@@ -1,84 +1,80 @@
-import { Mic, Brain, Sparkles, Shield } from "lucide-react";
+import { Brain, TrendingUp, Shield, Zap } from "lucide-react";
 
-const features = [
+const agents = [
   {
-    icon: Mic,
-    number: "1️⃣",
-    title: "AI InstantFollow",
-    subtitle: "Voice to Action in 30 Seconds",
-    description: "Say it once. FinProIQ does the rest. Turn any quick voice note like \"Met Lisa at dinner — she's planning retirement\" into CRM updates, compliant follow-ups, and reminders — instantly.",
-    highlight: "💡 Smart Prompts: Automatically suggests your next best question",
-    example: "\"Ask Lisa if she's reviewed her old 401(k)\"",
+    icon: Zap,
+    title: "AI InstantFollow Agent",
+    purpose: "Captures voice or meeting data, detects intent, drafts follow-ups, and suggests questions.",
+    trigger: "Voice note upload, meeting recording, CRM 'new lead' event",
+    integration: "Speech-to-Text (Whisper/OpenAI), CRM API, Twilio (SMS), SendGrid (email)",
   },
   {
     icon: Brain,
-    number: "2️⃣",
-    title: "AI Client & Insight Engine",
-    subtitle: "Trust & Emotional Intelligence",
-    description: "Reads between the lines — and tones. FinProIQ analyzes every email, note, or conversation for emotion and intent — enthusiasm, hesitation, disengagement — and recommends your best next move.",
-    highlight: "🧭 Response Intelligence:",
-    example: "\"Reassure,\" \"Inform,\" or \"Invite\" — always compliant, always empathetic",
-  },
-  {
-    icon: Sparkles,
-    number: "3️⃣",
-    title: "AI Brand Studio",
-    subtitle: "Compliance Meets Credibility",
-    description: "Your content, your voice — finally automated. Create FINRA/SEC-compliant posts, newsletters, bios, and visuals without lifting a finger. FinProIQ adapts to your tone, builds your brand, and keeps every post safe and compliant.",
-    highlight: "🚀 Effortless Publishing:",
-    example: "LinkedIn, email, newsletters — all done for you",
+    title: "AI Client Insight Engine Agent",
+    purpose: "Analyzes tone, emotional sentiment, and trust readiness.",
+    trigger: "Email, call transcript, or chat log input",
+    integration: "OpenAI or Anthropic LLMs + sentiment/emotion models",
   },
   {
     icon: Shield,
-    number: "4️⃣",
-    title: "AI Credibility & TrustBuilder",
-    subtitle: "Safety Without Slowdown",
-    description: "Your compliance copilot. FinProIQ reviews every message and post before it goes live — automatically flags risky language, adds required disclosures, and learns your firm's policies over time.",
-    highlight: "🛡️ Peace of Mind:",
-    example: "Post fast, stay safe, and keep your reputation spotless",
+    title: "AI Credibility & TrustBuilder Agent",
+    purpose: "Creates compliant, tone-matched messages and ensures FINRA/SEC-safe language.",
+    trigger: "Draft message event",
+    integration: "Custom compliance rules + SEC/FINRA language filter (regex + LLM guardrails)",
+  },
+  {
+    icon: TrendingUp,
+    title: "AI Brand Studio Agent",
+    purpose: "Automates social media posting and trending article summaries.",
+    trigger: "Scheduled daily or weekly",
+    integration: "APIs: LinkedIn, Facebook, X, Instagram + Perplexity API (news sources)",
   },
 ];
 
 const Features = () => {
   return (
-    <section className="py-20 md:py-32 bg-gradient-feature">
+    <section id="how-it-works" className="py-20 md:py-32 bg-gradient-feature">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            ⚡ How FinProIQ Works
+            ⚡ How It Works
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Four powerful AI agents working together to transform your practice
+            Four intelligent agents working together to power your growth
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+          {agents.map((agent, index) => {
+            const Icon = agent.icon;
             return (
               <div
                 key={index}
                 className="group bg-card rounded-2xl p-8 shadow-soft hover:shadow-medium transition-all duration-300 animate-scale-in border border-border hover:border-accent/50"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 rounded-xl bg-accent/10 text-accent group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-6 h-6" />
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-7 h-7 text-accent" />
                   </div>
-                  <div className="flex-1">
-                    <div className="text-2xl mb-2">{feature.number}</div>
-                    <h3 className="text-2xl font-bold mb-1">{feature.title}</h3>
-                    <p className="text-accent font-medium mb-3">{feature.subtitle}</p>
-                  </div>
+                  <h3 className="text-xl font-bold">{agent.title}</h3>
                 </div>
-
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                <div className="bg-secondary/50 rounded-lg p-4 border-l-4 border-accent">
-                  <p className="font-semibold mb-1">{feature.highlight}</p>
-                  <p className="text-sm text-muted-foreground italic">{feature.example}</p>
+                
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <p className="font-semibold text-accent mb-1">Purpose:</p>
+                    <p className="text-muted-foreground leading-relaxed">{agent.purpose}</p>
+                  </div>
+                  
+                  <div>
+                    <p className="font-semibold text-accent mb-1">Trigger:</p>
+                    <p className="text-muted-foreground leading-relaxed">{agent.trigger}</p>
+                  </div>
+                  
+                  <div>
+                    <p className="font-semibold text-accent mb-1">Integration:</p>
+                    <p className="text-muted-foreground leading-relaxed">{agent.integration}</p>
+                  </div>
                 </div>
               </div>
             );

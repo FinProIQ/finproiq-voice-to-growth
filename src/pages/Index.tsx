@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import ModernProfessionals from "@/components/ModernProfessionals";
@@ -12,10 +13,15 @@ const Index = () => {
 
   return (
     <main className="min-h-screen">
+      <Navigation onOpenCalendly={() => setIsCalendlyOpen(true)} />
       <Hero onOpenCalendly={() => setIsCalendlyOpen(true)} />
+      <section id="features">
+        <ModernProfessionals onOpenCalendly={() => setIsCalendlyOpen(true)} />
+      </section>
       <Features />
-      <ModernProfessionals onOpenCalendly={() => setIsCalendlyOpen(true)} />
-      <Testimonials />
+      <section id="testimonials">
+        <Testimonials />
+      </section>
       <FinalCTA onOpenCalendly={() => setIsCalendlyOpen(true)} />
       <Footer />
       <CalendlyModal 
