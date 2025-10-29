@@ -16,23 +16,23 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
   };
 
   return (
-    <section className="py-20 md:py-32 bg-gradient-hero">
+    <section className="py-20 md:py-32 bg-muted">
       <div className="container px-4">
-        <div className="max-w-3xl mx-auto text-center text-primary-foreground animate-fade-in">
+        <div className="max-w-3xl mx-auto text-center animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            🎯 Ready to see FinProIQ in action?
+            Ready to see FinProIQ in action?
           </h2>
           
-          <p className="text-xl md:text-2xl mb-10 opacity-90">
+          <p className="text-xl md:text-2xl mb-10 text-muted-foreground">
             Book your personalized demo and see how AI can help you build credibility, 
             grow faster, and stay compliant — effortlessly.
           </p>
 
           <Button 
-            variant="cta" 
+            variant="default" 
             size="lg"
             onClick={handleCTAClick}
-            className="text-lg px-10 py-7 h-auto animate-pulse-soft"
+            className="text-lg px-10 py-7 h-auto"
           >
             Book Your Demo Now →
           </Button>

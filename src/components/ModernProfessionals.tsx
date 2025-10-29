@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle2 } from "lucide-react";
 
 interface ModernProfessionalsProps {
   onOpenCalendly: () => void;
@@ -24,14 +23,14 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
   };
 
   return (
-    <section className="py-20 md:py-32 bg-primary text-primary-foreground">
+    <section className="py-20 md:py-32 bg-muted">
       <div className="container px-4">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            🌐 Built for Modern Financial Professionals
+            Built for Modern Financial Professionals
           </h2>
           
-          <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+          <p className="text-xl md:text-2xl mb-8 text-muted-foreground leading-relaxed">
             FinProIQ empowers advisors, agents, and firms to grow faster without sacrificing trust. 
             From client follow-ups to brand building — every workflow is compliant, intelligent, and automated.
           </p>
@@ -40,17 +39,15 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
             {benefits.map((benefit, index) => (
               <div 
                 key={index}
-                className="flex items-center gap-3 bg-primary-foreground/10 rounded-lg p-4 backdrop-blur-sm animate-slide-in-right"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="flex items-center justify-center gap-3 bg-background rounded-lg p-4 shadow-soft border border-border"
               >
-                <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0" />
-                <span className="text-lg font-medium text-left">{benefit}</span>
+                <span className="text-lg font-medium">{benefit}</span>
               </div>
             ))}
           </div>
 
           <Button 
-            variant="cta" 
+            variant="default" 
             size="lg"
             onClick={handleCTAClick}
             className="text-lg px-8 py-6 h-auto"
