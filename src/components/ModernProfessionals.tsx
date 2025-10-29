@@ -39,7 +39,7 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
             {benefits.map((benefit, index) => (
               <div 
                 key={index}
-                className="flex items-center justify-center gap-3 bg-background rounded-lg p-4 shadow-soft border border-border"
+                className="flex items-center justify-center gap-3 bg-gradient-to-r from-violet-50 to-white rounded-lg p-4 shadow-soft border border-accent/20 hover:border-accent/50 transition-colors"
               >
                 <span className="text-lg font-medium">{benefit}</span>
               </div>
@@ -50,7 +50,7 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
             variant="default" 
             size="lg"
             onClick={handleCTAClick}
-            className="text-lg px-8 py-6 h-auto"
+            className="text-lg px-8 py-6 h-auto bg-gradient-to-r from-accent to-violet-500 hover:from-accent-hover hover:to-violet-600 shadow-lg hover:shadow-xl transition-all"
           >
             Book Your Demo →
           </Button>

@@ -42,9 +42,9 @@ const Features = () => {
           {agents.map((agent, index) => (
               <div
                 key={index}
-                className="bg-card rounded-lg p-8 shadow-soft hover:shadow-medium transition-all duration-300 border border-border"
+                className="bg-card rounded-lg p-8 shadow-soft hover:shadow-medium transition-all duration-300 border-l-4 border-accent hover:border-violet-500 border-t border-r border-b border-border group"
               >
-                <h3 className="text-xl font-bold mb-6">{agent.title}</h3>
+                <h3 className="text-xl font-bold mb-6 group-hover:text-accent transition-colors">{agent.title}</h3>
                 
                 <div className="space-y-4 text-sm">
                   <div>

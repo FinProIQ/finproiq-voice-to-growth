@@ -34,8 +34,8 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-accent font-bold text-xl tracking-wide">
-              🏠 FinProIQ
+            <span className="font-bold text-xl tracking-wide bg-gradient-to-r from-accent to-violet-500 bg-clip-text text-transparent">
+              FinProIQ
             </span>
           </div>
 
@@ -59,7 +59,12 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
             >
               Testimonials
             </button>
-            <Button variant="cta" size="sm" onClick={handleCTAClick}>
+            <Button 
+              variant="default" 
+              size="sm" 
+              onClick={handleCTAClick}
+              className="bg-gradient-to-r from-accent to-violet-500 hover:from-accent-hover hover:to-violet-600 shadow-md hover:shadow-lg transition-all"
+            >
               Get Started
             </Button>
           </div>
@@ -94,7 +99,12 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
             >
               Testimonials
             </button>
-            <Button variant="cta" size="sm" onClick={handleCTAClick} className="w-full">
+            <Button 
+              variant="default" 
+              size="sm" 
+              onClick={handleCTAClick} 
+              className="w-full bg-gradient-to-r from-accent to-violet-500 hover:from-accent-hover hover:to-violet-600 shadow-md hover:shadow-lg transition-all"
+            >
               Get Started
             </Button>
           </div>
