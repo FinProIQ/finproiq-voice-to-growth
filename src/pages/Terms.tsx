@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 const Terms = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Navigation onOpenCalendly={() => {}} />
       <main className="flex-1">
         <section className="py-20 md:py-32">
           <div className="container px-4 max-w-4xl">

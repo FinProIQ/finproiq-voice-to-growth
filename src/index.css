@@ -27,9 +27,9 @@ All colors MUST be HSL.
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 210 85% 48%;
+    --accent: 210 90% 40%;
     --accent-foreground: 0 0% 100%;
-    --accent-hover: 210 85% 42%;
+    --accent-hover: 210 90% 35%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -88,9 +88,9 @@ All colors MUST be HSL.
     --muted: 217 33% 18%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 210 85% 55%;
+    --accent: 210 90% 45%;
     --accent-foreground: 222 47% 11%;
-    --accent-hover: 210 85% 48%;
+    --accent-hover: 210 90% 40%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
