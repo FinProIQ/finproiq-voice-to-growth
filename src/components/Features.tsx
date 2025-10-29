@@ -63,17 +63,17 @@ const Features = () => {
                 <div className="space-y-4 text-sm">
                   <div>
                     <p className="font-semibold text-accent mb-1">Purpose:</p>
-                    <p className="text-muted-foreground leading-relaxed">{agent.purpose}</p>
+                    <p className="text-foreground leading-relaxed">{agent.purpose}</p>
                   </div>
                   
                   <div>
                     <p className="font-semibold text-accent mb-1">Trigger:</p>
-                    <p className="text-muted-foreground leading-relaxed">{agent.trigger}</p>
+                    <p className="text-foreground leading-relaxed">{agent.trigger}</p>
                   </div>
                   
                   <div>
                     <p className="font-semibold text-accent mb-1">Integration:</p>
-                    <p className="text-muted-foreground leading-relaxed">{agent.integration}</p>
+                    <p className="text-foreground leading-relaxed">{agent.integration}</p>
                   </div>
                 </div>
               </div>
