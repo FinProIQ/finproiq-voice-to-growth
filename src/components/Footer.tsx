@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-accent to-violet-500 text-white py-12">
+    <footer className="bg-gradient-to-r from-accent to-accent-hover text-white py-12">
       <div className="container px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
