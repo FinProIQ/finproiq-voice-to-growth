@@ -39,7 +39,8 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
             {benefits.map((benefit, index) => (
               <div 
                 key={index}
-                className="flex items-center justify-center gap-3 bg-gradient-to-r from-violet-50 to-white rounded-lg p-4 shadow-soft border border-accent/20 hover:border-accent/50 transition-colors"
+                className="flex items-center justify-center gap-3 bg-gradient-to-r from-violet-50 to-white rounded-lg p-4 shadow-soft border border-accent/20 hover:border-accent/50 hover:scale-105 transition-all"
+                style={{ transition: 'var(--transition-bounce)' }}
               >
                 <span className="text-lg font-medium">{benefit}</span>
               </div>

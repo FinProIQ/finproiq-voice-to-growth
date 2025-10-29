@@ -42,7 +42,8 @@ const Features = () => {
           {agents.map((agent, index) => (
               <div
                 key={index}
-                className="bg-card rounded-lg p-8 shadow-soft hover:shadow-medium transition-all duration-300 border-l-4 border-accent hover:border-violet-500 border-t border-r border-b border-border group"
+                className="bg-card rounded-lg p-8 shadow-soft hover:shadow-medium hover:scale-105 transition-all duration-300 border-l-4 border-accent hover:border-violet-500 border-t border-r border-b border-border group"
+                style={{ transition: 'var(--transition-bounce)' }}
               >
                 <h3 className="text-xl font-bold mb-6 group-hover:text-accent transition-colors">{agent.title}</h3>
                 
