@@ -1,13 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Hero from "@/components/Hero";
+import Features from "@/components/Features";
+import ModernProfessionals from "@/components/ModernProfessionals";
+import Testimonials from "@/components/Testimonials";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
+import CalendlyModal from "@/components/CalendlyModal";
 
 const Index = () => {
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main className="min-h-screen">
+      <Hero onOpenCalendly={() => setIsCalendlyOpen(true)} />
+      <Features />
+      <ModernProfessionals onOpenCalendly={() => setIsCalendlyOpen(true)} />
+      <Testimonials />
+      <FinalCTA onOpenCalendly={() => setIsCalendlyOpen(true)} />
+      <Footer />
+      <CalendlyModal 
+        isOpen={isCalendlyOpen} 
+        onClose={() => setIsCalendlyOpen(false)} 
+      />
+    </main>
   );
 };
 
