@@ -34,9 +34,12 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="font-bold text-xl tracking-wide bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="font-bold text-xl tracking-wide bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            >
               FinProIQ
-            </span>
+            </button>
           </div>
 
           {/* Desktop Navigation */}
