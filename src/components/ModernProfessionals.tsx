@@ -5,10 +5,10 @@ interface ModernProfessionalsProps {
 }
 
 const benefits = [
-  "FINRA/SEC-Safe",
-  "AI-Powered Insights",
-  "Branding That Converts",
   "Voice-to-Action in Seconds",
+  "AI-Powered Insights",
+  "FINRA/SEC-Safe",
+  "Branding That Converts",
 ];
 
 const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
