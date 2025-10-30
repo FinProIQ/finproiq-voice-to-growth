@@ -29,7 +29,7 @@ const Privacy = () => {
               <div className="bg-card rounded-xl p-8 shadow-soft border border-border mb-8">
                 <h2 className="text-2xl font-bold mb-4">Our Commitment to Your Privacy</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  We value your privacy. FinProIQ only collects essential user data to improve functionality, 
+                  We value your privacy. AI Client & Insight Engine Agent only collects essential user data to improve functionality, 
                   personalize experiences, and maintain compliance. We do not share or sell your data.
                 </p>
               </div>

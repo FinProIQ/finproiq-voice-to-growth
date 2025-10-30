@@ -2,7 +2,7 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "FinProIQ helped me turn conversations into clients — without worrying about compliance.",
+    quote: "AI Client & Insight Engine Agent helped me turn conversations into clients — without worrying about compliance.",
     author: "Michael R.",
     title: "Financial Advisor",
   },

@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
-            <p className="text-2xl font-bold mb-2">FinProIQ</p>
+            <p className="text-2xl font-bold mb-2">AI Client & Insight Engine Agent</p>
             <p className="text-sm opacity-80">
               Where Financial Professionals Grow Smarter
             </p>
@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-8 border-t border-primary-foreground/20 text-center text-sm opacity-70">
-          <p>&copy; {new Date().getFullYear()} FinProIQ. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} AI Client & Insight Engine Agent. All rights reserved.</p>
         </div>
       </div>
     </footer>
