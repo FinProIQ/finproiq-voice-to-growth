@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface NavigationProps {
   onOpenCalendly: () => void;
@@ -8,6 +9,7 @@ interface NavigationProps {
 
 const Navigation = ({ onOpenCalendly }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -35,7 +37,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
           {/* Logo */}
           <div className="flex items-center">
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => navigate('/')}
               className="font-bold text-xl tracking-wide bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
               FinProIQ
