@@ -42,7 +42,7 @@ const FAQ = () => {
             </Link>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              🧾 Frequently Asked Questions
+              Frequently Asked Questions
             </h1>
             <p className="text-xl text-muted-foreground mb-12">
               Everything you need to know about FinProIQ
