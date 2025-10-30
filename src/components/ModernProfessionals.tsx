@@ -31,7 +31,7 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
           </h2>
           
           <p className="text-xl md:text-2xl mb-8 text-muted-foreground leading-relaxed">
-            AI Client & Insight Engine Agent empowers advisors, agents, and firms to grow faster without sacrificing trust. 
+            FinProIQ empowers advisors, agents, and firms to grow faster without sacrificing trust. 
             From client follow-ups to brand building — every workflow is compliant, intelligent, and automated.
           </p>
 

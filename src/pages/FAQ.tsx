@@ -6,16 +6,16 @@ import Footer from "@/components/Footer";
 
 const faqs = [
   {
-    question: "What is AI Client & Insight Engine Agent?",
-    answer: "AI Client & Insight Engine Agent is an AI-powered growth ecosystem for financial professionals — combining client insights, compliance, and automation to help you grow your practice efficiently and safely.",
+    question: "What is FinProIQ?",
+    answer: "FinProIQ is an AI-powered growth ecosystem for financial professionals — combining client insights, compliance, and automation to help you grow your practice efficiently and safely.",
   },
   {
-    question: "Is AI Client & Insight Engine Agent compliant with FINRA/SEC guidelines?",
+    question: "Is FinProIQ compliant with FINRA/SEC guidelines?",
     answer: "Yes. Every AI agent is designed with compliance as a built-in layer, not an afterthought. Our system automatically reviews content, flags risky language, and ensures all communications meet regulatory standards.",
   },
   {
-    question: "Can I use AI Client & Insight Engine Agent with my existing CRM?",
-    answer: "Yes. AI Client & Insight Engine Agent integrates easily with major CRMs through APIs or manual sync, allowing you to enhance your current workflow without disruption.",
+    question: "Can I use FinProIQ with my existing CRM?",
+    answer: "Yes. FinProIQ integrates easily with major CRMs through APIs or manual sync, allowing you to enhance your current workflow without disruption.",
   },
   {
     question: "Does it post automatically on social media?",
@@ -45,7 +45,7 @@ const FAQ = () => {
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-muted-foreground mb-12">
-              Everything you need to know about AI Client & Insight Engine Agent
+              Everything you need to know about FinProIQ
             </p>
 
             <div className="space-y-8">

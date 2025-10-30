@@ -35,7 +35,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
           {/* Logo */}
           <div className="flex items-center">
             <span className="font-bold text-xl tracking-wide bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">
-              AI Client & Insight Engine Agent
+              FinProIQ
             </span>
           </div>
 

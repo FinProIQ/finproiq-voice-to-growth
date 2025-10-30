@@ -29,8 +29,8 @@ const Terms = () => {
               <div className="bg-card rounded-xl p-8 shadow-soft border border-border mb-8">
                 <h2 className="text-2xl font-bold mb-4">Agreement to Terms</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  By using AI Client & Insight Engine Agent, you agree to responsible usage in accordance with FINRA/SEC and other 
-                  regulatory standards. AI Client & Insight Engine Agent provides AI automation tools but does not offer legal, 
+                  By using FinProIQ, you agree to responsible usage in accordance with FINRA/SEC and other 
+                  regulatory standards. FinProIQ provides AI automation tools but does not offer legal, 
                   financial, or compliance advice.
                 </p>
               </div>
@@ -39,7 +39,7 @@ const Terms = () => {
                 <div className="bg-card rounded-xl p-8 shadow-soft border border-border">
                   <h3 className="text-xl font-bold mb-3">Use of Services</h3>
                   <p className="text-muted-foreground leading-relaxed mb-4">
-                    AI Client & Insight Engine Agent is designed to assist financial professionals in managing their practice more 
+                    FinProIQ is designed to assist financial professionals in managing their practice more 
                     efficiently while maintaining compliance with industry regulations. Users are responsible for:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground">
@@ -53,8 +53,8 @@ const Terms = () => {
                 <div className="bg-card rounded-xl p-8 shadow-soft border border-border">
                   <h3 className="text-xl font-bold mb-3">Compliance Assistance</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    While AI Client & Insight Engine Agent incorporates compliance features and checks, it is an assistance tool and 
-                    not a substitute for professional compliance review. Users remain solely responsible for
+                    While FinProIQ incorporates compliance features and checks, it is an assistance tool and 
+                    not a substitute for professional compliance review. Users remain solely responsible for 
                     ensuring their communications and materials comply with all applicable regulations.
                   </p>
                 </div>
@@ -62,7 +62,7 @@ const Terms = () => {
                 <div className="bg-card rounded-xl p-8 shadow-soft border border-border">
                   <h3 className="text-xl font-bold mb-3">Intellectual Property</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Content created using AI Client & Insight Engine Agent belongs to you, the user. AI Client & Insight Engine Agent retains ownership of 
+                    Content created using FinProIQ belongs to you, the user. FinProIQ retains ownership of 
                     its platform, technology, and proprietary algorithms.
                   </p>
                 </div>
@@ -70,8 +70,8 @@ const Terms = () => {
                 <div className="bg-card rounded-xl p-8 shadow-soft border border-border">
                   <h3 className="text-xl font-bold mb-3">Limitation of Liability</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    AI Client & Insight Engine Agent provides tools and technology in good faith but cannot guarantee specific outcomes 
-                    or results. Users agree that AI Client & Insight Engine Agent is not liable for any regulatory issues, compliance 
+                    FinProIQ provides tools and technology in good faith but cannot guarantee specific outcomes 
+                    or results. Users agree that FinProIQ is not liable for any regulatory issues, compliance 
                     violations, or business outcomes resulting from the use of the platform.
                   </p>
                 </div>
