@@ -7,7 +7,7 @@ const agents = [
     bgColor: "bg-blue-50/50",
   },
   {
-    title: "AI Client Insight Engine Agent",
+    title: "AI Client & Insight Engine Agent",
     description: "Assesses tone, urgency, and request type from conversations, then routes to the Credibility & TrustBuilder for compliant messaging.",
     trigger: "Email, call transcript, or chat log input",
     technology: "OpenAI or Anthropic LLMs + sentiment/emotion models",
