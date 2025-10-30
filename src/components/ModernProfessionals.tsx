@@ -53,7 +53,7 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
             onClick={handleCTAClick}
             className="text-lg px-8 py-6 h-auto bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent shadow-lg hover:shadow-xl transition-all"
           >
-            Book Your Demo →
+            Join Waitlist →
           </Button>
         </div>
       </div>

@@ -70,7 +70,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={handleCTAClick}
               className="bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent shadow-md hover:shadow-lg transition-all"
             >
-              Get Started
+              Join Waitlist
             </Button>
           </div>
 
@@ -110,7 +110,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={handleCTAClick} 
               className="w-full bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent shadow-md hover:shadow-lg transition-all"
             >
-              Get Started
+              Join Waitlist
             </Button>
           </div>
         )}

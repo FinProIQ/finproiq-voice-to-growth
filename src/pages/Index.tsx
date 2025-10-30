@@ -6,27 +6,27 @@ import ModernProfessionals from "@/components/ModernProfessionals";
 import Testimonials from "@/components/Testimonials";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
-import CalendlyModal from "@/components/CalendlyModal";
+import WaitlistModal from "@/components/WaitlistModal";
 
 const Index = () => {
-  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   return (
     <main className="min-h-screen">
-      <Navigation onOpenCalendly={() => setIsCalendlyOpen(true)} />
-      <Hero onOpenCalendly={() => setIsCalendlyOpen(true)} />
+      <Navigation onOpenCalendly={() => setIsWaitlistOpen(true)} />
+      <Hero onOpenCalendly={() => setIsWaitlistOpen(true)} />
       <section id="features">
-        <ModernProfessionals onOpenCalendly={() => setIsCalendlyOpen(true)} />
+        <ModernProfessionals onOpenCalendly={() => setIsWaitlistOpen(true)} />
       </section>
       <Features />
       <section id="testimonials">
         <Testimonials />
       </section>
-      <FinalCTA onOpenCalendly={() => setIsCalendlyOpen(true)} />
+      <FinalCTA onOpenCalendly={() => setIsWaitlistOpen(true)} />
       <Footer />
-      <CalendlyModal 
-        isOpen={isCalendlyOpen} 
-        onClose={() => setIsCalendlyOpen(false)} 
+      <WaitlistModal 
+        isOpen={isWaitlistOpen} 
+        onClose={() => setIsWaitlistOpen(false)} 
       />
     </main>
   );
