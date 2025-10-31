@@ -34,7 +34,7 @@ const products = [
     subtitle: "",
     description: (
       <>
-        Summarize trending insights and publish <span className="font-bold">compliant, branded posts</span> to LinkedIn and email. Stay <span className="text-accent font-bold">visible and trusted</span> even when you're offline.
+        Summarize trending insights and publish <span className="font-bold">compliant, branded posts</span> across all social media platforms. Stay <span className="text-accent font-bold">visible and trusted</span> even when you're offline.
       </>
     ),
     bgColor: "bg-amber-50/50",
