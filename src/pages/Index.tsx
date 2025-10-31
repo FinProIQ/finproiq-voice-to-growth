@@ -27,10 +27,10 @@ const Index = () => {
     <main className="min-h-screen">
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero onOpenCalendly={handleOpenWaitlist} />
+      <ModernProfessionals onOpenCalendly={handleOpenWaitlist} />
       <section id="features">
-        <ModernProfessionals onOpenCalendly={handleOpenWaitlist} />
+        <ProductSuite />
       </section>
-      <ProductSuite />
       <HowItWorks />
       <Outcome />
       <section id="testimonials">
