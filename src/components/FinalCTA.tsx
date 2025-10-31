@@ -23,8 +23,8 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
             Join the <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">Waitlist</span>
           </h2>
           
-          <p className="text-xl md:text-2xl mb-10 text-muted-foreground">
-            Experience the fastest way to stay compliant, personal, and proactive — without lifting a finger.
+          <p className="text-xl md:text-2xl mb-10 text-foreground">
+            Experience the <span className="text-accent font-bold">fastest way</span> to stay <span className="font-bold">compliant, personal, and proactive</span> — without lifting a finger.
           </p>
 
           <Button 

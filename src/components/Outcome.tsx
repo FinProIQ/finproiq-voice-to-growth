@@ -1,15 +1,15 @@
 const beforePoints = [
-  "Missed follow-ups and cold leads",
-  "Hours of CRM entry and compliance checks",
-  "Uncertain timing for outreach",
-  "Low visibility online",
+  { text: "Missed follow-ups", highlight: "cold leads", type: "negative" },
+  { text: "Hours of CRM entry and", highlight: "compliance checks", type: "negative" },
+  { text: "Uncertain timing", highlight: "for outreach", type: "negative" },
+  { text: "Low visibility", highlight: "online", type: "negative" },
 ];
 
 const afterPoints = [
-  "Instant client actions from conversations",
-  "Personalized, compliant outreach automatically sent",
-  "Predictive trust signals and timely engagement",
-  "Consistent credibility and visibility",
+  { text: "Instant", highlight: "client actions", extra: "from conversations", type: "positive" },
+  { text: "Personalized, compliant outreach", highlight: "automatically sent", type: "positive" },
+  { text: "Predictive trust signals and", highlight: "timely engagement", type: "positive" },
+  { text: "Consistent", highlight: "credibility and visibility", type: "positive" },
 ];
 
 const Outcome = () => {
@@ -29,7 +29,9 @@ const Outcome = () => {
               {beforePoints.map((point, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <span className="text-destructive text-xl mt-0.5">✗</span>
-                  <span className="text-foreground">{point}</span>
+                  <span className="text-foreground">
+                    {point.text} <span className="font-bold">{point.highlight}</span>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -41,7 +43,9 @@ const Outcome = () => {
               {afterPoints.map((point, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <span className="text-accent text-xl mt-0.5">✓</span>
-                  <span className="text-foreground font-medium">{point}</span>
+                  <span className="text-foreground">
+                    {point.text} <span className="text-accent font-bold">{point.highlight}</span>{point.extra && ` ${point.extra}`}
+                  </span>
                 </li>
               ))}
             </ul>

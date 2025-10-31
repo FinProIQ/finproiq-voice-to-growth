@@ -2,22 +2,38 @@ const steps = [
   {
     number: "1",
     title: "Speak or Record",
-    description: "Record a short voice note after any conversation.",
+    description: (
+      <>
+        Record a <span className="font-bold">short voice note</span> after any conversation.
+      </>
+    ),
   },
   {
     number: "2",
     title: "FinProIQ Understands Context",
-    description: "Our system analyzes intent, tone, and urgency — identifying emotion and compliance needs.",
+    description: (
+      <>
+        Our system analyzes <span className="text-accent font-bold">intent, tone, and urgency</span> — identifying emotion and compliance needs.
+      </>
+    ),
   },
   {
     number: "3",
     title: "FinProIQ Acts Instantly",
-    description: "AI InstantFollow and AI Credibility & TrustBuilder draft compliant, personalized follow-ups — with optional links to trending articles from AI Brand Studio.",
+    description: (
+      <>
+        AI InstantFollow and AI Credibility & TrustBuilder draft <span className="text-accent font-bold">compliant, personalized follow-ups</span> — with optional links to trending articles from AI Brand Studio.
+      </>
+    ),
   },
   {
     number: "4",
     title: "You Approve & Send",
-    description: "Review once, send instantly. CRM updated automatically; client feels seen; your day stays on track.",
+    description: (
+      <>
+        Review once, send <span className="text-accent font-bold">instantly</span>. CRM updated automatically; client feels seen; your day stays on track.
+      </>
+    ),
   },
 ];
 
@@ -42,7 +58,7 @@ const HowItWorks = () => {
                   {step.number}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                <p className="text-foreground leading-relaxed">{step.description}</p>
               </div>
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-accent/30" />
@@ -52,7 +68,7 @@ const HowItWorks = () => {
         </div>
 
         <p className="text-center text-xl font-medium text-foreground mt-16 max-w-2xl mx-auto">
-          From conversation to client action in under a minute.
+          From conversation to client action in <span className="text-accent font-bold">under a minute</span>.
         </p>
       </div>
     </section>

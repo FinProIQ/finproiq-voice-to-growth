@@ -25,15 +25,15 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
           </h2>
           
           <p className="text-xl md:text-2xl mb-6 text-foreground leading-relaxed">
-            FinProIQ helps advisors, agents, and planners grow faster without sacrificing trust or compliance.
+            FinProIQ helps advisors, agents, and planners <span className="text-accent font-bold">grow faster</span> without sacrificing <span className="font-bold">trust</span> or <span className="font-bold">compliance</span>.
           </p>
 
-          <p className="text-lg md:text-xl mb-6 text-muted-foreground leading-relaxed">
-            Traditional CRMs record what happened. FinProIQ understands what needs to happen next.
+          <p className="text-lg md:text-xl mb-6 text-foreground leading-relaxed">
+            Traditional CRMs record what happened. FinProIQ understands <span className="text-accent font-bold">what needs to happen next</span>.
           </p>
 
-          <p className="text-lg md:text-xl mb-0 text-muted-foreground leading-relaxed">
-            It listens, interprets emotion, drafts compliant outreach, and updates your CRM — instantly. This is not another tool to manage. It's your AI growth partner.
+          <p className="text-lg md:text-xl mb-0 text-foreground leading-relaxed">
+            It listens, interprets emotion, drafts compliant outreach, and updates your CRM — <span className="text-accent font-bold">instantly</span>. This is not another tool to manage. It's your <span className="text-accent font-bold">AI growth partner</span>.
           </p>
         </div>
       </div>

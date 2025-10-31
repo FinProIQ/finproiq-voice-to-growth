@@ -31,8 +31,8 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
             Never Miss a Lead — Convert Every Conversation Into a <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">Client</span>
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            FinProIQ turns your voice notes and client meetings into compliant follow-ups, CRM updates, and emotionally intelligent messages — all in under 60 seconds. Stay proactive, stay compliant, and stay human.
+          <p className="text-xl md:text-2xl mb-8 text-foreground max-w-3xl mx-auto leading-relaxed">
+            FinProIQ turns your <span className="text-accent font-bold">voice notes</span> and <span className="text-accent font-bold">client meetings</span> into <span className="font-bold">compliant follow-ups</span>, <span className="font-bold">CRM updates</span>, and <span className="font-bold">emotionally intelligent messages</span> — all in <span className="text-accent font-bold">under 60 seconds</span>. Stay proactive, stay compliant, and stay human.
           </p>
 
           <Button 
