@@ -27,6 +27,14 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
   const onSubmit = async (data: WaitlistFormData) => {
     try {
+      // Track form submission
+      if (window.gtag) {
+        window.gtag('event', 'form_submit', {
+          event_category: 'engagement',
+          event_label: 'Waitlist Form'
+        });
+      }
+      
       // TODO: Implement actual waitlist submission (e.g., to database or email service)
       console.log("Waitlist submission:", data);
       

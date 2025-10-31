@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import Features from "@/components/Features";
 import ModernProfessionals from "@/components/ModernProfessionals";
+import ProductSuite from "@/components/ProductSuite";
+import HowItWorks from "@/components/HowItWorks";
+import Outcome from "@/components/Outcome";
 import Testimonials from "@/components/Testimonials";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -11,18 +13,30 @@ import WaitlistModal from "@/components/WaitlistModal";
 const Index = () => {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
+  const handleOpenWaitlist = () => {
+    if (window.gtag) {
+      window.gtag('event', 'modal_open', {
+        event_category: 'engagement',
+        event_label: 'Waitlist Modal'
+      });
+    }
+    setIsWaitlistOpen(true);
+  };
+
   return (
     <main className="min-h-screen">
-      <Navigation onOpenCalendly={() => setIsWaitlistOpen(true)} />
-      <Hero onOpenCalendly={() => setIsWaitlistOpen(true)} />
+      <Navigation onOpenCalendly={handleOpenWaitlist} />
+      <Hero onOpenCalendly={handleOpenWaitlist} />
       <section id="features">
-        <ModernProfessionals onOpenCalendly={() => setIsWaitlistOpen(true)} />
+        <ModernProfessionals onOpenCalendly={handleOpenWaitlist} />
       </section>
-      <Features />
+      <ProductSuite />
+      <HowItWorks />
+      <Outcome />
       <section id="testimonials">
         <Testimonials />
       </section>
-      <FinalCTA onOpenCalendly={() => setIsWaitlistOpen(true)} />
+      <FinalCTA onOpenCalendly={handleOpenWaitlist} />
       <Footer />
       <WaitlistModal 
         isOpen={isWaitlistOpen} 

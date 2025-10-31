@@ -20,12 +20,11 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
       <div className="container px-4">
         <div className="max-w-5xl mx-auto text-center animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Ready to transform your <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">financial practice?</span>
+            Join the <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">Waitlist</span>
           </h2>
           
           <p className="text-xl md:text-2xl mb-10 text-muted-foreground">
-            Join the waitlist and be among the first to experience AI-powered growth 
-            that builds credibility, accelerates growth, and ensures compliance.
+            Experience the fastest way to stay compliant, personal, and proactive — without lifting a finger.
           </p>
 
           <Button 

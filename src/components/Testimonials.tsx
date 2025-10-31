@@ -2,14 +2,19 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "FinProIQ helped me turn conversations into clients — without worrying about compliance.",
-    author: "Michael R.",
-    title: "Financial Advisor",
+    quote: "FinProIQ saved me from missing follow-ups and helped me close two clients in my first week.",
+    author: "Alex P.",
+    title: "Independent Financial Advisor",
   },
   {
-    quote: "The AI Brand Studio writes posts I'm proud to publish — and my compliance team loves them.",
-    author: "Sandra T.",
-    title: "CFP®",
+    quote: "It's like having an assistant who understands compliance and emotion — I've never seen anything like it.",
+    author: "Karen L.",
+    title: "Insurance Specialist",
+  },
+  {
+    quote: "Finally, something that doesn't just automate — it thinks with me.",
+    author: "Marcus D.",
+    title: "Wealth Planner",
   },
 ];
 
@@ -19,11 +24,11 @@ const Testimonials = () => {
       <div className="container px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            💬 What Our Users Say
+            What Advisors Are Saying
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}

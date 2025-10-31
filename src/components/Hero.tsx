@@ -28,15 +28,11 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight">
-            Where Financial Professionals Grow <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">Smarter</span>
+            Never Miss a Lead — Convert Every Conversation Into a <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">Client</span>
           </h1>
           
-          <p className="text-xl md:text-2xl mb-4 text-foreground max-w-3xl mx-auto font-medium">
-            Turn Voice Into Action. Build Trust at Scale. Stay 100% Compliant.
-          </p>
-          
-          <p className="text-lg md:text-xl mb-8 text-muted-foreground max-w-3xl mx-auto">
-            Your AI-powered Financial Professional Growth Ecosystem — converts voice into compliant client actions in under 60 seconds
+          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            FinProIQ turns your voice notes and client meetings into compliant follow-ups, CRM updates, and emotionally intelligent messages — all in under 60 seconds. Stay proactive, stay compliant, and stay human.
           </p>
 
           <Button 

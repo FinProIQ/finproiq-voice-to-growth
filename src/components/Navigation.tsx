@@ -12,6 +12,12 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
   const navigate = useNavigate();
 
   const scrollToSection = (id: string) => {
+    if (window.gtag) {
+      window.gtag('event', 'section_navigation', {
+        event_category: 'navigation',
+        event_label: id
+      });
+    }
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
