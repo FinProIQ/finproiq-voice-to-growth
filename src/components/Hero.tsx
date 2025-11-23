@@ -35,7 +35,18 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
             FinProIQ turns your <span className="text-accent font-bold">voice notes</span> and <span className="text-accent font-bold">client meetings</span> into <span className="font-bold">compliant follow-ups</span>, <span className="font-bold">CRM updates</span>, and <span className="font-bold">emotionally intelligent messages</span> — all in <span className="text-accent font-bold">under 60 seconds</span>. Stay proactive, stay compliant, and stay human.
           </p>
 
-          <Button 
+          <div className="mb-8 max-w-2xl mx-auto">
+            <video 
+              className="w-full rounded-lg shadow-2xl border border-border"
+              controls
+              preload="metadata"
+            >
+              <source src="/videos/hero-demo.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <Button
             variant="default" 
             size="lg" 
             onClick={handleCTAClick}
