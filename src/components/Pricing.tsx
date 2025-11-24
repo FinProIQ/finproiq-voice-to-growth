@@ -62,7 +62,7 @@ const pricingTiers = [
         ]
       },
       {
-        category: "AI Lead Studio (Weekly Workflow)",
+        category: "AI Brand Studio (Weekly Workflow)",
         items: [
           "Weekly state of social content ideas",
           "Rewrite, refine, and compliance-check posts",
