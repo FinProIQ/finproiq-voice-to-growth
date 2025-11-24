@@ -5,6 +5,7 @@ import ModernProfessionals from "@/components/ModernProfessionals";
 import ProductSuite from "@/components/ProductSuite";
 import HowItWorks from "@/components/HowItWorks";
 import Outcome from "@/components/Outcome";
+import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -33,6 +34,7 @@ const Index = () => {
       </section>
       <HowItWorks />
       <Outcome />
+      <Pricing />
       <section id="testimonials">
         <Testimonials />
       </section>
