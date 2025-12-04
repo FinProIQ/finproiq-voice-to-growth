@@ -25,7 +25,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send welcome email to the subscriber
     const welcomeEmail = await resend.emails.send({
-      from: "FinProIQ <onboarding@resend.dev>",
+      from: "FinProIQ <no-reply@finproiq.com>",
       to: [email],
       subject: "Welcome to the FinProIQ Waitlist! 🎉",
       html: `
@@ -68,7 +68,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification to owner
     const notificationEmail = await resend.emails.send({
-      from: "FinProIQ <onboarding@resend.dev>",
+      from: "FinProIQ <no-reply@finproiq.com>",
       to: ["raman.sivasankar@gmail.com"],
       subject: `New Waitlist Signup: ${name}`,
       html: `
