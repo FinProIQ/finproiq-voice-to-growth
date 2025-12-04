@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const waitlistSchema = z.object({
   name: z.string().trim().nonempty({ message: "Name is required" }).max(100, { message: "Name must be less than 100 characters" }),
@@ -35,17 +36,42 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
         });
       }
       
-      // TODO: Implement actual waitlist submission (e.g., to database or email service)
-      console.log("Waitlist submission:", data);
+      // Save to Supabase
+      const { error: dbError } = await supabase
+        .from('waitlist')
+        .insert({ name: data.name, email: data.email });
+      
+      if (dbError) {
+        if (dbError.code === '23505') {
+          toast({
+            title: "Already on the list!",
+            description: "This email is already registered on our waitlist.",
+          });
+          reset();
+          onClose();
+          return;
+        }
+        throw dbError;
+      }
+
+      // Send welcome email via edge function
+      const { error: emailError } = await supabase.functions.invoke('send-waitlist-welcome', {
+        body: { name: data.name, email: data.email }
+      });
+
+      if (emailError) {
+        console.error("Email error:", emailError);
+      }
       
       toast({
         title: "Welcome to the waitlist!",
-        description: "We'll be in touch soon with exclusive early access.",
+        description: "Check your inbox for a welcome email. We'll be in touch soon!",
       });
       
       reset();
       onClose();
     } catch (error) {
+      console.error("Waitlist error:", error);
       toast({
         title: "Something went wrong",
         description: "Please try again later.",
