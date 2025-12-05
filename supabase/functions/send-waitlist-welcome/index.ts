@@ -31,6 +31,16 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+// HTML encoding to prevent XSS in email templates
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // Server-side validation
 function validateInput(name: unknown, email: unknown): { valid: boolean; name?: string; email?: string } {
   if (typeof name !== 'string' || typeof email !== 'string') {
@@ -120,7 +130,7 @@ const handler = async (req: Request): Promise<Response> => {
       subject: "Welcome to the FinProIQ Waitlist! 🎉",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #2563eb;">Welcome to FinProIQ, ${name}!</h1>
+          <h1 style="color: #2563eb;">Welcome to FinProIQ, ${escapeHtml(name!)}!</h1>
           
           <p style="font-size: 16px; color: #333; line-height: 1.6;">
             Thank you for joining our waitlist! You're now part of an exclusive group of financial professionals 
@@ -160,12 +170,12 @@ const handler = async (req: Request): Promise<Response> => {
     const notificationEmail = await resend.emails.send({
       from: "FinProIQ <no-reply@finproiq.com>",
       to: ["raman.sivasankar@gmail.com"],
-      subject: `New Waitlist Signup: ${name}`,
+      subject: `New Waitlist Signup: ${escapeHtml(name!)}`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px;">
           <h2>New Waitlist Signup!</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Name:</strong> ${escapeHtml(name!)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email!)}</p>
           <p><strong>Time:</strong> ${new Date().toISOString()}</p>
         </div>
       `,
