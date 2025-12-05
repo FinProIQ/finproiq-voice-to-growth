@@ -36,33 +36,16 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
         });
       }
       
-      // Save to Supabase
-      const { error: dbError } = await supabase
-        .from('waitlist')
-        .insert({ name: data.name, email: data.email });
-      
-      if (dbError) {
-        if (dbError.code === '23505') {
-          toast({
-            title: "Already on the list!",
-            description: "This email is already registered on our waitlist.",
-          });
-          reset();
-          onClose();
-          return;
-        }
-        throw dbError;
-      }
-
-      // Send welcome email via edge function
-      const { error: emailError } = await supabase.functions.invoke('send-waitlist-welcome', {
+      // All processing happens server-side via edge function
+      const { error } = await supabase.functions.invoke('send-waitlist-welcome', {
         body: { name: data.name, email: data.email }
       });
 
-      if (emailError) {
-        console.error("Email error:", emailError);
+      if (error) {
+        throw error;
       }
       
+      // Generic success message (server always returns success to prevent enumeration)
       toast({
         title: "Welcome to the waitlist!",
         description: "Check your inbox for a welcome email. We'll be in touch soon!",
