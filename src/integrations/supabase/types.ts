@@ -14,6 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
+      survey_responses: {
+        Row: {
+          biggest_challenge: string[] | null
+          biggest_stress: string | null
+          capacity_limit: string | null
+          capacity_scale: string | null
+          compliance_approach: string | null
+          compliance_redo: string | null
+          created_at: string
+          crm_updates: string | null
+          delayed_tasks: string | null
+          followup_writer: string | null
+          future_pain: string | null
+          id: string
+          ideal_state: string | null
+          notes_location: string[] | null
+          post_meeting: string | null
+          predictable_process: string | null
+          prior_outcome: string | null
+          prior_solutions: string[] | null
+          real_cost: string | null
+          slippage_followup: string | null
+          slippage_frequency: string | null
+          stress_reason: string | null
+          time_focus: string[] | null
+          time_spent: string | null
+        }
+        Insert: {
+          biggest_challenge?: string[] | null
+          biggest_stress?: string | null
+          capacity_limit?: string | null
+          capacity_scale?: string | null
+          compliance_approach?: string | null
+          compliance_redo?: string | null
+          created_at?: string
+          crm_updates?: string | null
+          delayed_tasks?: string | null
+          followup_writer?: string | null
+          future_pain?: string | null
+          id?: string
+          ideal_state?: string | null
+          notes_location?: string[] | null
+          post_meeting?: string | null
+          predictable_process?: string | null
+          prior_outcome?: string | null
+          prior_solutions?: string[] | null
+          real_cost?: string | null
+          slippage_followup?: string | null
+          slippage_frequency?: string | null
+          stress_reason?: string | null
+          time_focus?: string[] | null
+          time_spent?: string | null
+        }
+        Update: {
+          biggest_challenge?: string[] | null
+          biggest_stress?: string | null
+          capacity_limit?: string | null
+          capacity_scale?: string | null
+          compliance_approach?: string | null
+          compliance_redo?: string | null
+          created_at?: string
+          crm_updates?: string | null
+          delayed_tasks?: string | null
+          followup_writer?: string | null
+          future_pain?: string | null
+          id?: string
+          ideal_state?: string | null
+          notes_location?: string[] | null
+          post_meeting?: string | null
+          predictable_process?: string | null
+          prior_outcome?: string | null
+          prior_solutions?: string[] | null
+          real_cost?: string | null
+          slippage_followup?: string | null
+          slippage_frequency?: string | null
+          stress_reason?: string | null
+          time_focus?: string[] | null
+          time_spent?: string | null
+        }
+        Relationships: []
+      }
       waitlist: {
         Row: {
           created_at: string
