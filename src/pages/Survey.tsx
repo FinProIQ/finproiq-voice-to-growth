@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,7 +6,22 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { ArrowLeft, ArrowRight, Calendar, Users, CheckCircle2 } from "lucide-react";
+import { 
+  ArrowLeft, 
+  ArrowRight, 
+  Calendar, 
+  Users, 
+  CheckCircle2,
+  ClipboardList,
+  Clock,
+  Shield,
+  Brain,
+  TrendingUp,
+  Search,
+  RefreshCw,
+  Target,
+  Sparkles
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import WaitlistModal from "@/components/WaitlistModal";
 import { cn } from "@/lib/utils";
@@ -212,25 +227,27 @@ const questions: Question[] = [
 ];
 
 const sections = [
-  { id: 1, title: "Current Workflow", icon: "📋" },
-  { id: 2, title: "Time & Slippage", icon: "⏱️" },
-  { id: 3, title: "Compliance", icon: "✅" },
-  { id: 4, title: "Core Pain", icon: "💭" },
-  { id: 5, title: "Future Cost", icon: "📈" },
-  { id: 6, title: "Self-Diagnosis", icon: "🔍" },
-  { id: 7, title: "Prior Attempts", icon: "🔄" },
-  { id: 8, title: "Vision", icon: "🎯" },
+  { id: 1, title: "Workflow", icon: ClipboardList, gradient: "from-blue-500 to-cyan-400" },
+  { id: 2, title: "Time", icon: Clock, gradient: "from-orange-500 to-amber-400" },
+  { id: 3, title: "Compliance", icon: Shield, gradient: "from-green-500 to-emerald-400" },
+  { id: 4, title: "Pain Points", icon: Brain, gradient: "from-purple-500 to-pink-400" },
+  { id: 5, title: "Future", icon: TrendingUp, gradient: "from-red-500 to-rose-400" },
+  { id: 6, title: "Diagnosis", icon: Search, gradient: "from-indigo-500 to-violet-400" },
+  { id: 7, title: "Past Tries", icon: RefreshCw, gradient: "from-teal-500 to-cyan-400" },
+  { id: 8, title: "Vision", icon: Target, gradient: "from-pink-500 to-purple-400" },
 ];
 
 const Survey = () => {
-  const [currentSection, setCurrentSection] = useState(1);
+  const [currentSection, setCurrentSection] = useState(0); // 0 = intro
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isComplete, setIsComplete] = useState(false);
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  const currentQuestions = questions.filter(q => q.section === currentSection);
+  const currentQuestions = currentSection > 0 ? questions.filter(q => q.section === currentSection) : [];
   const totalSections = sections.length;
-  const progress = ((currentSection - 1) / totalSections) * 100;
+  const progress = (currentSection / totalSections) * 100;
 
   const handleAnswer = (questionId: string, value: string | string[]) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
@@ -246,6 +263,7 @@ const Survey = () => {
   };
 
   const canProceed = () => {
+    if (currentSection === 0) return true;
     return currentQuestions.every(q => {
       const answer = answers[q.id];
       if (q.type === "text") return answer && (answer as string).trim().length > 0;
@@ -255,10 +273,17 @@ const Survey = () => {
     });
   };
 
+  const transitionToSection = (newSection: number) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentSection(newSection);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
   const handleNext = () => {
     if (currentSection < totalSections) {
-      setCurrentSection(prev => prev + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      transitionToSection(currentSection + 1);
     } else {
       setIsComplete(true);
       if (window.gtag) {
@@ -271,9 +296,14 @@ const Survey = () => {
   };
 
   const handlePrevious = () => {
-    if (currentSection > 1) {
-      setCurrentSection(prev => prev - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (currentSection > 0) {
+      transitionToSection(currentSection - 1);
+    }
+  };
+
+  const handleSectionClick = (sectionId: number) => {
+    if (sectionId <= currentSection) {
+      transitionToSection(sectionId);
     }
   };
 
@@ -287,6 +317,9 @@ const Survey = () => {
     window.open('https://calendly.com/your-link', '_blank');
   };
 
+  const currentSectionData = sections.find(s => s.id === currentSection);
+  const CurrentIcon = currentSectionData?.icon;
+
   if (isComplete) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background">
@@ -296,18 +329,21 @@ const Survey = () => {
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm">Back to FinProIQ</span>
             </Link>
-            <h1 className="text-lg font-semibold font-display text-foreground">Survey Complete</h1>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-accent" />
+              <h1 className="text-lg font-semibold font-display bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">Complete!</h1>
+            </div>
             <div className="w-24" />
           </div>
         </header>
 
         <main className="container px-4 py-16 max-w-2xl mx-auto">
           <div className="text-center animate-fade-in">
-            <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-accent/20 flex items-center justify-center">
-              <CheckCircle2 className="w-10 h-10 text-accent" />
+            <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center shadow-lg shadow-accent/30">
+              <CheckCircle2 className="w-12 h-12 text-white" />
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
+            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 bg-gradient-to-r from-foreground via-accent to-purple-500 bg-clip-text text-transparent">
               Thanks — this was genuinely helpful.
             </h2>
             
@@ -316,14 +352,14 @@ const Survey = () => {
             </p>
 
             <div className="space-y-6 max-w-md mx-auto">
-              <Card className="p-6 border-accent/20 bg-accent/5">
+              <Card className="p-6 border-accent/30 bg-gradient-to-br from-accent/10 to-purple-500/10 backdrop-blur-sm">
                 <p className="text-sm text-foreground mb-4 leading-relaxed">
                   If you'd like, I'm happy to walk through your responses and share what other advisors are doing differently.
                 </p>
                 <Button
                   onClick={openCalendly}
                   size="lg"
-                  className="w-full bg-accent hover:bg-accent-hover text-accent-foreground"
+                  className="w-full bg-gradient-to-r from-accent to-purple-500 hover:from-accent-hover hover:to-purple-600 text-white shadow-lg"
                 >
                   <Calendar className="w-5 h-5 mr-2" />
                   Optional 15-min conversation
@@ -374,13 +410,20 @@ const Survey = () => {
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm">Exit</span>
             </Link>
-            <h1 className="text-lg font-semibold font-display text-foreground">Workflow Discovery</h1>
-            <span className="text-sm text-muted-foreground">{currentSection}/{totalSections}</span>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-accent animate-pulse" />
+              <h1 className="text-lg font-semibold font-display bg-gradient-to-r from-accent via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Workflow Discovery
+              </h1>
+            </div>
+            <span className="text-sm text-muted-foreground font-medium">
+              {currentSection > 0 ? `${currentSection}/${totalSections}` : "Intro"}
+            </span>
           </div>
           {/* Progress bar */}
-          <div className="h-1 bg-muted rounded-full overflow-hidden">
+          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <div 
-              className="h-full bg-accent transition-all duration-500 ease-out"
+              className="h-full bg-gradient-to-r from-accent via-purple-500 to-pink-500 transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -391,170 +434,266 @@ const Survey = () => {
       <div className="border-b border-border/50 bg-background/50 backdrop-blur-sm overflow-x-auto">
         <div className="container px-4 py-3">
           <div className="flex gap-2 min-w-max">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => section.id <= currentSection && setCurrentSection(section.id)}
-                disabled={section.id > currentSection}
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap",
-                  section.id === currentSection
-                    ? "bg-accent text-accent-foreground shadow-md"
-                    : section.id < currentSection
-                    ? "bg-accent/10 text-accent cursor-pointer hover:bg-accent/20"
-                    : "bg-muted text-muted-foreground cursor-not-allowed opacity-50"
-                )}
-              >
-                <span className="mr-1.5">{section.icon}</span>
-                {section.title}
-              </button>
-            ))}
+            {sections.map((section) => {
+              const Icon = section.icon;
+              const isActive = section.id === currentSection;
+              const isCompleted = section.id < currentSection;
+              const isLocked = section.id > currentSection;
+              
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => handleSectionClick(section.id)}
+                  disabled={isLocked}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap",
+                    isActive && `bg-gradient-to-r ${section.gradient} text-white shadow-lg`,
+                    isCompleted && "bg-accent/10 text-accent cursor-pointer hover:bg-accent/20",
+                    isLocked && "bg-muted text-muted-foreground cursor-not-allowed opacity-50"
+                  )}
+                >
+                  <Icon className={cn("w-4 h-4", isActive && "animate-pulse")} />
+                  {section.title}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
 
       {/* Main Content */}
       <main className="container px-4 py-8 max-w-2xl mx-auto">
-        {/* Intro message for first section */}
-        {currentSection === 1 && (
-          <Card className="mb-8 p-6 bg-accent/5 border-accent/20">
-            <p className="text-foreground leading-relaxed">
-              Thanks for taking a few minutes.<br /><br />
-              This is <span className="font-semibold">not a sales form</span> — it's a short workflow check to understand how advisors handle follow-ups, notes, and client communication today.<br /><br />
-              Answer as casually as you'd like.
-            </p>
-          </Card>
-        )}
-
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground mb-2">
-            {sections.find(s => s.id === currentSection)?.icon} {sections.find(s => s.id === currentSection)?.title}
-          </h2>
-          <p className="text-muted-foreground">
-            Question {currentQuestions.findIndex(q => !answers[q.id]) + 1 || currentQuestions.length} of {currentQuestions.length} in this section
-          </p>
-        </div>
-
-        {/* Questions */}
-        <div className="space-y-8">
-          {currentQuestions.map((q, idx) => (
-            <Card 
-              key={q.id} 
-              className={cn(
-                "p-6 transition-all duration-300",
-                answers[q.id] ? "border-accent/30 bg-accent/5" : "border-border"
-              )}
-            >
-              <Label className="text-lg font-medium text-foreground mb-4 block leading-relaxed">
-                {idx + 1}. {q.question}
-              </Label>
-
-              {q.type === "text" && (
-                <Textarea
-                  value={(answers[q.id] as string) || ""}
-                  onChange={(e) => handleAnswer(q.id, e.target.value)}
-                  placeholder={q.placeholder}
-                  className="min-h-[100px] resize-none bg-background border-border focus:border-accent"
-                />
-              )}
-
-              {q.type === "radio" && (
-                <RadioGroup
-                  value={(answers[q.id] as string) || ""}
-                  onValueChange={(value) => handleAnswer(q.id, value)}
-                  className="space-y-3"
-                >
-                  {q.options?.map((option) => (
-                    <div key={option} className="flex items-center space-x-3">
-                      <RadioGroupItem value={option} id={`${q.id}-${option}`} />
-                      <Label 
-                        htmlFor={`${q.id}-${option}`} 
-                        className="text-foreground cursor-pointer"
-                      >
-                        {option}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              )}
-
-              {q.type === "checkbox" && (
-                <div className="space-y-3">
-                  {q.options?.map((option) => (
-                    <div key={option} className="flex items-center space-x-3">
-                      <Checkbox
-                        id={`${q.id}-${option}`}
-                        checked={((answers[q.id] as string[]) || []).includes(option)}
-                        onCheckedChange={(checked) => handleCheckboxChange(q.id, option, checked as boolean)}
-                      />
-                      <Label 
-                        htmlFor={`${q.id}-${option}`} 
-                        className="text-foreground cursor-pointer"
-                      >
-                        {option}
-                      </Label>
-                    </div>
-                  ))}
+        <div 
+          ref={contentRef}
+          className={cn(
+            "transition-all duration-300 ease-out",
+            isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          )}
+        >
+          {/* Intro Screen */}
+          {currentSection === 0 && (
+            <div className="animate-fade-in">
+              <Card className="p-8 md:p-12 bg-gradient-to-br from-accent/10 via-purple-500/5 to-pink-500/10 border-accent/20 backdrop-blur-sm">
+                <div className="text-center mb-8">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-accent via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-accent/30">
+                    <ClipboardList className="w-10 h-10 text-white" />
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 bg-gradient-to-r from-accent via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    Let's explore your workflow
+                  </h2>
                 </div>
-              )}
-
-              {q.type === "scale" && (
-                <div className="space-y-4">
-                  <Slider
-                    value={[parseInt(answers[q.id] as string) || 5]}
-                    onValueChange={(value) => handleAnswer(q.id, value[0].toString())}
-                    min={1}
-                    max={10}
-                    step={1}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>1 - Far from capacity</span>
-                    <span className="text-2xl font-bold text-accent">{answers[q.id] || "5"}</span>
-                    <span>10 - At full capacity</span>
+                
+                <div className="space-y-6 text-lg leading-relaxed">
+                  <p className="text-foreground">
+                    <span className="font-semibold bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">Thanks for taking a few minutes.</span>
+                  </p>
+                  
+                  <p className="text-muted-foreground">
+                    This isn't a sales form — it's a <span className="text-foreground font-medium">quick workflow check</span> to understand how advisors like you handle follow-ups, notes, and client communication.
+                  </p>
+                  
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-background/50 border border-border/50">
+                    <Sparkles className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                    <p className="text-foreground">
+                      Answer as <span className="font-semibold">casually as you'd like</span>. There are no right or wrong answers — just your honest experience.
+                    </p>
                   </div>
                 </div>
-              )}
 
-              {/* Follow-up question */}
-              {q.followUp && q.followUp.condition.includes(answers[q.id] as string) && (
-                <div className="mt-6 pt-6 border-t border-border/50">
-                  <Label className="text-base font-medium text-foreground mb-3 block">
-                    {q.followUp.question}
-                  </Label>
-                  <Textarea
-                    value={(answers[`${q.id}_followup`] as string) || ""}
-                    onChange={(e) => handleAnswer(`${q.id}_followup`, e.target.value)}
-                    placeholder={q.followUp.placeholder}
-                    className="min-h-[80px] resize-none bg-background border-border focus:border-accent"
-                  />
+                <div className="mt-10 flex justify-center">
+                  <Button
+                    onClick={handleNext}
+                    size="lg"
+                    className="px-12 py-6 text-lg bg-gradient-to-r from-accent via-purple-500 to-pink-500 hover:from-accent-hover hover:via-purple-600 hover:to-pink-600 text-white shadow-lg shadow-accent/30 transition-all hover:scale-105"
+                  >
+                    Let's Begin
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
                 </div>
-              )}
-            </Card>
-          ))}
-        </div>
+              </Card>
+            </div>
+          )}
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center mt-10 pt-6 border-t border-border/50">
-          <Button
-            variant="ghost"
-            onClick={handlePrevious}
-            disabled={currentSection === 1}
-            className="text-muted-foreground"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Previous
-          </Button>
+          {/* Section Content */}
+          {currentSection > 0 && (
+            <>
+              {/* Section Title */}
+              <div className="mb-8 animate-fade-in">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className={cn(
+                    "w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg bg-gradient-to-br",
+                    currentSectionData?.gradient
+                  )}>
+                    {CurrentIcon && <CurrentIcon className="w-7 h-7 text-white" />}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground">
+                      {currentSectionData?.title}
+                    </h2>
+                    <p className="text-muted-foreground">
+                      {currentQuestions.length} question{currentQuestions.length > 1 ? 's' : ''} in this section
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-          <Button
-            onClick={handleNext}
-            disabled={!canProceed()}
-            className="bg-accent hover:bg-accent-hover text-accent-foreground px-8"
-          >
-            {currentSection === totalSections ? "Complete Survey" : "Continue"}
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
+              {/* Questions */}
+              <div className="space-y-6">
+                {currentQuestions.map((q, idx) => (
+                  <Card 
+                    key={q.id} 
+                    className={cn(
+                      "p-6 transition-all duration-300 animate-fade-in",
+                      answers[q.id] ? "border-accent/30 bg-gradient-to-br from-accent/5 to-purple-500/5" : "border-border hover:border-accent/20"
+                    )}
+                    style={{ animationDelay: `${idx * 100}ms` }}
+                  >
+                    <Label className="text-lg font-medium text-foreground mb-4 block leading-relaxed">
+                      <span className={cn(
+                        "inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold mr-3 bg-gradient-to-br",
+                        currentSectionData?.gradient,
+                        "text-white"
+                      )}>
+                        {idx + 1}
+                      </span>
+                      {q.question}
+                    </Label>
+
+                    {q.type === "text" && (
+                      <Textarea
+                        value={(answers[q.id] as string) || ""}
+                        onChange={(e) => handleAnswer(q.id, e.target.value)}
+                        placeholder={q.placeholder}
+                        className="min-h-[100px] resize-none bg-background border-border focus:border-accent transition-colors"
+                      />
+                    )}
+
+                    {q.type === "radio" && (
+                      <RadioGroup
+                        value={(answers[q.id] as string) || ""}
+                        onValueChange={(value) => handleAnswer(q.id, value)}
+                        className="space-y-3"
+                      >
+                        {q.options?.map((option) => (
+                          <div 
+                            key={option} 
+                            className={cn(
+                              "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer",
+                              answers[q.id] === option 
+                                ? "bg-accent/10 border border-accent/30" 
+                                : "hover:bg-muted border border-transparent"
+                            )}
+                          >
+                            <RadioGroupItem value={option} id={`${q.id}-${option}`} />
+                            <Label 
+                              htmlFor={`${q.id}-${option}`} 
+                              className="text-foreground cursor-pointer flex-1"
+                            >
+                              {option}
+                            </Label>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                    )}
+
+                    {q.type === "checkbox" && (
+                      <div className="space-y-3">
+                        {q.options?.map((option) => {
+                          const isChecked = ((answers[q.id] as string[]) || []).includes(option);
+                          return (
+                            <div 
+                              key={option} 
+                              className={cn(
+                                "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer",
+                                isChecked 
+                                  ? "bg-accent/10 border border-accent/30" 
+                                  : "hover:bg-muted border border-transparent"
+                              )}
+                              onClick={() => handleCheckboxChange(q.id, option, !isChecked)}
+                            >
+                              <Checkbox
+                                id={`${q.id}-${option}`}
+                                checked={isChecked}
+                                onCheckedChange={(checked) => handleCheckboxChange(q.id, option, checked as boolean)}
+                              />
+                              <Label 
+                                htmlFor={`${q.id}-${option}`} 
+                                className="text-foreground cursor-pointer flex-1"
+                              >
+                                {option}
+                              </Label>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {q.type === "scale" && (
+                      <div className="space-y-6 pt-2">
+                        <Slider
+                          value={[parseInt(answers[q.id] as string) || 5]}
+                          onValueChange={(value) => handleAnswer(q.id, value[0].toString())}
+                          min={1}
+                          max={10}
+                          step={1}
+                          className="w-full"
+                        />
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-muted-foreground">Far from capacity</span>
+                          <span className={cn(
+                            "text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent",
+                            currentSectionData?.gradient
+                          )}>
+                            {answers[q.id] || "5"}
+                          </span>
+                          <span className="text-sm text-muted-foreground">At full capacity</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Follow-up question */}
+                    {q.followUp && q.followUp.condition.includes(answers[q.id] as string) && (
+                      <div className="mt-6 pt-6 border-t border-border/50 animate-fade-in">
+                        <Label className="text-base font-medium text-foreground mb-3 block">
+                          {q.followUp.question}
+                        </Label>
+                        <Textarea
+                          value={(answers[`${q.id}_followup`] as string) || ""}
+                          onChange={(e) => handleAnswer(`${q.id}_followup`, e.target.value)}
+                          placeholder={q.followUp.placeholder}
+                          className="min-h-[80px] resize-none bg-background border-border focus:border-accent"
+                        />
+                      </div>
+                    )}
+                  </Card>
+                ))}
+              </div>
+
+              {/* Navigation */}
+              <div className="flex justify-between items-center mt-10 pt-6 border-t border-border/50">
+                <Button
+                  variant="ghost"
+                  onClick={handlePrevious}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Previous
+                </Button>
+
+                <Button
+                  onClick={handleNext}
+                  disabled={!canProceed()}
+                  className={cn(
+                    "px-8 text-white shadow-lg transition-all hover:scale-105 bg-gradient-to-r",
+                    currentSectionData?.gradient
+                  )}
+                >
+                  {currentSection === totalSections ? "Complete Survey" : "Continue"}
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </main>
     </div>
