@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,8 +19,7 @@ import {
   TrendingUp,
   Search,
   RefreshCw,
-  Target,
-  Sparkles
+  Target
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import WaitlistModal from "@/components/WaitlistModal";
@@ -227,14 +226,14 @@ const questions: Question[] = [
 ];
 
 const sections = [
-  { id: 1, title: "Workflow", icon: ClipboardList, gradient: "from-blue-500 to-cyan-400" },
-  { id: 2, title: "Time", icon: Clock, gradient: "from-orange-500 to-amber-400" },
-  { id: 3, title: "Compliance", icon: Shield, gradient: "from-green-500 to-emerald-400" },
-  { id: 4, title: "Pain Points", icon: Brain, gradient: "from-purple-500 to-pink-400" },
-  { id: 5, title: "Future", icon: TrendingUp, gradient: "from-red-500 to-rose-400" },
-  { id: 6, title: "Diagnosis", icon: Search, gradient: "from-indigo-500 to-violet-400" },
-  { id: 7, title: "Past Tries", icon: RefreshCw, gradient: "from-teal-500 to-cyan-400" },
-  { id: 8, title: "Vision", icon: Target, gradient: "from-pink-500 to-purple-400" },
+  { id: 1, title: "Workflow", icon: ClipboardList },
+  { id: 2, title: "Time", icon: Clock },
+  { id: 3, title: "Compliance", icon: Shield },
+  { id: 4, title: "Pain Points", icon: Brain },
+  { id: 5, title: "Future", icon: TrendingUp },
+  { id: 6, title: "Diagnosis", icon: Search },
+  { id: 7, title: "Past Tries", icon: RefreshCw },
+  { id: 8, title: "Vision", icon: Target },
 ];
 
 const Survey = () => {
@@ -322,28 +321,25 @@ const Survey = () => {
 
   if (isComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background">
-        <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+      <div className="min-h-screen bg-gradient-to-b from-background to-accent/5">
+        <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
           <div className="container px-4 py-4 flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm">Back to FinProIQ</span>
             </Link>
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-accent" />
-              <h1 className="text-lg font-semibold font-display bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">Complete!</h1>
-            </div>
+            <h1 className="text-lg font-semibold font-display text-accent">Survey Complete</h1>
             <div className="w-24" />
           </div>
         </header>
 
         <main className="container px-4 py-16 max-w-2xl mx-auto">
           <div className="text-center animate-fade-in">
-            <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center shadow-lg shadow-accent/30">
-              <CheckCircle2 className="w-12 h-12 text-white" />
+            <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-accent/10 flex items-center justify-center">
+              <CheckCircle2 className="w-10 h-10 text-accent" />
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 bg-gradient-to-r from-foreground via-accent to-purple-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
               Thanks — this was genuinely helpful.
             </h2>
             
@@ -352,14 +348,14 @@ const Survey = () => {
             </p>
 
             <div className="space-y-6 max-w-md mx-auto">
-              <Card className="p-6 border-accent/30 bg-gradient-to-br from-accent/10 to-purple-500/10 backdrop-blur-sm">
+              <Card className="p-6 border-accent/20 bg-accent/5">
                 <p className="text-sm text-foreground mb-4 leading-relaxed">
                   If you'd like, I'm happy to walk through your responses and share what other advisors are doing differently.
                 </p>
                 <Button
                   onClick={openCalendly}
                   size="lg"
-                  className="w-full bg-gradient-to-r from-accent to-purple-500 hover:from-accent-hover hover:to-purple-600 text-white shadow-lg"
+                  className="w-full bg-accent hover:bg-accent-hover text-accent-foreground"
                 >
                   <Calendar className="w-5 h-5 mr-2" />
                   Optional 15-min conversation
@@ -376,7 +372,7 @@ const Survey = () => {
                 onClick={() => setIsWaitlistOpen(true)}
                 variant="outline"
                 size="lg"
-                className="w-full border-border hover:border-accent hover:bg-accent/5"
+                className="w-full border-accent text-accent hover:bg-accent/5"
               >
                 <Users className="w-5 h-5 mr-2" />
                 Join the Waitlist
@@ -401,21 +397,18 @@ const Survey = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-background to-accent/5">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container px-4 py-4">
           <div className="flex items-center justify-between mb-3">
             <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm">Exit</span>
             </Link>
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-accent animate-pulse" />
-              <h1 className="text-lg font-semibold font-display bg-gradient-to-r from-accent via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Workflow Discovery
-              </h1>
-            </div>
+            <h1 className="text-lg font-semibold font-display text-accent">
+              Workflow Discovery
+            </h1>
             <span className="text-sm text-muted-foreground font-medium">
               {currentSection > 0 ? `${currentSection}/${totalSections}` : "Intro"}
             </span>
@@ -423,7 +416,7 @@ const Survey = () => {
           {/* Progress bar */}
           <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-accent via-purple-500 to-pink-500 transition-all duration-500 ease-out"
+              className="h-full bg-accent transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -431,7 +424,7 @@ const Survey = () => {
       </header>
 
       {/* Section Navigation */}
-      <div className="border-b border-border/50 bg-background/50 backdrop-blur-sm overflow-x-auto">
+      <div className="border-b border-border bg-background/80 backdrop-blur-sm overflow-x-auto">
         <div className="container px-4 py-3">
           <div className="flex gap-2 min-w-max">
             {sections.map((section) => {
@@ -447,12 +440,12 @@ const Survey = () => {
                   disabled={isLocked}
                   className={cn(
                     "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap",
-                    isActive && `bg-gradient-to-r ${section.gradient} text-white shadow-lg`,
+                    isActive && "bg-accent text-accent-foreground",
                     isCompleted && "bg-accent/10 text-accent cursor-pointer hover:bg-accent/20",
                     isLocked && "bg-muted text-muted-foreground cursor-not-allowed opacity-50"
                   )}
                 >
-                  <Icon className={cn("w-4 h-4", isActive && "animate-pulse")} />
+                  <Icon className="w-4 h-4" />
                   {section.title}
                 </button>
               );
@@ -473,38 +466,35 @@ const Survey = () => {
           {/* Intro Screen */}
           {currentSection === 0 && (
             <div className="animate-fade-in">
-              <Card className="p-8 md:p-12 bg-gradient-to-br from-accent/10 via-purple-500/5 to-pink-500/10 border-accent/20 backdrop-blur-sm">
+              <Card className="p-8 md:p-12 border-accent/20 bg-card">
                 <div className="text-center mb-8">
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-accent via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-accent/30">
-                    <ClipboardList className="w-10 h-10 text-white" />
+                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
+                    <ClipboardList className="w-8 h-8 text-accent" />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 bg-gradient-to-r from-accent via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground">
                     Let's explore your workflow
                   </h2>
                 </div>
                 
-                <div className="space-y-6 text-lg leading-relaxed">
-                  <p className="text-foreground">
-                    <span className="font-semibold bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">Thanks for taking a few minutes.</span>
+                <div className="space-y-5 text-base leading-relaxed max-w-lg mx-auto">
+                  <p className="text-foreground font-medium">
+                    Thanks for taking a few minutes.
                   </p>
                   
                   <p className="text-muted-foreground">
-                    This isn't a sales form — it's a <span className="text-foreground font-medium">quick workflow check</span> to understand how advisors like you handle follow-ups, notes, and client communication.
+                    This isn't a sales form — it's a quick workflow check to understand how advisors like you handle follow-ups, notes, and client communication.
                   </p>
                   
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-background/50 border border-border/50">
-                    <Sparkles className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
-                    <p className="text-foreground">
-                      Answer as <span className="font-semibold">casually as you'd like</span>. There are no right or wrong answers — just your honest experience.
-                    </p>
-                  </div>
+                  <p className="text-muted-foreground">
+                    Answer as casually as you'd like. There are no right or wrong answers — just your honest experience.
+                  </p>
                 </div>
 
                 <div className="mt-10 flex justify-center">
                   <Button
                     onClick={handleNext}
                     size="lg"
-                    className="px-12 py-6 text-lg bg-gradient-to-r from-accent via-purple-500 to-pink-500 hover:from-accent-hover hover:via-purple-600 hover:to-pink-600 text-white shadow-lg shadow-accent/30 transition-all hover:scale-105"
+                    className="px-10 py-5 text-base bg-accent hover:bg-accent-hover text-accent-foreground"
                   >
                     Let's Begin
                     <ArrowRight className="w-5 h-5 ml-2" />
@@ -520,17 +510,14 @@ const Survey = () => {
               {/* Section Title */}
               <div className="mb-8 animate-fade-in">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className={cn(
-                    "w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg bg-gradient-to-br",
-                    currentSectionData?.gradient
-                  )}>
-                    {CurrentIcon && <CurrentIcon className="w-7 h-7 text-white" />}
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-accent/10">
+                    {CurrentIcon && <CurrentIcon className="w-6 h-6 text-accent" />}
                   </div>
                   <div>
                     <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground">
                       {currentSectionData?.title}
                     </h2>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {currentQuestions.length} question{currentQuestions.length > 1 ? 's' : ''} in this section
                     </p>
                   </div>
@@ -544,16 +531,12 @@ const Survey = () => {
                     key={q.id} 
                     className={cn(
                       "p-6 transition-all duration-300 animate-fade-in",
-                      answers[q.id] ? "border-accent/30 bg-gradient-to-br from-accent/5 to-purple-500/5" : "border-border hover:border-accent/20"
+                      answers[q.id] ? "border-accent/30 bg-accent/5" : "border-border"
                     )}
                     style={{ animationDelay: `${idx * 100}ms` }}
                   >
-                    <Label className="text-lg font-medium text-foreground mb-4 block leading-relaxed">
-                      <span className={cn(
-                        "inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-bold mr-3 bg-gradient-to-br",
-                        currentSectionData?.gradient,
-                        "text-white"
-                      )}>
+                    <Label className="text-base font-medium text-foreground mb-4 block leading-relaxed">
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold mr-3 bg-accent text-accent-foreground">
                         {idx + 1}
                       </span>
                       {q.question}
@@ -572,16 +555,16 @@ const Survey = () => {
                       <RadioGroup
                         value={(answers[q.id] as string) || ""}
                         onValueChange={(value) => handleAnswer(q.id, value)}
-                        className="space-y-3"
+                        className="space-y-2"
                       >
                         {q.options?.map((option) => (
                           <div 
                             key={option} 
                             className={cn(
-                              "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer",
+                              "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer border",
                               answers[q.id] === option 
-                                ? "bg-accent/10 border border-accent/30" 
-                                : "hover:bg-muted border border-transparent"
+                                ? "bg-accent/10 border-accent/30" 
+                                : "hover:bg-muted border-transparent"
                             )}
                           >
                             <RadioGroupItem value={option} id={`${q.id}-${option}`} />
@@ -597,17 +580,17 @@ const Survey = () => {
                     )}
 
                     {q.type === "checkbox" && (
-                      <div className="space-y-3">
+                      <div className="space-y-2">
                         {q.options?.map((option) => {
                           const isChecked = ((answers[q.id] as string[]) || []).includes(option);
                           return (
                             <div 
                               key={option} 
                               className={cn(
-                                "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer",
+                                "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer border",
                                 isChecked 
-                                  ? "bg-accent/10 border border-accent/30" 
-                                  : "hover:bg-muted border border-transparent"
+                                  ? "bg-accent/10 border-accent/30" 
+                                  : "hover:bg-muted border-transparent"
                               )}
                               onClick={() => handleCheckboxChange(q.id, option, !isChecked)}
                             >
@@ -629,7 +612,7 @@ const Survey = () => {
                     )}
 
                     {q.type === "scale" && (
-                      <div className="space-y-6 pt-2">
+                      <div className="space-y-5 pt-2">
                         <Slider
                           value={[parseInt(answers[q.id] as string) || 5]}
                           onValueChange={(value) => handleAnswer(q.id, value[0].toString())}
@@ -639,21 +622,18 @@ const Survey = () => {
                           className="w-full"
                         />
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-muted-foreground">Far from capacity</span>
-                          <span className={cn(
-                            "text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent",
-                            currentSectionData?.gradient
-                          )}>
+                          <span className="text-xs text-muted-foreground">Far from capacity</span>
+                          <span className="text-3xl font-bold text-accent">
                             {answers[q.id] || "5"}
                           </span>
-                          <span className="text-sm text-muted-foreground">At full capacity</span>
+                          <span className="text-xs text-muted-foreground">At full capacity</span>
                         </div>
                       </div>
                     )}
 
                     {/* Follow-up question */}
                     {q.followUp && q.followUp.condition.includes(answers[q.id] as string) && (
-                      <div className="mt-6 pt-6 border-t border-border/50 animate-fade-in">
+                      <div className="mt-6 pt-6 border-t border-border animate-fade-in">
                         <Label className="text-base font-medium text-foreground mb-3 block">
                           {q.followUp.question}
                         </Label>
@@ -670,7 +650,7 @@ const Survey = () => {
               </div>
 
               {/* Navigation */}
-              <div className="flex justify-between items-center mt-10 pt-6 border-t border-border/50">
+              <div className="flex justify-between items-center mt-10 pt-6 border-t border-border">
                 <Button
                   variant="ghost"
                   onClick={handlePrevious}
@@ -683,10 +663,7 @@ const Survey = () => {
                 <Button
                   onClick={handleNext}
                   disabled={!canProceed()}
-                  className={cn(
-                    "px-8 text-white shadow-lg transition-all hover:scale-105 bg-gradient-to-r",
-                    currentSectionData?.gradient
-                  )}
+                  className="px-8 bg-accent hover:bg-accent-hover text-accent-foreground"
                 >
                   {currentSection === totalSections ? "Complete Survey" : "Continue"}
                   <ArrowRight className="w-4 h-4 ml-2" />
