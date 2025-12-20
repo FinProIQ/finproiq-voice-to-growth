@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
 import { ArrowLeft, ArrowRight, Calendar, Users, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import WaitlistModal from "@/components/WaitlistModal";
@@ -499,21 +500,20 @@ const Survey = () => {
               )}
 
               {q.type === "scale" && (
-                <div className="flex flex-wrap gap-2">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                    <button
-                      key={num}
-                      onClick={() => handleAnswer(q.id, num.toString())}
-                      className={cn(
-                        "w-10 h-10 rounded-lg font-medium transition-all",
-                        answers[q.id] === num.toString()
-                          ? "bg-accent text-accent-foreground shadow-md"
-                          : "bg-muted text-foreground hover:bg-accent/20"
-                      )}
-                    >
-                      {num}
-                    </button>
-                  ))}
+                <div className="space-y-4">
+                  <Slider
+                    value={[parseInt(answers[q.id] as string) || 5]}
+                    onValueChange={(value) => handleAnswer(q.id, value[0].toString())}
+                    min={1}
+                    max={10}
+                    step={1}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>1 - Far from capacity</span>
+                    <span className="text-2xl font-bold text-accent">{answers[q.id] || "5"}</span>
+                    <span>10 - At full capacity</span>
+                  </div>
                 </div>
               )}
 
