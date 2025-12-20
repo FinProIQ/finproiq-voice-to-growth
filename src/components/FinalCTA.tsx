@@ -50,16 +50,16 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
           {/* Secondary option for those not ready */}
           <div className="mt-12 pt-8 border-t border-border/50">
             <p className="text-muted-foreground mb-4">
-              Not ready to commit? Discover where your workflow is costing you time.
+              Not ready to commit? Help us understand your workflow challenges.
             </p>
             <Link to="/survey" onClick={handleSurveyClick}>
               <Button 
-                variant="ghost" 
+                variant="outline" 
                 size="lg"
-                className="text-accent hover:text-accent-hover hover:bg-accent/5 transition-all"
+                className="border-accent text-accent hover:bg-accent/10 transition-all"
               >
                 <ClipboardList className="w-5 h-5 mr-2" />
-                Discover My Workflow Gaps
+                Share Your Workflow Challenges
               </Button>
             </Link>
           </div>
