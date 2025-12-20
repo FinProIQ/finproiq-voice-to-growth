@@ -19,11 +19,14 @@ import {
   TrendingUp,
   Search,
   RefreshCw,
-  Target
+  Target,
+  Home
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import WaitlistModal from "@/components/WaitlistModal";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface Question {
   id: string;
@@ -236,13 +239,18 @@ const sections = [
   { id: 8, title: "Vision", icon: Target },
 ];
 
+const CALENDLY_URL = "https://calendly.com/raman-sivasankar/introductory-15-minute-call";
+
 const Survey = () => {
   const [currentSection, setCurrentSection] = useState(0); // 0 = intro
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isComplete, setIsComplete] = useState(false);
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showCalendly, setShowCalendly] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   const currentQuestions = currentSection > 0 ? questions.filter(q => q.section === currentSection) : [];
   const totalSections = sections.length;
@@ -280,10 +288,57 @@ const Survey = () => {
     }, 300);
   };
 
-  const handleNext = () => {
+  const saveResponsesToDatabase = async () => {
+    setIsSaving(true);
+    try {
+      const { error } = await supabase
+        .from('survey_responses')
+        .insert({
+          post_meeting: answers.post_meeting as string || null,
+          notes_location: answers.notes_location as string[] || null,
+          followup_writer: answers.followup_writer as string || null,
+          crm_updates: answers.crm_updates as string || null,
+          delayed_tasks: answers.delayed_tasks as string || null,
+          time_spent: answers.time_spent as string || null,
+          slippage_frequency: answers.slippage_frequency as string || null,
+          slippage_followup: answers.slippage_frequency_followup as string || null,
+          compliance_approach: answers.compliance_approach as string || null,
+          compliance_redo: answers.compliance_redo as string || null,
+          biggest_stress: answers.biggest_stress as string || null,
+          stress_reason: answers.stress_reason as string || null,
+          real_cost: answers.real_cost as string || null,
+          future_pain: answers.future_pain as string || null,
+          capacity_limit: answers.capacity_limit as string || null,
+          capacity_scale: answers.capacity_scale as string || null,
+          predictable_process: answers.predictable_process as string || null,
+          biggest_challenge: answers.biggest_challenge as string[] || null,
+          prior_solutions: answers.prior_solutions as string[] || null,
+          prior_outcome: answers.prior_outcome as string || null,
+          ideal_state: answers.ideal_state as string || null,
+          time_focus: answers.time_focus as string[] || null,
+        });
+
+      if (error) {
+        console.error('Error saving survey:', error);
+        toast({
+          title: "Error saving responses",
+          description: "Your responses could not be saved, but you can still continue.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error saving survey:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleNext = async () => {
     if (currentSection < totalSections) {
       transitionToSection(currentSection + 1);
     } else {
+      // Save to database before completing
+      await saveResponsesToDatabase();
       setIsComplete(true);
       if (window.gtag) {
         window.gtag('event', 'survey_complete', {
@@ -306,14 +361,14 @@ const Survey = () => {
     }
   };
 
-  const openCalendly = () => {
+  const handleBookCall = () => {
     if (window.gtag) {
       window.gtag('event', 'calendly_click', {
         event_category: 'engagement',
         event_label: 'Survey Completion'
       });
     }
-    window.open('https://calendly.com/your-link', '_blank');
+    setShowCalendly(true);
   };
 
   const currentSectionData = sections.find(s => s.id === currentSection);
@@ -333,59 +388,79 @@ const Survey = () => {
           </div>
         </header>
 
-        <main className="container px-4 py-16 max-w-2xl mx-auto">
-          <div className="text-center animate-fade-in">
-            <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-accent/10 flex items-center justify-center">
-              <CheckCircle2 className="w-10 h-10 text-accent" />
-            </div>
-            
-            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
-              Thanks — this was genuinely helpful.
-            </h2>
-            
-            <p className="text-lg text-muted-foreground mb-12 max-w-lg mx-auto leading-relaxed">
-              You're not alone. Most advisors describe the same friction points once they see them written down.
-            </p>
+        <main className="container px-4 py-12 max-w-3xl mx-auto">
+          {!showCalendly ? (
+            <div className="text-center animate-fade-in">
+              <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-accent/10 flex items-center justify-center">
+                <CheckCircle2 className="w-10 h-10 text-accent" />
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
+                Thanks — this was genuinely helpful.
+              </h2>
+              
+              <p className="text-lg text-muted-foreground mb-10 max-w-lg mx-auto leading-relaxed">
+                You're not alone. Most advisors describe the same friction points once they see them written down.
+              </p>
 
-            <div className="space-y-6 max-w-md mx-auto">
-              <Card className="p-6 border-accent/20 bg-accent/5">
-                <p className="text-sm text-foreground mb-4 leading-relaxed">
-                  If you'd like, I'm happy to walk through your responses and share what other advisors are doing differently.
-                </p>
-                <Button
-                  onClick={openCalendly}
-                  size="lg"
-                  className="w-full bg-accent hover:bg-accent-hover text-accent-foreground"
-                >
-                  <Calendar className="w-5 h-5 mr-2" />
-                  Optional 15-min conversation
-                </Button>
-              </Card>
+              <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
+                <Card className="p-6 border-accent/20 hover:border-accent/40 transition-colors cursor-pointer group" onClick={handleBookCall}>
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Calendar className="w-6 h-6 text-accent" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">Book a Quick Call</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Walk through your responses and learn what other advisors are doing differently.
+                  </p>
+                  <Button className="w-full bg-accent hover:bg-accent-hover text-accent-foreground">
+                    Schedule 15-min Call
+                  </Button>
+                </Card>
 
-              <div className="flex items-center gap-4">
-                <div className="flex-1 border-t border-border" />
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">Or stay hands-off</span>
-                <div className="flex-1 border-t border-border" />
+                <Card className="p-6 border-border hover:border-accent/40 transition-colors cursor-pointer group" onClick={() => setIsWaitlistOpen(true)}>
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center group-hover:bg-accent/10 transition-colors">
+                    <Users className="w-6 h-6 text-muted-foreground group-hover:text-accent transition-colors" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">Join the Waitlist</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Get early access and updates on how we're solving these workflow challenges.
+                  </p>
+                  <Button variant="outline" className="w-full border-border hover:border-accent hover:text-accent">
+                    Get Early Access
+                  </Button>
+                </Card>
               </div>
 
-              <Button
-                onClick={() => setIsWaitlistOpen(true)}
-                variant="outline"
-                size="lg"
-                className="w-full border-accent text-accent hover:bg-accent/5"
-              >
-                <Users className="w-5 h-5 mr-2" />
-                Join the Waitlist
-              </Button>
-
-              <Link to="/" className="block">
-                <Button variant="ghost" className="w-full text-muted-foreground hover:text-foreground">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Return to Homepage
-                </Button>
+              <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors">
+                <Home className="w-4 h-4" />
+                <span>Return to Homepage</span>
               </Link>
             </div>
-          </div>
+          ) : (
+            <div className="animate-fade-in">
+              <div className="flex items-center justify-between mb-6">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => setShowCalendly(false)}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to options
+                </Button>
+              </div>
+              
+              <Card className="overflow-hidden border-accent/20">
+                <iframe
+                  src={`${CALENDLY_URL}?embed_domain=localhost&embed_type=Inline`}
+                  width="100%"
+                  height="700"
+                  frameBorder="0"
+                  title="Schedule a call"
+                  className="bg-background"
+                />
+              </Card>
+            </div>
+          )}
         </main>
 
         <WaitlistModal 
@@ -662,10 +737,10 @@ const Survey = () => {
 
                 <Button
                   onClick={handleNext}
-                  disabled={!canProceed()}
+                  disabled={!canProceed() || isSaving}
                   className="px-8 bg-accent hover:bg-accent-hover text-accent-foreground"
                 >
-                  {currentSection === totalSections ? "Complete Survey" : "Continue"}
+                  {isSaving ? "Saving..." : currentSection === totalSections ? "Complete Survey" : "Continue"}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
