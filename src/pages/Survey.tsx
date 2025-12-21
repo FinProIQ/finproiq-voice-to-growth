@@ -272,6 +272,11 @@ const Survey = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Scroll to top whenever section changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [currentSection]);
+
   const currentQuestions = currentSection > 0 ? questions.filter(q => q.section === currentSection) : [];
   const totalSections = sections.length;
   const progress = (currentSection / totalSections) * 100;
@@ -305,7 +310,6 @@ const Survey = () => {
     setTimeout(() => {
       setCurrentSection(newSection);
       setIsTransitioning(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 300);
   };
 
