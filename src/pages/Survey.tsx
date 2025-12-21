@@ -477,9 +477,11 @@ const Survey = () => {
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container px-4 py-4">
           <div className="flex items-center justify-between mb-3">
-            <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm">Exit</span>
+            <Link to="/">
+              <Button variant="outline" size="sm" className="gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Exit
+              </Button>
             </Link>
             <h1 className="text-lg font-semibold font-display text-accent">
               Workflow Discovery
@@ -728,21 +730,21 @@ const Survey = () => {
               {/* Navigation */}
               <div className="flex justify-between items-center mt-10 pt-6 border-t border-border">
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   onClick={handlePrevious}
-                  className="text-muted-foreground hover:text-foreground"
+                  className="gap-2"
                 >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  <ArrowLeft className="w-4 h-4" />
                   Previous
                 </Button>
 
                 <Button
                   onClick={handleNext}
                   disabled={!canProceed() || isSaving}
-                  className="px-8 bg-accent hover:bg-accent-hover text-accent-foreground"
+                  className="gap-2 px-8 bg-accent hover:bg-accent-hover text-accent-foreground"
                 >
                   {isSaving ? "Saving..." : currentSection === totalSections ? "Complete Survey" : "Continue"}
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
             </>
