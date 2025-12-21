@@ -25,6 +25,7 @@ export type Database = {
           created_at: string
           crm_updates: string | null
           delayed_tasks: string | null
+          email: string | null
           followup_writer: string | null
           future_pain: string | null
           id: string
@@ -51,6 +52,7 @@ export type Database = {
           created_at?: string
           crm_updates?: string | null
           delayed_tasks?: string | null
+          email?: string | null
           followup_writer?: string | null
           future_pain?: string | null
           id?: string
@@ -77,6 +79,7 @@ export type Database = {
           created_at?: string
           crm_updates?: string | null
           delayed_tasks?: string | null
+          email?: string | null
           followup_writer?: string | null
           future_pain?: string | null
           id?: string

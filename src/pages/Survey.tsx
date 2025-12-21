@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,6 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -20,13 +21,22 @@ import {
   Search,
   RefreshCw,
   Target,
-  Home
+  Home,
+  X,
+  Mail
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import WaitlistModal from "@/components/WaitlistModal";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface Question {
   id: string;
@@ -249,8 +259,18 @@ const Survey = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [showExitDialog, setShowExitDialog] = useState(false);
+  const [showExitCalendly, setShowExitCalendly] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const contentRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const currentQuestions = currentSection > 0 ? questions.filter(q => q.section === currentSection) : [];
   const totalSections = sections.length;
@@ -285,7 +305,30 @@ const Survey = () => {
     setTimeout(() => {
       setCurrentSection(newSection);
       setIsTransitioning(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 300);
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleExitClick = () => {
+    if (currentSection > 0 && Object.keys(answers).length > 0) {
+      setShowExitDialog(true);
+    } else {
+      navigate('/');
+    }
+  };
+
+  const handleExitBookCall = () => {
+    setShowExitCalendly(true);
+  };
+
+  const handleExitNoThanks = () => {
+    setShowExitDialog(false);
+    navigate('/');
   };
 
   const saveResponsesToDatabase = async () => {
@@ -294,6 +337,7 @@ const Survey = () => {
       const { error } = await supabase
         .from('survey_responses')
         .insert({
+          email: email || null,
           post_meeting: answers.post_meeting as string || null,
           notes_location: answers.notes_location as string[] || null,
           followup_writer: answers.followup_writer as string || null,
@@ -334,9 +378,17 @@ const Survey = () => {
   };
 
   const handleNext = async () => {
-    if (currentSection < totalSections) {
-      transitionToSection(currentSection + 1);
-    } else {
+    // If on last section, validate email before proceeding
+    if (currentSection === totalSections) {
+      if (!email.trim()) {
+        setEmailError("Please enter your email address");
+        return;
+      }
+      if (!validateEmail(email)) {
+        setEmailError("Please enter a valid email address");
+        return;
+      }
+      setEmailError("");
       // Save to database before completing
       await saveResponsesToDatabase();
       setIsComplete(true);
@@ -346,6 +398,8 @@ const Survey = () => {
           event_label: 'Workflow Survey'
         });
       }
+    } else {
+      transitionToSection(currentSection + 1);
     }
   };
 
@@ -477,12 +531,10 @@ const Survey = () => {
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container px-4 py-4">
           <div className="flex items-center justify-between mb-3">
-            <Link to="/">
-              <Button variant="outline" size="sm" className="gap-2">
-                <ArrowLeft className="w-4 h-4" />
-                Exit
-              </Button>
-            </Link>
+            <Button variant="outline" size="sm" className="gap-2" onClick={handleExitClick}>
+              <ArrowLeft className="w-4 h-4" />
+              Exit
+            </Button>
             <h1 className="text-lg font-semibold font-display text-accent">
               Workflow Discovery
             </h1>
@@ -727,6 +779,41 @@ const Survey = () => {
                 ))}
               </div>
 
+              {/* Email Collection - Show on last section */}
+              {currentSection === totalSections && (
+                <Card className="p-6 mt-6 border-accent/30 bg-accent/5 animate-fade-in">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-accent" />
+                    </div>
+                    <div>
+                      <Label className="text-base font-medium text-foreground block">
+                        Your email address
+                      </Label>
+                      <p className="text-sm text-muted-foreground">
+                        So we can connect your responses when you book a call later
+                      </p>
+                    </div>
+                  </div>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setEmailError("");
+                    }}
+                    placeholder="your@email.com"
+                    className={cn(
+                      "bg-background border-border focus:border-accent transition-colors",
+                      emailError && "border-destructive focus:border-destructive"
+                    )}
+                  />
+                  {emailError && (
+                    <p className="text-sm text-destructive mt-2">{emailError}</p>
+                  )}
+                </Card>
+              )}
+
               {/* Navigation */}
               <div className="flex justify-between items-center mt-10 pt-6 border-t border-border">
                 <Button
@@ -751,6 +838,74 @@ const Survey = () => {
           )}
         </div>
       </main>
+
+      {/* Exit Confirmation Dialog */}
+      <Dialog open={showExitDialog} onOpenChange={setShowExitDialog}>
+        <DialogContent className="sm:max-w-md">
+          {!showExitCalendly ? (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-xl font-display">
+                  We value your time
+                </DialogTitle>
+                <DialogDescription className="text-base leading-relaxed pt-2">
+                  We understand you're busy. Before you go, would you like to schedule a quick discovery call? We'd love to learn more about your workflow challenges.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex flex-col gap-3 mt-4">
+                <Button 
+                  onClick={handleExitBookCall}
+                  className="w-full bg-accent hover:bg-accent-hover text-accent-foreground gap-2"
+                >
+                  <Calendar className="w-4 h-4" />
+                  Yes, book a call
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={handleExitNoThanks}
+                  className="w-full gap-2"
+                >
+                  <X className="w-4 h-4" />
+                  No thanks, exit
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div className="py-2">
+              <div className="flex items-center justify-between mb-4">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => setShowExitCalendly(false)}
+                  className="text-muted-foreground hover:text-foreground gap-2"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Back
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => {
+                    setShowExitDialog(false);
+                    setShowExitCalendly(false);
+                  }}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+              <iframe
+                src={`${CALENDLY_URL}?embed_domain=localhost&embed_type=Inline`}
+                width="100%"
+                height="500"
+                frameBorder="0"
+                title="Schedule a call"
+                className="bg-background rounded-lg"
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
