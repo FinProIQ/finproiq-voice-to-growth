@@ -67,7 +67,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">
+          <DialogTitle className="text-2xl font-bold text-accent">
             Join the Waitlist
           </DialogTitle>
           <DialogDescription className="text-muted-foreground">
@@ -115,7 +115,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent"
+              className="flex-1 bg-accent hover:bg-accent-hover text-accent-foreground"
             >
               {isSubmitting ? "Joining..." : "Join Waitlist"}
             </Button>

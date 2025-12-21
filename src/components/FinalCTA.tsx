@@ -27,11 +27,11 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-accent/5 via-white to-accent/10">
+    <section className="py-16 md:py-24 bg-accent/5">
       <div className="container px-4">
         <div className="max-w-5xl mx-auto text-center animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">
-            Ready to <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">Transform Your Practice?</span>
+            Ready to <span className="text-accent">Transform Your Practice?</span>
           </h2>
           
           <p className="text-xl md:text-2xl mb-10 text-foreground">
@@ -42,7 +42,7 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
             variant="default" 
             size="lg"
             onClick={handleCTAClick}
-            className="text-lg px-10 py-5 h-auto rounded-xl bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent shadow-lg hover:shadow-xl transition-all"
+            className="text-lg px-10 py-5 h-auto rounded-xl bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
           >
             Join Waitlist Now →
           </Button>

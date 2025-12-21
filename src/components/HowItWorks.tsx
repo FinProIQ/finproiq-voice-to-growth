@@ -54,7 +54,7 @@ const HowItWorks = () => {
               className="relative"
             >
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-accent to-accent-hover text-white flex items-center justify-center text-2xl font-bold mb-4 shadow-lg">
+                <div className="w-16 h-16 rounded-full bg-accent text-accent-foreground flex items-center justify-center text-2xl font-bold mb-4 shadow-lg">
                   {step.number}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{step.title}</h3>
