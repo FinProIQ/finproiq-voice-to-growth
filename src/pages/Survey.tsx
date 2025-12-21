@@ -641,6 +641,7 @@ const Survey = () => {
                                 ? "bg-accent/10 border-accent/30" 
                                 : "hover:bg-muted border-transparent"
                             )}
+                            onClick={() => handleAnswer(q.id, option)}
                           >
                             <RadioGroupItem value={option} id={`${q.id}-${option}`} />
                             <Label 
