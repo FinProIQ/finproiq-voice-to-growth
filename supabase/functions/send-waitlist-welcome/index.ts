@@ -41,6 +41,14 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#039;');
 }
 
+// Mask email for logging
+function maskEmail(email: string): string {
+  const [local, domain] = email.split('@');
+  if (!local || !domain) return '***@***';
+  const maskedLocal = local.length > 2 ? local.slice(0, 2) + '***' : '***';
+  return `${maskedLocal}@${domain}`;
+}
+
 // Server-side validation
 function validateInput(name: unknown, email: unknown): { valid: boolean; name?: string; email?: string } {
   if (typeof name !== 'string' || typeof email !== 'string') {
@@ -78,7 +86,7 @@ const handler = async (req: Request): Promise<Response> => {
                    "unknown";
 
   if (isRateLimited(clientIP)) {
-    console.log(`Rate limited IP: ${clientIP}`);
+    console.log("Rate limit exceeded");
     // Return generic success to avoid information leakage
     return new Response(
       JSON.stringify({ success: true }),
@@ -101,7 +109,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const { name, email } = validation;
-    console.log(`Processing waitlist submission for ${email}`);
+    console.log(`Processing waitlist submission for ${maskEmail(email!)}`);
 
     // Create Supabase client with service role for server-side insert
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -114,8 +122,8 @@ const handler = async (req: Request): Promise<Response> => {
       .insert({ name, email });
 
     if (dbError) {
-      // Log the actual error server-side but return generic response
-      console.error("Database error:", dbError);
+      // Log generic error without exposing details
+      console.error("Database insert failed:", dbError.code);
       // Return success regardless to prevent email enumeration
       return new Response(
         JSON.stringify({ success: true }),
@@ -124,7 +132,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     // Send welcome email to the subscriber
-    const welcomeEmail = await resend.emails.send({
+    const welcomeResult = await resend.emails.send({
       from: "FinProIQ <no-reply@finproiq.com>",
       to: [email!],
       subject: "Welcome to the FinProIQ Waitlist! 🎉",
@@ -164,10 +172,12 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Welcome email sent:", welcomeEmail);
+    if (welcomeResult.error) {
+      console.error("Welcome email failed");
+    }
 
     // Send notification to owner
-    const notificationEmail = await resend.emails.send({
+    const notifyResult = await resend.emails.send({
       from: "FinProIQ <no-reply@finproiq.com>",
       to: ["raman.sivasankar@gmail.com"],
       subject: `New Waitlist Signup: ${escapeHtml(name!)}`,
@@ -181,14 +191,16 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Notification email sent:", notificationEmail);
+    if (notifyResult.error) {
+      console.error("Notification email failed");
+    }
 
     return new Response(
       JSON.stringify({ success: true }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: any) {
-    console.error("Error in send-waitlist-welcome:", error);
+    console.error("Waitlist handler error");
     // Return generic success to prevent information leakage
     return new Response(
       JSON.stringify({ success: true }),

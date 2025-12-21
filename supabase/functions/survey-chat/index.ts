@@ -6,6 +6,73 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Rate limiting
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 30; // max requests per window
+const RATE_WINDOW = 60000; // per minute
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+    return false;
+  }
+  
+  if (record.count >= RATE_LIMIT) {
+    return true;
+  }
+  
+  record.count++;
+  return false;
+}
+
+// Input validation for messages
+interface Message {
+  role: string;
+  content: string;
+}
+
+function validateMessages(messages: unknown): { valid: boolean; messages?: Message[] } {
+  if (!Array.isArray(messages)) {
+    return { valid: false };
+  }
+  
+  // Limit conversation history
+  if (messages.length > 50) {
+    return { valid: false };
+  }
+  
+  const validRoles = ['user', 'assistant'];
+  const validatedMessages: Message[] = [];
+  
+  for (const msg of messages) {
+    if (typeof msg !== 'object' || msg === null) {
+      return { valid: false };
+    }
+    
+    const { role, content } = msg as Record<string, unknown>;
+    
+    if (typeof role !== 'string' || !validRoles.includes(role)) {
+      return { valid: false };
+    }
+    
+    if (typeof content !== 'string') {
+      return { valid: false };
+    }
+    
+    // Limit individual message size
+    if (content.length > 5000) {
+      return { valid: false };
+    }
+    
+    validatedMessages.push({ role, content: content.trim() });
+  }
+  
+  return { valid: true, messages: validatedMessages };
+}
+
 const SYSTEM_PROMPT = `You are an intelligent discovery assistant helping financial professionals reflect on their post-meeting workflow, follow-ups, CRM usage, and compliance processes.
 
 Your goals:
@@ -80,8 +147,31 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Get client IP for rate limiting
+  const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || 
+                   req.headers.get("cf-connecting-ip") || 
+                   "unknown";
+
+  if (isRateLimited(clientIP)) {
+    console.log("Rate limit exceeded");
+    return new Response(JSON.stringify({ error: "Too many requests" }), {
+      status: 429,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validation = validateMessages(body.messages);
+    if (!validation.valid) {
+      console.log("Invalid message format received");
+      return new Response(JSON.stringify({ error: "Invalid request format" }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -93,7 +183,7 @@ serve(async (req) => {
         model: 'google/gemini-2.5-flash',
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
-          ...messages
+          ...validation.messages!
         ],
         temperature: 0.7,
         max_tokens: 1000,
@@ -101,9 +191,8 @@ serve(async (req) => {
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error('AI Gateway error:', error);
-      throw new Error(`AI Gateway error: ${response.status}`);
+      console.error("AI Gateway returned non-OK status:", response.status);
+      throw new Error(`AI service unavailable`);
     }
 
     const data = await response.json();
@@ -134,9 +223,8 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error in survey-chat function:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return new Response(JSON.stringify({ error: errorMessage }), {
+    console.error("Survey chat error occurred");
+    return new Response(JSON.stringify({ error: "Service temporarily unavailable" }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
