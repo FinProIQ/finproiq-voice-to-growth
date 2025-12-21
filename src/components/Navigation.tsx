@@ -44,7 +44,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
           <div className="flex items-center">
             <button
               onClick={() => navigate('/')}
-              className="font-bold text-xl tracking-wide bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+              className="font-bold text-xl tracking-wide text-accent hover:opacity-80 transition-opacity"
             >
               FinProIQ
             </button>
@@ -80,7 +80,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               variant="default" 
               size="sm" 
               onClick={handleCTAClick}
-              className="bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent shadow-md hover:shadow-lg transition-all"
+              className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
             >
               Join Waitlist
             </Button>
@@ -126,7 +126,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               variant="default" 
               size="sm" 
               onClick={handleCTAClick} 
-              className="w-full bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent shadow-md hover:shadow-lg transition-all"
+              className="w-full bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
             >
               Join Waitlist
             </Button>

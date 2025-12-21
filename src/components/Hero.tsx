@@ -17,18 +17,18 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-gradient-to-br from-accent/5 via-white to-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-background">
       {/* Content */}
       <div className="container relative z-10 px-4 py-20 md:py-32">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           <div className="mb-6 inline-block">
-            <span className="px-4 py-2 bg-gradient-to-r from-accent to-accent-hover text-white text-sm font-semibold rounded-full shadow-lg">
+            <span className="px-4 py-2 bg-accent text-accent-foreground text-sm font-semibold rounded-full shadow-lg">
               AI-Powered Growth Ecosystem
             </span>
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight">
-            Never Miss a Lead — Convert Every Conversation Into a <span className="bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent">Client</span>
+            Never Miss a Lead — Convert Every Conversation Into a <span className="text-accent">Client</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-foreground max-w-3xl mx-auto leading-relaxed">
@@ -50,7 +50,7 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
             variant="default" 
             size="lg" 
             onClick={handleCTAClick}
-            className="text-lg px-8 py-6 h-auto bg-gradient-to-r from-accent to-accent-hover hover:from-accent-hover hover:to-accent shadow-lg hover:shadow-xl transition-all"
+            className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
           >
             Join Waitlist →
           </Button>
