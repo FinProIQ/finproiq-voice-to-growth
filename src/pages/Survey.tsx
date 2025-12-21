@@ -382,13 +382,9 @@ const Survey = () => {
   };
 
   const handleNext = async () => {
-    // If on last section, validate email before proceeding
+    // If on last section, validate email only if provided (email is optional)
     if (currentSection === totalSections) {
-      if (!email.trim()) {
-        setEmailError("Please enter your email address");
-        return;
-      }
-      if (!validateEmail(email)) {
+      if (email.trim() && !validateEmail(email)) {
         setEmailError("Please enter a valid email address");
         return;
       }
@@ -792,10 +788,10 @@ const Survey = () => {
                     </div>
                     <div>
                       <Label className="text-base font-medium text-foreground block">
-                        Your email address
+                        Your email address <span className="text-muted-foreground font-normal">(optional)</span>
                       </Label>
                       <p className="text-sm text-muted-foreground">
-                        So we can connect your responses when you book a call later
+                        Helps us follow up with insights. We respect your privacy—no spam, ever.
                       </p>
                     </div>
                   </div>
