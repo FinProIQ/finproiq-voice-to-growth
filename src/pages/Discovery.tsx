@@ -251,7 +251,7 @@ const sections = [
 
 const CALENDLY_URL = "https://calendly.com/raman-sivasankar/introductory-15-minute-call";
 
-const Survey = () => {
+const Discovery = () => {
   const [currentSection, setCurrentSection] = useState(0); // 0 = intro
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isComplete, setIsComplete] = useState(false);
@@ -367,7 +367,7 @@ const Survey = () => {
         });
 
       if (error) {
-        console.error('Error saving survey:', error);
+        console.error('Error saving discovery:', error);
         toast({
           title: "Error saving responses",
           description: "Your responses could not be saved, but you can still continue.",
@@ -375,7 +375,7 @@ const Survey = () => {
         });
       }
     } catch (error) {
-      console.error('Error saving survey:', error);
+      console.error('Error saving discovery:', error);
     } finally {
       setIsSaving(false);
     }
@@ -393,9 +393,9 @@ const Survey = () => {
       await saveResponsesToDatabase();
       setIsComplete(true);
       if (window.gtag) {
-        window.gtag('event', 'survey_complete', {
+        window.gtag('event', 'discovery_complete', {
           event_category: 'engagement',
-          event_label: 'Workflow Survey'
+          event_label: 'Workflow Discovery'
         });
       }
     } else {
@@ -419,7 +419,7 @@ const Survey = () => {
     if (window.gtag) {
       window.gtag('event', 'calendly_click', {
         event_category: 'engagement',
-        event_label: 'Survey Completion'
+        event_label: 'Discovery Completion'
       });
     }
     setShowCalendly(true);
@@ -437,7 +437,7 @@ const Survey = () => {
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm">Back to FinProIQ</span>
             </Link>
-            <h1 className="text-lg font-semibold font-display text-accent">Survey Complete</h1>
+            <h1 className="text-lg font-semibold font-display text-accent">Discovery Complete</h1>
             <div className="w-24" />
           </div>
         </header>
@@ -830,7 +830,7 @@ const Survey = () => {
                   disabled={!canProceed() || isSaving}
                   className="gap-2 px-8 bg-accent hover:bg-accent-hover text-accent-foreground"
                 >
-                  {isSaving ? "Saving..." : currentSection === totalSections ? "Complete Survey" : "Continue"}
+                  {isSaving ? "Saving..." : currentSection === totalSections ? "Complete Discovery" : "Continue"}
                   <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
@@ -910,4 +910,4 @@ const Survey = () => {
   );
 };
 
-export default Survey;
+export default Discovery;
