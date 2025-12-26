@@ -17,11 +17,11 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
     onOpenCalendly();
   };
 
-  const handleSurveyClick = () => {
+  const handleDiscoveryClick = () => {
     if (window.gtag) {
-      window.gtag('event', 'survey_click', {
+      window.gtag('event', 'discovery_click', {
         event_category: 'engagement',
-        event_label: 'Final CTA Survey'
+        event_label: 'Final CTA Discovery'
       });
     }
   };
@@ -52,7 +52,7 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
             <p className="text-muted-foreground mb-4">
               Not ready to commit? Help us understand your workflow challenges.
             </p>
-            <Link to="/survey" onClick={handleSurveyClick}>
+            <Link to="/discovery" onClick={handleDiscoveryClick}>
               <Button 
                 variant="outline" 
                 size="lg"
