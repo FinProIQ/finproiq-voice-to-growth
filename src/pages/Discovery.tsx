@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -252,18 +252,15 @@ const sections = [
 const CALENDLY_URL = "https://calendly.com/raman-sivasankar/introductory-15-minute-call";
 
 const Discovery = () => {
-  const [currentSection, setCurrentSection] = useState(0); // 0 = intro
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isComplete, setIsComplete] = useState(false);
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showExitDialog, setShowExitDialog] = useState(false);
   const [showExitCalendly, setShowExitCalendly] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-  const contentRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -271,15 +268,6 @@ const Discovery = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Scroll to top whenever section changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [currentSection]);
-
-  const currentQuestions = currentSection > 0 ? questions.filter(q => q.section === currentSection) : [];
-  const totalSections = sections.length;
-  const progress = (currentSection / totalSections) * 100;
 
   const handleAnswer = (questionId: string, value: string | string[]) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
@@ -294,9 +282,8 @@ const Discovery = () => {
     }
   };
 
-  const canProceed = () => {
-    if (currentSection === 0) return true;
-    return currentQuestions.every(q => {
+  const canComplete = () => {
+    return questions.every(q => {
       const answer = answers[q.id];
       if (q.type === "text") return answer && (answer as string).trim().length > 0;
       if (q.type === "checkbox") return answer && (answer as string[]).length > 0;
@@ -305,21 +292,13 @@ const Discovery = () => {
     });
   };
 
-  const transitionToSection = (newSection: number) => {
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentSection(newSection);
-      setIsTransitioning(false);
-    }, 300);
-  };
-
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const handleExitClick = () => {
-    if (currentSection > 0 && Object.keys(answers).length > 0) {
+    if (Object.keys(answers).length > 0) {
       setShowExitDialog(true);
     } else {
       navigate('/');
@@ -381,37 +360,19 @@ const Discovery = () => {
     }
   };
 
-  const handleNext = async () => {
-    // If on last section, validate email only if provided (email is optional)
-    if (currentSection === totalSections) {
-      if (email.trim() && !validateEmail(email)) {
-        setEmailError("Please enter a valid email address");
-        return;
-      }
-      setEmailError("");
-      // Save to database before completing
-      await saveResponsesToDatabase();
-      setIsComplete(true);
-      if (window.gtag) {
-        window.gtag('event', 'discovery_complete', {
-          event_category: 'engagement',
-          event_label: 'Workflow Discovery'
-        });
-      }
-    } else {
-      transitionToSection(currentSection + 1);
+  const handleComplete = async () => {
+    if (email.trim() && !validateEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
     }
-  };
-
-  const handlePrevious = () => {
-    if (currentSection > 0) {
-      transitionToSection(currentSection - 1);
-    }
-  };
-
-  const handleSectionClick = (sectionId: number) => {
-    if (sectionId <= currentSection) {
-      transitionToSection(sectionId);
+    setEmailError("");
+    await saveResponsesToDatabase();
+    setIsComplete(true);
+    if (window.gtag) {
+      window.gtag('event', 'discovery_complete', {
+        event_category: 'engagement',
+        event_label: 'Workflow Discovery'
+      });
     }
   };
 
@@ -425,8 +386,9 @@ const Discovery = () => {
     setShowCalendly(true);
   };
 
-  const currentSectionData = sections.find(s => s.id === currentSection);
-  const CurrentIcon = currentSectionData?.icon;
+  const getQuestionsForSection = (sectionId: number) => {
+    return questions.filter(q => q.section === sectionId);
+  };
 
   if (isComplete) {
     return (
@@ -530,7 +492,7 @@ const Discovery = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container px-4 py-4">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between">
             <Button variant="outline" size="sm" className="gap-2" onClick={handleExitClick}>
               <ArrowLeft className="w-4 h-4" />
               Exit
@@ -538,197 +500,102 @@ const Discovery = () => {
             <h1 className="text-lg font-semibold font-display text-accent">
               Workflow Discovery
             </h1>
-            <span className="text-sm text-muted-foreground font-medium">
-              {currentSection > 0 ? `${currentSection}/${totalSections}` : "Intro"}
-            </span>
-          </div>
-          {/* Progress bar */}
-          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-accent transition-all duration-500 ease-out"
-              style={{ width: `${progress}%` }}
-            />
+            <div className="w-16" />
           </div>
         </div>
       </header>
 
-      {/* Section Navigation */}
-      <div className="border-b border-border bg-background/80 backdrop-blur-sm overflow-x-auto">
-        <div className="container px-4 py-3">
-          <div className="flex gap-2 min-w-max">
-            {sections.map((section) => {
-              const Icon = section.icon;
-              const isActive = section.id === currentSection;
-              const isCompleted = section.id < currentSection;
-              const isLocked = section.id > currentSection;
-              
-              return (
-                <button
-                  key={section.id}
-                  onClick={() => handleSectionClick(section.id)}
-                  disabled={isLocked}
-                  className={cn(
-                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap",
-                    isActive && "bg-accent text-accent-foreground",
-                    isCompleted && "bg-accent/10 text-accent cursor-pointer hover:bg-accent/20",
-                    isLocked && "bg-muted text-muted-foreground cursor-not-allowed opacity-50"
-                  )}
-                >
-                  <Icon className="w-4 h-4" />
-                  {section.title}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container px-4 py-8 max-w-2xl mx-auto">
-        <div 
-          ref={contentRef}
-          className={cn(
-            "transition-all duration-300 ease-out",
-            isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-          )}
-        >
-          {/* Intro Screen */}
-          {currentSection === 0 && (
-            <div className="animate-fade-in">
-              <Card className="p-8 md:p-12 border-accent/20 bg-card">
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
-                    <ClipboardList className="w-8 h-8 text-accent" />
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground">
-                    Let's explore your workflow
-                  </h2>
-                </div>
-                
-                <div className="space-y-5 text-base leading-relaxed max-w-lg mx-auto">
-                  <p className="text-foreground font-medium">
-                    Thanks for taking a few minutes.
-                  </p>
-                  
-                  <p className="text-muted-foreground">
-                    This isn't a sales form — it's a quick workflow check to understand how advisors like you handle follow-ups, notes, and client communication.
-                  </p>
-                  
-                  <p className="text-muted-foreground">
-                    Answer as casually as you'd like. There are no right or wrong answers — just your honest experience.
-                  </p>
-                </div>
-
-                <div className="mt-10 flex justify-center">
-                  <Button
-                    onClick={handleNext}
-                    size="lg"
-                    className="px-10 py-5 text-base bg-accent hover:bg-accent-hover text-accent-foreground"
-                  >
-                    Let's Begin
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </div>
-              </Card>
+      {/* Main Content - Single Page */}
+      <main className="container px-4 py-8 max-w-3xl mx-auto">
+        {/* Intro Card */}
+        <Card className="p-8 md:p-10 border-accent/20 bg-card mb-10">
+          <div className="text-center mb-6">
+            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-accent/10 flex items-center justify-center">
+              <ClipboardList className="w-7 h-7 text-accent" />
             </div>
-          )}
+            <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground mb-3">
+              Let's explore your workflow
+            </h2>
+          </div>
+          
+          <div className="space-y-4 text-base leading-relaxed max-w-xl mx-auto text-center">
+            <p className="text-foreground font-medium">
+              Thanks for taking a few minutes.
+            </p>
+            
+            <p className="text-muted-foreground">
+              This isn't a sales form — it's a quick workflow check to understand how advisors like you handle follow-ups, notes, and client communication. Answer as casually as you'd like.
+            </p>
+          </div>
+        </Card>
 
-          {/* Section Content */}
-          {currentSection > 0 && (
-            <>
-              {/* Section Title */}
-              <div className="mb-8 animate-fade-in">
-                <div className="flex items-center gap-4 mb-4">
+        {/* All Sections */}
+        <div className="space-y-12">
+          {sections.map((section) => {
+            const Icon = section.icon;
+            const sectionQuestions = getQuestionsForSection(section.id);
+            
+            return (
+              <div key={section.id} className="animate-fade-in">
+                {/* Section Header */}
+                <div className="flex items-center gap-4 mb-6 pb-4 border-b border-border">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-accent/10">
-                    {CurrentIcon && <CurrentIcon className="w-6 h-6 text-accent" />}
+                    <Icon className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <h2 className="text-2xl md:text-3xl font-bold font-display text-foreground">
-                      {currentSectionData?.title}
-                    </h2>
+                    <h3 className="text-xl md:text-2xl font-bold font-display text-foreground">
+                      {section.title}
+                    </h3>
                     <p className="text-muted-foreground text-sm">
-                      {currentQuestions.length} question{currentQuestions.length > 1 ? 's' : ''} in this section
+                      {sectionQuestions.length} question{sectionQuestions.length > 1 ? 's' : ''}
                     </p>
                   </div>
                 </div>
-              </div>
 
-              {/* Questions */}
-              <div className="space-y-6">
-                {currentQuestions.map((q, idx) => (
-                  <Card 
-                    key={q.id} 
-                    className={cn(
-                      "p-6 transition-all duration-300 animate-fade-in",
-                      answers[q.id] ? "border-accent/30 bg-accent/5" : "border-border"
-                    )}
-                    style={{ animationDelay: `${idx * 100}ms` }}
-                  >
-                    <Label className="text-base font-medium text-foreground mb-4 block leading-relaxed">
-                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold mr-3 bg-accent text-accent-foreground">
-                        {idx + 1}
-                      </span>
-                      {q.question}
-                    </Label>
+                {/* Section Questions */}
+                <div className="space-y-5">
+                  {sectionQuestions.map((q, idx) => (
+                    <Card 
+                      key={q.id} 
+                      className={cn(
+                        "p-5 transition-all duration-300",
+                        answers[q.id] ? "border-accent/30 bg-accent/5" : "border-border"
+                      )}
+                    >
+                      <Label className="text-base font-medium text-foreground mb-4 block leading-relaxed">
+                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold mr-3 bg-accent text-accent-foreground">
+                          {idx + 1}
+                        </span>
+                        {q.question}
+                      </Label>
 
-                    {q.type === "text" && (
-                      <Textarea
-                        value={(answers[q.id] as string) || ""}
-                        onChange={(e) => handleAnswer(q.id, e.target.value)}
-                        placeholder={q.placeholder}
-                        className="min-h-[100px] resize-none bg-background border-border focus:border-accent transition-colors"
-                      />
-                    )}
+                      {q.type === "text" && (
+                        <Textarea
+                          value={(answers[q.id] as string) || ""}
+                          onChange={(e) => handleAnswer(q.id, e.target.value)}
+                          placeholder={q.placeholder}
+                          className="min-h-[100px] resize-none bg-background border-border focus:border-accent transition-colors"
+                        />
+                      )}
 
-                    {q.type === "radio" && (
-                      <RadioGroup
-                        value={(answers[q.id] as string) || ""}
-                        onValueChange={(value) => handleAnswer(q.id, value)}
-                        className="space-y-2"
-                      >
-                        {q.options?.map((option) => (
-                          <div 
-                            key={option} 
-                            className={cn(
-                              "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer border",
-                              answers[q.id] === option 
-                                ? "bg-accent/10 border-accent/30" 
-                                : "hover:bg-muted border-transparent"
-                            )}
-                            onClick={() => handleAnswer(q.id, option)}
-                          >
-                            <RadioGroupItem value={option} id={`${q.id}-${option}`} />
-                            <Label 
-                              htmlFor={`${q.id}-${option}`} 
-                              className="text-foreground cursor-pointer flex-1"
-                            >
-                              {option}
-                            </Label>
-                          </div>
-                        ))}
-                      </RadioGroup>
-                    )}
-
-                    {q.type === "checkbox" && (
-                      <div className="space-y-2">
-                        {q.options?.map((option) => {
-                          const isChecked = ((answers[q.id] as string[]) || []).includes(option);
-                          return (
+                      {q.type === "radio" && (
+                        <RadioGroup
+                          value={(answers[q.id] as string) || ""}
+                          onValueChange={(value) => handleAnswer(q.id, value)}
+                          className="space-y-2"
+                        >
+                          {q.options?.map((option) => (
                             <div 
                               key={option} 
                               className={cn(
                                 "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer border",
-                                isChecked 
+                                answers[q.id] === option 
                                   ? "bg-accent/10 border-accent/30" 
                                   : "hover:bg-muted border-transparent"
                               )}
-                              onClick={() => handleCheckboxChange(q.id, option, !isChecked)}
+                              onClick={() => handleAnswer(q.id, option)}
                             >
-                              <Checkbox
-                                id={`${q.id}-${option}`}
-                                checked={isChecked}
-                                onCheckedChange={(checked) => handleCheckboxChange(q.id, option, checked as boolean)}
-                              />
+                              <RadioGroupItem value={option} id={`${q.id}-${option}`} />
                               <Label 
                                 htmlFor={`${q.id}-${option}`} 
                                 className="text-foreground cursor-pointer flex-1"
@@ -736,106 +603,128 @@ const Discovery = () => {
                                 {option}
                               </Label>
                             </div>
-                          );
-                        })}
-                      </div>
-                    )}
+                          ))}
+                        </RadioGroup>
+                      )}
 
-                    {q.type === "scale" && (
-                      <div className="space-y-5 pt-2">
-                        <Slider
-                          value={[parseInt(answers[q.id] as string) || 5]}
-                          onValueChange={(value) => handleAnswer(q.id, value[0].toString())}
-                          min={1}
-                          max={10}
-                          step={1}
-                          className="w-full"
-                        />
-                        <div className="flex justify-between items-center">
-                          <span className="text-xs text-muted-foreground">Far from capacity</span>
-                          <span className="text-3xl font-bold text-accent">
-                            {answers[q.id] || "5"}
-                          </span>
-                          <span className="text-xs text-muted-foreground">At full capacity</span>
+                      {q.type === "checkbox" && (
+                        <div className="space-y-2">
+                          {q.options?.map((option) => {
+                            const isChecked = ((answers[q.id] as string[]) || []).includes(option);
+                            return (
+                              <div 
+                                key={option} 
+                                className={cn(
+                                  "flex items-center space-x-3 p-3 rounded-lg transition-all cursor-pointer border",
+                                  isChecked 
+                                    ? "bg-accent/10 border-accent/30" 
+                                    : "hover:bg-muted border-transparent"
+                                )}
+                                onClick={() => handleCheckboxChange(q.id, option, !isChecked)}
+                              >
+                                <Checkbox
+                                  id={`${q.id}-${option}`}
+                                  checked={isChecked}
+                                  onCheckedChange={(checked) => handleCheckboxChange(q.id, option, checked as boolean)}
+                                />
+                                <Label 
+                                  htmlFor={`${q.id}-${option}`} 
+                                  className="text-foreground cursor-pointer flex-1"
+                                >
+                                  {option}
+                                </Label>
+                              </div>
+                            );
+                          })}
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {/* Follow-up question */}
-                    {q.followUp && q.followUp.condition.includes(answers[q.id] as string) && (
-                      <div className="mt-6 pt-6 border-t border-border animate-fade-in">
-                        <Label className="text-base font-medium text-foreground mb-3 block">
-                          {q.followUp.question}
-                        </Label>
-                        <Textarea
-                          value={(answers[`${q.id}_followup`] as string) || ""}
-                          onChange={(e) => handleAnswer(`${q.id}_followup`, e.target.value)}
-                          placeholder={q.followUp.placeholder}
-                          className="min-h-[80px] resize-none bg-background border-border focus:border-accent"
-                        />
-                      </div>
-                    )}
-                  </Card>
-                ))}
+                      {q.type === "scale" && (
+                        <div className="space-y-5 pt-2">
+                          <Slider
+                            value={[parseInt(answers[q.id] as string) || 5]}
+                            onValueChange={(value) => handleAnswer(q.id, value[0].toString())}
+                            min={1}
+                            max={10}
+                            step={1}
+                            className="w-full"
+                          />
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs text-muted-foreground">Far from capacity</span>
+                            <span className="text-3xl font-bold text-accent">
+                              {answers[q.id] || "5"}
+                            </span>
+                            <span className="text-xs text-muted-foreground">At full capacity</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Follow-up question */}
+                      {q.followUp && q.followUp.condition.includes(answers[q.id] as string) && (
+                        <div className="mt-6 pt-6 border-t border-border animate-fade-in">
+                          <Label className="text-base font-medium text-foreground mb-3 block">
+                            {q.followUp.question}
+                          </Label>
+                          <Textarea
+                            value={(answers[`${q.id}_followup`] as string) || ""}
+                            onChange={(e) => handleAnswer(`${q.id}_followup`, e.target.value)}
+                            placeholder={q.followUp.placeholder}
+                            className="min-h-[80px] resize-none bg-background border-border focus:border-accent"
+                          />
+                        </div>
+                      )}
+                    </Card>
+                  ))}
+                </div>
               </div>
+            );
+          })}
+        </div>
 
-              {/* Email Collection - Show on last section */}
-              {currentSection === totalSections && (
-                <Card className="p-6 mt-6 border-accent/30 bg-accent/5 animate-fade-in">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                      <Mail className="w-5 h-5 text-accent" />
-                    </div>
-                    <div>
-                      <Label className="text-base font-medium text-foreground block">
-                        Your email address <span className="text-muted-foreground font-normal">(optional)</span>
-                      </Label>
-                      <p className="text-sm text-muted-foreground">
-                        Helps us follow up with insights. We respect your privacy—no spam, ever.
-                      </p>
-                    </div>
-                  </div>
-                  <Input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setEmailError("");
-                    }}
-                    placeholder="your@email.com"
-                    className={cn(
-                      "bg-background border-border focus:border-accent transition-colors",
-                      emailError && "border-destructive focus:border-destructive"
-                    )}
-                  />
-                  {emailError && (
-                    <p className="text-sm text-destructive mt-2">{emailError}</p>
-                  )}
-                </Card>
-              )}
-
-              {/* Navigation */}
-              <div className="flex justify-between items-center mt-10 pt-6 border-t border-border">
-                <Button
-                  variant="outline"
-                  onClick={handlePrevious}
-                  className="gap-2"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Previous
-                </Button>
-
-                <Button
-                  onClick={handleNext}
-                  disabled={!canProceed() || isSaving}
-                  className="gap-2 px-8 bg-accent hover:bg-accent-hover text-accent-foreground"
-                >
-                  {isSaving ? "Saving..." : currentSection === totalSections ? "Complete Discovery" : "Continue"}
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </div>
-            </>
+        {/* Email Collection */}
+        <Card className="p-6 mt-10 border-accent/30 bg-accent/5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+              <Mail className="w-5 h-5 text-accent" />
+            </div>
+            <div>
+              <Label className="text-base font-medium text-foreground block">
+                Your email address <span className="text-muted-foreground font-normal">(optional)</span>
+              </Label>
+              <p className="text-sm text-muted-foreground">
+                Helps us follow up with insights. We respect your privacy—no spam, ever.
+              </p>
+            </div>
+          </div>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError("");
+            }}
+            placeholder="your@email.com"
+            className={cn(
+              "bg-background border-border focus:border-accent transition-colors",
+              emailError && "border-destructive focus:border-destructive"
+            )}
+          />
+          {emailError && (
+            <p className="text-sm text-destructive mt-2">{emailError}</p>
           )}
+        </Card>
+
+        {/* Complete Button */}
+        <div className="flex justify-center mt-10 pb-10">
+          <Button
+            onClick={handleComplete}
+            disabled={!canComplete() || isSaving}
+            size="lg"
+            className="gap-2 px-10 py-6 text-base bg-accent hover:bg-accent-hover text-accent-foreground"
+          >
+            {isSaving ? "Saving..." : "Complete Discovery"}
+            <ArrowRight className="w-5 h-5" />
+          </Button>
         </div>
       </main>
 
@@ -894,14 +783,16 @@ const Discovery = () => {
                   <X className="w-4 h-4" />
                 </Button>
               </div>
-              <iframe
-                src={`${CALENDLY_URL}?embed_domain=localhost&embed_type=Inline`}
-                width="100%"
-                height="500"
-                frameBorder="0"
-                title="Schedule a call"
-                className="bg-background rounded-lg"
-              />
+              <Card className="overflow-hidden border-accent/20">
+                <iframe
+                  src={`${CALENDLY_URL}?embed_domain=localhost&embed_type=Inline`}
+                  width="100%"
+                  height="500"
+                  frameBorder="0"
+                  title="Schedule a call"
+                  className="bg-background"
+                />
+              </Card>
             </div>
           )}
         </DialogContent>
