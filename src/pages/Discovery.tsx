@@ -239,7 +239,7 @@ const questions: Question[] = [
 ];
 
 const sections = [
-  { id: 1, title: "Workflow", icon: ClipboardList },
+  { id: 1, title: "Client Meeting", icon: ClipboardList },
   { id: 2, title: "Time", icon: Clock },
   { id: 3, title: "Compliance", icon: Shield },
   { id: 4, title: "Pain Points", icon: Brain },
