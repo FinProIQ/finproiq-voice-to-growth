@@ -95,7 +95,7 @@ const questions: Question[] = [
     sectionTitle: "Time & Slippage",
     question: "When things get busy, what part usually gets delayed or skipped?",
     type: "text",
-    placeholder: "Be honest — we've all been there...",
+    placeholder: "Be honest - we've all been there...",
   },
   {
     id: "time_spent",
@@ -141,7 +141,7 @@ const questions: Question[] = [
     id: "biggest_stress",
     section: 4,
     sectionTitle: "Core Pain",
-    question: "Out of everything you've shared so far — what part stresses you out the most?",
+    question: "Out of everything you've shared so far - what part stresses you out the most?",
     type: "text",
     placeholder: "What keeps you up at night about your workflow?",
   },
@@ -157,7 +157,7 @@ const questions: Question[] = [
     id: "real_cost",
     section: 4,
     sectionTitle: "Core Pain",
-    question: "What's the real cost of that happening — time, energy, missed opportunities, or something else?",
+    question: "What's the real cost of that happening - time, energy, missed opportunities, or something else?",
     type: "text",
     placeholder: "Think about the ripple effects...",
   },
@@ -412,7 +412,7 @@ const Discovery = () => {
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
-                Thanks — this was genuinely helpful.
+                Thanks - this was genuinely helpful.
               </h2>
               
               <p className="text-lg text-muted-foreground mb-10 max-w-lg mx-auto leading-relaxed">
@@ -524,7 +524,7 @@ const Discovery = () => {
             </p>
             
             <p className="text-muted-foreground">
-              This isn't a sales form — it's a quick workflow check to understand how advisors like you handle follow-ups, notes, and client communication. Answer as casually as you'd like.
+              This isn't a sales form - it's a quick workflow check to understand how advisors like you handle follow-ups, notes, and client communication. Answer as casually as you'd like.
             </p>
           </div>
         </Card>
@@ -692,7 +692,7 @@ const Discovery = () => {
                 Your email address <span className="text-muted-foreground font-normal">(optional)</span>
               </Label>
               <p className="text-sm text-muted-foreground">
-                Helps us follow up with insights. We respect your privacy—no spam, ever.
+                Helps us follow up with insights. We respect your privacy - no spam, ever.
               </p>
             </div>
           </div>

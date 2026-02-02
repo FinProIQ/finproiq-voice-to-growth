@@ -13,7 +13,7 @@ const steps = [
     title: "FinProIQ Understands Context",
     description: (
       <>
-        Our system analyzes <span className="text-accent font-bold">intent, tone, and urgency</span> — identifying emotion and compliance needs.
+        Our system analyzes <span className="text-accent font-bold">intent, tone, and urgency</span> - identifying emotion and compliance needs.
       </>
     ),
   },
@@ -22,7 +22,7 @@ const steps = [
     title: "FinProIQ Acts Instantly",
     description: (
       <>
-        AI InstantFollow and AI Credibility & TrustBuilder draft <span className="text-accent font-bold">compliant, personalized follow-ups</span> — with optional links to trending articles from AI Brand Studio.
+        AI InstantFollow and AI Credibility & TrustBuilder draft <span className="text-accent font-bold">compliant, personalized follow-ups</span> - with optional links to trending articles from AI Brand Studio.
       </>
     ),
   },

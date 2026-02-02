@@ -23,7 +23,7 @@ const pricingTiers = [
         ]
       },
       {
-        category: "AI Credibility & TrustBuilder (Full Compliance — always full)",
+        category: "AI Credibility & TrustBuilder (Full Compliance - always full)",
         items: [
           "FINRA/SEC guardrails",
           "Detects non-compliant phrasing and removes it",
