@@ -39,8 +39,17 @@ const products = [
     ),
     bgColor: "bg-amber-50/50",
   },
+  {
+    title: "AI Workflow Automation",
+    subtitle: "(Scheduler → CRM → Action)",
+    description: (
+      <>
+        When a client books, reschedules, or cancels via your <span className="font-bold">meeting scheduler</span>, FinProIQ automatically syncs to your <span className="font-bold">CRM</span>, provisions records in your <span className="text-accent font-bold">financial planning and billing platforms</span>, and associates time entries with clients. Show up prepared — <span className="text-accent font-bold">without manual setup</span>.
+      </>
+    ),
+    bgColor: "bg-rose-50/50",
+  },
 ];
-
 const ProductSuite = () => {
   return (
     <section className="py-20 md:py-32 bg-gradient-feature">
@@ -52,10 +61,12 @@ const ProductSuite = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-          {products.map((product, index) => (
+          {products.map((product, index) => {
+            const isLastOdd = products.length % 2 === 1 && index === products.length - 1;
+            return (
             <div
               key={index}
-              className={`${product.bgColor} rounded-lg p-8 shadow-soft hover:shadow-medium hover:scale-105 transition-all duration-300 border-l-4 border-accent hover:border-accent-hover border-t border-r border-b border-border group`}
+              className={`${product.bgColor} rounded-lg p-8 shadow-soft hover:shadow-medium hover:scale-105 transition-all duration-300 border-l-4 border-accent hover:border-accent-hover border-t border-r border-b border-border group ${isLastOdd ? 'md:col-span-2' : ''}`}
             >
               <h3 className="text-xl font-bold group-hover:text-accent transition-colors mb-2">
                 {product.title}
@@ -63,7 +74,8 @@ const ProductSuite = () => {
               </h3>
               <p className="text-foreground leading-relaxed">{product.description}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
