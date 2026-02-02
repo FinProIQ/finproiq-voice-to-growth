@@ -201,7 +201,7 @@ const Pricing = () => {
 
         {/* Workflow Automation Pricing */}
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-4 text-accent-warm">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-4 text-accent">
             Workflow Automation
           </h3>
           <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
@@ -211,7 +211,7 @@ const Pricing = () => {
             {workflowPhases.map((phase, index) => (
               <Card
                 key={index}
-                className="relative transition-all duration-300 hover:scale-105 hover:shadow-2xl border-accent-warm/20"
+                className="relative transition-all duration-300 hover:scale-105 hover:shadow-2xl"
               >
                 <CardHeader className="text-center pb-6">
                   <CardTitle className="text-2xl mb-2">{phase.name}</CardTitle>
@@ -224,7 +224,7 @@ const Pricing = () => {
                   <ul className="space-y-3">
                     {phase.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 text-accent-warm shrink-0 mt-0.5" />
+                        <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{feature}</span>
                       </li>
                     ))}
