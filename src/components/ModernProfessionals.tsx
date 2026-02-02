@@ -33,7 +33,7 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
           </p>
 
           <p className="text-lg md:text-xl mb-0 text-foreground leading-relaxed">
-            It listens, interprets emotion, drafts compliant outreach, and updates your CRM — <span className="text-accent font-bold">instantly</span>. This is not another tool to manage. It's your <span className="text-accent font-bold">AI growth partner</span>.
+            It listens, interprets emotion, drafts compliant outreach, and updates your CRM - <span className="text-accent font-bold">instantly</span>. This is not another tool to manage. It's your <span className="text-accent font-bold">AI growth partner</span>.
           </p>
         </div>
       </div>
