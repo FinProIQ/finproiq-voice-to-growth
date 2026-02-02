@@ -28,11 +28,11 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight">
-            Never Miss a Lead — Convert Every Conversation Into a <span className="text-accent">Client</span>
+            Never Miss a Lead - Convert Every Conversation Into a <span className="text-accent">Client</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-foreground max-w-3xl mx-auto leading-relaxed">
-            FinProIQ turns your <span className="text-accent font-bold">voice notes</span> and <span className="text-accent font-bold">client meetings</span> into <span className="font-bold">compliant follow-ups</span>, <span className="font-bold">CRM updates</span>, and <span className="font-bold">emotionally intelligent messages</span> — all in <span className="text-accent font-bold">under 60 seconds</span>. Stay proactive, stay compliant, and stay human.
+            FinProIQ turns your <span className="text-accent font-bold">voice notes</span> and <span className="text-accent font-bold">client meetings</span> into <span className="font-bold">compliant follow-ups</span>, <span className="font-bold">CRM updates</span>, and <span className="font-bold">emotionally intelligent messages</span> - all in <span className="text-accent font-bold">under 60 seconds</span>. Stay proactive, stay compliant, and stay human.
           </p>
 
           <div className="mb-8 max-w-2xl mx-auto">
