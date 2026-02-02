@@ -180,15 +180,17 @@ const DiscoverySummary = ({
         </p>
         <div className="flex flex-wrap gap-3">
           <Button 
+            type="button"
             onClick={handleExportPDF}
             variant="outline"
             className="gap-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground"
           >
             <Download className="w-4 h-4" />
-            Export as PDF
+            Save as PDF
           </Button>
           {email && (
             <Button 
+              type="button"
               onClick={onEmailSummary}
               disabled={isSendingEmail}
               className="gap-2 bg-accent hover:bg-accent-hover text-accent-foreground"
