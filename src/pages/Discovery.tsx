@@ -317,36 +317,38 @@ const Discovery = () => {
   const saveResponsesToDatabase = async () => {
     setIsSaving(true);
     try {
-      const { error } = await supabase
-        .from('survey_responses')
-        .insert({
-          email: email || null,
-          post_meeting: answers.post_meeting as string || null,
-          notes_location: answers.notes_location as string[] || null,
-          followup_writer: answers.followup_writer as string || null,
-          crm_updates: answers.crm_updates as string || null,
-          delayed_tasks: answers.delayed_tasks as string || null,
-          time_spent: answers.time_spent as string || null,
-          slippage_frequency: answers.slippage_frequency as string || null,
-          slippage_followup: answers.slippage_frequency_followup as string || null,
-          compliance_approach: answers.compliance_approach as string || null,
-          compliance_redo: answers.compliance_redo as string || null,
-          biggest_stress: answers.biggest_stress as string || null,
-          stress_reason: answers.stress_reason as string || null,
-          real_cost: answers.real_cost as string || null,
-          future_pain: answers.future_pain as string || null,
-          capacity_limit: answers.capacity_limit as string || null,
-          capacity_scale: answers.capacity_scale as string || null,
-          predictable_process: answers.predictable_process as string || null,
-          biggest_challenge: answers.biggest_challenge as string[] || null,
-          prior_solutions: answers.prior_solutions as string[] || null,
-          prior_outcome: answers.prior_outcome as string || null,
-          ideal_state: answers.ideal_state as string || null,
-          time_focus: answers.time_focus as string[] || null,
-        });
+      const surveyData = {
+        email: email || null,
+        post_meeting: answers.post_meeting as string || null,
+        notes_location: answers.notes_location as string[] || null,
+        followup_writer: answers.followup_writer as string || null,
+        crm_updates: answers.crm_updates as string || null,
+        delayed_tasks: answers.delayed_tasks as string || null,
+        time_spent: answers.time_spent as string || null,
+        slippage_frequency: answers.slippage_frequency as string || null,
+        slippage_followup: answers.slippage_frequency_followup as string || null,
+        compliance_approach: answers.compliance_approach as string || null,
+        compliance_redo: answers.compliance_redo as string || null,
+        biggest_stress: answers.biggest_stress as string || null,
+        stress_reason: answers.stress_reason as string || null,
+        real_cost: answers.real_cost as string || null,
+        future_pain: answers.future_pain as string || null,
+        capacity_limit: answers.capacity_limit as string || null,
+        capacity_scale: answers.capacity_scale as string || null,
+        predictable_process: answers.predictable_process as string || null,
+        biggest_challenge: answers.biggest_challenge as string[] || null,
+        prior_solutions: answers.prior_solutions as string[] || null,
+        prior_outcome: answers.prior_outcome as string || null,
+        ideal_state: answers.ideal_state as string || null,
+        time_focus: answers.time_focus as string[] || null,
+      };
 
-      if (error) {
-        console.error('Error saving discovery:', error);
+      const response = await supabase.functions.invoke('submit-survey', {
+        body: surveyData,
+      });
+
+      if (response.error) {
+        console.error('Error saving discovery:', response.error);
         toast({
           title: "Error saving responses",
           description: "Your responses could not be saved, but you can still continue.",
@@ -355,6 +357,11 @@ const Discovery = () => {
       }
     } catch (error) {
       console.error('Error saving discovery:', error);
+      toast({
+        title: "Error saving responses",
+        description: "Your responses could not be saved, but you can still continue.",
+        variant: "destructive",
+      });
     } finally {
       setIsSaving(false);
     }
