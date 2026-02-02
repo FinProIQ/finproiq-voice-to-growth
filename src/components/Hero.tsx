@@ -31,8 +31,23 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
             Never Miss a Lead - Convert Every Conversation Into a <span className="text-accent">Client</span>
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-foreground max-w-3xl mx-auto leading-relaxed">
-            FinProIQ turns your <span className="text-accent font-bold">voice notes</span> and <span className="text-accent font-bold">client meetings</span> into <span className="font-bold">compliant follow-ups</span>, <span className="font-bold">CRM updates</span>, and <span className="font-bold">emotionally intelligent messages</span> - all in <span className="text-accent font-bold">under 60 seconds</span>. Stay proactive, stay compliant, and stay human.
+          <div className="grid md:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto text-left">
+            <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl border border-border">
+              <h3 className="text-lg font-bold text-accent mb-3">Voice-to-Action</h3>
+              <p className="text-foreground/90 leading-relaxed">
+                Turn your <span className="font-semibold">voice notes</span> and <span className="font-semibold">client meetings</span> into compliant follow-ups, CRM updates, and emotionally intelligent messages - all in <span className="text-accent font-semibold">under 60 seconds</span>.
+              </p>
+            </div>
+            <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl border border-border">
+              <h3 className="text-lg font-bold text-accent mb-3">Workflow Automation</h3>
+              <p className="text-foreground/90 leading-relaxed">
+                Automate your <span className="font-semibold">client provisioning</span> from scheduler to CRM - reducing manual steps and ensuring no client slips through the cracks.
+              </p>
+            </div>
+          </div>
+          
+          <p className="text-lg text-foreground/80 mb-8 max-w-2xl mx-auto">
+            Stay proactive, stay compliant, and stay human.
           </p>
 
           <div className="mb-8 max-w-2xl mx-auto">
