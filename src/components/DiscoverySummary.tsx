@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Mail, Download } from "lucide-react";
+import jsPDF from "jspdf";
 
 interface Question {
   id: string;
@@ -37,63 +38,45 @@ const DiscoverySummary = ({
   const summaryRef = useRef<HTMLDivElement>(null);
 
   const handleExportPDF = () => {
-    // Use browser print functionality for PDF export
-    const printContent = summaryRef.current;
-    if (!printContent) return;
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 20;
+    const maxWidth = pageWidth - margin * 2;
+    let yPos = 20;
 
-    const printWindow = window.open('', '_blank');
-    if (!printWindow) return;
+    // Helper to add new page if needed
+    const checkPageBreak = (height: number) => {
+      if (yPos + height > doc.internal.pageSize.getHeight() - 20) {
+        doc.addPage();
+        yPos = 20;
+      }
+    };
 
-    const styles = `
-      <style>
-        body { 
-          font-family: 'Inter', system-ui, sans-serif; 
-          padding: 40px; 
-          max-width: 800px; 
-          margin: 0 auto;
-          color: #1a1a1a;
-        }
-        h1 { 
-          font-size: 24px; 
-          margin-bottom: 8px; 
-          color: #1a365d;
-        }
-        h2 { 
-          font-size: 18px; 
-          margin-top: 32px; 
-          margin-bottom: 16px; 
-          color: #1a365d;
-          border-bottom: 2px solid #e2e8f0;
-          padding-bottom: 8px;
-        }
-        .qa-item { 
-          margin-bottom: 20px; 
-          padding: 16px;
-          background: #f8fafc;
-          border-radius: 8px;
-        }
-        .question { 
-          font-weight: 600; 
-          margin-bottom: 8px; 
-          color: #334155;
-        }
-        .answer { 
-          color: #475569; 
-          white-space: pre-wrap;
-        }
-        .header { 
-          text-align: center; 
-          margin-bottom: 40px;
-          padding-bottom: 20px;
-          border-bottom: 2px solid #1a365d;
-        }
-        .date { 
-          color: #64748b; 
-          font-size: 14px; 
-        }
-      </style>
-    `;
+    // Title
+    doc.setFontSize(20);
+    doc.setTextColor(26, 54, 93); // accent color
+    doc.text("Workflow Discovery Summary", pageWidth / 2, yPos, { align: "center" });
+    yPos += 10;
 
+    // Date
+    doc.setFontSize(10);
+    doc.setTextColor(100, 116, 139);
+    const dateStr = new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    doc.text(dateStr, pageWidth / 2, yPos, { align: "center" });
+    yPos += 15;
+
+    // Divider line
+    doc.setDrawColor(26, 54, 93);
+    doc.setLineWidth(0.5);
+    doc.line(margin, yPos, pageWidth - margin, yPos);
+    yPos += 15;
+
+    // Group questions by section
     const groupedQuestions = questions.reduce((acc, q) => {
       if (!acc[q.sectionTitle]) {
         acc[q.sectionTitle] = [];
@@ -102,60 +85,70 @@ const DiscoverySummary = ({
       return acc;
     }, {} as Record<string, Question[]>);
 
-    let htmlContent = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Workflow Discovery Summary - FinProIQ</title>
-        ${styles}
-      </head>
-      <body>
-        <div class="header">
-          <h1>Workflow Discovery Summary</h1>
-          <p class="date">Generated on ${new Date().toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          })}</p>
-        </div>
-    `;
-
+    // Render each section
     Object.entries(groupedQuestions).forEach(([sectionTitle, sectionQuestions]) => {
-      htmlContent += `<h2>${sectionTitle}</h2>`;
+      checkPageBreak(20);
+      
+      // Section title
+      doc.setFontSize(14);
+      doc.setTextColor(26, 54, 93);
+      doc.setFont("helvetica", "bold");
+      doc.text(sectionTitle, margin, yPos);
+      yPos += 3;
+      
+      // Section underline
+      doc.setDrawColor(226, 232, 240);
+      doc.setLineWidth(0.3);
+      doc.line(margin, yPos, pageWidth - margin, yPos);
+      yPos += 10;
+
       sectionQuestions.forEach((q) => {
         const answer = answers[q.id];
         const formattedAnswer = Array.isArray(answer) ? answer.join(', ') : (answer || 'Not answered');
-        htmlContent += `
-          <div class="qa-item">
-            <div class="question">${q.question}</div>
-            <div class="answer">${formattedAnswer}</div>
-          </div>
-        `;
-        
-        // Include follow-up if exists
+
+        // Question
+        doc.setFontSize(11);
+        doc.setTextColor(51, 65, 85);
+        doc.setFont("helvetica", "bold");
+        const questionLines = doc.splitTextToSize(q.question, maxWidth);
+        checkPageBreak(questionLines.length * 5 + 15);
+        doc.text(questionLines, margin, yPos);
+        yPos += questionLines.length * 5 + 2;
+
+        // Answer
+        doc.setFontSize(10);
+        doc.setTextColor(71, 85, 105);
+        doc.setFont("helvetica", "normal");
+        const answerLines = doc.splitTextToSize(formattedAnswer, maxWidth);
+        checkPageBreak(answerLines.length * 4 + 10);
+        doc.text(answerLines, margin, yPos);
+        yPos += answerLines.length * 4 + 8;
+
+        // Follow-up if exists
         if (q.followUp && q.followUp.condition.includes(answer as string)) {
           const followUpAnswer = answers[`${q.id}_followup`] as string || 'Not answered';
-          htmlContent += `
-            <div class="qa-item" style="margin-left: 20px; border-left: 3px solid #1a365d;">
-              <div class="question">${q.followUp.question}</div>
-              <div class="answer">${followUpAnswer}</div>
-            </div>
-          `;
+          
+          doc.setFontSize(10);
+          doc.setTextColor(51, 65, 85);
+          doc.setFont("helvetica", "bolditalic");
+          const followUpQLines = doc.splitTextToSize(`↳ ${q.followUp.question}`, maxWidth - 10);
+          checkPageBreak(followUpQLines.length * 4 + 10);
+          doc.text(followUpQLines, margin + 10, yPos);
+          yPos += followUpQLines.length * 4 + 2;
+
+          doc.setFont("helvetica", "italic");
+          doc.setTextColor(71, 85, 105);
+          const followUpALines = doc.splitTextToSize(followUpAnswer, maxWidth - 10);
+          doc.text(followUpALines, margin + 10, yPos);
+          yPos += followUpALines.length * 4 + 8;
         }
       });
+
+      yPos += 5; // Extra spacing between sections
     });
 
-    htmlContent += `
-        </body>
-      </html>
-    `;
-
-    printWindow.document.write(htmlContent);
-    printWindow.document.close();
-    printWindow.onload = () => {
-      printWindow.print();
-    };
+    // Download the PDF
+    doc.save("FinProIQ-Discovery-Summary.pdf");
   };
 
   // Group questions by section
