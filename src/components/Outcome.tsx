@@ -1,8 +1,10 @@
 const beforePoints = [
-  { text: "Missed follow-ups", highlight: "cold leads", type: "negative" },
+  { text: "Missed follow-ups and", highlight: "cold leads", type: "negative" },
   { text: "Hours of CRM entry and", highlight: "compliance checks", type: "negative" },
   { text: "Uncertain timing", highlight: "for outreach", type: "negative" },
   { text: "Low visibility", highlight: "online", type: "negative" },
+  { text: "Manual client provisioning across", highlight: "multiple platforms", type: "negative" },
+  { text: "Clients slipping through", highlight: "the cracks", type: "negative" },
 ];
 
 const afterPoints = [
@@ -10,6 +12,8 @@ const afterPoints = [
   { text: "Personalized, compliant outreach", highlight: "automatically sent", type: "positive" },
   { text: "Predictive trust signals and", highlight: "timely engagement", type: "positive" },
   { text: "Consistent", highlight: "credibility and visibility", type: "positive" },
+  { text: "Automated provisioning from", highlight: "scheduler to CRM", type: "positive" },
+  { text: "Every client", highlight: "fully tracked", extra: "from first booking", type: "positive" },
 ];
 
 const Outcome = () => {
