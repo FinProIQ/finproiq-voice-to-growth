@@ -4,7 +4,7 @@ const products = [
     subtitle: "(Voice → Intent → Conversion)",
     description: (
       <>
-        Turn <span className="font-bold">voice notes</span> or meeting recaps into <span className="text-accent font-bold">instant, compliant action</span>. Speak naturally — "Met John, interested in term insurance" — and AI InstantFollow drafts the follow-up, updates your CRM, and suggests the next question to ask.
+        Turn <span className="font-bold">voice notes</span> or meeting recaps into <span className="text-accent font-bold">instant, compliant action</span>. Speak naturally - "Met John, interested in term insurance" - and AI InstantFollow drafts the follow-up, updates your CRM, and suggests the next question to ask.
       </>
     ),
     bgColor: "bg-blue-50/50",
@@ -14,7 +14,7 @@ const products = [
     subtitle: "",
     description: (
       <>
-        Detect <span className="font-bold">tone, sentiment, and readiness</span> across emails, calls, and notes. Know when to reassure, when to follow up, and when to escalate — <span className="text-accent font-bold">before your client asks</span>.
+        Detect <span className="font-bold">tone, sentiment, and readiness</span> across emails, calls, and notes. Know when to reassure, when to follow up, and when to escalate - <span className="text-accent font-bold">before your client asks</span>.
       </>
     ),
     bgColor: "bg-purple-50/50",
@@ -24,7 +24,7 @@ const products = [
     subtitle: "",
     description: (
       <>
-        Generate <span className="font-bold">FINRA/SEC-safe content</span> and messages that sound like you. From short client updates to bios and newsletters — build credibility <span className="text-accent font-bold">without compliance anxiety</span>.
+        Generate <span className="font-bold">FINRA/SEC-safe content</span> and messages that sound like you. From short client updates to bios and newsletters - build credibility <span className="text-accent font-bold">without compliance anxiety</span>.
       </>
     ),
     bgColor: "bg-green-50/50",
@@ -44,7 +44,7 @@ const products = [
     subtitle: "(Scheduler → CRM → Action)",
     description: (
       <>
-        When a client books, reschedules, or cancels via your <span className="font-bold">meeting scheduler</span>, FinProIQ automatically syncs to your <span className="font-bold">CRM</span>, provisions records in your <span className="text-accent font-bold">financial planning and billing platforms</span>, and associates time entries with clients. Show up prepared — <span className="text-accent font-bold">without manual setup</span>.
+        When a client books, reschedules, or cancels via your <span className="font-bold">meeting scheduler</span>, FinProIQ automatically syncs to your <span className="font-bold">CRM</span>, provisions records in your <span className="text-accent font-bold">financial planning and billing platforms</span>, and associates time entries with clients. Show up prepared - <span className="text-accent font-bold">without manual setup</span>.
       </>
     ),
     bgColor: "bg-rose-50/50",

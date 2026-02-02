@@ -7,12 +7,12 @@ const testimonials = [
     title: "Independent Financial Advisor",
   },
   {
-    quote: "It's like having an assistant who understands compliance and emotion — I've never seen anything like it.",
+    quote: "It's like having an assistant who understands compliance and emotion - I've never seen anything like it.",
     author: "Karen L.",
     title: "Insurance Specialist",
   },
   {
-    quote: "Finally, something that doesn't just automate — it thinks with me.",
+    quote: "Finally, something that doesn't just automate - it thinks with me.",
     author: "Marcus D.",
     title: "Wealth Planner",
   },

@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 const faqs = [
   {
     question: "What is FinProIQ?",
-    answer: "FinProIQ is an AI-powered growth ecosystem for financial professionals — combining client insights, compliance, and automation to help you grow your practice efficiently and safely.",
+    answer: "FinProIQ is an AI-powered growth ecosystem for financial professionals - combining client insights, compliance, and automation to help you grow your practice efficiently and safely.",
   },
   {
     question: "Is FinProIQ compliant with FINRA/SEC guidelines?",
@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     question: "Does it post automatically on social media?",
-    answer: "Yes — you can review or approve before publishing, ensuring full compliance and maintaining your personal touch while automating the content creation process.",
+    answer: "Yes - you can review or approve before publishing, ensuring full compliance and maintaining your personal touch while automating the content creation process.",
   },
   {
     question: "How long does setup take?",
