@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.submit-survey]
 verify_jwt = false
+
+[functions.send-discovery-summary]
+verify_jwt = false

@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import WaitlistModal from "@/components/WaitlistModal";
+import DiscoverySummary from "@/components/DiscoverySummary";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -257,6 +258,7 @@ const Discovery = () => {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
   const [showExitDialog, setShowExitDialog] = useState(false);
   const [showExitCalendly, setShowExitCalendly] = useState(false);
   const [email, setEmail] = useState("");
@@ -393,6 +395,45 @@ const Discovery = () => {
     setShowCalendly(true);
   };
 
+  const handleEmailSummary = async () => {
+    if (!email) return;
+    
+    setIsSendingEmail(true);
+    try {
+      const questionsForEmail = questions.map(q => ({
+        id: q.id,
+        sectionTitle: q.sectionTitle,
+        question: q.question,
+      }));
+
+      const response = await supabase.functions.invoke('send-discovery-summary', {
+        body: {
+          email,
+          questions: questionsForEmail,
+          answers,
+        },
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+
+      toast({
+        title: "Summary sent!",
+        description: `Your discovery summary has been emailed to ${email}`,
+      });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Failed to send email",
+        description: "Please try again or use the PDF export option.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSendingEmail(false);
+    }
+  };
+
   const getQuestionsForSection = (sectionId: number) => {
     return questions.filter(q => q.section === sectionId);
   };
@@ -413,26 +454,38 @@ const Discovery = () => {
 
         <main className="container px-4 py-12 max-w-3xl mx-auto">
           {!showCalendly ? (
-            <div className="text-center animate-fade-in">
-              <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-accent/10 flex items-center justify-center">
-                <CheckCircle2 className="w-10 h-10 text-accent" />
+            <div className="animate-fade-in">
+              <div className="text-center mb-10">
+                <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-accent/10 flex items-center justify-center">
+                  <CheckCircle2 className="w-10 h-10 text-accent" />
+                </div>
+                
+                <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
+                  Thanks - this was genuinely helpful.
+                </h2>
+                
+                <p className="text-lg text-muted-foreground mb-6 max-w-lg mx-auto leading-relaxed">
+                  You're not alone. Most advisors describe the same friction points once they see them written down.
+                </p>
               </div>
-              
-              <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
-                Thanks - this was genuinely helpful.
-              </h2>
-              
-              <p className="text-lg text-muted-foreground mb-10 max-w-lg mx-auto leading-relaxed">
-                You're not alone. Most advisors describe the same friction points once they see them written down.
-              </p>
 
-              <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
+              {/* Discovery Summary with Export Options */}
+              <DiscoverySummary
+                questions={questions}
+                answers={answers}
+                email={email}
+                onEmailSummary={handleEmailSummary}
+                isSendingEmail={isSendingEmail}
+              />
+
+              {/* Action Cards */}
+              <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto my-10">
                 <Card className="p-6 border-accent/20 hover:border-accent/40 transition-colors cursor-pointer group" onClick={handleBookCall}>
                   <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <Calendar className="w-6 h-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-2">Book a Quick Call</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <h3 className="font-semibold text-foreground mb-2 text-center">Book a Quick Call</h3>
+                  <p className="text-sm text-muted-foreground mb-4 text-center">
                     Walk through your responses and learn what other advisors are doing differently.
                   </p>
                   <Button className="w-full bg-accent hover:bg-accent-hover text-accent-foreground">
@@ -444,8 +497,8 @@ const Discovery = () => {
                   <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center group-hover:bg-accent/10 transition-colors">
                     <Users className="w-6 h-6 text-muted-foreground group-hover:text-accent transition-colors" />
                   </div>
-                  <h3 className="font-semibold text-foreground mb-2">Join the Waitlist</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <h3 className="font-semibold text-foreground mb-2 text-center">Join the Waitlist</h3>
+                  <p className="text-sm text-muted-foreground mb-4 text-center">
                     Get early access and updates on how we're solving these workflow challenges.
                   </p>
                   <Button variant="outline" className="w-full border-border hover:border-accent hover:text-accent">
@@ -454,10 +507,12 @@ const Discovery = () => {
                 </Card>
               </div>
 
-              <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors">
-                <Home className="w-4 h-4" />
-                <span>Return to Homepage</span>
-              </Link>
+              <div className="text-center">
+                <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors">
+                  <Home className="w-4 h-4" />
+                  <span>Return to Homepage</span>
+                </Link>
+              </div>
             </div>
           ) : (
             <div className="animate-fade-in">
