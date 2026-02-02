@@ -2,3 +2,6 @@ project_id = "hwjfijlanyaxyopousfz"
 
 [functions.send-waitlist-welcome]
 verify_jwt = false
+
+[functions.submit-survey]
+verify_jwt = false
