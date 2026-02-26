@@ -20,7 +20,9 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
     }
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const offset = 80; // nav height
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
       setIsMenuOpen(false);
     }
   };
