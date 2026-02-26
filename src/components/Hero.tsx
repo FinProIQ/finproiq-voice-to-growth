@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-bg.jpg";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   onOpenCalendly: () => void;
@@ -18,40 +18,46 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-background">
-      {/* Content */}
       <div className="container relative z-10 px-4 py-20 md:py-32">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <div className="mb-6 inline-block">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-6 inline-block"
+          >
             <span className="px-4 py-2 bg-accent text-accent-foreground text-sm font-semibold rounded-full shadow-lg">
-              AI-Powered Growth Ecosystem
+              For Financial Advisors & Professionals
             </span>
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground leading-tight">
-            Never Miss a Lead - Convert Every Conversation Into a <span className="text-accent">Client</span>
-          </h1>
-          
-          <div className="grid md:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto text-left">
-            <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl border border-border">
-              <h3 className="text-lg font-bold text-accent mb-3">Voice-to-Action</h3>
-              <p className="text-foreground/90 leading-relaxed">
-                Turn your <span className="font-semibold">voice notes</span> and <span className="font-semibold">client meetings</span> into compliant follow-ups, CRM updates, and emotionally intelligent messages - all in <span className="text-accent font-semibold">under 60 seconds</span>.
-              </p>
-            </div>
-            <div className="bg-card/50 backdrop-blur-sm p-6 rounded-xl border border-border">
-              <h3 className="text-lg font-bold text-accent mb-3">Workflow Automation</h3>
-              <p className="text-foreground/90 leading-relaxed">
-                Automate your <span className="font-semibold">client provisioning</span> from scheduler to CRM - reducing manual steps and ensuring no client slips through the cracks.
-              </p>
-            </div>
-          </div>
-          
-          <p className="text-lg text-foreground/80 mb-8 max-w-2xl mx-auto">
-            Stay proactive, stay compliant, and stay human.
-          </p>
+          </motion.div>
 
-          <div className="mb-8 max-w-2xl mx-auto">
-            <video 
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-bold font-display mb-6 text-foreground leading-tight"
+          >
+            Autonomous Advisor{" "}
+            <span className="text-accent">Operating System</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed"
+          >
+            FinProIQ replaces manual execution, fragmented tools, and compliance anxiety
+            with a <span className="text-accent font-semibold">unified AI operating system</span>.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mb-8 max-w-2xl mx-auto"
+          >
+            <video
               className="w-full rounded-lg shadow-2xl border border-border"
               controls
               preload="metadata"
@@ -59,16 +65,22 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
               <source src="/videos/hero-demo.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-          </div>
+          </motion.div>
 
-          <Button
-            variant="default" 
-            size="lg" 
-            onClick={handleCTAClick}
-            className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
           >
-            Join Waitlist →
-          </Button>
+            <Button
+              variant="default"
+              size="lg"
+              onClick={handleCTAClick}
+              className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
+            >
+              Join Waitlist →
+            </Button>
+          </motion.div>
         </div>
       </div>
     </section>
