@@ -139,7 +139,7 @@ const Pricing = () => {
             Monthly subscription per advisor. All tiers include full compliance guardrails.
           </motion.p>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {advisorTiers.map((tier, index) => (
               <motion.div
                 key={index}
@@ -161,32 +161,36 @@ const Pricing = () => {
                     </div>
                   )}
                   <CardHeader className="pb-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <CardTitle className="text-xl">{tier.name}</CardTitle>
-                      <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground">
-                        {tier.tagline}
-                      </span>
-                    </div>
+                    <CardTitle className="text-xl">{tier.name}</CardTitle>
                     <div className="mb-1">
                       <span className="text-3xl font-bold text-foreground">{tier.price}</span>
                       <span className="text-sm text-muted-foreground ml-1">{tier.period}</span>
                     </div>
-                    {tier.altPrice && (
-                      <p className="text-xs text-accent font-medium">{tier.altPrice}</p>
-                    )}
-                    <CardDescription className="text-sm italic mt-2">
-                      "{tier.positioning}"
+                    <span className="text-xs font-semibold tracking-wider uppercase text-accent">
+                      {tier.tagline}
+                    </span>
+                    <CardDescription className="text-sm mt-2">
+                      {tier.positioning}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2.5">
-                      {tier.features.map((feature, fi) => (
-                        <li key={fi} className="flex items-start gap-2 text-sm">
-                          <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
-                          <span className="text-muted-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <CardContent className="space-y-5">
+                    {tier.sections.map((section, si) => (
+                      <div key={si}>
+                        <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-2">{section.title}</p>
+                        <ul className="space-y-1.5">
+                          {section.items.map((item, fi) => (
+                            <li key={fi} className="flex items-start gap-2 text-sm">
+                              <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
+                              <span className="text-muted-foreground">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                    <div className="pt-3 border-t border-border">
+                      <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-1">What it solves</p>
+                      <p className="text-sm text-muted-foreground">{tier.solves}</p>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
