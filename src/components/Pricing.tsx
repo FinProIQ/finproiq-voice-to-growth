@@ -5,73 +5,64 @@ import { Check } from "lucide-react";
 const advisorTiers = [
   {
     name: "Starter",
-    tagline: "AI Productivity",
-    price: "$149",
-    period: "/mo per advisor",
-    positioning: "Replace your admin assistant.",
-    features: [
-      "Voice-to-Action Engine",
-      "AI InstantFollow",
-      "Basic TrustBuilder",
-      "Basic CRM sync (via Zapier)",
-      "Manual approval before execution",
-      "1 CRM integration",
-      "30-day conversation memory",
+    tagline: "Operational Foundation",
+    price: "$497",
+    period: "/month",
+    positioning: "For advisors who want admin under control.",
+    sections: [
+      {
+        title: "Advisor Cognitive Layer",
+        items: ["Voice-to-Action", "Intent extraction", "Sentiment detection", "Basic client memory"],
+      },
+      {
+        title: "Advisor Execution Layer",
+        items: ["CRM updates", "Task creation", "Meeting sync (new / cancel / reschedule)", "One-click execution"],
+      },
     ],
+    solves: "Removes manual CRM work and follow-up friction. You speak → system logs and structures.",
   },
   {
     name: "Professional",
-    tagline: "Execution Mode",
-    price: "$349",
-    period: "/mo per advisor",
-    positioning: "Turn AI into your operations manager.",
+    tagline: "Foundation + Embedded Protection",
+    price: "$897",
+    period: "/month",
+    positioning: "Everything in Starter, plus:",
     popular: true,
-    features: [
-      "Everything in Starter",
-      "Direct CRM integration (Wealthbox / Redtail)",
-      "One-click execution workflows",
-      "Persistent client memory",
-      "Proactive follow-up suggestions",
-      "Workflow dashboard",
-      "90-day conversation memory",
-      "Audit log (basic)",
+    sections: [
+      {
+        title: "Compliance & Governance Layer",
+        items: [
+          "Risk language detection",
+          "Compliant rewrites",
+          "Policy mapping",
+          "Approval workflows",
+          "Audit-ready logs",
+          "Communication archiving",
+        ],
+      },
     ],
+    solves: "Removes admin + compliance anxiety. Move faster without fear.",
   },
   {
     name: "Growth",
-    tagline: "Autonomous Advisor OS",
-    price: "$699",
-    period: "/mo per advisor",
-    altPrice: "$1,499/mo per firm (up to 3)",
-    positioning: "Your autonomous advisor operating system.",
-    features: [
-      "Autonomous intent-to-action execution",
-      "Advanced TrustBuilder",
-      "Brand Studio (authority engine)",
-      "Proactive opportunity detection",
-      "Compliance pre-screening",
-      "Approval workflows",
-      "Full dashboard + advanced analytics",
-      "Unlimited memory",
-      "Revenue insights engine",
+    tagline: "Full Autonomous Advisor Operating System",
+    price: "$1,497",
+    period: "/month",
+    positioning: "Everything in Professional, plus:",
+    sections: [
+      {
+        title: "Growth & Trust Engine",
+        items: [
+          "AI InstantFollow",
+          "TrustBuilder",
+          "Brand Studio",
+          "Proactive follow-up suggestions",
+          "Client inactivity detection",
+          "Opportunity surfacing",
+        ],
+      },
     ],
-  },
-  {
-    name: "Enterprise",
-    tagline: "Firm OS",
-    price: "Custom",
-    period: "$2,500 – $10,000/mo",
-    positioning: "AI infrastructure for advisory firms.",
-    features: [
-      "Multi-user control & role-based permissions",
-      "Compliance intelligence engine",
-      "Policy rule mapping",
-      "Enterprise audit trails",
-      "Direct CRM + custodian integrations",
-      "API access & custom workflows",
-      "Dedicated onboarding & SLA support",
-      "White labeling (optional)",
-    ],
+    solves: "Removes admin + removes fear + drives revenue. You don't just stay organized — you grow systematically.",
   },
 ];
 
@@ -148,7 +139,7 @@ const Pricing = () => {
             Monthly subscription per advisor. All tiers include full compliance guardrails.
           </motion.p>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {advisorTiers.map((tier, index) => (
               <motion.div
                 key={index}
@@ -170,32 +161,36 @@ const Pricing = () => {
                     </div>
                   )}
                   <CardHeader className="pb-4">
-                    <div className="flex items-center gap-2 mb-1">
-                      <CardTitle className="text-xl">{tier.name}</CardTitle>
-                      <span className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground">
-                        {tier.tagline}
-                      </span>
-                    </div>
+                    <CardTitle className="text-xl">{tier.name}</CardTitle>
                     <div className="mb-1">
                       <span className="text-3xl font-bold text-foreground">{tier.price}</span>
                       <span className="text-sm text-muted-foreground ml-1">{tier.period}</span>
                     </div>
-                    {tier.altPrice && (
-                      <p className="text-xs text-accent font-medium">{tier.altPrice}</p>
-                    )}
-                    <CardDescription className="text-sm italic mt-2">
-                      "{tier.positioning}"
+                    <span className="text-xs font-semibold tracking-wider uppercase text-accent">
+                      {tier.tagline}
+                    </span>
+                    <CardDescription className="text-sm mt-2">
+                      {tier.positioning}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2.5">
-                      {tier.features.map((feature, fi) => (
-                        <li key={fi} className="flex items-start gap-2 text-sm">
-                          <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
-                          <span className="text-muted-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <CardContent className="space-y-5">
+                    {tier.sections.map((section, si) => (
+                      <div key={si}>
+                        <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-2">{section.title}</p>
+                        <ul className="space-y-1.5">
+                          {section.items.map((item, fi) => (
+                            <li key={fi} className="flex items-start gap-2 text-sm">
+                              <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
+                              <span className="text-muted-foreground">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                    <div className="pt-3 border-t border-border">
+                      <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-1">What it solves</p>
+                      <p className="text-sm text-muted-foreground">{tier.solves}</p>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
