@@ -1,25 +1,51 @@
 import { motion } from "framer-motion";
+import { Mic, Brain, Cog, Shield, TrendingUp, ArrowDown } from "lucide-react";
 
 const steps = [
   {
-    number: "1",
-    title: "Speak or Record",
-    description: "Record a voice note or finish a client meeting. FinProIQ captures everything.",
+    number: "01",
+    label: "INPUT",
+    title: "Capture",
+    icon: Mic,
+    color: "bg-blue-500/10 text-blue-600",
+    items: ["Voice note", "Meeting transcript", "CRM activity", "Calendar booking", "Email reply"],
+    output: "Intelligence Engine",
   },
   {
-    number: "2",
-    title: "AI Understands Intent",
-    description: "The Intelligence Engine analyzes intent, tone, urgency, and context — instantly.",
+    number: "02",
+    label: "THINK",
+    title: "Intelligence Engine",
+    icon: Brain,
+    color: "bg-violet-500/10 text-violet-600",
+    items: ["Transcribe voice", "Extract intent", "Detect sentiment", "Retrieve client memory"],
+    output: "Structured Action Plan + Context",
   },
   {
-    number: "3",
-    title: "Autonomous Execution",
-    description: "Workflows fire automatically: CRM updates, compliant follow-ups, task creation — all at once.",
+    number: "03",
+    label: "DECIDE",
+    title: "Execution Engine",
+    icon: Cog,
+    color: "bg-amber-500/10 text-amber-600",
+    items: ["CRM updates", "Task creation", "Email drafting", "Meeting sync"],
+    output: "Auto-execute or One-Click Approval",
   },
   {
-    number: "4",
-    title: "You Review & Approve",
-    description: "One-click approval. Everything logged, archived, and compliance-ready.",
+    number: "04",
+    label: "PROTECT",
+    title: "Compliance Engine",
+    icon: Shield,
+    color: "bg-emerald-500/10 text-emerald-600",
+    items: ["Risk language scan", "Policy rule mapping", "Risk scoring"],
+    output: "Allow send or Route to approval",
+  },
+  {
+    number: "05",
+    label: "ENHANCE",
+    title: "Growth & Trust Engine",
+    icon: TrendingUp,
+    color: "bg-rose-500/10 text-rose-600",
+    items: ["Add credibility content", "Adjust tone by sentiment", "Suggest proactive follow-up"],
+    output: "Finalized & sent",
   },
 ];
 
@@ -34,31 +60,57 @@ const HowItWorks = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">How It Works</h2>
-          <p className="text-lg text-muted-foreground">From conversation to compliant client action in under a minute.</p>
+          <h2 className="text-3xl md:text-5xl font-bold font-display mb-3">How It Works</h2>
+          <p className="text-muted-foreground text-lg">The full suite flow — from input to client action.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div className="max-w-2xl mx-auto space-y-0">
           {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.12 }}
-              className="relative"
-            >
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-accent text-accent-foreground flex items-center justify-center text-2xl font-bold mb-4 shadow-lg">
-                  {step.number}
+            <div key={index}>
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="relative bg-card rounded-2xl border border-border p-6 shadow-soft hover:shadow-medium transition-shadow"
+              >
+                <div className="flex items-start gap-4">
+                  <div className={`flex-shrink-0 w-11 h-11 rounded-xl ${step.color} flex items-center justify-center`}>
+                    <step.icon className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[11px] font-bold tracking-widest uppercase text-accent">
+                        Step {step.number}
+                      </span>
+                      <span className="text-[11px] text-muted-foreground uppercase tracking-wide">
+                        · {step.label}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-3">{step.title}</h3>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {step.items.map((item, i) => (
+                        <span
+                          key={i}
+                          className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground font-medium"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-sm text-accent font-medium">
+                      → {step.output}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-foreground">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-              </div>
+              </motion.div>
+
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-accent/30" />
+                <div className="flex justify-center py-2">
+                  <ArrowDown className="w-4 h-4 text-border" />
+                </div>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
