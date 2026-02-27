@@ -149,10 +149,10 @@ const Pricing = () => {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
               >
                 <Card
-                  className={`relative h-full transition-all duration-300 hover:shadow-medium ${
+                  className={`relative h-full transition-all duration-300 hover:shadow-medium hover:-translate-y-1 ${
                     tier.popular
                       ? "border-accent border-2 shadow-medium"
-                      : "border-border"
+                      : "border-border hover:border-accent/30"
                   }`}
                 >
                   {tier.popular && (
