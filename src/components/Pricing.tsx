@@ -6,7 +6,7 @@ const advisorTiers = [
   {
     name: "Starter",
     tagline: "Operational Foundation",
-    price: "$497",
+    price: "$199",
     period: "/month",
     positioning: "For advisors who want admin under control.",
     sections: [
@@ -24,7 +24,7 @@ const advisorTiers = [
   {
     name: "Professional",
     tagline: "Foundation + Embedded Protection",
-    price: "$897",
+    price: "$349",
     period: "/month",
     positioning: "Everything in Starter, plus:",
     popular: true,
@@ -46,7 +46,7 @@ const advisorTiers = [
   {
     name: "Growth",
     tagline: "Full Autonomous Advisor Operating System",
-    price: "$1,497",
+    price: "$749",
     period: "/month",
     positioning: "Everything in Professional, plus:",
     sections: [
