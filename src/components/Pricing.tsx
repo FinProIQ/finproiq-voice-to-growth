@@ -149,10 +149,10 @@ const Pricing = () => {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
               >
                 <Card
-                  className={`relative h-full transition-all duration-300 hover:shadow-medium hover:-translate-y-1 ${
+                  className={`relative h-full transition-all duration-300 hover:shadow-medium ${
                     tier.popular
                       ? "border-accent border-2 shadow-medium"
-                      : "border-border hover:border-accent/30"
+                      : "border-border"
                   }`}
                 >
                   {tier.popular && (
@@ -227,7 +227,7 @@ const Pricing = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
               >
-                <Card className="relative h-full transition-all duration-300 hover:shadow-medium hover:-translate-y-1 hover:border-accent/30">
+                <Card className="relative h-full transition-all duration-300 hover:shadow-medium">
                   <CardHeader className="text-center pb-4">
                     <CardTitle className="text-xl mb-1">{phase.name}</CardTitle>
                     <div className="mb-1">

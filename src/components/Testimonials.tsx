@@ -32,7 +32,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-card rounded-2xl p-8 shadow-soft border border-border relative hover:shadow-medium hover:-translate-y-1 hover:border-accent/20 transition-all duration-300"
+              className="bg-card rounded-2xl p-8 shadow-soft border border-border relative"
             >
               <Quote className="w-12 h-12 text-accent/20 absolute top-6 right-6" />
               

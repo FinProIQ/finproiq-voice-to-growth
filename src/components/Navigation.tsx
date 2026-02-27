@@ -82,7 +82,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               variant="default" 
               size="sm" 
               onClick={handleCTAClick}
-              className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+              className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
             >
               Join Waitlist
             </Button>

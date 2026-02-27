@@ -172,7 +172,7 @@ const SystemCard = ({ system, index }: { system: CoreSystem; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`bg-gradient-to-br ${system.gradient} rounded-2xl border border-border ${system.borderColor} border-l-4 overflow-hidden shadow-soft hover:shadow-medium hover:-translate-y-1 transition-all duration-300`}
+      className={`bg-gradient-to-br ${system.gradient} rounded-2xl border border-border ${system.borderColor} border-l-4 overflow-hidden shadow-soft hover:shadow-medium transition-shadow`}
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
@@ -217,7 +217,7 @@ const SystemCard = ({ system, index }: { system: CoreSystem; index: number }) =>
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: fi * 0.05 }}
-                  className="bg-card/80 backdrop-blur-sm rounded-xl p-5 border border-border hover:border-accent/30 hover:shadow-soft transition-all duration-200"
+                  className="bg-card/80 backdrop-blur-sm rounded-xl p-5 border border-border"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <feature.icon className="w-4 h-4 text-accent" />
