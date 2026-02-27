@@ -6,7 +6,7 @@ const advisorTiers = [
   {
     name: "Starter",
     tagline: "Operational Foundation",
-    price: "$497",
+    price: "$199",
     period: "/month",
     positioning: "For advisors who want admin under control.",
     sections: [
