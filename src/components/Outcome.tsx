@@ -42,7 +42,7 @@ const Outcome = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="bg-card rounded-2xl p-8 md:p-10 shadow-soft border border-destructive/15"
+            className="bg-card rounded-2xl p-8 md:p-10 shadow-soft border border-destructive/15 hover:shadow-medium hover:-translate-y-1 transition-all duration-300"
           >
             <h3 className="text-xl font-bold text-destructive mb-8 tracking-tight">
               Before FinProIQ
