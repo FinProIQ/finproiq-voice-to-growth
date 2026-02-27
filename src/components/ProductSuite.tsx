@@ -172,7 +172,7 @@ const SystemCard = ({ system, index }: { system: CoreSystem; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`bg-gradient-to-br ${system.gradient} rounded-2xl border border-border ${system.borderColor} border-l-4 overflow-hidden shadow-soft hover:shadow-medium transition-shadow`}
+      className={`bg-gradient-to-br ${system.gradient} rounded-2xl border border-border ${system.borderColor} border-l-4 overflow-hidden shadow-soft hover:shadow-medium hover:-translate-y-1 transition-all duration-300`}
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
