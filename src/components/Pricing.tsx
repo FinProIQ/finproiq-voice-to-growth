@@ -173,8 +173,8 @@ const Pricing = () => {
                       {tier.positioning}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="flex flex-col flex-1 space-y-5">
-                    <div className="flex-1 space-y-5">
+                  <CardContent className="flex flex-col flex-1">
+                    <div className="space-y-5 mb-5">
                       {tier.sections.map((section, si) => (
                         <div key={si}>
                           <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-2">{section.title}</p>
