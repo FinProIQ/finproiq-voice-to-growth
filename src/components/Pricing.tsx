@@ -24,7 +24,7 @@ const advisorTiers = [
   {
     name: "Professional",
     tagline: "Foundation + Embedded Protection",
-    price: "$897",
+    price: "$349",
     period: "/month",
     positioning: "Everything in Starter, plus:",
     popular: true,
