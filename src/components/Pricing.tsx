@@ -46,7 +46,7 @@ const advisorTiers = [
   {
     name: "Growth",
     tagline: "Full Autonomous Advisor Operating System",
-    price: "$1,497",
+    price: "$749",
     period: "/month",
     positioning: "Everything in Professional, plus:",
     sections: [
