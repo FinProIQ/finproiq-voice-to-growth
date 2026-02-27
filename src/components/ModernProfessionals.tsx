@@ -45,7 +45,7 @@ const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                className="flex items-center gap-3 bg-card rounded-xl p-4 border border-border shadow-soft"
+                className="flex items-center gap-3 bg-card rounded-xl p-4 border border-border shadow-soft hover:shadow-medium hover:-translate-y-1 hover:border-accent/30 transition-all duration-300"
               >
                 <cap.icon className="w-6 h-6 text-accent flex-shrink-0" />
                 <span className="font-medium text-foreground">{cap.text}</span>

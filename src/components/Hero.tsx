@@ -76,7 +76,7 @@ const Hero = ({ onOpenCalendly }: HeroProps) => {
               variant="default"
               size="lg"
               onClick={handleCTAClick}
-              className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
+              className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Join Waitlist →
             </Button>

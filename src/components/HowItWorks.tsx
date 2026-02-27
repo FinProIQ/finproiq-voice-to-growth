@@ -72,7 +72,7 @@ const HowItWorks = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="relative bg-card rounded-2xl border border-border p-6 shadow-soft hover:shadow-medium transition-shadow"
+                className="relative bg-card rounded-2xl border border-border p-6 shadow-soft hover:shadow-medium hover:-translate-y-1 hover:border-accent/30 transition-all duration-300"
               >
                 <div className="flex items-start gap-4">
                   <div className={`flex-shrink-0 w-11 h-11 rounded-xl ${step.color} flex items-center justify-center`}>
@@ -92,7 +92,7 @@ const HowItWorks = () => {
                       {step.items.map((item, i) => (
                         <span
                           key={i}
-                          className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground font-medium"
+                          className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground font-medium hover:bg-accent/10 hover:text-accent transition-colors duration-200 cursor-default"
                         >
                           {item}
                         </span>
