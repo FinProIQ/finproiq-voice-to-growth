@@ -68,7 +68,7 @@ const Outcome = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="relative bg-gradient-to-br from-accent/[0.04] via-card to-accent/[0.08] rounded-2xl p-8 md:p-10 shadow-medium border-2 border-accent/20"
+            className="relative bg-gradient-to-br from-accent/[0.04] via-card to-accent/[0.08] rounded-2xl p-8 md:p-10 shadow-medium border-2 border-accent/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
           >
             <h3 className="text-xl font-bold text-accent mb-8 tracking-tight">
               After FinProIQ

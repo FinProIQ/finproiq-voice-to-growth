@@ -217,7 +217,7 @@ const SystemCard = ({ system, index }: { system: CoreSystem; index: number }) =>
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: fi * 0.05 }}
-                  className="bg-card/80 backdrop-blur-sm rounded-xl p-5 border border-border"
+                  className="bg-card/80 backdrop-blur-sm rounded-xl p-5 border border-border hover:border-accent/30 hover:shadow-soft transition-all duration-200"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <feature.icon className="w-4 h-4 text-accent" />

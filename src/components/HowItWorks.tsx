@@ -92,7 +92,7 @@ const HowItWorks = () => {
                       {step.items.map((item, i) => (
                         <span
                           key={i}
-                          className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground font-medium"
+                          className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground font-medium hover:bg-accent/10 hover:text-accent transition-colors duration-200 cursor-default"
                         >
                           {item}
                         </span>
