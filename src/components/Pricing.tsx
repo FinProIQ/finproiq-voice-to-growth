@@ -173,21 +173,23 @@ const Pricing = () => {
                       {tier.positioning}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-5">
-                    {tier.sections.map((section, si) => (
-                      <div key={si}>
-                        <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-2">{section.title}</p>
-                        <ul className="space-y-1.5">
-                          {section.items.map((item, fi) => (
-                            <li key={fi} className="flex items-start gap-2 text-sm">
-                              <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
-                              <span className="text-muted-foreground">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                    <div className="pt-3 border-t border-border">
+                  <CardContent className="flex flex-col flex-1 space-y-5">
+                    <div className="flex-1 space-y-5">
+                      {tier.sections.map((section, si) => (
+                        <div key={si}>
+                          <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-2">{section.title}</p>
+                          <ul className="space-y-1.5">
+                            {section.items.map((item, fi) => (
+                              <li key={fi} className="flex items-start gap-2 text-sm">
+                                <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
+                                <span className="text-muted-foreground">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="pt-3 border-t border-border mt-auto">
                       <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-1">What it solves</p>
                       <p className="text-sm text-muted-foreground">{tier.solves}</p>
                     </div>
