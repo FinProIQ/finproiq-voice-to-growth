@@ -1,68 +1,55 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 
 const advisorTiers = [
   {
     name: "Starter",
-    tagline: "Operational Foundation",
-    price: "$199",
-    period: "/month",
-    positioning: "For advisors who want admin under control.",
-    sections: [
-      {
-        title: "Advisor Cognitive Layer",
-        items: ["Voice-to-Action", "Intent extraction", "Sentiment detection", "Basic client memory"],
-      },
-      {
-        title: "Advisor Execution Layer",
-        items: ["CRM updates", "Task creation", "Meeting sync (new / cancel / reschedule)", "One-click execution"],
-      },
+    tagline: "The compliant starting point",
+    price: "$79",
+    period: "/mo",
+    positioning: "AI turns your notes into ready-to-review Email and SMS — you control the send.",
+    features: [
+      "Voice & text notes → Email & SMS formatted output",
+      "Social content generation — up to 10 posts/month",
+      "CRM entries auto-generated — manual update required",
+      "Compliance engine applied to every output",
     ],
-    solves: "Removes manual CRM work and follow-up friction. You speak → system logs and structures.",
   },
   {
     name: "Professional",
-    tagline: "Foundation + Embedded Protection",
-    price: "$349",
-    period: "/month",
-    positioning: "Everything in Starter, plus:",
+    tagline: "Where real automation begins",
+    price: "$199",
+    period: "/mo",
+    positioning: "One click sends the email, posts the content, and updates the CRM. No copy-paste.",
     popular: true,
-    sections: [
-      {
-        title: "Compliance & Governance Layer",
-        items: [
-          "Risk language detection",
-          "Compliant rewrites",
-          "Policy mapping",
-          "Approval workflows",
-          "Audit-ready logs",
-          "Communication archiving",
-        ],
-      },
+    features: [
+      "Everything in Starter",
+      "Direct Email & SMS sending — one-click execution",
+      "Automated CRM updates with full integration",
+      "Unlimited social posts with direct publishing",
+      "Full Brand Studio with scheduled social posts",
+      "Memory Layer for personalized, context-aware output",
     ],
-    solves: "Removes admin + compliance anxiety. Move faster without fear.",
   },
   {
     name: "Growth",
-    tagline: "Full Autonomous Advisor Operating System",
-    price: "$749",
-    period: "/month",
-    positioning: "Everything in Professional, plus:",
-    sections: [
-      {
-        title: "Growth & Trust Engine",
-        items: [
-          "AI InstantFollow",
-          "TrustBuilder",
-          "Brand Studio",
-          "Proactive follow-up suggestions",
-          "Client inactivity detection",
-          "Opportunity surfacing",
-        ],
-      },
+    tagline: "Your autonomous advisor OS",
+    price: "$399",
+    period: "/mo",
+    positioning: "Full intelligence stack — enrichment, insights, and intent-triggered workflows.",
+    comingSoon: true,
+    features: [
+      "Everything in Professional",
+      "CRM enrichment & new client addition",
+      "Insights Dashboard — performance analytics",
+      "Intent-triggered workflows",
     ],
-    solves: "Removes admin + removes fear + drives revenue. You don't just stay organized — you grow systematically.",
+    comingSoonItems: [
+      "Proactive follow-up suggestions",
+      "Automated meeting scheduling & follow-up emails",
+      "Advisor authority & thought leadership engine",
+    ],
   },
 ];
 
@@ -161,6 +148,11 @@ const Pricing = () => {
                       Most Popular
                     </div>
                   )}
+                  {tier.comingSoon && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-muted text-muted-foreground px-4 py-1 rounded-full text-xs font-bold tracking-wide uppercase border border-border">
+                      Coming Soon
+                    </div>
+                  )}
                   <CardHeader className="pb-4">
                     <CardTitle className="text-xl">{tier.name}</CardTitle>
                     <div className="mb-1">
@@ -175,25 +167,27 @@ const Pricing = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex flex-col flex-1">
-                    <div className="space-y-5 mb-5">
-                      {tier.sections.map((section, si) => (
-                        <div key={si}>
-                          <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-2">{section.title}</p>
-                          <ul className="space-y-1.5">
-                            {section.items.map((item, fi) => (
-                              <li key={fi} className="flex items-start gap-2 text-sm">
-                                <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
-                                <span className="text-muted-foreground">{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                    <ul className="space-y-2 mb-5">
+                      {tier.features.map((item, fi) => (
+                        <li key={fi} className="flex items-start gap-2 text-sm">
+                          <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
+                          <span className="text-muted-foreground">{item}</span>
+                        </li>
                       ))}
-                    </div>
-                    <div className="pt-3 border-t border-border mt-auto">
-                      <p className="text-xs font-bold uppercase tracking-wider text-foreground mb-1">What it solves</p>
-                      <p className="text-sm text-muted-foreground">{tier.solves}</p>
-                    </div>
+                    </ul>
+                    {tier.comingSoonItems && (
+                      <div className="mt-auto pt-3 border-t border-border">
+                        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Coming Soon</p>
+                        <ul className="space-y-2">
+                          {tier.comingSoonItems.map((item, fi) => (
+                            <li key={fi} className="flex items-start gap-2 text-sm">
+                              <Clock className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" strokeWidth={2} />
+                              <span className="text-muted-foreground/80">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </motion.div>
