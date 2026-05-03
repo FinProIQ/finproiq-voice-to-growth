@@ -31,10 +31,10 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
     if (window.gtag) {
       window.gtag('event', 'cta_click', {
         event_category: 'engagement',
-        event_label: 'Nav CTA'
+        event_label: 'Nav Schedule Demo'
       });
     }
-    onOpenCalendly();
+    window.open('https://www.calendly.com/raman-sivasankar', '_blank');
     setIsMenuOpen(false);
   };
 
@@ -84,7 +84,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={handleCTAClick}
               className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
             >
-              Join Waitlist
+              Schedule a Demo
             </Button>
           </div>
 
@@ -130,7 +130,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={handleCTAClick} 
               className="w-full bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
             >
-              Join Waitlist
+              Schedule a Demo
             </Button>
           </div>
         )}
