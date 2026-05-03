@@ -123,7 +123,7 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            Monthly subscription per advisor. All tiers include full compliance guardrails.
+            If this helps you convert just one additional client, it pays for itself many times over.
           </motion.p>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
@@ -193,6 +193,16 @@ const Pricing = () => {
               </motion.div>
             ))}
           </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-center text-muted-foreground mt-8 text-lg font-medium"
+          >
+            Try it free for 14 days. No credit card required.
+          </motion.p>
         </div>
 
         {/* Workflow Automation Pricing */}

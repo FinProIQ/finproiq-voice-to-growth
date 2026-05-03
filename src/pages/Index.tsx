@@ -1,11 +1,15 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import ModernProfessionals from "@/components/ModernProfessionals";
-import ProductSuite from "@/components/ProductSuite";
+import Problem from "@/components/Problem";
+import EmailComparison from "@/components/EmailComparison";
+import WhatItDoes from "@/components/WhatItDoes";
+import WhyItWorks from "@/components/WhyItWorks";
 import HowItWorks from "@/components/HowItWorks";
 import Outcome from "@/components/Outcome";
+import LiveDemoCTA from "@/components/LiveDemoCTA";
 import Pricing from "@/components/Pricing";
+import Trust from "@/components/Trust";
 import Testimonials from "@/components/Testimonials";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -27,18 +31,20 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Navigation onOpenCalendly={handleOpenWaitlist} />
-      <Hero onOpenCalendly={handleOpenWaitlist} />
-      <ModernProfessionals onOpenCalendly={handleOpenWaitlist} />
-      <section id="features">
-        <ProductSuite />
-      </section>
+      <Hero />
+      <Problem />
+      <EmailComparison />
+      <WhatItDoes />
+      <WhyItWorks />
       <HowItWorks />
       <Outcome />
+      <LiveDemoCTA />
       <Pricing />
+      <Trust />
       <section id="testimonials">
         <Testimonials />
       </section>
-      <FinalCTA onOpenCalendly={handleOpenWaitlist} />
+      <FinalCTA />
       <Footer />
       <WaitlistModal 
         isOpen={isWaitlistOpen} 

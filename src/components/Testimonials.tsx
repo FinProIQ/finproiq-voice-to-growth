@@ -2,19 +2,19 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "FinProIQ saved me from missing follow-ups and helped me close two clients in my first week.",
-    author: "Alex P.",
-    title: "Independent Financial Advisor",
+    quote: "I used this after a prospect said 'I'll think about it' - they replied the same day and signed the next week.",
+    author: "Financial Advisor",
+    title: "",
   },
   {
-    quote: "It's like having an assistant who understands compliance and emotion - I've never seen anything like it.",
-    author: "Karen L.",
-    title: "Insurance Specialist",
+    quote: "This is the first tool that actually improved my follow-ups, not just sped them up.",
+    author: "Wealth Manager",
+    title: "",
   },
   {
-    quote: "Finally, something that doesn't just automate - it thinks with me.",
-    author: "Marcus D.",
-    title: "Wealth Planner",
+    quote: "It feels like having an assistant that understands both compliance and client psychology.",
+    author: "Insurance Agent",
+    title: "",
   },
 ];
 
@@ -36,7 +36,7 @@ const Testimonials = () => {
             >
               <Quote className="w-12 h-12 text-accent/20 absolute top-6 right-6" />
               
-              <p className="text-lg md:text-xl mb-6 leading-relaxed relative z-10">
+              <p className="text-lg md:text-xl mb-6 leading-relaxed relative z-10 text-foreground">
                 "{testimonial.quote}"
               </p>
               
@@ -44,10 +44,7 @@ const Testimonials = () => {
                 <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold text-xl">
                   {testimonial.author.charAt(0)}
                 </div>
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.title}</p>
-                </div>
+                <p className="font-semibold text-foreground">{testimonial.author}</p>
               </div>
             </div>
           ))}

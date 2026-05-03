@@ -2,19 +2,27 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ClipboardList } from "lucide-react";
 
-interface FinalCTAProps {
-  onOpenCalendly: () => void;
-}
+const DEMO_URL = "https://advisorflow.replit.app/";
 
-const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
-  const handleCTAClick = () => {
+const FinalCTA = () => {
+  const handleSeeItClick = () => {
     if (window.gtag) {
       window.gtag('event', 'cta_click', {
         event_category: 'engagement',
-        event_label: 'Final CTA'
+        event_label: 'Final CTA See It'
       });
     }
-    onOpenCalendly();
+    window.open(DEMO_URL, '_blank');
+  };
+
+  const handleDemoClick = () => {
+    if (window.gtag) {
+      window.gtag('event', 'cta_click', {
+        event_category: 'engagement',
+        event_label: 'Final CTA Demo'
+      });
+    }
+    window.open(DEMO_URL, '_blank');
   };
 
   const handleDiscoveryClick = () => {
@@ -31,24 +39,30 @@ const FinalCTA = ({ onOpenCalendly }: FinalCTAProps) => {
       <div className="container px-4">
         <div className="max-w-5xl mx-auto text-center animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">
-            Ready to <span className="text-accent">Transform Your Practice?</span>
+            You don't need another tool. You need a system that makes sure{" "}
+            <span className="text-accent">no opportunity slips.</span>
           </h2>
-          
-          <p className="text-xl md:text-2xl mb-10 text-foreground">
-            Experience the <span className="text-accent font-bold">fastest way</span> to stay <span className="font-bold">compliant, personal, and proactive</span> — without lifting a finger.
-          </p>
 
-          <Button 
-            variant="default" 
-            size="lg"
-            onClick={handleCTAClick}
-            className="text-lg px-10 py-5 h-auto rounded-xl bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
-          >
-            Join Waitlist Now →
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+            <Button 
+              size="lg"
+              onClick={handleSeeItClick}
+              className="text-lg px-10 py-5 h-auto rounded-xl bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
+            >
+              See It In Action
+            </Button>
+            <Button 
+              variant="outline"
+              size="lg"
+              onClick={handleDemoClick}
+              className="text-lg px-10 py-5 h-auto rounded-xl border-accent text-accent hover:bg-accent/10 transition-all"
+            >
+              Try Live Demo
+            </Button>
+          </div>
 
           {/* Secondary option for those not ready */}
-          <div className="mt-12 pt-8 border-t border-border/50">
+          <div className="pt-8 border-t border-border/50">
             <p className="text-muted-foreground mb-4">
               Not ready to commit? Help us understand your workflow challenges.
             </p>
