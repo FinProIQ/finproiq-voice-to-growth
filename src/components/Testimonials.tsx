@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 
 const testimonials = [
@@ -30,9 +31,14 @@ const Testimonials = () => {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-card rounded-2xl p-8 shadow-soft border border-border relative"
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.1 }}
+              whileHover={{ scale: 1.03, y: -4 }}
+              className="bg-card rounded-2xl p-8 shadow-soft border border-border relative transition-shadow hover:shadow-medium cursor-default"
             >
               <Quote className="w-12 h-12 text-accent/20 absolute top-6 right-6" />
               
@@ -46,7 +52,7 @@ const Testimonials = () => {
                 </div>
                 <p className="font-semibold text-foreground">{testimonial.author}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -41,7 +41,8 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.1 }}
-              className="text-center"
+              whileHover={{ scale: 1.05, y: -6 }}
+              className="text-center bg-card rounded-2xl p-6 border border-border shadow-soft transition-shadow hover:shadow-medium cursor-default"
             >
               <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <step.icon className="w-7 h-7 text-accent" />
