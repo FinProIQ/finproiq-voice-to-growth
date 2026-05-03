@@ -11,7 +11,8 @@ const EmailComparison = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="bg-muted/60 rounded-2xl p-8 md:p-10 border border-border"
+            whileHover={{ scale: 1.03, y: -4 }}
+            className="bg-muted/60 rounded-2xl p-8 md:p-10 border border-border transition-shadow hover:shadow-medium cursor-default"
           >
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
               Typical Follow-Up
@@ -27,7 +28,8 @@ const EmailComparison = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="bg-card rounded-2xl p-8 md:p-10 border-2 border-accent/20 shadow-medium"
+            whileHover={{ scale: 1.03, y: -4 }}
+            className="bg-card rounded-2xl p-8 md:p-10 border-2 border-accent/20 shadow-medium transition-shadow hover:shadow-strong cursor-default"
           >
             <p className="text-xs font-bold uppercase tracking-wider text-accent mb-4">
               FinProIQ Follow-Up

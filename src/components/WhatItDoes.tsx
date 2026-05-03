@@ -31,7 +31,8 @@ const WhatItDoes = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="flex items-start gap-3 bg-card rounded-xl p-5 border border-border shadow-soft text-left"
+                whileHover={{ scale: 1.05, y: -4 }}
+                className="flex items-start gap-3 bg-card rounded-xl p-5 border border-border shadow-soft text-left transition-shadow hover:shadow-medium cursor-default"
               >
                 <feature.icon className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <span className="text-foreground">{feature.text}</span>
