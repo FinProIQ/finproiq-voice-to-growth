@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, Zap, Shield, TrendingUp, ChevronDown, ChevronUp, Mic, Heart, Target, Database, Workflow, MousePointerClick, Link2, MessageSquare, ScanSearch, FileCheck, CheckCircle, BookOpen, Archive, BarChart3, Mail, Award, Bell } from "lucide-react";
+import { Brain, Zap, Shield, TrendingUp, ChevronDown, ChevronUp, Mic, Heart, Target, Database, Workflow, MousePointerClick, Link2, ScanSearch, FileCheck, Archive, BarChart3, Mail, Award, Bell } from "lucide-react";
 
 interface SubFeature {
   title: string;
