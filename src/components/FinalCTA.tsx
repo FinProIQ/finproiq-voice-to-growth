@@ -55,7 +55,7 @@ const FinalCTA = () => {
             <Button 
               variant="outline"
               size="lg"
-              onClick={handleDemoClick}
+              onClick={handleDemoSignupClick}
               className="text-lg px-10 py-5 h-auto rounded-xl border-accent text-accent hover:bg-accent/10 transition-all"
             >
               Try Live Demo
