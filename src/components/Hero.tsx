@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Mic, Brain, MessageSquare, UserCheck } from "lucide-react";
 
-const DEMO_URL = "https://advisorflow.replit.app/";
+    const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
 
 const workflowSteps = [
   { icon: Mic, label: "Voice" },
@@ -16,7 +16,7 @@ const Hero = () => {
     if (window.gtag) {
       window.gtag('event', 'cta_click', {
         event_category: 'engagement',
-        event_label: 'Hero See It In Action'
+        event_label: 'Hero How It Works'
       });
     }
     window.open(DEMO_URL, '_blank');
@@ -99,7 +99,7 @@ const Hero = () => {
               onClick={handlePrimaryClick}
               className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
             >
-              See It In Action
+              How It Works
             </Button>
             <Button
               variant="outline"
