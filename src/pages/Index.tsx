@@ -33,9 +33,6 @@ const Index = () => {
     <main className="min-h-screen">
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero />
-      <section id="product">
-        <ProductSuite />
-      </section>
       <Problem />
       <EmailComparison />
       <WhatItDoes />
@@ -43,6 +40,9 @@ const Index = () => {
       <HowItWorks />
       <Outcome />
       <LiveDemoCTA />
+      <section id="product">
+        <ProductSuite />
+      </section>
       <Pricing />
       <Trust />
       <section id="testimonials">
