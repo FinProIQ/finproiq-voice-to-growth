@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Mic, Brain, MessageSquare, UserCheck } from "lucide-react";
 
     const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
+    const SIGNUP_URL = "https://advisorflow.replit.app/";
 
 const workflowSteps = [
   { icon: Mic, label: "Voice" },
@@ -29,7 +30,7 @@ const Hero = () => {
         event_label: 'Hero Try With Last Meeting'
       });
     }
-    window.open(DEMO_URL, '_blank');
+    window.open(SIGNUP_URL, '_blank');
   };
 
   return (

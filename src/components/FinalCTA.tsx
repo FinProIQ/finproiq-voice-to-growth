@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ClipboardList } from "lucide-react";
 
 const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
+const SIGNUP_URL = "https://advisorflow.replit.app/";
 
 const FinalCTA = () => {
   const handleSeeItClick = () => {
@@ -15,14 +16,14 @@ const FinalCTA = () => {
     window.open(DEMO_URL, '_blank');
   };
 
-  const handleDemoClick = () => {
+  const handleDemoSignupClick = () => {
     if (window.gtag) {
       window.gtag('event', 'cta_click', {
         event_category: 'engagement',
         event_label: 'Final CTA Demo'
       });
     }
-    window.open(DEMO_URL, '_blank');
+    window.open(SIGNUP_URL, '_blank');
   };
 
   const handleDiscoveryClick = () => {
