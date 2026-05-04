@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, Zap, Shield, TrendingUp, ChevronDown, ChevronUp, Mic, Heart, Target, Database, Workflow, MousePointerClick, Link2, MessageSquare, ScanSearch, FileCheck, CheckCircle, BookOpen, Archive, BarChart3, Mail, Award, Bell } from "lucide-react";
+import { Brain, Zap, Shield, TrendingUp, ChevronDown, ChevronUp, Mic, Heart, Target, Database, Workflow, MousePointerClick, Link2, ScanSearch, FileCheck, Archive, BarChart3, Mail, Award, Bell } from "lucide-react";
 
 interface SubFeature {
   title: string;
@@ -33,7 +33,7 @@ const coreSystems: CoreSystem[] = [
       {
         title: "Voice-to-Action",
         meaning: "Advisor speaks after a meeting. The system converts speech into structured actions.",
-        points: ["Transcribes voice note", "Identifies what needs to be done", "Converts into tasks, emails, or CRM updates"],
+        points: ["Transcribes voice note", "Identifies what needs to be done", "Converts into tasks, emails, or CRM updates (uses Sentiment Detection and Intent Extraction)"],
         icon: Mic,
       },
       {
@@ -59,7 +59,7 @@ const coreSystems: CoreSystem[] = [
   {
     number: "02",
     title: "Autonomous Execution Engine",
-    subtitle: "Meeting Lifecycle Sync + Workflow Automation + CRM Execution",
+    subtitle: "Workflow Automation + CRM Execution + One-Click Execute",
     positioning: "Execution Layer",
     icon: Zap,
     gradient: "from-amber-500/10 to-orange-500/10",
@@ -68,8 +68,14 @@ const coreSystems: CoreSystem[] = [
       {
         title: "Workflow Automation",
         meaning: "Automatically performs tasks based on detected intent.",
-        points: ["Creates tasks", "Sends emails", "Updates CRM", "Triggers follow-ups"],
+        points: ["Creates tasks", "Composes emails", "Updates CRM via Direct CRM Execution", "Triggers follow-ups"],
         icon: Workflow,
+      },
+      {
+        title: "One-Click Execution",
+        meaning: "Advisor reviews the plan from Workflow Automation and clicks \"Execute.\"",
+        points: ["Executes full workflow instantly", "Confirms completion", "Logs activity"],
+        icon: MousePointerClick,
       },
       {
         title: "Direct CRM Execution",
@@ -77,25 +83,13 @@ const coreSystems: CoreSystem[] = [
         points: ["Creates contacts", "Updates activities", "Logs meetings", "Syncs lifecycle changes"],
         icon: Link2,
       },
-      {
-        title: "One-Click Execution",
-        meaning: "Advisor reviews plan and clicks \"Execute.\"",
-        points: ["Executes full workflow instantly", "Confirms completion", "Logs activity"],
-        icon: MousePointerClick,
-      },
-      {
-        title: "Intent-Triggered Workflows",
-        meaning: "Certain phrases automatically trigger predefined actions.",
-        points: ["\"Schedule review\" → opens calendar flow", "\"Send retirement guide\" → email + attachment", "Fully automated if enabled"],
-        icon: MessageSquare,
-      },
     ],
   },
   {
     number: "03",
     title: "Compliance & Governance Engine",
-    subtitle: "Language Screening + Approval Routing + Audit Trail",
-    positioning: "Risk Layer",
+    subtitle: "Language Screening + Policy Mapping + Audit Trail",
+    positioning: "Risk Layer - All communications must pass through this system",
     icon: Shield,
     gradient: "from-emerald-500/10 to-teal-500/10",
     borderColor: "border-l-emerald-500",
@@ -108,15 +102,9 @@ const coreSystems: CoreSystem[] = [
       },
       {
         title: "Policy Mapping",
-        meaning: "Aligns communication with firm-level compliance rules.",
-        points: ["Applies internal policies", "Adjusts messaging to meet regulatory standards"],
+        meaning: "RAG-powered alignment with firm-level compliance rules.",
+        points: ["Applies internal policies", "Queries compliance documents", "Adjusts messaging to meet regulatory standards"],
         icon: FileCheck,
-      },
-      {
-        title: "Approval Workflows",
-        meaning: "High-risk messages require review before sending.",
-        points: ["Routes message to compliance officer", "Tracks approval status", "Blocks send until approved"],
-        icon: CheckCircle,
       },
       {
         title: "Audit Logs & Archiving",
@@ -130,21 +118,21 @@ const coreSystems: CoreSystem[] = [
     number: "04",
     title: "Growth & Trust Engine",
     subtitle: "InstantFollow + TrustBuilder + Brand Studio + Proactive AI",
-    positioning: "Revenue Layer",
+    positioning: "Revenue Layer - Client-facing features for Financial Professionals",
     icon: TrendingUp,
     gradient: "from-violet-500/10 to-purple-500/10",
     borderColor: "border-l-violet-500",
     features: [
       {
         title: "AI InstantFollow",
-        meaning: "Generates personalized follow-ups instantly.",
-        points: ["Drafts client-ready email", "Adjusts tone based on sentiment", "References past context"],
+        meaning: "Generates personalized follow-ups instantly. Advisors can share this capability with clients.",
+        points: ["Drafts client-ready email (via Workflow Automation)", "Adjusts tone based on sentiment (via Sentiment Detection)", "References past context (via Memory Layer)"],
         icon: Mail,
       },
       {
         title: "TrustBuilder",
         meaning: "Enhances communication with credibility.",
-        points: ["Adds relevant insights", "Suggests educational material", "Strengthens advisor authority"],
+        points: ["Adds market insights based on current affairs", "Suggests educational material using Voice-to-Action detected needs", "Strengthens advisor authority"],
         icon: Award,
       },
       {

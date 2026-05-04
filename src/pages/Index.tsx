@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import ProductSuite from "@/components/ProductSuite";
 import Problem from "@/components/Problem";
 import EmailComparison from "@/components/EmailComparison";
 import WhatItDoes from "@/components/WhatItDoes";
@@ -32,6 +33,9 @@ const Index = () => {
     <main className="min-h-screen">
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero />
+      <section id="product">
+        <ProductSuite />
+      </section>
       <Problem />
       <EmailComparison />
       <WhatItDoes />
