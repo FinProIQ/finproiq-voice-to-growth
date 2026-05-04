@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ClipboardList } from "lucide-react";
 
-const DEMO_URL = "https://advisorflow.replit.app/";
+const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
 
 const FinalCTA = () => {
   const handleSeeItClick = () => {
     if (window.gtag) {
       window.gtag('event', 'cta_click', {
         event_category: 'engagement',
-        event_label: 'Final CTA See It'
+        event_label: 'Final CTA How It Works'
       });
     }
     window.open(DEMO_URL, '_blank');
@@ -49,7 +49,7 @@ const FinalCTA = () => {
               onClick={handleSeeItClick}
               className="text-lg px-10 py-5 h-auto rounded-xl bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
             >
-              See It In Action
+              How It Works
             </Button>
             <Button 
               variant="outline"
