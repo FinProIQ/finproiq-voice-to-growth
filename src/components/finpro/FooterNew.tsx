@@ -17,13 +17,12 @@ const FooterNew = () => {
             <Link to="/privacy" className="hover:opacity-70 transition-opacity">Privacy</Link>
             <Link to="/terms" className="hover:opacity-70 transition-opacity">Terms</Link>
             <a href="mailto:FinProIQ@gmail.com" className="hover:opacity-70 transition-opacity">Data Handling</a>
-            <a href="#" className="hover:opacity-70 transition-opacity">Status</a>
           </nav>
 
           <nav className="flex flex-col gap-2 text-sm">
             <p className="text-xs uppercase tracking-wider opacity-60 mb-1">Contact</p>
             <a href="mailto:FinProIQ@gmail.com" className="hover:opacity-70 transition-opacity">FinProIQ@gmail.com</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">Twitter / X</a>
+            <a href="https://twitter.com/FinProIQ" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">Twitter / X</a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
           </nav>
         </div>
