@@ -23,7 +23,7 @@ const FooterNew = () => {
             <p className="text-xs uppercase tracking-wider opacity-60 mb-1">Contact</p>
             <a href="mailto:FinProIQ@gmail.com" className="hover:opacity-70 transition-opacity">FinProIQ@gmail.com</a>
             <a href="https://twitter.com/FinProIQ" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">Twitter / X</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
+            <a href="https://www.linkedin.com/company/115744076/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
           </nav>
         </div>
 
