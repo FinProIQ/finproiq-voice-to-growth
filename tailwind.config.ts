@@ -50,6 +50,11 @@ export default {
           foreground: "hsl(var(--accent-warm-foreground))",
           hover: "hsl(var(--accent-warm-hover))",
         },
+        electric: {
+          DEFAULT: "hsl(var(--electric))",
+          foreground: "hsl(var(--electric-foreground))",
+          hover: "hsl(var(--electric-hover))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
