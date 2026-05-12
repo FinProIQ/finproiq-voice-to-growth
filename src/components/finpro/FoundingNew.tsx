@@ -34,14 +34,19 @@ const FoundingNew = ({ onJoinWaitlist }: Props) => {
             { name: "Automation Layer", standard: "$199/mo", founder: "$199/mo" },
             { name: "AI Visibility Engine", standard: "$399/mo", founder: "$299/mo" },
             { name: "Bundle", standard: "$499/mo", founder: "$399/mo" },
-          ].map((p, i) => (
-            <div key={i} className="rounded-xl bg-background/5 border border-background/15 p-5">
-              <div className="text-sm uppercase tracking-wider opacity-75 mb-2">{p.name}</div>
-              <div className="text-xs opacity-70">Standard <span className="line-through">{p.standard}</span></div>
-              <div className="text-2xl font-bold mt-1">{p.founder}</div>
-              <div className="text-xs opacity-75">Founder rate</div>
-            </div>
-          ))}
+          ].map((p, i) => {
+            const same = p.standard === p.founder;
+            return (
+              <div key={i} className="rounded-xl bg-background/5 border border-background/15 p-5">
+                <div className="text-sm uppercase tracking-wider opacity-75 mb-2">{p.name}</div>
+                <div className="text-xs opacity-70">
+                  Standard {same ? <span>{p.standard}</span> : <span className="line-through">{p.standard}</span>}
+                </div>
+                <div className="text-2xl font-bold mt-1">{p.founder}</div>
+                <div className="text-xs opacity-75">{same ? "Same for founders" : "Founder rate"}</div>
+              </div>
+            );
+          })}
         </div>
 
         <Button
