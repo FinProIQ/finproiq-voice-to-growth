@@ -35,14 +35,19 @@ const FoundingNew = ({ onJoinWaitlist }: Props) => {
           ].map((p, i) => {
             const same = p.standard === p.founder;
             return (
-              <div key={i} className="rounded-xl bg-background/5 border border-background/15 p-5">
+              <motion.div
+                key={i}
+                whileHover={{ y: -6, scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="rounded-xl bg-background/5 border border-background/15 p-5 hover:bg-background/10 hover:border-background/30 hover:shadow-lg cursor-default"
+              >
                 <div className="text-sm uppercase tracking-wider opacity-75 mb-2">{p.name}</div>
                 <div className="text-xs opacity-70">
                   Standard {same ? <span>{p.standard}</span> : <span className="line-through">{p.standard}</span>}
                 </div>
                 <div className="text-2xl font-bold mt-1">{p.founder}</div>
                 <div className="text-xs opacity-75">{same ? "Same for founders" : "Founder rate"}</div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
