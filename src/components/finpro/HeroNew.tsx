@@ -18,14 +18,14 @@ const HeroNew = () => {
           className="text-center"
         >
           <span className="inline-block px-3 py-1 mb-6 text-xs font-semibold tracking-wide uppercase rounded-full bg-secondary text-foreground/70">
-            AI infrastructure for advice-only RIAs
+            AI infrastructure for Financial Advisors
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.05] tracking-tight text-foreground mb-6">
             Your expertise is invisible.{" "}
             <span className="text-electric">We make it visible.</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-10">
-            FinProIQ is the AI infrastructure for advice-only advisors. Automation
+            FinProIQ is the AI infrastructure for Financial Advisors. Automation
             that gives you hours back. AI that turns your client work into the brand
             prospects actually find.
           </p>

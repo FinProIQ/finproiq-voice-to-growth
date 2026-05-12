@@ -19,7 +19,7 @@ const WhyNew = () => {
           className="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-center mb-14 text-foreground"
         >
           Built for the way{" "}
-          <span className="text-electric">advice-only RIAs</span> actually work.
+          <span className="text-electric">Financial Advisors</span> actually work.
         </motion.h2>
         <div className="grid sm:grid-cols-2 gap-5">
           {tiles.map((t, i) => (
