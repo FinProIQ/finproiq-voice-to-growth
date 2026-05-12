@@ -109,7 +109,7 @@ const DataHandling = () => {
 
               <Section title="Cancellation, deletion, and export">
                 <p>
-                  You can request a full export of your data at any time by emailing hello@finproiq.com.
+                  You can request a full export of your data at any time by emailing FinProIQ@gmail.com.
                   We will deliver the export within 7 business days.
                 </p>
                 <p>
@@ -123,7 +123,7 @@ const DataHandling = () => {
                   FinProIQ does not currently hold SOC 2, ISO 27001, or HIPAA certification. We follow
                   industry-standard practices for data handling and intend to pursue SOC 2 Type 1 as we
                   scale. Customers requiring formal certification or due-diligence questionnaires can
-                  email hello@finproiq.com - we maintain a current security overview and can complete
+                  email FinProIQ@gmail.com - we maintain a current security overview and can complete
                   most standard assessments.
                 </p>
               </Section>
@@ -139,7 +139,7 @@ const DataHandling = () => {
               </Section>
 
               <Section title="Questions, concerns, or incidents">
-                <p>Email hello@finproiq.com. We respond within one business day.</p>
+                <p>Email FinProIQ@gmail.com. We respond within one business day.</p>
                 <p>
                   If you believe a data incident has affected your account, please mark the email subject
                   "Security." We will respond the same business day and follow up with a written summary
