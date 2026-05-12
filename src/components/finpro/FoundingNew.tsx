@@ -23,10 +23,8 @@ const FoundingNew = ({ onJoinWaitlist }: Props) => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-base md:text-lg leading-relaxed opacity-90 mb-10 max-w-2xl mx-auto"
         >
-          Standard pricing post-launch: $399/mo for AI Visibility Engine, $199/mo for
-          Automation Layer, $499/mo for the bundle. Founding members lock in $299/mo
-          for the AI product, $199/mo for automation, $399/mo for the bundle - forever.
-          Your feedback shapes v1. We sign a written founding member agreement.
+          Founding members lock in discounted rates forever. Your feedback shapes v1,
+          backed by a written founding member agreement.
         </motion.p>
 
         <div className="grid sm:grid-cols-3 gap-4 mb-10 text-left">
