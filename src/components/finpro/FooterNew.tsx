@@ -16,7 +16,7 @@ const FooterNew = () => {
             <p className="text-xs uppercase tracking-wider opacity-60 mb-1">Company</p>
             <Link to="/privacy" className="hover:opacity-70 transition-opacity">Privacy</Link>
             <Link to="/terms" className="hover:opacity-70 transition-opacity">Terms</Link>
-            <a href="mailto:FinProIQ@gmail.com" className="hover:opacity-70 transition-opacity">Data Handling</a>
+            <Link to="/data-handling" className="hover:opacity-70 transition-opacity">Data Handling</Link>
           </nav>
 
           <nav className="flex flex-col gap-2 text-sm">
