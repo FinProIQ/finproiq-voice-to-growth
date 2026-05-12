@@ -8,7 +8,7 @@ const FooterNew = () => {
           <div>
             <p className="text-2xl font-bold font-display mb-2">FinProIQ</p>
             <p className="text-sm opacity-70 max-w-xs">
-              AI infrastructure for advice-only financial advisors.
+              AI infrastructure for Financial Advisors.
             </p>
           </div>
 
