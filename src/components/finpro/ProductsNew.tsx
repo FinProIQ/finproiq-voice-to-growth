@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-const CALENDLY = "https://calendly.com/raman-sivasankar";
+const CALENDLY = "https://calendly.com/finproiq/introductory-30-minute-call";
 
 interface Props {
   onJoinWaitlist: () => void;
