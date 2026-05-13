@@ -34,7 +34,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
         event_label: 'Nav Schedule Demo'
       });
     }
-    window.open('https://www.calendly.com/raman-sivasankar', '_blank');
+    window.open('https://calendly.com/finproiq/introductory-30-minute-call', '_blank');
     setIsMenuOpen(false);
   };
 

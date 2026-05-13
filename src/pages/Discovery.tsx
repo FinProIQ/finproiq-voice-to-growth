@@ -250,7 +250,7 @@ const sections = [
   { id: 8, title: "Vision", icon: Target },
 ];
 
-const CALENDLY_URL = "https://calendly.com/raman-sivasankar/introductory-15-minute-call";
+const CALENDLY_URL = "https://calendly.com/finproiq/introductory-30-minute-call";
 
 const Discovery = () => {
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});

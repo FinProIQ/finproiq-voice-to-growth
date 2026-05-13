@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-const CALENDLY = "https://calendly.com/raman-sivasankar";
+const CALENDLY = "https://calendly.com/finproiq/introductory-30-minute-call";
 
 const HeroNew = () => {
   const onBook = () => {
