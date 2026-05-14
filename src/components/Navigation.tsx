@@ -55,7 +55,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection('product')}
+              onClick={() => scrollToSection('core-systems')}
               className="text-foreground hover:text-accent transition-colors"
             >
               Products
@@ -101,7 +101,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-4 animate-fade-in">
             <button
-              onClick={() => scrollToSection('product')}
+              onClick={() => scrollToSection('core-systems')}
               className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
             >
               Products
