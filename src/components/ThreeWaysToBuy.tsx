@@ -42,7 +42,7 @@ const ThreeWaysToBuy = () => {
       });
     }
     if (target === "calendly") {
-      window.open('https://www.calendly.com/raman-sivasankar', '_blank');
+      window.open('https://calendly.com/finproiq', '_blank');
       return;
     }
     const el = document.getElementById(target);
