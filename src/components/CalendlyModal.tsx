@@ -36,7 +36,7 @@ const CalendlyModal = ({ isOpen, onClose }: CalendlyModalProps) => {
         </DialogHeader>
         <div 
           className="calendly-inline-widget w-full h-[600px]" 
-          data-url="https://calendly.com/finproiq/introductory-30-minute-call?hide_gdpr_banner=1&background_color=ffffff&text_color=1a2332&primary_color=40b5ad"
+          data-url="https://calendly.com/raman-sivasankar/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1a2332&primary_color=40b5ad"
         />
       </DialogContent>
     </Dialog>

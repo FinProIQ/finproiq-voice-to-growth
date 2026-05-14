@@ -1,13 +1,19 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
-import HeroNew from "@/components/finpro/HeroNew";
-import ProblemNew from "@/components/finpro/ProblemNew";
-import ProductsNew from "@/components/finpro/ProductsNew";
-import HowItWorksNew from "@/components/finpro/HowItWorksNew";
-import WhyNew from "@/components/finpro/WhyNew";
-import FoundingNew from "@/components/finpro/FoundingNew";
-import FAQNew from "@/components/finpro/FAQNew";
-import FooterNew from "@/components/finpro/FooterNew";
+import Hero from "@/components/Hero";
+import ProductSuite from "@/components/ProductSuite";
+import Problem from "@/components/Problem";
+import EmailComparison from "@/components/EmailComparison";
+import WhatItDoes from "@/components/WhatItDoes";
+import WhyItWorks from "@/components/WhyItWorks";
+import HowItWorks from "@/components/HowItWorks";
+import Outcome from "@/components/Outcome";
+import LiveDemoCTA from "@/components/LiveDemoCTA";
+import Pricing from "@/components/Pricing";
+import Trust from "@/components/Trust";
+import Testimonials from "@/components/Testimonials";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
 import WaitlistModal from "@/components/WaitlistModal";
 
 const Index = () => {
@@ -26,14 +32,24 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Navigation onOpenCalendly={handleOpenWaitlist} />
-      <HeroNew />
-      <ProblemNew />
-      <ProductsNew onJoinWaitlist={handleOpenWaitlist} />
-      <HowItWorksNew />
-      <WhyNew />
-      <FoundingNew onJoinWaitlist={handleOpenWaitlist} />
-      <FAQNew />
-      <FooterNew />
+      <Hero />
+      <Problem />
+      <EmailComparison />
+      <WhatItDoes />
+      <WhyItWorks />
+      <HowItWorks />
+      <Outcome />
+      <LiveDemoCTA />
+      <section id="product">
+        <ProductSuite />
+      </section>
+      <Pricing />
+      <Trust />
+      <section id="testimonials">
+        <Testimonials />
+      </section>
+      <FinalCTA />
+      <Footer />
       <WaitlistModal 
         isOpen={isWaitlistOpen} 
         onClose={() => setIsWaitlistOpen(false)} 

@@ -8,7 +8,6 @@ import FAQ from "./pages/FAQ";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Discovery from "./pages/Discovery";
-import DataHandling from "./pages/DataHandling";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -26,7 +25,6 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/data-handling" element={<DataHandling />} />
           <Route path="/discovery" element={<Discovery />} />
           <Route path="/survey" element={<Navigate to="/discovery" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

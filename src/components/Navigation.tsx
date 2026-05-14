@@ -34,7 +34,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
         event_label: 'Nav Schedule Demo'
       });
     }
-    window.open('https://calendly.com/finproiq/introductory-30-minute-call', '_blank');
+    window.open('https://www.calendly.com/raman-sivasankar', '_blank');
     setIsMenuOpen(false);
   };
 
@@ -55,7 +55,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection('products')}
+              onClick={() => scrollToSection('product')}
               className="text-foreground hover:text-accent transition-colors"
             >
               Products
@@ -73,10 +73,10 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               Pricing
             </button>
             <button
-              onClick={() => scrollToSection('faq')}
+              onClick={() => scrollToSection('testimonials')}
               className="text-foreground hover:text-accent transition-colors"
             >
-              FAQ
+              Testimonials
             </button>
             <Button 
               variant="default" 
@@ -84,7 +84,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={handleCTAClick}
               className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
             >
-              Book a call
+              Schedule a Demo
             </Button>
           </div>
 
@@ -101,7 +101,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-4 animate-fade-in">
             <button
-              onClick={() => scrollToSection('products')}
+              onClick={() => scrollToSection('product')}
               className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
             >
               Products
@@ -119,10 +119,10 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               Pricing
             </button>
             <button
-              onClick={() => scrollToSection('faq')}
+              onClick={() => scrollToSection('testimonials')}
               className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
             >
-              FAQ
+              Testimonials
             </button>
             <Button 
               variant="default" 
@@ -130,7 +130,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={handleCTAClick} 
               className="w-full bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
             >
-              Book a call
+              Schedule a Demo
             </Button>
           </div>
         )}
