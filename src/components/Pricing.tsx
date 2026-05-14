@@ -201,7 +201,7 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-center text-muted-foreground mt-8 text-lg font-medium"
           >
-            Try it free for 14 days. No credit card required.
+            Try it free for 14 days. Full refund if not happy.
           </motion.p>
         </div>
 
