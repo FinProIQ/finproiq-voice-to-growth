@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, Zap, Shield, TrendingUp, ChevronDown, ChevronUp, Mic, Heart, Target, Database, Workflow, MousePointerClick, Link2, ScanSearch, FileCheck, Archive, BarChart3, Mail, Award, Bell } from "lucide-react";
+import { Brain, Zap, Shield, TrendingUp, ChevronDown, ChevronUp, Mic, Heart, Target, Database, Workflow, MousePointerClick, Link2, ScanSearch, FileCheck, Archive, BarChart3, Mail, Award, Bell, CalendarCheck, UserPlus, CreditCard, Clock } from "lucide-react";
 
 interface SubFeature {
   title: string;
@@ -23,6 +23,41 @@ interface CoreSystem {
 const coreSystems: CoreSystem[] = [
   {
     number: "01",
+    title: "Scheduler-to-CRM Provisioning",
+    subtitle: "Calendly + Wealthbox + AdvicePay + RightCapital + Clockify",
+    positioning: "Onboarding Layer - The plumbing before the meeting",
+    icon: CalendarCheck,
+    gradient: "from-sky-500/10 to-cyan-500/10",
+    borderColor: "border-l-sky-500",
+    features: [
+      {
+        title: "Calendly to Wealthbox",
+        meaning: "A booked meeting becomes a CRM contact and activity in seconds.",
+        points: ["Creates contact in Wealthbox", "Logs meeting activity", "Syncs reschedules and cancellations", "Maintains canonical client identity"],
+        icon: UserPlus,
+      },
+      {
+        title: "AdvicePay Provisioning",
+        meaning: "Sets up billing the moment a client is created.",
+        points: ["Creates AdvicePay client", "Links to CRM record", "Ready for first invoice without manual entry"],
+        icon: CreditCard,
+      },
+      {
+        title: "RightCapital Setup",
+        meaning: "Provisions financial planning workspace automatically.",
+        points: ["Creates RightCapital client", "Pre-fills shared identity", "Eliminates duplicate data entry across stack"],
+        icon: Workflow,
+      },
+      {
+        title: "Clockify + Smartria",
+        meaning: "Time tracking and compliance audit trail wired in from day one.",
+        points: ["Clockify project per client", "Smartria audit-trail integration", "Every meeting and minute accounted for"],
+        icon: Clock,
+      },
+    ],
+  },
+  {
+    number: "02",
     title: "Advisor Intelligence Engine",
     subtitle: "Voice + Intent + Sentiment + Memory",
     positioning: "Cognitive Layer",
@@ -57,7 +92,7 @@ const coreSystems: CoreSystem[] = [
     ],
   },
   {
-    number: "02",
+    number: "03",
     title: "Autonomous Execution Engine",
     subtitle: "Workflow Automation + CRM Execution + One-Click Execute",
     positioning: "Execution Layer",
@@ -86,7 +121,7 @@ const coreSystems: CoreSystem[] = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     title: "Compliance & Governance Engine",
     subtitle: "Language Screening + Policy Mapping + Audit Trail",
     positioning: "Risk Layer - All communications must pass through this system",
@@ -115,7 +150,7 @@ const coreSystems: CoreSystem[] = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     title: "Growth & Trust Engine",
     subtitle: "InstantFollow + TrustBuilder + Brand Studio + Proactive AI",
     positioning: "Revenue Layer - Client-facing features for Financial Professionals",
@@ -242,7 +277,7 @@ const ProductSuite = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
-            4 Core Systems
+            5 Core Systems
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Each system works independently and in concert — forming a complete operating layer for your practice.
