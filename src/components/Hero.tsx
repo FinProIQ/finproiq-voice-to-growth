@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Mic, Brain, MessageSquare, UserCheck } from "lucide-react";
+import { CalendarClock, Database, Mic, Send } from "lucide-react";
 
     const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
     const SIGNUP_URL = "https://advisorflow.replit.app/";
 
 const workflowSteps = [
+  { icon: CalendarClock, label: "Scheduler" },
+  { icon: Database, label: "CRM" },
   { icon: Mic, label: "Voice" },
-  { icon: Brain, label: "AI" },
-  { icon: MessageSquare, label: "Message" },
-  { icon: UserCheck, label: "Client" },
+  { icon: Send, label: "Follow-up" },
 ];
 
 const Hero = () => {
@@ -54,8 +54,8 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold font-display mb-6 text-foreground leading-tight"
           >
-            Never lose a client because of a{" "}
-            <span className="text-accent">weak or delayed follow-up.</span>
+            Two friction points.{" "}
+            <span className="text-accent">One Operating System.</span>
           </motion.h1>
 
           <motion.p
@@ -64,7 +64,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed"
           >
-            Turn every client meeting into a personalized, compliant follow-up that actually gets replies - in under 60 seconds.
+            FinProIQ automates the plumbing before your client meetings and handles the brainwork after, so your practice runs without you watching it.
           </motion.p>
 
           {/* Workflow illustration */}
