@@ -2,30 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import VoiceToCrm from "@/components/VoiceToCrm";
 
-const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
-const SIGNUP_URL = "https://advisorflow.replit.app/";
-
 const Hero = () => {
-  const handlePrimaryClick = () => {
-    if (window.gtag) {
-      window.gtag('event', 'cta_click', {
-        event_category: 'engagement',
-        event_label: 'Hero How It Works'
-      });
-    }
-    window.open(DEMO_URL, '_blank');
-  };
-
-  const handleSecondaryClick = () => {
-    if (window.gtag) {
-      window.gtag('event', 'cta_click', {
-        event_category: 'engagement',
-        event_label: 'Hero Try With Last Meeting'
-      });
-    }
-    window.open(SIGNUP_URL, '_blank');
-  };
-
   return (
     <section className="relative flex items-center justify-center overflow-hidden pt-16 bg-background">
       <div className="container relative z-10 px-4 py-10 md:py-16">
@@ -67,29 +44,6 @@ const Hero = () => {
             className="mb-10"
           >
             <VoiceToCrm />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.55 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
-          >
-            <Button
-              size="lg"
-              onClick={handlePrimaryClick}
-              className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
-            >
-              How It Works
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleSecondaryClick}
-              className="text-lg px-8 py-6 h-auto border-accent text-accent hover:bg-accent/10 transition-all"
-            >
-              Try It With Your Last Meeting
-            </Button>
           </motion.div>
 
           <motion.p
