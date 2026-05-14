@@ -97,7 +97,7 @@ const FoundingMembers = () => {
             onClick={handleApply}
             className="text-lg px-8 py-6 h-auto bg-accent hover:bg-accent-hover text-accent-foreground shadow-lg hover:shadow-xl transition-all"
           >
-            Apply to be a founding member
+            Apply to be a Design Partner
           </Button>
         </div>
       </div>
