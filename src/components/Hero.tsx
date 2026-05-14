@@ -54,8 +54,8 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold font-display mb-6 text-foreground leading-tight"
           >
-            Two friction points.{" "}
-            <span className="text-accent">One Operating System.</span>
+            Run your practice on{" "}
+            <span className="text-accent">autopilot.</span>
           </motion.h1>
 
           <motion.p
