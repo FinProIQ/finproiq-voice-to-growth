@@ -206,7 +206,7 @@ const Pricing = () => {
         </div>
 
         {/* Workflow Automation Pricing */}
-        <div>
+        <div id="workflow-automation">
           <motion.h3
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
