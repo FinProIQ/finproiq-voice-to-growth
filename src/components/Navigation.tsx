@@ -73,10 +73,10 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               Pricing
             </button>
             <button
-              onClick={() => scrollToSection('testimonials')}
+              onClick={() => scrollToSection('founding-members')}
               className="text-foreground hover:text-accent transition-colors"
             >
-              Testimonials
+              Founding Members
             </button>
             <Button 
               variant="default" 
@@ -119,10 +119,10 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               Pricing
             </button>
             <button
-              onClick={() => scrollToSection('testimonials')}
+              onClick={() => scrollToSection('founding-members')}
               className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
             >
-              Testimonials
+              Founding Members
             </button>
             <Button 
               variant="default" 

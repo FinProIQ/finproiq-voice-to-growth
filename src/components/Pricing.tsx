@@ -114,7 +114,7 @@ const Pricing = () => {
             transition={{ duration: 0.5 }}
             className="text-2xl md:text-3xl font-bold text-center mb-3 text-accent"
           >
-            Advisor Operating System
+            AI Engine subscription
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -123,7 +123,7 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            If this helps you convert just one additional client, it pays for itself many times over.
+            Choose the tier that fits your practice. Scale as you grow.
           </motion.p>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
@@ -214,7 +214,7 @@ const Pricing = () => {
             transition={{ duration: 0.5 }}
             className="text-2xl md:text-3xl font-bold text-center mb-3 text-accent"
           >
-            Workflow Automation
+            Workflow Automation setup
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -223,7 +223,7 @@ const Pricing = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            One-time setup fees for automated client provisioning from scheduler to CRM.
+            One-time setup fee for automated client provisioning from scheduler to CRM. Buy phase by phase or all three at once.
           </motion.p>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {workflowPhases.map((phase, index) => (
