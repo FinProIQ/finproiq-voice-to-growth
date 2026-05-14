@@ -3,7 +3,6 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import ProductSuite from "@/components/ProductSuite";
 import TwoFrictionPoints from "@/components/TwoFrictionPoints";
-import EmailComparison from "@/components/EmailComparison";
 import WhatItDoes from "@/components/WhatItDoes";
 import WhyItWorks from "@/components/WhyItWorks";
 import PreMeetingFlow from "@/components/PreMeetingFlow";
@@ -35,7 +34,6 @@ const Index = () => {
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero />
       <TwoFrictionPoints />
-      <EmailComparison />
       <PreMeetingFlow />
       <WhatItDoes />
       <WhyItWorks />
