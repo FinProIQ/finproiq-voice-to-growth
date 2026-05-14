@@ -1,17 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { CalendarClock, Database, Mic, Send } from "lucide-react";
 import VoiceToCrm from "@/components/VoiceToCrm";
 
-    const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
-    const SIGNUP_URL = "https://advisorflow.replit.app/";
-
-const workflowSteps = [
-  { icon: CalendarClock, label: "Scheduler" },
-  { icon: Database, label: "CRM" },
-  { icon: Mic, label: "Voice" },
-  { icon: Send, label: "Follow-up" },
-];
+const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
+const SIGNUP_URL = "https://advisorflow.replit.app/";
 
 const Hero = () => {
   const handlePrimaryClick = () => {
@@ -67,28 +59,6 @@ const Hero = () => {
           >
             FinProIQ automates scheduling, CRM updates, follow-ups, and compliance - the work that used to eat your nights and weekends.
           </motion.p>
-
-          {/* Workflow illustration */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mb-10 flex items-center justify-center gap-3 md:gap-6"
-          >
-            {workflowSteps.map((step, i) => (
-              <div key={i} className="flex items-center gap-3 md:gap-6">
-                <div className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <step.icon className="w-5 h-5 md:w-6 md:h-6 text-accent" />
-                  </div>
-                  <span className="text-xs font-medium text-muted-foreground">{step.label}</span>
-                </div>
-                {i < workflowSteps.length - 1 && (
-                  <span className="text-accent font-bold text-lg">→</span>
-                )}
-              </div>
-            ))}
-          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
