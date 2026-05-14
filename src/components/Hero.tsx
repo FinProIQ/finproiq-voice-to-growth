@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { CalendarClock, Database, Mic, Send } from "lucide-react";
+import VoiceToCrm from "@/components/VoiceToCrm";
 
     const DEMO_URL = "https://advisorflow.replit.app/?demo=true";
     const SIGNUP_URL = "https://advisorflow.replit.app/";
@@ -87,6 +88,15 @@ const Hero = () => {
                 )}
               </div>
             ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mb-10"
+          >
+            <VoiceToCrm />
           </motion.div>
 
           <motion.div
