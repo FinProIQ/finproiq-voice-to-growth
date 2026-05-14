@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const EmailComparison = () => {
   return (
-    <section className="py-20 md:py-32 bg-background">
+    <section className="py-12 md:py-20 bg-background">
       <div className="container px-4">
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {/* Before */}

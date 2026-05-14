@@ -14,7 +14,7 @@ interface ModernProfessionalsProps {
 
 const ModernProfessionals = ({ onOpenCalendly }: ModernProfessionalsProps) => {
   return (
-    <section className="py-20 md:py-32 bg-muted">
+    <section className="py-12 md:py-20 bg-muted">
       <div className="container px-4">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
