@@ -10,7 +10,7 @@ const reasons = [
 
 const WhyItWorks = () => {
   return (
-    <section className="py-12 md:py-20 bg-background">
+    <section className="py-12 md:py-20 bg-background border-t border-border">
       <div className="container px-4">
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2
