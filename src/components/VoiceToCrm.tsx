@@ -7,14 +7,41 @@ type Stage = {
   label: string;
   caption: string;
   variant?: "voice";
+  sample: string[];
 };
 
 const stages: Stage[] = [
-  { icon: CalendarCheck, label: "Booking", caption: "Sarah books a call" },
-  { icon: Database, label: "CRM add", caption: "Contact created" },
-  { icon: Mic, label: "Voice note", caption: "Post-meeting recap", variant: "voice" },
-  { icon: Mail, label: "Email / SMS", caption: "Follow-up sent" },
-  { icon: Database, label: "CRM update", caption: "Notes + next steps" },
+  {
+    icon: CalendarCheck,
+    label: "Booking",
+    caption: "Sarah books a call",
+    sample: ["Sarah Chen", "Thu 2:00 PM - Discovery", "Calendly -> Wealthbox"],
+  },
+  {
+    icon: Database,
+    label: "CRM add",
+    caption: "Contact created",
+    sample: ["Contact: Sarah Chen", "Stage: New Lead", "Owner: You"],
+  },
+  {
+    icon: Mic,
+    label: "Voice note",
+    caption: "Post-meeting recap",
+    variant: "voice",
+    sample: ["\"Great fit. Wants Roth", "conversion review next", "week. Send proposal.\""],
+  },
+  {
+    icon: Mail,
+    label: "Email / SMS",
+    caption: "Follow-up sent",
+    sample: ["Hi Sarah - thanks for", "today. Attached the Roth", "outline we discussed."],
+  },
+  {
+    icon: Database,
+    label: "CRM update",
+    caption: "Notes + next steps",
+    sample: ["Note logged", "Task: Send proposal Fri", "Next mtg: in 7 days"],
+  },
 ];
 
 const STEP_MS = 1400;
@@ -96,6 +123,20 @@ const VoiceToCrm = () => {
                 <span className={`hidden md:block text-[10px] leading-tight truncate w-full transition-colors duration-500 ${captionCls}`}>
                   {s.caption}
                 </span>
+                <div
+                  className={`hidden md:block w-full mt-1.5 pt-1.5 border-t border-border/60 text-left transition-opacity duration-500 ${
+                    isPending ? "opacity-40" : "opacity-100"
+                  }`}
+                >
+                  {s.sample.map((line, idx) => (
+                    <p
+                      key={idx}
+                      className="text-[9px] leading-snug font-mono text-muted-foreground truncate"
+                    >
+                      {line}
+                    </p>
+                  ))}
+                </div>
               </motion.div>
 
               {i < stages.length - 1 && (
