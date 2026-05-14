@@ -10,7 +10,7 @@ const features = [
 
 const WhatItDoes = () => {
   return (
-    <section className="py-12 md:py-20 bg-muted/50">
+    <section className="py-12 md:py-20 bg-background border-t border-border">
       <div className="container px-4">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex items-center justify-center mb-6">
