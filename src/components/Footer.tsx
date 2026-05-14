@@ -38,6 +38,9 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-primary-foreground/20 text-center text-sm opacity-70">
           <p>&copy; {new Date().getFullYear()} FinProIQ. All rights reserved.</p>
+          <p className="mt-3 text-xs opacity-80 max-w-3xl mx-auto leading-relaxed">
+            FinProIQ is a software vendor. Not registered as an investment adviser. Marketing Rule compliance is the responsibility of the publishing advisor.
+          </p>
         </div>
       </div>
     </footer>

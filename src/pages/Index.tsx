@@ -2,16 +2,17 @@ import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import ProductSuite from "@/components/ProductSuite";
-import Problem from "@/components/Problem";
+import TwoFrictionPoints from "@/components/TwoFrictionPoints";
 import EmailComparison from "@/components/EmailComparison";
 import WhatItDoes from "@/components/WhatItDoes";
 import WhyItWorks from "@/components/WhyItWorks";
-import HowItWorks from "@/components/HowItWorks";
+import PreMeetingFlow from "@/components/PreMeetingFlow";
 import Outcome from "@/components/Outcome";
 import LiveDemoCTA from "@/components/LiveDemoCTA";
+import ThreeWaysToBuy from "@/components/ThreeWaysToBuy";
 import Pricing from "@/components/Pricing";
 import Trust from "@/components/Trust";
-import Testimonials from "@/components/Testimonials";
+import FoundingMembers from "@/components/FoundingMembers";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import WaitlistModal from "@/components/WaitlistModal";
@@ -33,21 +34,18 @@ const Index = () => {
     <main className="min-h-screen">
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero />
-      <Problem />
+      <TwoFrictionPoints />
       <EmailComparison />
       <WhatItDoes />
       <WhyItWorks />
-      <HowItWorks />
+      <PreMeetingFlow />
+      <ProductSuite />
       <Outcome />
       <LiveDemoCTA />
-      <section id="product">
-        <ProductSuite />
-      </section>
+      <ThreeWaysToBuy />
       <Pricing />
       <Trust />
-      <section id="testimonials">
-        <Testimonials />
-      </section>
+      <FoundingMembers />
       <FinalCTA />
       <Footer />
       <WaitlistModal 
