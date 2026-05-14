@@ -54,8 +54,8 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold font-display mb-6 text-foreground leading-tight"
           >
-            Run your practice on{" "}
-            <span className="text-accent">autopilot.</span>
+            Get 10 hours back{" "}
+            <span className="text-accent">every week.</span>
           </motion.h1>
 
           <motion.p
@@ -64,7 +64,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed"
           >
-            FinProIQ automates the plumbing before your client meetings and handles the brainwork after, so your practice runs without you watching it.
+            FinProIQ automates scheduling, CRM updates, follow-ups, and compliance - the work that used to eat your nights and weekends.
           </motion.p>
 
           {/* Workflow illustration */}
