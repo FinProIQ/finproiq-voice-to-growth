@@ -39,7 +39,7 @@ const FoundingMembers = () => {
         event_label: 'Founding Member Apply',
       });
     }
-    window.open('https://www.calendly.com/raman-sivasankar', '_blank');
+    window.open('https://calendly.com/finproiq', '_blank');
   };
 
   return (

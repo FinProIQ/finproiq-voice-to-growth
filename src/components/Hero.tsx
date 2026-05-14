@@ -34,8 +34,8 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-background">
-      <div className="container relative z-10 px-4 py-20 md:py-32">
+    <section className="relative flex items-center justify-center overflow-hidden pt-16 bg-background">
+      <div className="container relative z-10 px-4 py-10 md:py-16">
         <div className="max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
