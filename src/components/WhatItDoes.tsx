@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageSquare, Database, ListChecks, Shield } from "lucide-react";
+import { MessageSquare, Database, ListChecks, Shield, Mic } from "lucide-react";
 
 const features = [
   { icon: MessageSquare, text: "Generates follow-ups that feel personal and get replies" },
@@ -13,6 +13,11 @@ const WhatItDoes = () => {
     <section className="py-20 md:py-32 bg-muted/50">
       <div className="container px-4">
         <div className="max-w-3xl mx-auto text-center">
+          <div className="flex items-center justify-center mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-bold uppercase tracking-wider">
+              <Mic className="w-4 h-4" /> After the meeting
+            </span>
+          </div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
