@@ -10,7 +10,7 @@ const cards = [
     body: "Pre-built integrations across the XYPN tech stack. Calendly to Wealthbox, AdvicePay, RightCapital, Clockify. We set it up. You stop maintaining Zaps.",
     price: "From $500 to $750 per phase, one-time",
     cta: "See workflow phases",
-    target: "pricing",
+    target: "workflow-automation",
   },
   {
     badge: "Monthly subscription",
