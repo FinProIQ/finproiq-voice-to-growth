@@ -106,16 +106,6 @@ const PreMeetingFlow = () => {
           ))}
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center text-lg font-semibold text-accent mb-16"
-        >
-          From booking to fully provisioned client in seconds.
-        </motion.p>
-
         <div className="max-w-6xl mx-auto">
           <h3 className="text-xl md:text-2xl font-bold text-center text-foreground mb-8">
             Rolled out in three phases
