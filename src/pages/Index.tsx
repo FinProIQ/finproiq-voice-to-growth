@@ -36,9 +36,9 @@ const Index = () => {
       <Hero />
       <TwoFrictionPoints />
       <EmailComparison />
+      <PreMeetingFlow />
       <WhatItDoes />
       <WhyItWorks />
-      <PreMeetingFlow />
       <ProductSuite />
       <Outcome />
       <LiveDemoCTA />
