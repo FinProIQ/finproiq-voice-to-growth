@@ -76,7 +76,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={() => scrollToSection('founding-members')}
               className="text-foreground hover:text-accent transition-colors"
             >
-              Founding Members
+              Limited Early Access
             </button>
             <Button 
               variant="default" 
@@ -122,7 +122,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               onClick={() => scrollToSection('founding-members')}
               className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
             >
-              Founding Members
+              Limited Early Access
             </button>
             <Button 
               variant="default" 
