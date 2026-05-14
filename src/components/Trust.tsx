@@ -9,7 +9,7 @@ const trustPoints = [
 
 const Trust = () => {
   return (
-    <section className="py-10 md:py-16 bg-muted/50">
+    <section className="py-10 md:py-16 bg-background">
       <div className="container px-4">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-16 max-w-4xl mx-auto">
           {trustPoints.map((point, i) => (

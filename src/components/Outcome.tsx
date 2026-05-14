@@ -19,7 +19,7 @@ const afterPoints = [
 
 const Outcome = () => {
   return (
-    <section className="py-14 md:py-20 bg-muted/50">
+    <section className="py-14 md:py-20 bg-background">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
