@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CalendarCheck, Zap, FileText, UserCheck } from "lucide-react";
+import { CalendarCheck, Zap, FileText, UserCheck, ArrowRight } from "lucide-react";
 
 const steps = [
   {
@@ -46,6 +46,30 @@ const PreMeetingFlow = () => {
   return (
     <section id="how-it-works" className="py-20 md:py-32 bg-background">
       <div className="container px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 max-w-3xl mx-auto"
+        >
+          <span className="inline-block text-xs font-bold tracking-wider uppercase text-accent mb-3">
+            How it works
+          </span>
+          <h2 className="text-4xl md:text-6xl font-bold font-display text-foreground">
+            From first booking to final follow-up.
+          </h2>
+          <p className="text-lg text-muted-foreground mt-4">
+            Two phases. One Operating System.
+          </p>
+        </motion.div>
+
+        <div className="flex items-center justify-center gap-3 mb-10">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-bold uppercase tracking-wider">
+            <CalendarCheck className="w-4 h-4" /> Before the meeting
+          </span>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
