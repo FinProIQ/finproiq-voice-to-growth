@@ -267,7 +267,7 @@ const SystemCard = ({ system, index }: { system: CoreSystem; index: number }) =>
 
 const ProductSuite = () => {
   return (
-    <section id="core-systems" className="py-20 md:py-32 bg-gradient-feature">
+    <section id="core-systems" className="py-12 md:py-20 bg-gradient-feature">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

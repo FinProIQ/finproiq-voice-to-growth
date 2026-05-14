@@ -31,7 +31,7 @@ const agents = [
 
 const Features = () => {
   return (
-    <section id="how-it-works" className="py-20 md:py-32 bg-accent/5">
+    <section id="how-it-works" className="py-12 md:py-20 bg-accent/5">
       <div className="container px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">

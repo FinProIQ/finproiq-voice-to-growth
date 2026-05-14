@@ -16,7 +16,7 @@ const LiveDemoCTA = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-muted/50">
+    <section className="py-12 md:py-18 bg-muted/50">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

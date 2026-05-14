@@ -10,7 +10,7 @@ const painPoints = [
 
 const Problem = () => {
   return (
-    <section className="py-20 md:py-32 bg-muted/50">
+    <section className="py-12 md:py-20 bg-muted/50">
       <div className="container px-4">
         <div className="max-w-3xl mx-auto text-center">
           <motion.h2

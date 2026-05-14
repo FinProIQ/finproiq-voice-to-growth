@@ -53,7 +53,7 @@ const ThreeWaysToBuy = () => {
   };
 
   return (
-    <section id="product" className="py-20 md:py-32 bg-muted/50">
+    <section id="product" className="py-12 md:py-20 bg-muted/50">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

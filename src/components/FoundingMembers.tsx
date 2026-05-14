@@ -43,7 +43,7 @@ const FoundingMembers = () => {
   };
 
   return (
-    <section id="founding-members" className="py-20 md:py-32 bg-accent/5">
+    <section id="founding-members" className="py-12 md:py-20 bg-accent/5">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
