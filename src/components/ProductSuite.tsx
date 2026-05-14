@@ -232,7 +232,7 @@ const SystemCard = ({ system, index }: { system: CoreSystem; index: number }) =>
 
 const ProductSuite = () => {
   return (
-    <section className="py-20 md:py-32 bg-gradient-feature">
+    <section id="core-systems" className="py-20 md:py-32 bg-gradient-feature">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
