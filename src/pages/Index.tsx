@@ -34,7 +34,6 @@ const Index = () => {
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero />
       <TwoFrictionPoints />
-      <EmailComparison />
       <PreMeetingFlow />
       <WhatItDoes />
       <WhyItWorks />
