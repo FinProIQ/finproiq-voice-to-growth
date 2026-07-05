@@ -63,7 +63,7 @@ const TwoFrictionPoints = () => {
           <Column data={before} delay={0} />
           <Column data={after} delay={0.1} />
         </div>
-
+      </div>
     </section>
   );
 };
