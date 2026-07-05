@@ -64,16 +64,6 @@ const TwoFrictionPoints = () => {
           <Column data={after} delay={0.1} />
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center text-lg text-muted-foreground mt-10 max-w-3xl mx-auto"
-        >
-          Not because you are bad at what you do. Because there is no system built for either moment.
-        </motion.p>
-      </div>
     </section>
   );
 };
