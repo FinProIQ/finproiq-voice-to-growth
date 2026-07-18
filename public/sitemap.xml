@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://finproiq-voice-to-growth.lovable.app/</loc>
+    <loc>https://finproiq.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://finproiq-voice-to-growth.lovable.app/faq</loc>
+    <loc>https://finproiq.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://finproiq-voice-to-growth.lovable.app/privacy</loc>
+    <loc>https://finproiq.com/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://finproiq-voice-to-growth.lovable.app/terms</loc>
+    <loc>https://finproiq.com/terms</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://finproiq-voice-to-growth.lovable.app/discovery</loc>
+    <loc>https://finproiq.com/discovery</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
