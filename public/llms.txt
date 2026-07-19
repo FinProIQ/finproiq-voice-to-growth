@@ -1,0 +1,21 @@
+# FinProIQ
+
+> Autonomous Advisor Operating System - AI-powered execution and growth infrastructure for financial advisors. FinProIQ automates scheduling, CRM updates, follow-ups, and compliance so advisors get 10 hours back every week.
+
+## Core Pages
+
+- [Home](https://finproiq.com/): Product overview, how it works, and pricing
+- [FAQ](https://finproiq.com/faq): Frequently asked questions about FinProIQ
+- [Discovery](https://finproiq.com/discovery): Workflow discovery questionnaire for advisors
+- [Privacy Policy](https://finproiq.com/privacy): How we handle data and privacy
+- [Terms of Service](https://finproiq.com/terms): Terms governing use of FinProIQ
+
+## Product
+
+- 5 Core Systems: Scheduler-to-CRM Provisioning, Intelligence Engine, Autonomous Execution, Compliance & Governance, Growth & Trust
+- Pricing: Starter $79/mo, Professional $199/mo, Growth $399/mo
+- Contact: [Schedule a Demo](https://calendly.com/finproiq)
+
+## Resources
+
+- [Sitemap](https://finproiq.com/sitemap.xml)

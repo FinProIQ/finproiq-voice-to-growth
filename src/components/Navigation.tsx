@@ -49,7 +49,7 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
               className="hover:opacity-80 transition-opacity"
               aria-label="FinProIQ home"
             >
-              <img src="/finproiq-lockup.svg" alt="FinProIQ" className="h-8 w-auto" />
+              <img src="/finproiq-lockup.svg" alt="FinProIQ" width="140" height="32" className="h-8 w-auto" />
             </button>
           </div>
 
@@ -93,6 +93,8 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
           <button
             className="md:hidden text-foreground"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
