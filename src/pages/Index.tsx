@@ -1,21 +1,22 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import ProductSuite from "@/components/ProductSuite";
-import TwoFrictionPoints from "@/components/TwoFrictionPoints";
-import WhatItDoes from "@/components/WhatItDoes";
-import WhyItWorks from "@/components/WhyItWorks";
-import PreMeetingFlow from "@/components/PreMeetingFlow";
-import Outcome from "@/components/Outcome";
-import LiveDemoCTA from "@/components/LiveDemoCTA";
-import ThreeWaysToBuy from "@/components/ThreeWaysToBuy";
-import Pricing from "@/components/Pricing";
-import Trust from "@/components/Trust";
-import FoundingMembers from "@/components/FoundingMembers";
-import FinalCTA from "@/components/FinalCTA";
-import Footer from "@/components/Footer";
 import WaitlistModal from "@/components/WaitlistModal";
+
+const ProductSuite = lazy(() => import("@/components/ProductSuite"));
+const TwoFrictionPoints = lazy(() => import("@/components/TwoFrictionPoints"));
+const WhatItDoes = lazy(() => import("@/components/WhatItDoes"));
+const WhyItWorks = lazy(() => import("@/components/WhyItWorks"));
+const PreMeetingFlow = lazy(() => import("@/components/PreMeetingFlow"));
+const Outcome = lazy(() => import("@/components/Outcome"));
+const LiveDemoCTA = lazy(() => import("@/components/LiveDemoCTA"));
+const ThreeWaysToBuy = lazy(() => import("@/components/ThreeWaysToBuy"));
+const Pricing = lazy(() => import("@/components/Pricing"));
+const Trust = lazy(() => import("@/components/Trust"));
+const FoundingMembers = lazy(() => import("@/components/FoundingMembers"));
+const FinalCTA = lazy(() => import("@/components/FinalCTA"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
@@ -41,19 +42,21 @@ const Index = () => {
       </Helmet>
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero />
-      <TwoFrictionPoints />
-      <PreMeetingFlow />
-      <WhatItDoes />
-      <WhyItWorks />
-      <ProductSuite />
-      <Outcome />
-      <LiveDemoCTA />
-      <ThreeWaysToBuy />
-      <Pricing />
-      <Trust />
-      <FoundingMembers />
-      <FinalCTA />
-      <Footer />
+      <Suspense fallback={null}>
+        <TwoFrictionPoints />
+        <PreMeetingFlow />
+        <WhatItDoes />
+        <WhyItWorks />
+        <ProductSuite />
+        <Outcome />
+        <LiveDemoCTA />
+        <ThreeWaysToBuy />
+        <Pricing />
+        <Trust />
+        <FoundingMembers />
+        <FinalCTA />
+        <Footer />
+      </Suspense>
       <WaitlistModal 
         isOpen={isWaitlistOpen} 
         onClose={() => setIsWaitlistOpen(false)} 
