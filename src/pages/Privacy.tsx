@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
@@ -7,6 +8,13 @@ import Footer from "@/components/Footer";
 const Privacy = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Privacy Policy - FinProIQ</title>
+        <meta name="description" content="How FinProIQ collects, uses, and protects your data and your clients' information. Read our full privacy policy." />
+        <meta property="og:description" content="How FinProIQ collects, uses, and protects your data and your clients' information. Read our full privacy policy." />
+        <meta property="og:url" content="https://finproiq.com/privacy" />
+        <link rel="canonical" href="https://finproiq.com/privacy" />
+      </Helmet>
       <Navigation onOpenCalendly={() => {}} />
       <main className="flex-1">
         <section className="py-20 md:py-32">
