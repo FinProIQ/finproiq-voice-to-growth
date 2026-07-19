@@ -26,6 +26,7 @@ import {
   Mail
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import WaitlistModal from "@/components/WaitlistModal";
 import DiscoverySummary from "@/components/DiscoverySummary";
 import { cn } from "@/lib/utils";
