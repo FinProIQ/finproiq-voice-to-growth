@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import VoiceToCrm from "@/components/VoiceToCrm";
+import { lazy, Suspense } from "react";
+const VoiceToCrm = lazy(() => import("@/components/VoiceToCrm"));
 
 const Hero = () => {
   return (
@@ -42,7 +43,9 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mb-10"
           >
-            <VoiceToCrm />
+            <Suspense fallback={<div className="min-h-[280px]" />}>
+              <VoiceToCrm />
+            </Suspense>
           </motion.div>
 
           <motion.p
