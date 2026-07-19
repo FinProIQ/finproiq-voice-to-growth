@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
@@ -49,6 +50,13 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>FAQ - FinProIQ</title>
+        <meta name="description" content="Straight answers on how FinProIQ automates follow-ups and CRM updates, what it costs, how compliance works, and how fast you can get set up." />
+        <meta property="og:description" content="Straight answers on how FinProIQ automates follow-ups and CRM updates, what it costs, how compliance works, and how fast you can get set up." />
+        <meta property="og:url" content="https://finproiq.com/faq" />
+        <link rel="canonical" href="https://finproiq.com/faq" />
+      </Helmet>
       <Navigation onOpenCalendly={() => {}} />
       <main className="flex-1">
         <section className="py-20 md:py-32">
