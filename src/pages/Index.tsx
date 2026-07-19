@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import ProductSuite from "@/components/ProductSuite";
@@ -31,6 +32,13 @@ const Index = () => {
 
   return (
     <main className="min-h-screen">
+      <Helmet>
+        <title>FinProIQ - Autonomous Advisor Operating System</title>
+        <meta name="description" content="Advisors lose real revenue to slow follow-ups and post-meeting busywork. FinProIQ turns every client conversation into compliant action in 60 seconds." />
+        <meta property="og:description" content="Advisors lose real revenue to slow follow-ups and post-meeting busywork. FinProIQ turns every client conversation into compliant action in 60 seconds." />
+        <meta property="og:url" content="https://finproiq.com/" />
+        <link rel="canonical" href="https://finproiq.com/" />
+      </Helmet>
       <Navigation onOpenCalendly={handleOpenWaitlist} />
       <Hero />
       <TwoFrictionPoints />

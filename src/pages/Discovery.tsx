@@ -26,6 +26,7 @@ import {
   Mail
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import WaitlistModal from "@/components/WaitlistModal";
 import DiscoverySummary from "@/components/DiscoverySummary";
 import { cn } from "@/lib/utils";
@@ -551,6 +552,13 @@ const Discovery = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Discovery - FinProIQ</title>
+        <meta name="description" content="Answer a few questions about your week and see exactly how much time and revenue slow follow-ups and manual busywork are quietly costing your practice." />
+        <meta property="og:description" content="Answer a few questions about your week and see exactly how much time and revenue slow follow-ups and manual busywork are quietly costing your practice." />
+        <meta property="og:url" content="https://finproiq.com/discovery" />
+        <link rel="canonical" href="https://finproiq.com/discovery" />
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container px-4 py-4">

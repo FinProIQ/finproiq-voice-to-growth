@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
@@ -7,6 +8,13 @@ import Footer from "@/components/Footer";
 const Terms = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Terms of Service - FinProIQ</title>
+        <meta name="description" content="The terms that govern your use of FinProIQ. Please review before getting started." />
+        <meta property="og:description" content="The terms that govern your use of FinProIQ. Please review before getting started." />
+        <meta property="og:url" content="https://finproiq.com/terms" />
+        <link rel="canonical" href="https://finproiq.com/terms" />
+      </Helmet>
       <Navigation onOpenCalendly={() => {}} />
       <main className="flex-1">
         <section className="py-20 md:py-32">
