@@ -2,7 +2,7 @@ import { useState, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-const WaitlistModal = lazy(() => import("@/components/WaitlistModal"));
+import WaitlistModal from "@/components/WaitlistModal";
 
 const ProductSuite = lazy(() => import("@/components/ProductSuite"));
 const TwoFrictionPoints = lazy(() => import("@/components/TwoFrictionPoints"));
@@ -57,14 +57,10 @@ const Index = () => {
         <FinalCTA />
         <Footer />
       </Suspense>
-      {isWaitlistOpen && (
-        <Suspense fallback={null}>
-          <WaitlistModal 
-            isOpen={isWaitlistOpen} 
-            onClose={() => setIsWaitlistOpen(false)} 
-          />
-        </Suspense>
-      )}
+      <WaitlistModal 
+        isOpen={isWaitlistOpen} 
+        onClose={() => setIsWaitlistOpen(false)} 
+      />
     </main>
   );
 };
