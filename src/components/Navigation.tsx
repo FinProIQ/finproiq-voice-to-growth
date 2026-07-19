@@ -46,9 +46,10 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
           <div className="flex items-center">
             <button
               onClick={() => navigate('/')}
-              className="font-bold text-xl tracking-wide text-accent hover:opacity-80 transition-opacity"
+              className="hover:opacity-80 transition-opacity"
+              aria-label="FinProIQ home"
             >
-              FinProIQ
+              <img src="/finproiq-lockup.svg" alt="FinProIQ" className="h-8 w-auto" />
             </button>
           </div>
 
