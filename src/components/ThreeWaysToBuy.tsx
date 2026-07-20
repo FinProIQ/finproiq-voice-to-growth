@@ -104,7 +104,8 @@ const ThreeWaysToBuy = () => {
                 </CardHeader>
                 <CardContent className="flex flex-col flex-1">
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{c.body}</p>
-                  <p className="text-sm font-semibold text-foreground mb-6">{c.price}</p>
+                  <p className="text-sm font-semibold text-foreground mb-2">{c.price}</p>
+                  <p className="text-xs text-muted-foreground/80 italic mb-6">{c.frictionReducer}</p>
                   <Button
                     onClick={() => handleClick(c.target, c.title)}
                     className="mt-auto bg-accent hover:bg-accent-hover text-accent-foreground"
