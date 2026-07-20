@@ -3,6 +3,10 @@
     { "path": "/api/keep-alive", "schedule": "0 6 * * *" }
   ],
   "rewrites": [
+    { "source": "/faq", "destination": "/faq/index.html" },
+    { "source": "/discovery", "destination": "/discovery/index.html" },
+    { "source": "/privacy", "destination": "/privacy/index.html" },
+    { "source": "/terms", "destination": "/terms/index.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
