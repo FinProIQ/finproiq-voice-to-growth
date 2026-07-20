@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 interface NavigationProps {
   onOpenCalendly: () => void;
@@ -10,8 +10,15 @@ interface NavigationProps {
 const Navigation = ({ onOpenCalendly }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const scrollToSection = (id: string) => {
+    if (!isHome) {
+      navigate(`/#${id}`);
+      setIsMenuOpen(false);
+      return;
+    }
     if (window.gtag) {
       window.gtag('event', 'section_navigation', {
         event_category: 'navigation',
@@ -79,6 +86,12 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
             >
               Limited Early Access
             </button>
+            <Link
+              to="/faq"
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              FAQ
+            </Link>
             <Button 
               variant="default" 
               size="sm" 
@@ -125,6 +138,13 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
             >
               Limited Early Access
             </button>
+            <Link
+              to="/faq"
+              onClick={() => setIsMenuOpen(false)}
+              className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
+            >
+              FAQ
+            </Link>
             <Button 
               variant="default" 
               size="sm" 
