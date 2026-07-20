@@ -31,7 +31,7 @@ const cards = [
     body: "Workflow setup plus AI subscription. Everything connected end-to-end. Recommended for XYPN-stack firms scaling past 50 households.",
     price: "Workflow setup + AI subscription, bundled pricing",
     frictionReducer: "One conversation, one rollout plan — no separate contracts to juggle.",
-    cta: "Talk to us about Full OS",
+    cta: "Get Your Full OS Rollout Plan",
     target: "calendly",
   },
 ];
