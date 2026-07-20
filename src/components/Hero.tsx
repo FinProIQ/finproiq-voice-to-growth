@@ -51,7 +51,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="text-sm text-muted-foreground"
           >
-            Built for financial advisors who want to move faster, stay compliant, and close more without adding work.
+            Built for financial advisors who want to move faster, stay compliant, and close more - without adding headcount.
           </motion.p>
         </div>
       </div>
