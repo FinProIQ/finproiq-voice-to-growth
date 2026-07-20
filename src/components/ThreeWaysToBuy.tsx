@@ -9,6 +9,7 @@ const cards = [
     tagline: "The plumbing before the meeting.",
     body: "Pre-built integrations across the XYPN tech stack. Calendly to Wealthbox, AdvicePay, RightCapital, Clockify. We set it up. You stop maintaining Zaps.",
     price: "From $500 to $750 per phase, one-time",
+    frictionReducer: "Fixed price, scoped upfront — you know the cost before you start.",
     cta: "See workflow phases",
     target: "workflow-automation",
   },
@@ -18,6 +19,7 @@ const cards = [
     tagline: "The brainwork after the meeting.",
     body: "Voice notes become compliant follow-ups, CRM updates, social posts, and next steps. Three tiers from Starter to Growth.",
     price: "From $79 to $399 per month",
+    frictionReducer: "Try it free for 14 days. Full refund if not happy.",
     cta: "See AI tiers",
     target: "pricing",
     popular: true,
@@ -28,6 +30,7 @@ const cards = [
     tagline: "Both layers. One bill.",
     body: "Workflow setup plus AI subscription. Everything connected end-to-end. Recommended for XYPN-stack firms scaling past 50 households.",
     price: "Workflow setup + AI subscription, bundled pricing",
+    frictionReducer: "One conversation, one rollout plan — no separate contracts to juggle.",
     cta: "Talk to us about Full OS",
     target: "calendly",
   },
@@ -101,7 +104,8 @@ const ThreeWaysToBuy = () => {
                 </CardHeader>
                 <CardContent className="flex flex-col flex-1">
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{c.body}</p>
-                  <p className="text-sm font-semibold text-foreground mb-6">{c.price}</p>
+                  <p className="text-sm font-semibold text-foreground mb-2">{c.price}</p>
+                  <p className="text-xs text-muted-foreground/80 italic mb-6">{c.frictionReducer}</p>
                   <Button
                     onClick={() => handleClick(c.target, c.title)}
                     className="mt-auto bg-accent hover:bg-accent-hover text-accent-foreground"
