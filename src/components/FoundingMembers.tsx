@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Users } from "lucide-react";
 
-const cards = [
+const topCards = [
   {
     title: "What founding members get",
     items: [
@@ -11,14 +11,6 @@ const cards = [
       "Discounted Workflow Automation setup",
       "Monthly 30-minute call where your feedback shapes what gets built next",
       "First access to every new feature shipped",
-    ],
-  },
-  {
-    title: "What founding members agree to",
-    items: [
-      "Use the product weekly during the design partner phase",
-      "Give honest feedback in monthly calls",
-      "Allow being referenced (anonymously if preferred) in case studies",
     ],
   },
   {
@@ -30,6 +22,15 @@ const cards = [
     ],
   },
 ];
+
+const agreeCard = {
+  title: "What founding members agree to",
+  items: [
+    "Use the product weekly during the design partner phase",
+    "Give honest feedback in monthly calls",
+    "Allow being referenced (anonymously if preferred) in case studies",
+  ],
+};
 
 const FoundingMembers = () => {
   const handleApply = () => {
@@ -63,8 +64,8 @@ const FoundingMembers = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-10">
-          {cards.map((c, i) => (
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
+          {topCards.map((c, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 25 }}
@@ -91,7 +92,7 @@ const FoundingMembers = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="text-center mb-10">
           <Button
             size="lg"
             onClick={handleApply}
@@ -99,7 +100,34 @@ const FoundingMembers = () => {
           >
             Apply to be a Design Partner
           </Button>
+          <p className="mt-4 text-sm text-muted-foreground">
+            15-minute intro call. No obligation to join.
+          </p>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="max-w-2xl mx-auto"
+        >
+          <Card className="hover:shadow-medium transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-lg">{agreeCard.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-3">
+                {agreeCard.items.map((item, ii) => (
+                  <li key={ii} className="flex items-start gap-2 text-sm">
+                    <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </section>
   );
