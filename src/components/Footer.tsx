@@ -13,6 +13,13 @@ const Footer = () => {
           </div>
 
           <nav className="flex flex-wrap justify-center gap-6 text-sm">
+            <Link
+              to="/faq"
+              className="hover:opacity-70 hover:underline transition-all"
+              onClick={() => window.gtag?.('event', 'footer_navigation', { link: 'FAQ' })}
+            >
+              FAQ
+            </Link>
             <Link 
               to="/privacy" 
               className="hover:opacity-70 hover:underline transition-all"
