@@ -62,6 +62,10 @@ const FinalCTA = () => {
             </Button>
           </div>
 
+          <p className="text-sm text-muted-foreground -mt-6 mb-10">
+            Free, 20 minutes, no obligation · 14-day free trial, full refund if not happy.
+          </p>
+
           {/* Secondary option for those not ready */}
           <div className="pt-8 border-t border-border/50">
             <p className="text-muted-foreground mb-4">
