@@ -5,27 +5,63 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const faqs = [
   {
     question: "What is FinProIQ?",
-    answer: "FinProIQ is an AI-powered growth ecosystem for financial professionals - combining client insights, compliance, and automation to help you grow your practice efficiently and safely.",
+    answer:
+      "FinProIQ is an operating system for independent financial advisors. It handles the work that piles up around client meetings: writing the summary, updating your CRM, drafting the follow-up, and queuing the next task. You stay in control while the busywork runs itself.",
   },
   {
-    question: "Is FinProIQ compliant with FINRA/SEC guidelines?",
-    answer: "Yes. Every AI agent is designed with compliance as a built-in layer, not an afterthought. Our system automatically reviews content, flags risky language, and ensures all communications meet regulatory standards.",
+    question: "Who is FinProIQ built for?",
+    answer:
+      "Independent financial advisors and small-firm owners who run their own tech decisions, especially advisors already using tools like Wealthbox, Calendly, AdvicePay, and RightCapital. If you handle your own admin and want that time back, it fits.",
   },
   {
-    question: "Can I use FinProIQ with my existing CRM?",
-    answer: "Yes. FinProIQ integrates easily with major CRMs through APIs or manual sync, allowing you to enhance your current workflow without disruption.",
+    question: "What does FinProIQ integrate with?",
+    answer:
+      "It connects to the tools independent advisors already run, including Wealthbox, Calendly, AdvicePay, RightCapital, and Clockify. The point is to stop you from rekeying the same client data across five different systems.",
   },
   {
-    question: "Does it post automatically on social media?",
-    answer: "Yes - you can review or approve before publishing, ensuring full compliance and maintaining your personal touch while automating the content creation process.",
+    question: "Will AI replace me or contact my clients on its own?",
+    answer:
+      "No. Nothing reaches a client without your review. FinProIQ prepares and drafts, then routes anything that needs a decision back to you. The AI does the assembly work; the judgment stays with you.",
+  },
+  {
+    question: "Is it compliant? Is there an audit trail?",
+    answer:
+      "Every action runs through validation before it happens, and each step is logged, so you always have a record of what was done and when. Anything outside the defined rules gets flagged to you rather than guessed at.",
+  },
+  {
+    question: "How much does FinProIQ cost?",
+    answer:
+      "There are two ways in: a one-time workflow automation setup, or a monthly AI Engine subscription starting at $79/month. You can also bundle both. Full details are on the pricing page.",
   },
   {
     question: "How long does setup take?",
-    answer: "Most professionals get fully onboarded and start automating within 48 hours. Our team guides you through the process to ensure a smooth transition.",
+    answer:
+      "The workflow automation rolls out in phases, so you are not rebuilding your entire practice at once. The core automation is running early, and each phase builds on the last.",
+  },
+  {
+    question: "Do I need to be technical to use it?",
+    answer:
+      "No. FinProIQ runs in the background of the tools you already use. If you can run Wealthbox and Calendly, you can run this.",
+  },
+  {
+    question: "What happens to my client data?",
+    answer:
+      "FinProIQ works across the tools you already trust and moves information between them rather than becoming one more place your data sits unprotected. If you want specifics on data handling, reach out and we will walk you through it.",
+  },
+  {
+    question: "Can I see it working?",
+    answer:
+      "Yes. Book a call for a live walkthrough. There are also a limited number of founding member slots with locked-in pricing for advisors who want to shape the product early.",
   },
 ];
 
@@ -75,16 +111,45 @@ const FAQ = () => {
               Everything you need to know about FinProIQ
             </p>
 
-            <div className="space-y-8">
+            <Accordion
+              type="single"
+              collapsible
+              className="bg-card rounded-xl border border-border shadow-soft divide-y divide-border overflow-hidden"
+            >
               {faqs.map((faq, index) => (
-                <div 
-                  key={index} 
-                  className="bg-card rounded-xl p-6 shadow-soft border border-border"
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="border-b-0 px-6"
                 >
-                  <h2 className="text-xl font-bold mb-3">{index + 1}. {faq.question}</h2>
-                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                </div>
+                  <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-5">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-5">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
+            </Accordion>
+
+            <div className="mt-12 text-center bg-accent/5 border border-border rounded-xl p-8">
+              <h2 className="text-2xl font-bold mb-3">Still have questions?</h2>
+              <p className="text-muted-foreground mb-6">
+                Book a live walkthrough and we will show you exactly how FinProIQ fits into your practice.
+              </p>
+              <Button
+                size="lg"
+                asChild
+                className="bg-accent hover:bg-accent-hover text-accent-foreground shadow-md hover:shadow-lg transition-all"
+              >
+                <a
+                  href="https://calendly.com/finproiq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Schedule a Demo
+                </a>
+              </Button>
             </div>
           </div>
         </section>
