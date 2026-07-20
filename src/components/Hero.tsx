@@ -36,6 +36,15 @@ const Hero = () => {
             FinProIQ automates scheduling, CRM updates, follow-ups, and compliance - the work that used to eat your nights and weekends.
           </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="text-sm md:text-base text-muted-foreground mb-8"
+          >
+            Built on the tools you already run: Calendly · Wealthbox · AdvicePay · RightCapital · Clockify
+          </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -51,7 +60,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="text-sm text-muted-foreground"
           >
-            Built for financial advisors who want to move faster, stay compliant, and close more without adding work.
+            Built for financial advisors who want to move faster, stay compliant, and close more - without adding headcount.
           </motion.p>
         </div>
       </div>

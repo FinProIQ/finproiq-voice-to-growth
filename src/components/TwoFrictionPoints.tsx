@@ -56,7 +56,7 @@ const TwoFrictionPoints = () => {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-5xl font-bold font-display mb-14 text-center text-foreground max-w-3xl mx-auto"
         >
-          Your practice has two friction points. <span className="text-accent">We solve both.</span>
+          Two friction points slow down every practice. <span className="text-accent">Here's where yours is hiding.</span>
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
