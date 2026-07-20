@@ -59,7 +59,7 @@ const FoundingMembers = () => {
             Founding member <span className="text-accent">program.</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            FinProIQ is in design partner phase. The first 10 firms to onboard get founder pricing, locked indefinitely.
+            FinProIQ is in design partner phase. The first 10 firms to onboard get founder pricing, locked indefinitely. Only 6 slots remaining.
           </p>
         </motion.div>
 
