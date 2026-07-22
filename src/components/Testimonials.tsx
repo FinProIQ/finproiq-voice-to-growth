@@ -1,21 +1,14 @@
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, Linkedin } from "lucide-react";
+import michaelAnderson from "@/assets/michael-anderson.png.asset.json";
 
 const testimonials = [
   {
-    quote: "I used this after a prospect said 'I'll think about it' - they replied the same day and signed the next week.",
-    author: "Financial Advisor",
-    title: "",
-  },
-  {
-    quote: "This is the first tool that actually improved my follow-ups, not just sped them up.",
-    author: "Wealth Manager",
-    title: "",
-  },
-  {
-    quote: "It feels like having an assistant that understands both compliance and client psychology.",
-    author: "Insurance Agent",
-    title: "",
+    quote:
+      "FinProIQ is a fantastic alternative for advisors wanting to improve efficiency in their practice. It helped to streamline my workflow with automation without having to rebuild my tech stack or create reliance on one software.",
+    author: "Michael Anderson, CFP®",
+    image: michaelAnderson.url,
+    linkedin: "https://www.linkedin.com/in/michael-anderson-cfp/",
   },
 ];
 
@@ -29,7 +22,7 @@ const Testimonials = () => {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-1 gap-8 max-w-3xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -47,10 +40,23 @@ const Testimonials = () => {
               </p>
               
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold text-xl">
-                  {testimonial.author.charAt(0)}
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.author}
+                  loading="lazy"
+                  className="w-14 h-14 rounded-full object-cover border border-border"
+                />
+                <div className="flex flex-col">
+                  <p className="font-semibold text-foreground">{testimonial.author}</p>
+                  <a
+                    href={testimonial.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-accent hover:underline mt-0.5"
+                  >
+                    <Linkedin className="w-4 h-4" /> LinkedIn
+                  </a>
                 </div>
-                <p className="font-semibold text-foreground">{testimonial.author}</p>
               </div>
             </motion.div>
           ))}
