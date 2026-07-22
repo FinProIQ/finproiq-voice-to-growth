@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Quote, Linkedin } from "lucide-react";
-import michaelAnderson from "@/assets/michael-anderson.png.asset.json";
+import michaelAnderson from "@/assets/michael-anderson.png";
 
 const testimonials = [
   {
     quote:
       "FinProIQ is a fantastic alternative for advisors wanting to improve efficiency in their practice. It helped to streamline my workflow with automation without having to rebuild my tech stack or create reliance on one software.",
     author: "Michael Anderson, CFP®",
-    image: michaelAnderson.url,
+    image: michaelAnderson,
     linkedin: "https://www.linkedin.com/in/michael-anderson-cfp/",
   },
 ];
