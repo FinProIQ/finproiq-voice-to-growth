@@ -14,6 +14,7 @@ const LiveDemoCTA = lazy(() => import("@/components/LiveDemoCTA"));
 const ThreeWaysToBuy = lazy(() => import("@/components/ThreeWaysToBuy"));
 const Pricing = lazy(() => import("@/components/Pricing"));
 const Trust = lazy(() => import("@/components/Trust"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
 const FoundingMembers = lazy(() => import("@/components/FoundingMembers"));
 const FinalCTA = lazy(() => import("@/components/FinalCTA"));
 const Footer = lazy(() => import("@/components/Footer"));
@@ -53,6 +54,7 @@ const Index = () => {
         <ThreeWaysToBuy />
         <Pricing />
         <Trust />
+        <Testimonials />
         <FoundingMembers />
         <FinalCTA />
         <Footer />
