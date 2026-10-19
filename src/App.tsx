@@ -12,6 +12,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Discovery = lazy(() => import("./pages/Discovery"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const DemoRedirect = lazy(() => import("./pages/DemoRedirect"));
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/terms" element={<Terms />} />
           <Route path="/discovery" element={<Discovery />} />
           <Route path="/survey" element={<Navigate to="/discovery" replace />} />
+          <Route path="/demo" element={<DemoRedirect />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
