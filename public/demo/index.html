@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinProIQ — Interactive demo</title>
+<meta name="description" content="A clickable demo of FinProIQ: booking, CRM updates, voice notes, personalized follow-ups and CRM logging for financial advisors — all 5 steps, live.">
+<meta property="og:title" content="FinProIQ — Interactive demo">
+<meta property="og:description" content="Try the full flow in 3 minutes: a client books, the CRM updates itself, you record a voice note, approve a personal follow-up, and it all gets logged.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F6FA;color:#0E1A3A;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+a{color:#1D5BFF}a:hover{color:#1747D1}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.card{background:#fff;border:1px solid #E2E7F0;border-radius:16px}
+.eyebrow{margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5F6980;font-weight:700}
+.btn{min-height:44px;padding:0 18px;border-radius:10px;border:1px solid #CBD3E1;background:#fff;color:#0E1A3A;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:#F2F5FB}
+.btn-pri{background:#1D5BFF;border-color:#1D5BFF;color:#fff}
+.btn-pri:hover{background:#1747D1}
+.chip{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid #D5DCE8;background:#fff;font-size:13px;font-weight:700;color:#38445F}
+.chip:hover{border-color:#9AA6BD}
+.chip-on{background:#0E1A3A;border-color:#0E1A3A;color:#fff}
+.chip-on:hover{border-color:#0E1A3A}
+.nav{min-height:44px;padding:0 16px;border-radius:10px;border:0;background:none;font-weight:700;font-size:14.5px;color:#4A5675}
+.nav:hover{background:#F2F5FB}
+.nav-on{background:#EAF0FF;color:#1847D6}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.tag-blue{background:#1D5BFF;color:#fff}
+.tag-pale{background:#E9F0FF;color:#1A44B8}
+.tag-amber{background:#FFEFCC;color:#733A00}
+.tag-gray{background:#EEF1F6;color:#4A5675}
+.pstep{flex:1;min-width:0;display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:10px;font-size:12.5px;font-weight:700;border:1.5px solid transparent}
+.st-done{background:#E9F0FF;color:#1A44B8}
+.st-cur{background:#1D5BFF;color:#fff;box-shadow:0 0 0 4px rgba(29,91,255,.18)}
+.st-warn{background:#FFF3DC;color:#733A00;border-color:#E9A73B}
+.st-pend{background:#F4F6F9;color:#5F6980;border-style:dashed;border-color:#CDD4E0}
+.pico{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:11px;font-weight:800}
+.st-done .pico{background:#D2DFFF}
+.st-cur .pico{background:rgba(255,255,255,.24)}
+.st-warn .pico{background:#E9A73B;color:#3D1E00}
+.st-pend .pico{background:#E2E6EE}
+.ic-cur{background:#1D5BFF;color:#fff}
+.ic-done{background:#D2DFFF;color:#1A44B8}
+.ic-warn{background:#E9A73B;color:#3D1E00}
+.ic-pend{background:#E2E6EE;color:#4A5675}
+.plabel{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conn{width:10px;height:2px;flex:none;background:#D3D9E4}
+.conn-on{background:#8FAEFF}
+.mwrap{border-top:1px solid #EDF0F5}
+.mwrap-open{background:#FAFBFE}
+.mrow{width:100%;text-align:left;background:none;border:0;padding:16px 20px;color:inherit;display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.mrow:hover{background:#F8FAFD}
+.chev{display:inline-flex;color:#5F6980;transition:transform .2s}
+.chev-open{transform:rotate(180deg)}
+.act{width:100%;text-align:left;border:0;background:none;padding:14px 20px;display:flex;gap:14px;align-items:flex-start;color:inherit}
+.act:hover{background:#F8FAFD}
+.aico{width:38px;height:38px;border-radius:12px;background:#EEF3FF;color:#1D5BFF;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.aico-warn{background:#FFEFCC;color:#8A4500}
+.fld{width:100%;min-height:44px;border:1px solid #C3CCDB;border-radius:10px;padding:10px 12px;font:inherit;font-size:14px;color:#0E1A3A;background:#fff}
+.fld:focus{outline:2px solid #1D5BFF;outline-offset:1px;border-color:#1D5BFF}
+textarea.fld{min-height:240px;resize:vertical;line-height:1.6}
+.lbl{display:block;font-size:12.5px;font-weight:700;color:#38445F;margin-bottom:6px}
+.preview{white-space:pre-line;background:#fff;border:1px solid #E2E7F0;border-radius:12px;padding:16px 18px;font-size:14.5px;line-height:1.6;color:#1E2A4A}
+.tab{min-height:38px;padding:0 14px;border:0;border-radius:8px;background:none;font-weight:700;font-size:13.5px;color:#4A5675;display:inline-flex;align-items:center;gap:6px}
+.tab-on{background:#fff;color:#0E1A3A;box-shadow:0 1px 3px rgba(14,26,58,.14)}
+.cli{width:100%;display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;border:1px solid transparent;background:none;text-align:left;color:inherit;min-height:58px}
+.cli:hover{background:#F4F6FA}
+.cli-on{background:#EEF3FF;border-color:#C6D6FF}
+.av{width:38px;height:38px;border-radius:50%;background:#0E1A3A;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.badge{min-width:22px;height:22px;border-radius:999px;background:#E9A73B;color:#3D1E00;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+.abox{border:1px solid #E2E7F0;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;background:#fff;min-width:0}
+.abox-cur{border-color:#1D5BFF;box-shadow:0 0 0 3px rgba(29,91,255,.12)}
+.abox-warn{border-color:#E9A73B;background:#FFFBF2}
+.abox-pend{background:#F8F9FB;border-style:dashed}
+.kv{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:0;line-height:1.1}
+.kv-amber{color:#9A4A00}
+.kv-blue{color:#1D5BFF}
+.mic{width:56px;height:56px;border-radius:50%;border:0;background:#1D5BFF;color:#fff;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.mic-on{background:#C2410C;animation:ring 1.2s ease-out infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(194,65,12,.45)}100%{box-shadow:0 0 0 16px rgba(194,65,12,0)}}
+.action{border:1.5px solid #E9A73B;background:#FFFBF2;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.sw{width:18px;height:12px;border-radius:4px;display:inline-block}
+.st-run{background:#fff;color:#1A44B8;border-color:#1D5BFF;animation:glow 1.1s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(29,91,255,0)}50%{box-shadow:0 0 0 5px rgba(29,91,255,.2)}}
+.st-run .pico{background:#E9F0FF}
+.ic-run{background:#E9F0FF;color:#1A44B8}
+.abox-run{border-color:#1D5BFF}
+.pbig{padding:14px;font-size:14px;gap:10px}
+.pbig .pico{width:26px;height:26px;font-size:13px}
+.spin{width:28px;height:28px;border-radius:50%;border:3px solid #D2DFFF;border-top-color:#1D5BFF;animation:spin .8s linear infinite;flex:none;display:inline-block}
+.spin-sm{width:14px;height:14px;border-radius:50%;border:2px solid #C6D6FF;border-top-color:#1D5BFF;animation:spin .8s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fs{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.fs legend{padding:0;margin-bottom:8px}
+.live-dot{width:9px;height:9px;border-radius:50%;background:#16A34A;animation:ld 1.6s ease-out infinite;flex:none}
+@keyframes ld{0%{box-shadow:0 0 0 0 rgba(22,163,74,.45)}100%{box-shadow:0 0 0 8px rgba(22,163,74,0)}}
+@media (max-width:640px){.hide-sm{display:none !important}.act{flex-wrap:wrap}.act-meta{order:3;flex:1 1 100% !important;flex-direction:row !important;align-items:center !important;padding-left:52px}.act-chev{display:none}h1{font-size:30px !important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<template id="tpl">
+<div style="min-height: 100vh; background: #F4F6FA">
+<header style="background: #ffffff; border-bottom: 1px solid #E2E7F0">
+<div style="max-width: 1320px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="width: 34px; height: 34px; border-radius: 10px; background: #0E1A3A; color: #ffffff; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 19V11"></path><path d="M12 19V5"></path><path d="M19 19v-6"></path></svg></span>
+<span style="font-weight: 800; font-size: 18px; letter-spacing: -0.01em">FinProIQ</span>
+</div>
+<nav aria-label="Main" style="display: flex; gap: 4px">
+<button class="{{navDashCls}}" onClick="{{goDash}}">Dashboard</button>
+<button class="{{navCliCls}}" onClick="{{goClients}}">Clients</button>
+</nav>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 12px">
+<button class="btn btn-pri" onClick="{{startLive}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Run a live meeting</button>
+<span class="tag tag-gray hide-sm">Prototype · sample data</span>
+<span class="av" style="width: 36px; height: 36px; background: #1D5BFF">AM</span>
+<span class="hide-sm" style="font-size: 14px; font-weight: 700">Alex Morgan</span>
+</div>
+</div>
+</header>
+
+<sc-if value="{{isDash}}" hint-placeholder-val="{{true}}">
+<main style="max-width: 1320px; margin: 0 auto; padding: 36px 24px 72px; display: flex; flex-direction: column; gap: 28px">
+<section style="display: flex; flex-direction: column; gap: 8px">
+<p class="eyebrow mono">{{todayStr}}</p>
+<h1 style="margin: 0; font-size: 42px; line-height: 1.1; font-weight: 800; letter-spacing: -0.025em">{{greet}}, Alex.</h1>
+<p style="margin: 0; font-size: 17px; color: #4A5675; max-width: 720px; line-height: 1.5">{{greetSub}}</p>
+</section>
+
+<section aria-label="Summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px">
+<sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+<div class="card" style="padding: 20px 22px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13.5px; font-weight: 700; color: #4A5675">{{k.label}}</span>
+<p class="{{k.valCls}}">{{k.value}}</p>
+<span style="font-size: 13px; color: #5F6980">{{k.sub}}</span>
+</div>
+</sc-for>
+</section>
+
+<section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div class="card" style="flex: 999 1 620px; min-width: 0; overflow: hidden">
+<div style="padding: 20px 20px 16px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Recent activity</h2>
+<span style="font-size: 13px; color: #5F6980">Everything FinProIQ did for you, newest first</span>
+</div>
+<div role="group" aria-label="Filter activity" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{actChips}}" as="c" hint-placeholder-count="6">
+<button class="{{c.cls}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button>
+</sc-for>
+<sc-if value="{{hasActClient}}">
+<button class="chip chip-on" onClick="{{clearActClient}}" aria-label="Clear client filter">Client: {{actClientName}} ✕</button>
+</sc-if>
+</div>
+</div>
+<sc-for list="{{acts}}" as="a" hint-placeholder-count="6">
+<div style="border-top: 1px solid #EDF0F5">
+<button class="act" onClick="{{a.toggle}}" aria-expanded="{{a.openStr}}">
+<span class="{{a.icoCls}}">
+<sc-if value="{{a.kBooking}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></sc-if>
+<sc-if value="{{a.kNotes}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"></path></svg></sc-if>
+<sc-if value="{{a.kFollow}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 6.5l8.5 6 8.5-6"></path></svg></sc-if>
+<sc-if value="{{a.kCrm}}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="2.5"></ellipse><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6"></path><path d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"></path></svg></sc-if>
+</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-weight: 700; font-size: 15px">{{a.title}}</span>
+<span style="font-size: 13.5px; color: #4A5675">{{a.who}} · {{a.mtype}}</span>
+</span>
+<span class="act-meta" style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex: none">
+<span class="mono" style="font-size: 12px; color: #5F6980">{{a.time}}</span>
+<sc-if value="{{a.isAttn}}"><span class="tag tag-amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg>Needs attention</span></sc-if>
+<sc-if value="{{a.isResolved}}"><span class="tag tag-pale">Resolved</span></sc-if>
+</span>
+<span class="{{a.chevCls}} act-chev" style="margin-top: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span>
+</button>
+<sc-if value="{{a.open}}">
+<div style="padding: 2px 20px 20px 72px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: #1E2A4A">{{a.detail}}</p>
+<div style="overflow-x: auto">
+<div style="min-width: 560px; display: flex; align-items: center">
+<sc-for list="{{a.pipe}}" as="p" hint-placeholder-count="5">
+<span style="display: flex; align-items: center; flex: 1; min-width: 0">
+<sc-if value="{{p.conn}}"><span class="{{p.connCls}}"></span></sc-if>
+<span class="pstep {{p.cls}}" title="{{p.name}}: {{p.stateLabel}}">
+<span class="pico">
+<sc-if value="{{p.showCheck}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+<sc-if value="{{p.isWarn}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg></sc-if>
+<sc-if value="{{p.isPend}}"><span>{{p.n}}</span></sc-if>
+</span>
+<span class="plabel">{{p.name}}</span>
+</span>
+</span>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="btn btn-pri" onClick="{{a.openTimeline}}">Open in client timeline</button>
+<button class="btn" onClick="{{a.filterClient}}">Show only {{a.first}}’s activity</button>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{noActs}}">
+<div style="border-top: 1px solid #EDF0F5; padding: 32px 20px; text-align: center; color: #4A5675; font-size: 14.5px">Nothing here — every item in this view is taken care of.</div>
+</sc-if>
+</div>
+
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<div class="card" style="overflow: hidden">
+<div style="padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<h2 style="margin: 0; font-size: 17px; font-weight: 800">Needs your attention</h2>
+<sc-if value="{{hasAttn}}"><span class="badge">{{attnCount}}</span></sc-if>
+</div>
+<sc-for list="{{attn}}" as="t" hint-placeholder-count="3">
+<div style="border-top: 1px solid #EDF0F5">
+<button class="act" onClick="{{t.open}}">
+<span class="aico aico-warn" style="width: 34px; height: 34px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 700; font-size: 14.5px">{{t.who}}</span>
+<span style="font-size: 13.5px; color: #733A00; font-weight: 600">{{t.title}}</span>
+<span class="mono" style="font-size: 12px; color: #5F6980">{{t.when}}</span>
+</span>
+<span style="color: #5F6980; margin-top: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></span>
+</button>
+</div>
+</sc-for>
+<sc-if value="{{noAttn}}">
+<div style="border-top: 1px solid #EDF0F5; padding: 20px; font-size: 14px; color: #4A5675">All clear. Nothing is stuck.</div>
+</sc-if>
+</div>
+
+<div class="card" style="overflow: hidden">
+<div style="padding: 18px 20px">
+<h2 style="margin: 0; font-size: 17px; font-weight: 800">Upcoming meetings</h2>
+</div>
+<sc-for list="{{upcoming}}" as="u" hint-placeholder-count="3">
+<div style="border-top: 1px solid #EDF0F5">
+<button class="act" onClick="{{u.open}}">
+<span class="aico" style="width: 34px; height: 34px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 700; font-size: 14.5px">{{u.who}}</span>
+<span style="font-size: 13.5px; color: #4A5675">{{u.type}}</span>
+<span class="mono" style="font-size: 12px; color: #5F6980">{{u.when}}</span>
+</span>
+<sc-if value="{{u.hasWarn}}"><span class="tag tag-amber" style="margin-top: 4px">Check</span></sc-if>
+</button>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+</main>
+</sc-if>
+
+<sc-if value="{{isClients}}" hint-placeholder-val="{{false}}">
+<main style="max-width: 1320px; margin: 0 auto; padding: 28px 24px 72px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<aside class="card" style="flex: 1 1 270px; min-width: 0; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<label for="csearch" class="lbl" style="margin: 0">Filter by client</label>
+<input id="csearch" class="fld" type="search" placeholder="Search by name" value="{{search}}" onChange="{{onSearch}}">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{clientList}}" as="c" hint-placeholder-count="6">
+<button class="{{c.cls}}" aria-current="{{c.current}}" onClick="{{c.pick}}">
+<span class="av">{{c.initials}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 700; font-size: 14.5px">{{c.name}}</span>
+<span style="font-size: 12.5px; color: #5F6980">{{c.sub}}</span>
+</span>
+<sc-if value="{{c.hasAttn}}"><span class="badge" aria-label="needs attention">{{c.attn}}</span></sc-if>
+</button>
+</sc-for>
+<sc-if value="{{noClients}}"><p style="margin: 8px 4px; font-size: 13.5px; color: #4A5675">No clients match that search.</p></sc-if>
+</div>
+</aside>
+
+<section style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div class="card" style="padding: 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center">
+<span class="av" style="width: 60px; height: 60px; font-size: 19px">{{client.initials}}</span>
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.02em">{{client.name}}</h1>
+<p style="margin: 0; font-size: 14px; color: #4A5675">{{client.stage}} · {{client.email}} · {{client.phoneText}}</p>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<div><dt class="eyebrow">Meetings</dt><dd style="margin: 4px 0 0; font-size: 20px; font-weight: 800">{{client.count}}</dd></div>
+<div><dt class="eyebrow">Last</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 700; white-space: nowrap">{{client.last}}</dd></div>
+<div><dt class="eyebrow">Next</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 700; white-space: nowrap">{{client.next}}</dd></div>
+</dl>
+<button class="btn btn-pri" onClick="{{startLiveFor}}">Book a new meeting for {{client.first}}</button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between">
+<div role="group" aria-label="Filter meetings" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{meetChips}}" as="c" hint-placeholder-count="4">
+<button class="{{c.cls}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 12.5px; color: #4A5675; font-weight: 600">
+<span style="display: inline-flex; align-items: center; gap: 6px"><span class="sw" style="background: #1D5BFF"></span>Last completed step</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span class="sw" style="background: #E9F0FF; border: 1px solid #C6D6FF"></span>Done</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span class="sw" style="background: #FFF3DC; border: 1.5px solid #E9A73B"></span>Needs attention</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span class="sw" style="background: #F4F6F9; border: 1.5px dashed #CDD4E0"></span>Not yet</span>
+</div>
+</div>
+
+<div class="card" style="overflow: hidden">
+<div style="padding: 16px 20px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 17px; font-weight: 800">Meeting timeline</h2>
+<span style="font-size: 13px; color: #5F6980">Click a meeting to see exactly what happened at each step</span>
+</div>
+<sc-for list="{{meetings}}" as="m" hint-placeholder-count="5">
+<div class="{{m.wrapCls}}">
+<button class="mrow" onClick="{{m.toggle}}" aria-expanded="{{m.openStr}}">
+<span style="width: 200px; flex: none; display: flex; flex-direction: column; gap: 3px">
+<span class="mono" style="font-size: 12px; color: #5F6980">{{m.dLong}} · {{m.time}}</span>
+<span style="font-weight: 700; font-size: 15.5px">{{m.type}}</span>
+</span>
+<span style="flex: 999 1 480px; min-width: 0; overflow-x: auto; padding: 4px">
+<span style="display: flex; align-items: center; min-width: 500px">
+<sc-for list="{{m.pipe}}" as="p" hint-placeholder-count="5">
+<span style="display: flex; align-items: center; flex: 1; min-width: 0">
+<sc-if value="{{p.conn}}"><span class="{{p.connCls}}"></span></sc-if>
+<span class="pstep {{p.cls}}" title="{{p.name}}: {{p.stateLabel}}">
+<span class="pico">
+<sc-if value="{{p.showCheck}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+<sc-if value="{{p.isWarn}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg></sc-if>
+<sc-if value="{{p.isPend}}"><span>{{p.n}}</span></sc-if>
+</span>
+<span class="plabel">{{p.name}}</span>
+</span>
+</span>
+</sc-for>
+</span>
+</span>
+<span style="display: flex; align-items: center; gap: 10px; flex: none; margin-left: auto">
+<span class="{{m.statusCls}}"><sc-if value="{{m.statusWarn}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg></sc-if>{{m.statusText}}</span>
+<span class="{{m.chevCls}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></span>
+</span>
+</button>
+
+<sc-if value="{{m.open}}">
+<div style="padding: 4px 20px 24px; display: flex; flex-direction: column; gap: 20px">
+
+<sc-if value="{{m.hasCompose}}">
+<div class="action">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between">
+<div style="min-width: 0">
+<p style="margin: 0; font-weight: 800; font-size: 16.5px">Review follow-up for {{m.first}}</p>
+<p style="margin: 4px 0 0; font-size: 13.5px; color: #4A5675">{{m.cp.basis}}</p>
+</div>
+<div role="tablist" aria-label="Channel" style="display: flex; background: #EEF1F6; padding: 4px; border-radius: 10px; gap: 4px">
+<button role="tab" aria-selected="{{m.cp.emailSel}}" class="{{m.cp.emailTabCls}}" onClick="{{m.cp.tabEmail}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 6.5l8.5 6 8.5-6"></path></svg>Email</button>
+<button role="tab" aria-selected="{{m.cp.smsSel}}" class="{{m.cp.smsTabCls}}" onClick="{{m.cp.tabSms}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"></path></svg>SMS</button>
+</div>
+</div>
+
+<sc-if value="{{m.cp.isEmail}}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<div><label class="lbl" for="to-{{m.id}}">To (email address)</label><input id="to-{{m.id}}" class="fld" type="email" value="{{m.cp.to}}" onChange="{{m.cp.onTo}}"></div>
+<div><label class="lbl" for="sub-{{m.id}}">Subject</label><input id="sub-{{m.id}}" class="fld" type="text" value="{{m.cp.subject}}" onChange="{{m.cp.onSubject}}"></div>
+</div>
+<sc-if value="{{m.cp.editing}}">
+<div><label class="lbl" for="body-{{m.id}}">Message</label><textarea id="body-{{m.id}}" class="fld" value="{{m.cp.body}}" onChange="{{m.cp.onBody}}"></textarea></div>
+</sc-if>
+<sc-if value="{{m.cp.notEditing}}">
+<div><span class="lbl">Message preview</span><div class="preview">{{m.cp.body}}</div></div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{m.cp.isSms}}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="max-width: 340px"><label class="lbl" for="ph-{{m.id}}">To (mobile number)</label><input id="ph-{{m.id}}" class="fld" type="tel" placeholder="(555) 555-0100" value="{{m.cp.phone}}" onChange="{{m.cp.onPhone}}"></div>
+<sc-if value="{{m.cp.editing}}">
+<div><label class="lbl" for="sms-{{m.id}}">Text message</label><textarea id="sms-{{m.id}}" class="fld" style="min-height: 120px" value="{{m.cp.sms}}" onChange="{{m.cp.onSms}}"></textarea></div>
+</sc-if>
+<sc-if value="{{m.cp.notEditing}}">
+<div><span class="lbl">Text preview</span><div class="preview" style="max-width: 460px; background: #EEF3FF; border-color: #C6D6FF; border-radius: 16px 16px 16px 4px">{{m.cp.sms}}</div></div>
+</sc-if>
+<span class="mono" style="font-size: 12px; color: #5F6980">{{m.cp.smsCount}}</span>
+</div>
+</sc-if>
+
+<sc-if value="{{m.cp.hasErr}}"><p role="alert" style="margin: 0; color: #B42318; font-size: 14px; font-weight: 600">{{m.cp.err}}</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end">
+<button class="btn" onClick="{{m.cp.toggleEdit}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path></svg>{{m.cp.editLabel}}</button>
+<button class="btn btn-pri" onClick="{{m.cp.send}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18-4-7-7-4 18-7z"></path></svg>{{m.cp.sendLabel}}</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{m.hasNotes}}">
+<div class="action">
+<div>
+<p style="margin: 0; font-weight: 800; font-size: 16.5px">Add notes for this meeting</p>
+<p style="margin: 4px 0 0; font-size: 13.5px; color: #4A5675; line-height: 1.5">{{m.np.detail}}</p>
+</div>
+<div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+<button class="{{m.np.micCls}}" onClick="{{m.np.toggleMic}}" aria-label="{{m.np.micAria}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"></path></svg></button>
+<span style="font-size: 14px; font-weight: 600; color: #1E2A4A; flex: 1 1 240px">{{m.np.micText}}</span>
+<button class="btn" onClick="{{m.np.pasteNotes}}">Paste AI notetaker notes</button>
+</div>
+<div><label class="lbl" for="notes-{{m.id}}">Notes: type, paste from your AI notetaker, or dictate</label><textarea id="notes-{{m.id}}" class="fld" style="min-height: 140px" placeholder="e.g. Reviewed beneficiary forms. Action: send signed form by Friday." value="{{m.np.notes}}" onChange="{{m.np.onNotes}}"></textarea></div>
+<sc-if value="{{m.np.hasErr}}"><p role="alert" style="margin: 0; color: #B42318; font-size: 14px; font-weight: 600">{{m.np.err}}</p></sc-if>
+<div style="display: flex; justify-content: flex-end"><button class="btn btn-pri" onClick="{{m.np.generate}}">Draft personalized follow-up</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{m.hasRetry}}">
+<div class="action" style="flex-direction: row; flex-wrap: wrap; align-items: center">
+<span class="aico aico-warn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg></span>
+<div style="flex: 1 1 320px; min-width: 0">
+<p style="margin: 0; font-weight: 800; font-size: 16px">{{m.rp.title}}</p>
+<p style="margin: 4px 0 0; font-size: 14px; color: #4A5675; line-height: 1.5">{{m.rp.detail}}</p>
+</div>
+<button class="btn btn-pri" onClick="{{m.rp.go}}">{{m.rp.action}}</button>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<p class="eyebrow">Audit trail</p>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px">
+<sc-for list="{{m.audit}}" as="s" hint-placeholder-count="5">
+<li class="{{s.boxCls}}">
+<div style="display: flex; align-items: center; gap: 8px">
+<span class="{{s.icoCls}}">
+<sc-if value="{{s.showCheck}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+<sc-if value="{{s.isWarn}}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg></sc-if>
+<sc-if value="{{s.isPend}}"><span>{{s.n}}</span></sc-if>
+</span>
+<span style="font-weight: 800; font-size: 13.5px">{{s.name}}</span>
+</div>
+<span class="{{s.tagCls}}" style="align-self: flex-start">{{s.stateLabel}}</span>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{s.lines}}" as="l" hint-placeholder-count="2">
+<li style="display: flex; flex-direction: column; gap: 2px">
+<span class="mono" style="font-size: 11px; color: #5F6980">{{l.t}}</span>
+<span style="font-size: 13px; line-height: 1.45; color: #1E2A4A">{{l.x}}</span>
+</li>
+</sc-for>
+</ul>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{noMeetings}}">
+<div style="border-top: 1px solid #EDF0F5; padding: 32px 20px; text-align: center; color: #4A5675; font-size: 14.5px">No meetings in this view.</div>
+</sc-if>
+</div>
+</section>
+</main>
+</sc-if>
+
+<sc-if value="{{isLive}}" hint-placeholder-val="{{false}}">
+<main style="max-width: 1320px; margin: 0 auto; padding: 28px 24px 72px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; justify-content: space-between">
+<div style="min-width: 0; max-width: 780px">
+<p class="eyebrow">Live run · one meeting, all 5 steps</p>
+<h1 style="margin: 6px 0 0; font-size: 32px; font-weight: 800; letter-spacing: -0.02em">{{lv.heading}}</h1>
+<p style="margin: 6px 0 0; color: #4A5675; font-size: 15.5px; line-height: 1.5">{{lv.sub}}</p>
+</div>
+<button class="btn" onClick="{{goDash}}">Exit to dashboard</button>
+</div>
+
+<div class="card" style="padding: 16px; overflow-x: auto">
+<div style="display: flex; align-items: center; min-width: 720px">
+<sc-for list="{{lv.pipe}}" as="p" hint-placeholder-count="5">
+<span style="display: flex; align-items: center; flex: 1; min-width: 0">
+<sc-if value="{{p.conn}}"><span class="{{p.connCls}}" style="width: 16px"></span></sc-if>
+<span class="pstep pbig {{p.cls}}">
+<span class="pico">
+<sc-if value="{{p.showCheck}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+<sc-if value="{{p.isWarn}}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.5 20h19L12 3.5z"></path><path d="M12 10v4.5M12 17.5v.3"></path></svg></sc-if>
+<sc-if value="{{p.isRun}}"><span class="spin-sm"></span></sc-if>
+<sc-if value="{{p.isPend}}"><span>{{p.n}}</span></sc-if>
+</span>
+<span style="display: flex; flex-direction: column; min-width: 0; gap: 1px">
+<span class="plabel">{{p.name}}</span>
+<span class="plabel" style="font-size: 11.5px; font-weight: 600; opacity: 0.85">{{p.stateLabel}}</span>
+</span>
+</span>
+</span>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+<sc-if value="{{lv.isBook}}">
+<div class="card" style="overflow: hidden">
+<div style="padding: 14px 20px; background: #0E1A3A; color: #ffffff; display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+<span class="tag" style="background: rgba(255,255,255,0.16); color: #ffffff">Step 1 · Client’s view</span>
+<span style="font-size: 14px; font-weight: 600">The booking page your client opens from your scheduling link</span>
+</div>
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span class="av" style="width: 48px; height: 48px; background: #1D5BFF">AM</span>
+<div>
+<p style="margin: 0; font-weight: 800; font-size: 19px">Book time with Alex Morgan</p>
+<p style="margin: 2px 0 0; font-size: 14px; color: #4A5675">45 min · video call · Alex Morgan Wealth</p>
+</div>
+</div>
+<fieldset class="fs">
+<legend class="lbl">Who is booking?</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{lv.clientChips}}" as="c" hint-placeholder-count="7">
+<button class="{{c.cls}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button>
+</sc-for>
+</div>
+</fieldset>
+<sc-if value="{{lv.isNewClient}}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+<div><label class="lbl" for="nc-name">Full name</label><input id="nc-name" class="fld" type="text" placeholder="e.g. Chris Patel" value="{{lv.name}}" onChange="{{lv.onName}}"></div>
+<div><label class="lbl" for="nc-email">Email</label><input id="nc-email" class="fld" type="email" placeholder="name@example.com" value="{{lv.email}}" onChange="{{lv.onEmail}}"></div>
+<div><label class="lbl" for="nc-phone">Mobile (for text reminders)</label><input id="nc-phone" class="fld" type="tel" placeholder="(555) 555-0100" value="{{lv.phone}}" onChange="{{lv.onPhone}}"></div>
+</div>
+</sc-if>
+<sc-if value="{{lv.isExisting}}">
+<p style="margin: 0; font-size: 13.5px; color: #4A5675">Booking as {{lv.bookerName}} · {{lv.bookerEmail}}</p>
+</sc-if>
+<fieldset class="fs">
+<legend class="lbl">Meeting type</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{lv.typeChips}}" as="c" hint-placeholder-count="4">
+<button class="{{c.cls}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button>
+</sc-for>
+</div>
+</fieldset>
+<div style="display: flex; flex-wrap: wrap; gap: 22px">
+<fieldset class="fs">
+<legend class="lbl">Day</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{lv.dayChips}}" as="c" hint-placeholder-count="3">
+<button class="{{c.cls}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button>
+</sc-for>
+</div>
+</fieldset>
+<fieldset class="fs">
+<legend class="lbl">Time</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{lv.timeChips}}" as="c" hint-placeholder-count="4">
+<button class="{{c.cls}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}">{{c.label}}</button>
+</sc-for>
+</div>
+</fieldset>
+</div>
+<sc-if value="{{lv.hasErr}}"><p role="alert" style="margin: 0; color: #B42318; font-size: 14px; font-weight: 600">{{lv.err}}</p></sc-if>
+<div><button class="btn btn-pri" onClick="{{lv.book}}">Confirm booking</button></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{lv.isRunning}}">
+<div class="card" style="padding: 28px; display: flex; align-items: center; gap: 18px">
+<span class="spin" aria-hidden="true"></span>
+<div role="status" style="min-width: 0">
+<p style="margin: 0; font-weight: 800; font-size: 17px">{{lv.runTitle}}</p>
+<p style="margin: 4px 0 0; font-size: 14.5px; color: #4A5675">{{lv.runText}}</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{lv.isWaiting}}">
+<div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-size: 19px; font-weight: 800">{{lv.bookerName}} is booked for {{lv.when}}</p>
+<p style="margin: 0; font-size: 14.5px; color: #4A5675; line-height: 1.55">The invite and reminders are out and the CRM is up to date. In real life FinProIQ waits here until the meeting ends, then asks for your notes. For this demo, skip ahead.</p>
+<div><button class="btn btn-pri" onClick="{{lv.fastForward}}">Skip ahead: the meeting just ended</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{lv.hasNotes}}">
+<div class="action">
+<div>
+<p style="margin: 0; font-weight: 800; font-size: 16.5px">Notes from your meeting with {{lv.bookerFirst}}</p>
+<p style="margin: 4px 0 0; font-size: 13.5px; color: #4A5675; line-height: 1.5">{{lv.np.detail}}</p>
+</div>
+<div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+<button class="{{lv.np.micCls}}" onClick="{{lv.np.toggleMic}}" aria-label="{{lv.np.micAria}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"></path></svg></button>
+<span style="font-size: 14px; font-weight: 600; color: #1E2A4A; flex: 1 1 240px">{{lv.np.micText}}</span>
+<button class="btn" onClick="{{lv.np.pasteNotes}}">Paste AI notetaker notes</button>
+</div>
+<div><label class="lbl" for="notes-live">Notes: type, paste, or dictate</label><textarea id="notes-live" class="fld" style="min-height: 160px" placeholder="e.g. Reviewed the portfolio. Action: send rebalance proposal by Friday." value="{{lv.np.notes}}" onChange="{{lv.np.onNotes}}"></textarea></div>
+<sc-if value="{{lv.np.hasErr}}"><p role="alert" style="margin: 0; color: #B42318; font-size: 14px; font-weight: 600">{{lv.np.err}}</p></sc-if>
+<div style="display: flex; justify-content: flex-end"><button class="btn btn-pri" onClick="{{lv.np.generate}}">Draft personalized follow-up</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{lv.hasCompose}}">
+<div class="action">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between">
+<div style="min-width: 0">
+<p style="margin: 0; font-weight: 800; font-size: 16.5px">Review follow-up for {{lv.bookerFirst}}</p>
+<p style="margin: 4px 0 0; font-size: 13.5px; color: #4A5675">{{lv.cp.basis}}</p>
+</div>
+<div role="tablist" aria-label="Channel" style="display: flex; background: #EEF1F6; padding: 4px; border-radius: 10px; gap: 4px">
+<button role="tab" aria-selected="{{lv.cp.emailSel}}" class="{{lv.cp.emailTabCls}}" onClick="{{lv.cp.tabEmail}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 6.5l8.5 6 8.5-6"></path></svg>Email</button>
+<button role="tab" aria-selected="{{lv.cp.smsSel}}" class="{{lv.cp.smsTabCls}}" onClick="{{lv.cp.tabSms}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"></path></svg>SMS</button>
+</div>
+</div>
+<sc-if value="{{lv.cp.isEmail}}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<div><label class="lbl" for="to-live">To (email address)</label><input id="to-live" class="fld" type="email" value="{{lv.cp.to}}" onChange="{{lv.cp.onTo}}"></div>
+<div><label class="lbl" for="sub-live">Subject</label><input id="sub-live" class="fld" type="text" value="{{lv.cp.subject}}" onChange="{{lv.cp.onSubject}}"></div>
+</div>
+<sc-if value="{{lv.cp.editing}}">
+<div><label class="lbl" for="body-live">Message</label><textarea id="body-live" class="fld" value="{{lv.cp.body}}" onChange="{{lv.cp.onBody}}"></textarea></div>
+</sc-if>
+<sc-if value="{{lv.cp.notEditing}}">
+<div><span class="lbl">Message preview</span><div class="preview">{{lv.cp.body}}</div></div>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{lv.cp.isSms}}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="max-width: 340px"><label class="lbl" for="ph-live">To (mobile number)</label><input id="ph-live" class="fld" type="tel" placeholder="(555) 555-0100" value="{{lv.cp.phone}}" onChange="{{lv.cp.onPhone}}"></div>
+<sc-if value="{{lv.cp.editing}}">
+<div><label class="lbl" for="sms-live">Text message</label><textarea id="sms-live" class="fld" style="min-height: 120px" value="{{lv.cp.sms}}" onChange="{{lv.cp.onSms}}"></textarea></div>
+</sc-if>
+<sc-if value="{{lv.cp.notEditing}}">
+<div><span class="lbl">Text preview</span><div class="preview" style="max-width: 460px; background: #EEF3FF; border-color: #C6D6FF; border-radius: 16px 16px 16px 4px">{{lv.cp.sms}}</div></div>
+</sc-if>
+<span class="mono" style="font-size: 12px; color: #5F6980">{{lv.cp.smsCount}}</span>
+</div>
+</sc-if>
+<sc-if value="{{lv.cp.hasErr}}"><p role="alert" style="margin: 0; color: #B42318; font-size: 14px; font-weight: 600">{{lv.cp.err}}</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end">
+<button class="btn" onClick="{{lv.cp.toggleEdit}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path></svg>{{lv.cp.editLabel}}</button>
+<button class="btn btn-pri" onClick="{{lv.cp.send}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"></path><path d="M21 3l-7 18-4-7-7-4 18-7z"></path></svg>{{lv.cp.sendLabel}}</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{lv.isDone}}">
+<div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 16px; border: 2px solid #1D5BFF">
+<span style="width: 52px; height: 52px; border-radius: 50%; background: #1D5BFF; color: #ffffff; display: inline-flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<p style="margin: 0; font-size: 22px; font-weight: 800">All 5 steps complete for {{lv.bookerName}}</p>
+<p style="margin: 0; font-size: 15px; color: #4A5675; line-height: 1.55">{{lv.doneText}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button class="btn btn-pri" onClick="{{lv.viewTimeline}}">See it in {{lv.bookerFirst}}’s timeline</button>
+<button class="btn" onClick="{{lv.again}}">Run another meeting</button>
+</div>
+</div>
+</sc-if>
+</div>
+
+<aside class="card" style="flex: 1 1 340px; min-width: 0; overflow: hidden">
+<div style="padding: 16px 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #EDF0F5">
+<span class="live-dot" aria-hidden="true"></span>
+<h2 style="margin: 0; font-size: 16px; font-weight: 800">System log</h2>
+<span style="margin-left: auto; font-size: 12.5px; color: #5F6980">Newest first</span>
+</div>
+<ol aria-live="polite" style="list-style: none; margin: 0; padding: 0; max-height: 640px; overflow-y: auto">
+<sc-for list="{{lv.log}}" as="l" hint-placeholder-count="3">
+<li style="padding: 12px 18px; display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid #F1F3F7">
+<span style="display: flex; gap: 8px; align-items: center"><span class="tag tag-pale">{{l.step}}</span><span class="mono" style="font-size: 11px; color: #5F6980">{{l.t}}</span></span>
+<span style="font-size: 13.5px; line-height: 1.45; color: #1E2A4A">{{l.x}}</span>
+</li>
+</sc-for>
+</ol>
+<sc-if value="{{lv.noLog}}"><p style="margin: 0; padding: 20px 18px; font-size: 14px; color: #4A5675; line-height: 1.5">Nothing yet. Book a meeting as the client to start the run.</p></sc-if>
+</aside>
+</div>
+</main>
+</sc-if>
+
+<sc-if value="{{hasToast}}">
+<div role="status" style="position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: #0E1A3A; color: #ffffff; padding: 14px 20px; border-radius: 12px; font-weight: 600; font-size: 14px; display: flex; gap: 10px; align-items: center; box-shadow: 0 12px 32px rgba(14,26,58,0.28); z-index: 50; max-width: calc(100% - 32px)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FAEFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span>{{toast}}</span>
+</div>
+</sc-if>
+</div>
+</template>
+<script>(function(global,factory){typeof exports==="object"&&typeof module!=="undefined"?module.exports=factory():typeof define==="function"&&define.amd?define(factory):(global=global||self,global.morphdom=factory())})(this,function(){"use strict";var DOCUMENT_FRAGMENT_NODE=11;function morphAttrs(fromNode,toNode){var toNodeAttrs=toNode.attributes;var attr;var attrName;var attrNamespaceURI;var attrValue;var fromValue;if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE||fromNode.nodeType===DOCUMENT_FRAGMENT_NODE){return}for(var i=toNodeAttrs.length-1;i>=0;i--){attr=toNodeAttrs[i];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;attrValue=attr.value;if(attrNamespaceURI){attrName=attr.localName||attrName;fromValue=fromNode.getAttributeNS(attrNamespaceURI,attrName);if(fromValue!==attrValue){if(attr.prefix==="xmlns"){attrName=attr.name}fromNode.setAttributeNS(attrNamespaceURI,attrName,attrValue)}}else{fromValue=fromNode.getAttribute(attrName);if(fromValue!==attrValue){fromNode.setAttribute(attrName,attrValue)}}}var fromNodeAttrs=fromNode.attributes;for(var d=fromNodeAttrs.length-1;d>=0;d--){attr=fromNodeAttrs[d];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;if(attrNamespaceURI){attrName=attr.localName||attrName;if(!toNode.hasAttributeNS(attrNamespaceURI,attrName)){fromNode.removeAttributeNS(attrNamespaceURI,attrName)}}else{if(!toNode.hasAttribute(attrName)){fromNode.removeAttribute(attrName)}}}}var range;var NS_XHTML="http://www.w3.org/1999/xhtml";var doc=typeof document==="undefined"?undefined:document;var HAS_TEMPLATE_SUPPORT=!!doc&&"content"in doc.createElement("template");var HAS_RANGE_SUPPORT=!!doc&&doc.createRange&&"createContextualFragment"in doc.createRange();function createFragmentFromTemplate(str){var template=doc.createElement("template");template.innerHTML=str;return template.content.childNodes[0]}function createFragmentFromRange(str){if(!range){range=doc.createRange();range.selectNode(doc.body)}var fragment=range.createContextualFragment(str);return fragment.childNodes[0]}function createFragmentFromWrap(str){var fragment=doc.createElement("body");fragment.innerHTML=str;return fragment.childNodes[0]}function toElement(str){str=str.trim();if(HAS_TEMPLATE_SUPPORT){return createFragmentFromTemplate(str)}else if(HAS_RANGE_SUPPORT){return createFragmentFromRange(str)}return createFragmentFromWrap(str)}function compareNodeNames(fromEl,toEl){var fromNodeName=fromEl.nodeName;var toNodeName=toEl.nodeName;var fromCodeStart,toCodeStart;if(fromNodeName===toNodeName){return true}fromCodeStart=fromNodeName.charCodeAt(0);toCodeStart=toNodeName.charCodeAt(0);if(fromCodeStart<=90&&toCodeStart>=97){return fromNodeName===toNodeName.toUpperCase()}else if(toCodeStart<=90&&fromCodeStart>=97){return toNodeName===fromNodeName.toUpperCase()}else{return false}}function createElementNS(name,namespaceURI){return!namespaceURI||namespaceURI===NS_XHTML?doc.createElement(name):doc.createElementNS(namespaceURI,name)}function moveChildren(fromEl,toEl){var curChild=fromEl.firstChild;while(curChild){var nextChild=curChild.nextSibling;toEl.appendChild(curChild);curChild=nextChild}return toEl}function syncBooleanAttrProp(fromEl,toEl,name){if(fromEl[name]!==toEl[name]){fromEl[name]=toEl[name];if(fromEl[name]){fromEl.setAttribute(name,"")}else{fromEl.removeAttribute(name)}}}var specialElHandlers={OPTION:function(fromEl,toEl){var parentNode=fromEl.parentNode;if(parentNode){var parentName=parentNode.nodeName.toUpperCase();if(parentName==="OPTGROUP"){parentNode=parentNode.parentNode;parentName=parentNode&&parentNode.nodeName.toUpperCase()}if(parentName==="SELECT"&&!parentNode.hasAttribute("multiple")){if(fromEl.hasAttribute("selected")&&!toEl.selected){fromEl.setAttribute("selected","selected");fromEl.removeAttribute("selected")}parentNode.selectedIndex=-1}}syncBooleanAttrProp(fromEl,toEl,"selected")},INPUT:function(fromEl,toEl){syncBooleanAttrProp(fromEl,toEl,"checked");syncBooleanAttrProp(fromEl,toEl,"disabled");if(fromEl.value!==toEl.value){fromEl.value=toEl.value}if(!toEl.hasAttribute("value")){fromEl.removeAttribute("value")}},TEXTAREA:function(fromEl,toEl){var newValue=toEl.value;if(fromEl.value!==newValue){fromEl.value=newValue}var firstChild=fromEl.firstChild;if(firstChild){var oldValue=firstChild.nodeValue;if(oldValue==newValue||!newValue&&oldValue==fromEl.placeholder){return}firstChild.nodeValue=newValue}},SELECT:function(fromEl,toEl){if(!toEl.hasAttribute("multiple")){var selectedIndex=-1;var i=0;var curChild=fromEl.firstChild;var optgroup;var nodeName;while(curChild){nodeName=curChild.nodeName&&curChild.nodeName.toUpperCase();if(nodeName==="OPTGROUP"){optgroup=curChild;curChild=optgroup.firstChild}else{if(nodeName==="OPTION"){if(curChild.hasAttribute("selected")){selectedIndex=i;break}i++}curChild=curChild.nextSibling;if(!curChild&&optgroup){curChild=optgroup.nextSibling;optgroup=null}}}fromEl.selectedIndex=selectedIndex}}};var ELEMENT_NODE=1;var DOCUMENT_FRAGMENT_NODE$1=11;var TEXT_NODE=3;var COMMENT_NODE=8;function noop(){}function defaultGetNodeKey(node){if(node){return node.getAttribute&&node.getAttribute("id")||node.id}}function morphdomFactory(morphAttrs){return function morphdom(fromNode,toNode,options){if(!options){options={}}if(typeof toNode==="string"){if(fromNode.nodeName==="#document"||fromNode.nodeName==="HTML"||fromNode.nodeName==="BODY"){var toNodeHtml=toNode;toNode=doc.createElement("html");toNode.innerHTML=toNodeHtml}else{toNode=toElement(toNode)}}else if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE$1){toNode=toNode.firstElementChild}var getNodeKey=options.getNodeKey||defaultGetNodeKey;var onBeforeNodeAdded=options.onBeforeNodeAdded||noop;var onNodeAdded=options.onNodeAdded||noop;var onBeforeElUpdated=options.onBeforeElUpdated||noop;var onElUpdated=options.onElUpdated||noop;var onBeforeNodeDiscarded=options.onBeforeNodeDiscarded||noop;var onNodeDiscarded=options.onNodeDiscarded||noop;var onBeforeElChildrenUpdated=options.onBeforeElChildrenUpdated||noop;var skipFromChildren=options.skipFromChildren||noop;var addChild=options.addChild||function(parent,child){return parent.appendChild(child)};var childrenOnly=options.childrenOnly===true;var fromNodesLookup=Object.create(null);var keyedRemovalList=[];function addKeyedRemoval(key){keyedRemovalList.push(key)}function walkDiscardedChildNodes(node,skipKeyedNodes){if(node.nodeType===ELEMENT_NODE){var curChild=node.firstChild;while(curChild){var key=undefined;if(skipKeyedNodes&&(key=getNodeKey(curChild))){addKeyedRemoval(key)}else{onNodeDiscarded(curChild);if(curChild.firstChild){walkDiscardedChildNodes(curChild,skipKeyedNodes)}}curChild=curChild.nextSibling}}}function removeNode(node,parentNode,skipKeyedNodes){if(onBeforeNodeDiscarded(node)===false){return}if(parentNode){parentNode.removeChild(node)}onNodeDiscarded(node);walkDiscardedChildNodes(node,skipKeyedNodes)}function indexTree(node){if(node.nodeType===ELEMENT_NODE||node.nodeType===DOCUMENT_FRAGMENT_NODE$1){var curChild=node.firstChild;while(curChild){var key=getNodeKey(curChild);if(key){fromNodesLookup[key]=curChild}indexTree(curChild);curChild=curChild.nextSibling}}}indexTree(fromNode);function handleNodeAdded(el){onNodeAdded(el);var curChild=el.firstChild;while(curChild){var nextSibling=curChild.nextSibling;var key=getNodeKey(curChild);if(key){var unmatchedFromEl=fromNodesLookup[key];if(unmatchedFromEl&&compareNodeNames(curChild,unmatchedFromEl)){curChild.parentNode.replaceChild(unmatchedFromEl,curChild);morphEl(unmatchedFromEl,curChild)}else{handleNodeAdded(curChild)}}else{handleNodeAdded(curChild)}curChild=nextSibling}}function cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey){while(curFromNodeChild){var fromNextSibling=curFromNodeChild.nextSibling;if(curFromNodeKey=getNodeKey(curFromNodeChild)){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}}function morphEl(fromEl,toEl,childrenOnly){var toElKey=getNodeKey(toEl);if(toElKey){delete fromNodesLookup[toElKey]}if(!childrenOnly){var beforeUpdateResult=onBeforeElUpdated(fromEl,toEl);if(beforeUpdateResult===false){return}else if(beforeUpdateResult instanceof HTMLElement){fromEl=beforeUpdateResult;indexTree(fromEl)}morphAttrs(fromEl,toEl);onElUpdated(fromEl);if(onBeforeElChildrenUpdated(fromEl,toEl)===false){return}}if(fromEl.nodeName!=="TEXTAREA"){morphChildren(fromEl,toEl)}else{specialElHandlers.TEXTAREA(fromEl,toEl)}}function morphChildren(fromEl,toEl){var skipFrom=skipFromChildren(fromEl,toEl);var curToNodeChild=toEl.firstChild;var curFromNodeChild=fromEl.firstChild;var curToNodeKey;var curFromNodeKey;var fromNextSibling;var toNextSibling;var matchingFromEl;outer:while(curToNodeChild){toNextSibling=curToNodeChild.nextSibling;curToNodeKey=getNodeKey(curToNodeChild);while(!skipFrom&&curFromNodeChild){fromNextSibling=curFromNodeChild.nextSibling;if(curToNodeChild.isSameNode&&curToNodeChild.isSameNode(curFromNodeChild)){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}curFromNodeKey=getNodeKey(curFromNodeChild);var curFromNodeType=curFromNodeChild.nodeType;var isCompatible=undefined;if(curFromNodeType===curToNodeChild.nodeType){if(curFromNodeType===ELEMENT_NODE){if(curToNodeKey){if(curToNodeKey!==curFromNodeKey){if(matchingFromEl=fromNodesLookup[curToNodeKey]){if(fromNextSibling===matchingFromEl){isCompatible=false}else{fromEl.insertBefore(matchingFromEl,curFromNodeChild);if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=matchingFromEl;curFromNodeKey=getNodeKey(curFromNodeChild)}}else{isCompatible=false}}}else if(curFromNodeKey){isCompatible=false}isCompatible=isCompatible!==false&&compareNodeNames(curFromNodeChild,curToNodeChild);if(isCompatible){morphEl(curFromNodeChild,curToNodeChild)}}else if(curFromNodeType===TEXT_NODE||curFromNodeType==COMMENT_NODE){isCompatible=true;if(curFromNodeChild.nodeValue!==curToNodeChild.nodeValue){curFromNodeChild.nodeValue=curToNodeChild.nodeValue}}}if(isCompatible){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}if(curToNodeKey&&(matchingFromEl=fromNodesLookup[curToNodeKey])&&compareNodeNames(matchingFromEl,curToNodeChild)){if(!skipFrom){addChild(fromEl,matchingFromEl)}morphEl(matchingFromEl,curToNodeChild)}else{var onBeforeNodeAddedResult=onBeforeNodeAdded(curToNodeChild);if(onBeforeNodeAddedResult!==false){if(onBeforeNodeAddedResult){curToNodeChild=onBeforeNodeAddedResult}if(curToNodeChild.actualize){curToNodeChild=curToNodeChild.actualize(fromEl.ownerDocument||doc)}addChild(fromEl,curToNodeChild);handleNodeAdded(curToNodeChild)}}curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling}cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey);var specialElHandler=specialElHandlers[fromEl.nodeName];if(specialElHandler){specialElHandler(fromEl,toEl)}}var morphedNode=fromNode;var morphedNodeType=morphedNode.nodeType;var toNodeType=toNode.nodeType;if(!childrenOnly){if(morphedNodeType===ELEMENT_NODE){if(toNodeType===ELEMENT_NODE){if(!compareNodeNames(fromNode,toNode)){onNodeDiscarded(fromNode);morphedNode=moveChildren(fromNode,createElementNS(toNode.nodeName,toNode.namespaceURI))}}else{morphedNode=toNode}}else if(morphedNodeType===TEXT_NODE||morphedNodeType===COMMENT_NODE){if(toNodeType===morphedNodeType){if(morphedNode.nodeValue!==toNode.nodeValue){morphedNode.nodeValue=toNode.nodeValue}return morphedNode}else{morphedNode=toNode}}}if(morphedNode===toNode){onNodeDiscarded(fromNode)}else{if(toNode.isSameNode&&toNode.isSameNode(morphedNode)){return}morphEl(morphedNode,toNode,childrenOnly);if(keyedRemovalList){for(var i=0,len=keyedRemovalList.length;i<len;i++){var elToRemove=fromNodesLookup[keyedRemovalList[i]];if(elToRemove){removeNode(elToRemove,elToRemove.parentNode,false)}}}}if(!childrenOnly&&morphedNode!==fromNode&&fromNode.parentNode){if(morphedNode.actualize){morphedNode=morphedNode.actualize(fromNode.ownerDocument||doc)}fromNode.parentNode.replaceChild(morphedNode,fromNode)}return morphedNode}}var morphdom=morphdomFactory(morphAttrs);return morphdom});</script>
+<script>
+(function () {
+  var H = {}, hid = 0, comp, app, tpl, pending = false;
+  var WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+  function schedule() { if (pending) return; pending = true; Promise.resolve().then(function () { pending = false; render(); }); }
+  window.DCLogic = class DCLogic {
+    constructor() { this.props = {}; this.state = {}; }
+    setState(p) { Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); schedule(); }
+    forceUpdate() { schedule(); }
+  };
+  function lookup(path, scopes) {
+    path = path.trim();
+    if (path === 'true') return true; if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return +path;
+    var parts = path.split('.'), v;
+    for (var i = scopes.length - 1; i >= 0; i--) { if (scopes[i] && Object.prototype.hasOwnProperty.call(scopes[i], parts[0])) { v = scopes[i][parts[0]]; break; } }
+    for (var j = 1; j < parts.length && v != null; j++) v = v[parts[j]];
+    return v;
+  }
+  function interp(s, scopes) { return s.replace(/\{\{\s*([^}]+?)\s*\}\}/g, function (_, p) { var v = lookup(p, scopes); return v == null ? '' : String(v); }); }
+  function val(s, scopes) { var m = WHOLE.exec(s || ''); return m ? lookup(m[1], scopes) : s; }
+  function kids(node, scopes, out) { node.childNodes.forEach(function (c) { build(c, scopes, out); }); }
+  function build(node, scopes, out) {
+    if (node.nodeType === 3) { out.appendChild(document.createTextNode(interp(node.nodeValue, scopes))); return; }
+    if (node.nodeType !== 1) return;
+    var tag = node.localName;
+    if (tag === 'sc-if') { if (val(node.getAttribute('value'), scopes)) kids(node, scopes, out); return; }
+    if (tag === 'sc-for') {
+      var list = val(node.getAttribute('list'), scopes) || [], as = node.getAttribute('as') || 'item';
+      list.forEach(function (it, i) { var sc = {}; sc[as] = it; sc.$index = i; kids(node, scopes.concat([sc]), out); });
+      return;
+    }
+    var el = node.namespaceURI === 'http://www.w3.org/1999/xhtml' ? document.createElement(tag) : document.createElementNS(node.namespaceURI, tag);
+    for (var k = 0; k < node.attributes.length; k++) {
+      var n = node.attributes[k].name, v = node.attributes[k].value;
+      if (n.indexOf('hint-') === 0) continue;
+      if (/^on/.test(n)) {
+        var fn = val(v, scopes);
+        if (typeof fn === 'function') { var id = 'h' + (hid++); H[id] = fn; el.setAttribute('data-h-' + (n === 'onchange' || n === 'oninput' ? 'input' : n.slice(2)), id); }
+        continue;
+      }
+      var m = WHOLE.exec(v), o;
+      if (m) { o = lookup(m[1], scopes); if (o === false || o == null) continue; o = o === true ? '' : String(o); }
+      else o = interp(v, scopes);
+      if (n === 'value' && tag === 'textarea') { el.textContent = o; continue; }
+      el.setAttribute(n, o);
+    }
+    kids(node, scopes, el);
+    out.appendChild(el);
+  }
+  function render() {
+    H = {}; hid = 0;
+    var vals = comp.renderVals();
+    var holder = document.createElement('div');
+    tpl.childNodes.forEach(function (n) { build(n, [vals], holder); });
+    morphdom(app, holder, { childrenOnly: true });
+  }
+  window.addEventListener('DOMContentLoaded', function () {
+    tpl = document.getElementById('tpl').content;
+    app = document.getElementById('app');
+    app.addEventListener('click', function (e) { var t = e.target.closest('[data-h-click]'); if (t) { var f = H[t.getAttribute('data-h-click')]; if (f) f(e); } });
+    app.addEventListener('input', function (e) { var t = e.target.closest('[data-h-input]'); if (t) { var f = H[t.getAttribute('data-h-input')]; if (f) f(e); } });
+    comp = new Component();
+    render();
+  });
+})();
+</script>
+<script>
+class Component extends DCLogic {
+  fmt(iso) { var p = iso.split('-').map(Number); return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][p[1]-1] + ' ' + p[2]; }
+  fmtLong(iso) { return this.fmt(iso) + ', ' + iso.slice(0, 4); }
+  shift(iso, n) { var p = iso.split('-').map(Number); return new Date(Date.UTC(p[0], p[1]-1, p[2] + n)).toISOString().slice(0, 10); }
+  wk(iso) { var p = iso.split('-').map(Number); return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(Date.UTC(p[0], p[1]-1, p[2])).getUTCDay()]; }
+  addMin(t, min) {
+    var r = /(\d+):(\d+)\s*(AM|PM)/.exec(t);
+    var h = (+r[1]) % 12 + (r[3] === 'PM' ? 12 : 0);
+    var tot = h * 60 + (+r[2]) + min;
+    h = Math.floor(tot / 60) % 24; var mm = tot % 60;
+    return (((h + 11) % 12) + 1) + ':' + String(mm).padStart(2, '0') + ' ' + (h >= 12 ? 'PM' : 'AM');
+  }
+
+  data() {
+    if (this._d) return this._d;
+    var TODAY = '2026-10-18';
+    var clients = [
+      { key: 'jane', name: 'Jane Doe', first: 'Jane', initials: 'JD', email: 'jane.doe@example.com', phone: '(415) 555-0142', stage: 'Client since May 2026' },
+      { key: 'marcus', name: 'Marcus Chen', first: 'Marcus', initials: 'MC', email: 'marcus.chen@example.com', phone: '(415) 555-0178', stage: 'Client since Apr 2026' },
+      { key: 'ortiz', name: 'David & Elena Ortiz', first: 'David & Elena', initials: 'DO', email: 'ortiz.family@example.com', phone: '(650) 555-0119', stage: 'Clients since Jan 2026' },
+      { key: 'priya', name: 'Priya Natarajan', first: 'Priya', initials: 'PN', email: 'priya.n@example.com', phone: '', stage: 'Prospect' },
+      { key: 'grace', name: 'Grace Okafor', first: 'Grace', initials: 'GO', email: 'grace.okafor@example.com', phone: '(510) 555-0163', stage: 'Client since 2024' },
+      { key: 'sam', name: 'Sam Whitfield', first: 'Sam', initials: 'SW', email: 'sam.whitfield@example.com', phone: '(408) 555-0127', stage: 'New prospect' }
+    ];
+    var byKey = {}; clients.forEach(function (c) { byKey[c.key] = c; });
+    var WARN = {
+      compose: { title: 'Awaiting your approval', detail: 'Email and SMS drafts are ready. Review, edit if needed, then send.' },
+      notes: { title: 'Notes missing', detail: 'No notes were added after this meeting, so no follow-up has gone out yet. Dictate or type a quick recap and FinProIQ will draft a personal follow-up.' }
+    };
+    var D = [
+      ['j10','jane','2026-10-20','10:00 AM','Annual review','ddppp',{ lead: -7, bookedAt: '7:40 PM' }],
+      ['j9','jane','2026-10-14','2:00 PM','Portfolio check-in','dddwp',{ lead: -12, voice: 1, summary: 'Up 6.2% YTD; rebalance about 5% into bonds; look at adding to Leo’s 529.', warn: { step: 3, kind: 'compose' }, draft: 'jane' }],
+      ['j8','jane','2026-09-30','11:00 AM','Roth conversion discussion','ddddd',{ summary: 'Partial Roth conversion of $25K this year; agreed to proceed in December.' }],
+      ['j7','jane','2026-09-12','9:30 AM','Insurance review','ddddw',{ voice: 1, summary: 'Reviewed term life coverage; recommended increasing to $1.5M.', warn: { step: 4, kind: 'retry', title: 'CRM update failed', detail: 'The CRM didn’t respond (timed out after 30 seconds). Your notes and 2 action items are safe here but not in the CRM yet.', action: 'Retry CRM sync', done: 'Retry succeeded · notes and 2 action items saved to CRM', toast: 'CRM updated for Jane Doe' }, warnLog: [[71, 'Tried to save notes and action items to CRM — no response after 30s'], [76, 'Retried automatically — failed again']] }],
+      ['j6','jane','2026-08-28','3:00 PM','Quarterly review','ddddd',{ summary: 'On track for the plan; increased monthly savings by $300.' }],
+      ['j5','jane','2026-08-05','1:00 PM','Estate plan update','ddwpp',{ warn: { step: 2, kind: 'notes' }, warnLog: [[60, 'Meeting ended — no voice note or notes received']], dictation: 'Reviewed the updated will and trust documents. Emma to be named contingent beneficiary on the IRA. Action: signed beneficiary form back by next Friday. Check in again in three months.' }],
+      ['j4','jane','2026-07-15','10:30 AM','Mid-year check-in','ddddd',{ voice: 1, summary: 'Emergency fund now covers 6 months; no portfolio changes.' }],
+      ['j3','jane','2026-06-20','4:00 PM','College savings plan','ddddd',{ summary: 'Opened a 529 for Leo with a $250/month automatic contribution.' }],
+      ['j2','jane','2026-05-30','11:00 AM','Financial plan presentation','ddddd',{ summary: 'Presented the full plan; Jane approved the investment policy.' }],
+      ['j1','jane','2026-05-02','9:00 AM','Discovery call','ddddd',{ isNew: 1, summary: 'Goals: retire at 62 and fund college for Emma and Leo.' }],
+      ['m4','marcus','2026-10-16','3:30 PM','Tax-loss harvesting review','dddwp',{ lead: -5, voice: 1, summary: 'About $18K in harvestable losses; hold company stock until the January vest.', warn: { step: 3, kind: 'compose' }, draft: 'marcus' }],
+      ['m3','marcus','2026-09-18','1:00 PM','Quarterly review','ddddd',{ summary: 'Raised 401(k) contribution to the max for the rest of the year.' }],
+      ['m2','marcus','2026-07-10','12:00 PM','Plan update','ddddd',{ voice: 1, summary: 'Updated plan for new salary; added an equity-comp section.' }],
+      ['m1','marcus','2026-04-22','5:00 PM','Discovery call','ddddd',{ isNew: 1, summary: 'Goals: manage RSUs, buy a home in 3 years.' }],
+      ['o5','ortiz','2026-10-15','10:00 AM','Retirement income plan','dwppp',{ lead: -8, bookedAt: '9:05 AM', warn: { step: 1, kind: 'retry', title: 'Duplicate contact in CRM', detail: 'Two matching records were found (“David Ortiz” and “Ortiz Family”). Merge them so this meeting and its notes land in one place.', action: 'Merge records & continue', done: 'Records merged into “David & Elena Ortiz” · meeting logged', toast: 'Merged. Next: add your meeting notes' }, warnLog: [['b', 'Two matching CRM records found — paused so nothing gets duplicated']], dictation: 'Walked through the retirement income plan. Elena claims Social Security at 67 and David at 70. Monthly $6,500 transfer from the brokerage account starts in January. I will send the updated income projection by next week.' }],
+      ['o4','ortiz','2026-09-02','11:30 AM','Quarterly review','ddddd',{ summary: 'Portfolio on track; discussed long-term care options.' }],
+      ['o3','ortiz','2026-06-11','2:00 PM','Social Security timing','ddddd',{ voice: 1, summary: 'Modeled claiming ages; leaning toward 67 / 70.' }],
+      ['o2','ortiz','2026-03-19','10:00 AM','Annual review','ddddd',{ summary: 'Consolidated two old 401(k)s into one IRA.' }],
+      ['o1','ortiz','2026-01-08','4:00 PM','Rollover consultation','ddddd',{ isNew: 1, summary: 'Initial review of retirement accounts and goals.' }],
+      ['p3','priya','2026-10-22','1:30 PM','Proposal meeting','wpppp',{ lead: -10, bookedAt: '6:02 PM', warn: { step: 0, kind: 'retry', title: 'Phone number missing', detail: 'Priya booked without a phone number, so SMS reminders and text follow-ups can’t go out.', action: 'Ask Priya for her number', done: 'Emailed Priya asking for her mobile number · booking confirmed', toast: 'Request sent to Priya' }, warnLog: [['b', 'Booking received — phone field left blank']] }],
+      ['p2','priya','2026-10-06','3:30 PM','Goals deep-dive','ddddd',{ summary: 'Clarified goals: early retirement at 55, sabbatical in 2028.' }],
+      ['p1','priya','2026-09-24','12:30 PM','Discovery call','ddddd',{ isNew: 1, summary: 'Intro call; referred by Grace Okafor.' }],
+      ['g3','grace','2026-10-09','4:00 PM','Quarterly review','ddddd',{ voice: 1, summary: 'Moved $40K of cash into a short-term bond ladder.' }],
+      ['g2','grace','2026-07-08','11:00 AM','Long-term care discussion','ddddd',{ summary: 'Compared hybrid LTC policies; Grace will decide by fall.' }],
+      ['g1','grace','2026-04-02','2:30 PM','Annual review','ddddd',{ summary: 'Annual review; no changes to allocation.' }],
+      ['s1','sam','2026-10-21','9:00 AM','Discovery call','ddppp',{ isNew: 1, lead: -5, bookedAt: '9:12 AM' }]
+    ];
+    var self = this;
+    var meetings = D.map(function (r) {
+      var o = r[6]; var c = byKey[r[1]];
+      var m = { id: r[0], ck: r[1], iso: r[2], time: r[3], type: r[4], dShort: self.fmt(r[2]), dLong: self.fmtLong(r[2]), upcoming: r[2] > TODAY, isNew: !!o.isNew, voice: !!o.voice, summary: o.summary || 'Reviewed progress against the plan; no changes needed.', dictation: o.dictation || '', notes: '', listening: false, dictated: false, notesErr: '' };
+      m.bookedOn = self.fmt(self.shift(r[2], o.lead || -9)) + ' · ' + (o.bookedAt || '8:14 PM');
+      var T = function (min) { return m.dShort + ' · ' + self.addMin(m.time, min); };
+      m.T = T;
+      m.steps = r[5].split('').map(function (s, i) {
+        var st = { s: s, log: [], warn: null };
+        if (s === 'w') {
+          st.warn = Object.assign({}, WARN[o.warn.kind] || {}, o.warn);
+          if (o.warn.kind === 'compose') st.log = [{ t: T(57), x: 'Personalized email + SMS drafted from your ' + (m.voice ? 'voice note' : 'notes') }, { t: T(57), x: 'Waiting for your approval — nothing is sent until you say so' }];
+          else st.log = (o.warnLog || []).map(function (w) { return { t: w[0] === 'b' ? m.bookedOn : T(w[0]), x: w[1] }; });
+        } else {
+          st.log = self.logFor(i, s, m, c);
+        }
+        return st;
+      });
+      if (o.draft) m.draft = self.cannedDraft(o.draft, c);
+      return m;
+    });
+    var acts = [
+      { id: 'a1', mid: 'm4', step: 3, kind: 'followup', time: 'Oct 16 · 4:28 PM', title: 'Follow-up drafted — ready for approval', detail: 'FinProIQ turned your voice note into a personal email and SMS for Marcus. Nothing goes out until you approve it.' },
+      { id: 'a2', mid: 's1', step: 1, kind: 'booking', time: 'Oct 16 · 9:12 AM', title: 'New booking + new CRM contact', detail: 'Sam booked a Discovery call for Tue, Oct 21 at 9:00 AM. A new CRM contact was created and a calendar invite sent.' },
+      { id: 'a3', mid: 'o5', step: 1, kind: 'crm', time: 'Oct 15 · 11:02 AM', title: 'CRM blocked: duplicate contact', detail: 'The Ortizes’ meeting is on hold because two matching CRM records exist. Merge them to continue to notes and follow-up.' },
+      { id: 'a4', mid: 'j9', step: 3, kind: 'followup', time: 'Oct 14 · 2:57 PM', title: 'Follow-up drafted — ready for approval', detail: 'Your voice note from Jane’s portfolio check-in became an email and SMS recap with 2 action items.' },
+      { id: 'a5', mid: 'j10', step: 1, kind: 'booking', time: 'Oct 13 · 7:40 PM', title: 'Booking: Annual review', detail: 'Jane booked her Annual review for Tue, Oct 20 at 10:00 AM. Her CRM record was updated and a reminder is set.' },
+      { id: 'a6', mid: 'p3', step: 0, kind: 'booking', time: 'Oct 12 · 6:02 PM', title: 'Booking received — phone number missing', detail: 'Priya booked her proposal meeting for Thu, Oct 22 without a phone number. SMS reminders are off until you have it.' },
+      { id: 'a7', mid: 'g3', step: 4, kind: 'crm', time: 'Oct 9 · 5:16 PM', title: 'Recap sent & CRM updated', detail: 'Grace opened your recap email. Notes and the bond-ladder action item were saved to her CRM record.' },
+      { id: 'a8', mid: 'p2', step: 3, kind: 'followup', time: 'Oct 6 · 4:40 PM', title: 'Recap email sent', detail: 'Approved and sent to Priya after your Goals deep-dive. She replied within the hour.' },
+      { id: 'a9', mid: 'j8', step: 3, kind: 'followup', time: 'Sep 30 · 12:10 PM', title: 'Recap email sent', detail: 'Roth conversion recap sent to Jane; the December next step was logged in the CRM.' },
+      { id: 'a10', mid: 'j7', step: 4, kind: 'crm', time: 'Sep 12 · 10:46 AM', title: 'CRM update failed', detail: 'Notes from Jane’s insurance review didn’t reach the CRM after two tries. One click retries the sync.' },
+      { id: 'a11', mid: 'j5', step: 2, kind: 'notes', time: 'Aug 5 · 2:00 PM', title: 'Notes missing after meeting', detail: 'No notes were captured for Jane’s estate plan update, so no follow-up went out.' }
+    ];
+    var byId = {}; meetings.forEach(function (m) { byId[m.id] = m; });
+    acts.forEach(function (a) { a.flag = byId[a.mid].steps[a.step].s === 'w'; });
+    this._d = { clients: clients, byKey: byKey, meetings: meetings, byId: byId, acts: acts };
+    return this._d;
+  }
+
+  logFor(i, s, m, c) {
+    var T = m.T;
+    if (s === 'p') return [{ t: '—', x: (m.upcoming && i >= 2) ? 'Opens after the meeting on ' + m.dShort : 'Waiting on the previous step' }];
+    if (i === 0) return [{ t: m.bookedOn, x: c.first + ' booked “' + m.type + '” through your scheduling link' }, { t: m.bookedOn, x: 'Calendar invite + video link sent to ' + c.email }, { t: m.bookedOn, x: 'Reminder set for 24 hours before' }];
+    if (i === 1) return m.isNew ? [{ t: m.bookedOn, x: 'New contact created in CRM · stage set to Prospect' }, { t: m.bookedOn, x: 'Meeting added to the contact’s timeline' }] : [{ t: m.bookedOn, x: 'Matched existing CRM contact “' + c.name + '”' }, { t: m.bookedOn, x: 'Upcoming meeting logged on their record' }];
+    if (i === 2) return [{ t: T(55), x: m.voice ? 'Voice note captured (2m 10s) and transcribed' : 'AI notetaker notes pasted in' }, { t: T(56), x: 'Key points: ' + m.summary }];
+    if (i === 3) return [{ t: T(57), x: 'Personalized email drafted from your notes' }, { t: T(70), x: 'Approved by you · sent to ' + c.email }, { t: T(140), x: 'Opened by ' + c.first }];
+    return [{ t: T(71), x: 'Notes, action items and next review date saved to CRM' }];
+  }
+
+  cannedDraft(which, c) {
+    if (which === 'jane') return { tab: 'email', editing: false, err: '', to: c.email, phone: c.phone,
+      subject: 'Great catching up today, Jane — your next steps',
+      body: 'Hi Jane,\n\nThanks for making time today — and it was so good to hear Emma has settled in well at college.\n\nHere’s a quick recap of what we covered:\n• Your portfolio is up 6.2% this year, a little ahead of the plan we set in May.\n• We agreed to move about 5% from stocks into bonds to keep you on track for retiring at 62.\n• You asked about adding to Leo’s 529 — I’ll run the numbers for you.\n\nNext steps:\n1. I’ll send the rebalance paperwork for e-signature by Friday.\n2. When you get a chance, please send me your latest pay stub so we can update your savings rate.\n\nTalk soon,\nAlex',
+      sms: 'Hi Jane, it’s Alex. Great catching up today! Quick recap: we’re moving ~5% into bonds and I’ll look at Leo’s 529. Paperwork coming by Fri — could you send a photo of your latest pay stub? Thanks!',
+      basis: 'Personalized with: your voice note · Jane’s goals (retire at 62, kids’ college) · your last 3 meetings' };
+    return { tab: 'email', editing: false, err: '', to: c.email, phone: c.phone,
+      subject: 'Recap: your tax-loss harvesting plan',
+      body: 'Hi Marcus,\n\nThanks for the time this afternoon — and congrats again on the new role.\n\nHere’s what we covered:\n• We found about $18,000 in losses we can harvest in your taxable account before year-end.\n• We’ll swap into similar funds so your overall mix stays the same.\n• You’ll hold your company stock until after the January vest.\n\nNext steps:\n1. I’ll place the trades by Oct 24 and send you a confirmation.\n2. Please forward your CPA’s contact so I can share a summary with them.\n\nBest,\nAlex',
+      sms: 'Hi Marcus, Alex here. Great talking today! Recap: harvesting ~$18K in losses before year-end, trades placed by Oct 24. Could you text me your CPA’s contact? Thanks!',
+      basis: 'Personalized with: your voice note · Marcus’s equity comp and home-buying goals' };
+  }
+
+  genDraft(m) {
+    var c = this.data().byKey[m.ck];
+    var cap = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
+    var parts = m.notes.split(/\n+|\.\s+/).map(function (s) { return s.replace(/^[•\-\*\s]+/, '').trim().replace(/\.$/, ''); }).filter(function (s) { return s && !/:$/.test(s); });
+    var acts = [], rec = [];
+    parts.forEach(function (p) { var mm = /^action( item)?s?\s*:?\s*/i.exec(p); if (mm && mm[0].length) acts.push(cap(p.slice(mm[0].length))); else rec.push(cap(p)); });
+    rec = rec.slice(0, 5);
+    var body = 'Hi ' + c.first + ',\n\nThank you for taking the time to meet — I always enjoy our conversations. Here’s a quick recap so we’re on the same page:\n\n' + rec.map(function (p) { return '• ' + p + '.'; }).join('\n') +
+      (acts.length ? '\n\nNext steps:\n' + acts.map(function (a, i) { return (i + 1) + '. ' + a + '.'; }).join('\n') : '') +
+      '\n\nIf anything comes up in the meantime, just reply here or text me.\n\nWarmly,\nAlex';
+    var sms = 'Hi ' + c.first + ', it’s Alex. Thanks for meeting with me! I just emailed a recap' + (acts.length ? ' — next up: ' + acts[0].charAt(0).toLowerCase() + acts[0].slice(1) : ' of what we covered') + '. Text me anytime with questions.';
+    return { tab: 'email', editing: false, err: '', to: c.email, phone: c.phone, nActs: acts.length, nRecap: rec.length,
+      subject: 'Thank you, ' + c.first + ' — recap from our ' + m.type.toLowerCase(),
+      body: body, sms: sms,
+      basis: 'Personalized with: your notes from ' + m.dShort + ' · ' + c.first + '’s history · warm, plain-English tone' };
+  }
+
+  cur(m) { var c = -1; for (var i = 0; i < 5; i++) { if (m.steps[i].s === 'd') c = i; else break; } return c; }
+  kind(m, i) { var st = m.steps[i]; var cur = this.cur(m); return i === cur ? 'cur' : st.s === 'd' ? 'done' : st.s === 'w' ? 'warn' : st.s === 'r' ? 'run' : 'pend'; }
+
+  pipe(m) {
+    var SH = ['Booked', 'CRM add', 'Notes', 'Email / SMS', 'CRM update'];
+    var LBL = { cur: 'Last completed', done: 'Done', warn: 'Needs attention', run: 'In progress…', pend: 'Not yet' };
+    var self = this;
+    return m.steps.map(function (st, i) {
+      var k = self.kind(m, i);
+      return { n: i + 1, name: SH[i], cls: 'st-' + k, showCheck: k === 'cur' || k === 'done', isWarn: k === 'warn', isRun: k === 'run', isPend: k === 'pend', conn: i > 0, connCls: 'conn' + (st.s === 'd' ? ' conn-on' : ''), stateLabel: LBL[k] };
+    });
+  }
+
+  audit(m) {
+    var LN = ['Booked', 'CRM add / update', 'Meeting notes', 'Email / SMS', 'CRM update'];
+    var LBL = { cur: 'Last completed', done: 'Done', warn: 'Needs attention', run: 'In progress…', pend: 'Not yet' };
+    var TAG = { cur: 'blue', done: 'pale', warn: 'amber', run: 'pale', pend: 'gray' };
+    var self = this;
+    return m.steps.map(function (st, i) {
+      var k = self.kind(m, i);
+      return { n: i + 1, name: LN[i], icoCls: 'pico ic-' + k, showCheck: k === 'cur' || k === 'done', isWarn: k === 'warn', isPend: k === 'pend' || k === 'run', stateLabel: LBL[k], tagCls: 'tag tag-' + TAG[k], boxCls: 'abox abox-' + k, lines: st.log.map(function (l) { return { t: l.t, x: l.x }; }) };
+    });
+  }
+
+  complete(m, i, lines) {
+    var st = m.steps[i]; st.s = 'd'; st.warn = null; st.log = lines;
+    var nx = i + 1; if (nx > 4) return;
+    var n = m.steps[nx];
+    if (nx === 1) { this.complete(m, 1, [{ t: 'Just now', x: 'Matched existing CRM contact · meeting logged on their record' }]); return; }
+    if (m.upcoming) return;
+    if (nx === 2) { n.s = 'w'; n.warn = { kind: 'notes', title: 'Add meeting notes', detail: 'Speak or type what happened in the meeting and FinProIQ will draft a personal follow-up for you to approve.' }; n.log = [{ t: 'Just now', x: 'Ready for your notes' }]; return; }
+    if (nx === 3) { n.s = 'w'; n.warn = { kind: 'compose', title: 'Awaiting your approval' }; n.log = [{ t: 'Just now', x: 'Personalized email + SMS drafted from your notes' }, { t: 'Just now', x: 'Waiting for your approval — nothing is sent until you say so' }]; m.draft = this.genDraft(m); return; }
+    if (nx === 4) { this.complete(m, 4, [{ t: 'Just now', x: 'Recap, action items and next steps saved to the CRM record' }]); }
+  }
+
+  toast(msg) {
+    var self = this;
+    this.setState({ toast: msg });
+    clearTimeout(this._tt);
+    this._tt = setTimeout(function () { self.setState({ toast: '' }); }, 3400);
+  }
+
+  send(m) {
+    var dr = m.draft;
+    if (dr.tab === 'sms') {
+      if (String(dr.phone || '').replace(/\D/g, '').length < 10) { dr.err = 'Enter a valid mobile number to send the text.'; this.forceUpdate(); return; }
+    } else if (!/^\S+@\S+\.\S+$/.test(dr.to || '')) { dr.err = 'Enter a valid email address.'; this.forceUpdate(); return; }
+    dr.err = ''; dr.editing = false;
+    var via = dr.tab === 'sms' ? 'SMS sent to ' + dr.phone : 'Email sent to ' + dr.to;
+    if (m.live) { this.liveSend(m, via); return; }
+    var prev = m.steps[3].log.filter(function (l) { return l.x.indexOf('Waiting for your approval') !== 0; });
+    this.complete(m, 3, prev.concat([{ t: 'Just now', x: 'Approved by you · ' + via }]));
+    this.toast(via + ' · CRM updated');
+  }
+
+  retry(m) {
+    var i = m.steps.findIndex(function (x) { return x.s === 'w'; }); if (i < 0) return;
+    var w = m.steps[i];
+    var msg = w.warn.toast;
+    this.complete(m, i, w.log.concat([{ t: 'Just now', x: w.warn.done }]));
+    this.toast(msg);
+  }
+
+  mic(m) {
+    var self = this;
+    if (m.listening) { this.stopMic(m); return; }
+    m.listening = true; m.micNote = ''; m.realMic = false; m.notesErr = '';
+    m.base = m.notes ? m.notes.trim() + '\n' : '';
+    var SR = (typeof window !== 'undefined') && (window.SpeechRecognition || window.webkitSpeechRecognition);
+    if (SR) {
+      try {
+        var r = new SR(); m.rec = r; r.continuous = true; r.interimResults = true; r.lang = 'en-US';
+        r.onresult = function (e) { var t = ''; for (var i = 0; i < e.results.length; i++) t += e.results[i][0].transcript; m.realMic = true; m.dictated = true; m.notes = m.base + t.trim(); self.forceUpdate(); };
+        r.onerror = function () { if (m.rec === r) m.rec = null; if (m.listening && !m.realMic) self.simDictate(m, 'The mic isn’t available in this preview, so here’s a sample dictation.'); };
+        r.onend = function () { if (m.rec === r) { m.rec = null; if (m.realMic) { m.listening = false; self.forceUpdate(); } } };
+        r.onstart = function () {
+          clearTimeout(m._t);
+          m._t = setTimeout(function () { if (m.listening && !m.realMic) { try { r.abort(); } catch (e) {} m.rec = null; self.simDictate(m, 'Didn’t catch any speech, so here’s a sample dictation.'); } }, 8000);
+        };
+        r.start(); this.forceUpdate();
+        return;
+      } catch (e) { m.rec = null; }
+    }
+    this.simDictate(m, 'Your browser doesn’t allow voice capture here, so here’s a sample dictation.');
+  }
+  simDictate(m, note) {
+    var self = this;
+    clearInterval(m._iv); m.listening = true; m.micNote = note;
+    var words = (m.dictation || 'Reviewed progress against the plan. No changes needed. Action: book the next check-in in three months.').split(' ');
+    var i = 0; m.notes = m.base || '';
+    m._iv = setInterval(function () {
+      if (!m.listening) { clearInterval(m._iv); return; }
+      m.notes += (i ? ' ' : '') + words[i]; i++; m.dictated = true;
+      if (i >= words.length) { clearInterval(m._iv); m.listening = false; }
+      self.forceUpdate();
+    }, 90);
+    this.forceUpdate();
+  }
+  stopMic(m) {
+    m.listening = false; clearInterval(m._iv); clearTimeout(m._t);
+    if (m.rec) { try { m.rec.stop(); } catch (e) {} }
+    this.forceUpdate();
+  }
+  pasteNotes(m) {
+    var lines = (m.dictation || 'Reviewed progress against the plan. Action: book the next check-in in three months.').split(/\.\s+/).map(function (s) { return s.replace(/\.$/, ''); }).filter(Boolean);
+    m.notes = 'Meeting summary (AI notetaker):\n' + lines.map(function (l) { return '• ' + l + '.'; }).join('\n');
+    m.dictated = false; m.notesErr = ''; m.micNote = '';
+    this.forceUpdate();
+  }
+  npVM(m, w) {
+    var self = this;
+    return { detail: w.warn.detail, notes: m.notes, onNotes: function (e) { m.notes = e.target.value; m.notesErr = ''; self.forceUpdate(); },
+      toggleMic: function () { self.mic(m); }, micCls: 'mic' + (m.listening ? ' mic-on' : ''), micAria: m.listening ? 'Stop recording' : 'Record a voice note',
+      micText: m.listening ? (m.micNote || 'Listening… speak naturally. Tap again to stop.') : (m.dictated ? (m.micNote ? m.micNote + ' ' : '') + 'Edit anything below before drafting.' : 'Tap the mic to record a voice note, or type / paste notes below.'),
+      pasteNotes: function () { self.pasteNotes(m); },
+      err: m.notesErr, hasErr: !!m.notesErr, generate: function () { self.genFollow(m); } };
+  }
+  genFollow(m) {
+    if (m.listening) this.stopMic(m);
+    if (!m.notes.trim()) { m.notesErr = 'Add a few notes first: type, paste, or tap the mic.'; this.forceUpdate(); return; }
+    if (m.live) { this.liveNotes(m); return; }
+    var first = m.notes.split(/\n+|\.\s+/)[0].trim().replace(/\.$/, '');
+    this.complete(m, 2, [{ t: 'Just now', x: m.dictated ? 'Voice note captured and transcribed' : 'Notes added by you' }, { t: 'Just now', x: 'Key points: ' + first + '…' }]);
+    this.toast('Follow-up drafted — review it and send');
+  }
+
+  composeVM(m) {
+    var self = this; var dr = m.draft; var isEmail = dr.tab !== 'sms';
+    var up = function () { self.forceUpdate(); };
+    return {
+      basis: dr.basis, isEmail: isEmail, isSms: !isEmail, emailSel: String(isEmail), smsSel: String(!isEmail),
+      emailTabCls: 'tab' + (isEmail ? ' tab-on' : ''), smsTabCls: 'tab' + (!isEmail ? ' tab-on' : ''),
+      tabEmail: function () { dr.tab = 'email'; dr.err = ''; up(); }, tabSms: function () { dr.tab = 'sms'; dr.err = ''; up(); },
+      to: dr.to, onTo: function (e) { dr.to = e.target.value; dr.err = ''; up(); },
+      subject: dr.subject, onSubject: function (e) { dr.subject = e.target.value; up(); },
+      body: dr.body, onBody: function (e) { dr.body = e.target.value; up(); },
+      phone: dr.phone, onPhone: function (e) { dr.phone = e.target.value; dr.err = ''; up(); },
+      sms: dr.sms, onSms: function (e) { dr.sms = e.target.value; up(); },
+      smsCount: dr.sms.length + ' characters' + (dr.sms.length > 160 ? ' · sends as 2 texts' : ' · 1 text'),
+      editing: !!dr.editing, notEditing: !dr.editing, editLabel: dr.editing ? 'Done editing' : 'Edit',
+      toggleEdit: function () { dr.editing = !dr.editing; up(); },
+      sendLabel: isEmail ? 'Approve & send email' : 'Approve & send SMS',
+      send: function () { self.send(m); }, err: dr.err, hasErr: !!dr.err
+    };
+  }
+
+  meetVM(m, s, c) {
+    var self = this;
+    var open = s.open === m.id;
+    var w = m.steps.find(function (x) { return x.s === 'w'; });
+    var all = m.steps.every(function (x) { return x.s === 'd'; });
+    var vm = { id: m.id, dLong: m.dLong, time: m.time, type: m.type, pipe: this.pipe(m),
+      statusText: w ? w.warn.title : all ? 'Complete' : m.steps.some(function (x) { return x.s === 'r'; }) ? 'In progress' : 'Upcoming', statusCls: 'tag ' + (w ? 'tag-amber' : all ? 'tag-pale' : 'tag-gray'), statusWarn: !!w,
+      open: open, openStr: String(open), toggle: function () { self.setState({ open: open ? null : m.id }); },
+      chevCls: 'chev' + (open ? ' chev-open' : ''), wrapCls: 'mwrap' + (open ? ' mwrap-open' : ''), first: c.first,
+      hasCompose: false, hasNotes: false, hasRetry: false, cp: {}, np: {}, rp: {}, audit: [] };
+    if (!open) return vm;
+    vm.audit = this.audit(m);
+    if (w) {
+      var k = w.warn.kind;
+      if (k === 'compose') { vm.hasCompose = true; vm.cp = this.composeVM(m); }
+      else if (k === 'notes') { vm.hasNotes = true; vm.np = this.npVM(m, w); } else { vm.hasRetry = true; vm.rp = { title: w.warn.title, detail: w.warn.detail, action: w.warn.action, go: function () { self.retry(m); } }; }
+    }
+    return vm;
+  }
+
+  todayIso() { var t = new Date(); return t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0'); }
+  nowStr() { var t = new Date(); var h = t.getHours(), mi = t.getMinutes(); return this.fmt(this.todayIso()) + ' · ' + (((h + 11) % 12) + 1) + ':' + String(mi).padStart(2, '0') + ' ' + (h >= 12 ? 'PM' : 'AM'); }
+  sampleNotes(type) {
+    var S = {
+      'Discovery call': 'Great first conversation. Main goals are retiring by 60 and paying off the mortgage early. There is an old 401(k) from a previous employer to roll over. Action: send the onboarding checklist and data-gathering form. Action: schedule the plan presentation in two weeks.',
+      'Portfolio check-in': 'Portfolio is up about 5 percent this year and on track. Talked about moving some extra cash into a short-term bond fund. Action: send the rebalance proposal by Friday. Action: confirm the emergency fund target.',
+      'Annual review': 'Reviewed the full plan and updated the retirement projection. Monthly savings going up by 400 dollars. Beneficiaries confirmed on all accounts. Action: send the updated plan summary. Action: book next year’s review.',
+      'Tax planning': 'Went over year-end tax moves. Plan to harvest about 12 thousand in losses and max out the HSA. Action: coordinate the Roth conversion amount with the CPA. Action: share last year’s tax return.'
+    };
+    return S[type] || S['Portfolio check-in'];
+  }
+  form() { if (!this._form) this._form = { mode: 'existing', ck: 'jane', name: '', email: '', phone: '', type: 'Portfolio check-in', day: 0, time: '2:00 PM', err: '' }; return this._form; }
+  startLive(ck) {
+    (this._timers || []).forEach(clearTimeout); this._timers = [];
+    this._live = { phase: 'book', log: [] }; this._form = null;
+    var f = this.form(); if (ck) { f.mode = 'existing'; f.ck = ck; }
+    this.setState({ view: 'live' });
+  }
+  seq(list) {
+    var self = this;
+    this._timers = (this._timers || []).concat(list.map(function (it) { return setTimeout(function () { it[1](); self.forceUpdate(); }, it[0]); }));
+  }
+  say(m, i, x) {
+    var st = m.steps[i];
+    if (st.log.length && st.log[0].t === '—') st.log = [];
+    var line = { t: this.nowStr(), x: x }; st.log.push(line);
+    if (this._live && this._live.m === m) this._live.log.unshift({ step: i, t: line.t, x: x });
+  }
+  liveOf(m) { return (this._live && this._live.m === m) ? this._live : {}; }
+  book() {
+    var d = this.data(), f = this.form(), self = this, c;
+    if (f.mode === 'new') {
+      if (!f.name.trim()) { f.err = 'Enter the client’s full name.'; this.forceUpdate(); return; }
+      if (!/^\S+@\S+\.\S+$/.test(f.email.trim())) { f.err = 'Enter a valid email address.'; this.forceUpdate(); return; }
+      var nm = f.name.trim(); var parts = nm.split(/\s+/);
+      c = { key: 'c' + Date.now(), name: nm, first: parts[0], initials: (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase(), email: f.email.trim(), phone: f.phone.trim(), stage: 'New prospect' };
+      d.clients.push(c); d.byKey[c.key] = c;
+    } else { c = d.byKey[f.ck]; }
+    f.err = '';
+    var iso = this.shift(this.todayIso(), f.day);
+    var m = { id: 'L' + Date.now(), ck: c.key, iso: iso, time: f.time, type: f.type, dShort: this.fmt(iso), dLong: this.fmtLong(iso), upcoming: true, isNew: f.mode === 'new', voice: false, summary: '', dictation: this.sampleNotes(f.type), notes: '', listening: false, dictated: false, notesErr: '', live: true,
+      steps: [0, 1, 2, 3, 4].map(function () { return { s: 'p', log: [{ t: '—', x: 'Waiting on the previous step' }], warn: null }; }) };
+    d.meetings.push(m); d.byId[m.id] = m;
+    var L = this._live = { phase: 'run', m: m, log: [], start: Date.now(), runTitle: 'Step 1 · Booking', runText: 'Receiving ' + c.first + '’s booking…' };
+    var when = this.wk(iso) + ', ' + m.dShort + ' at ' + m.time;
+    m.steps[0].s = 'r';
+    this.say(m, 0, c.first + ' booked “' + m.type + '” for ' + when + ' through your scheduling link');
+    this.forceUpdate();
+    this.seq([
+      [800, function () { self.say(m, 0, 'Calendar invite + video link sent to ' + c.email); }],
+      [1500, function () { self.say(m, 0, c.phone ? 'Text reminder scheduled for 24 hours before' : 'Email reminder scheduled (no mobile number for texts)'); m.steps[0].s = 'd'; m.steps[1].s = 'r'; L.runTitle = 'Step 2 · CRM add / update'; L.runText = 'Looking up ' + c.email + ' in your CRM…'; self.say(m, 1, 'Searching CRM for ' + c.email + '…'); }],
+      [2700, function () { self.say(m, 1, m.isNew ? 'No match found — created new contact “' + c.name + '” · stage: Prospect' : 'Matched existing contact “' + c.name + '” — no duplicate created'); }],
+      [3400, function () { self.say(m, 1, 'Meeting added to ' + c.first + '’s CRM timeline'); m.steps[1].s = 'd'; L.phase = 'wait';
+        d.acts.unshift({ id: 'la' + m.id, mid: m.id, step: 1, kind: 'booking', time: self.nowStr(), title: m.isNew ? 'New booking + new CRM contact' : 'Booking: ' + m.type, detail: c.first + ' booked ' + m.type + ' for ' + when + '. ' + (m.isNew ? 'A new CRM contact was created.' : 'Their CRM record was updated.'), flag: false }); }]
+    ]);
+  }
+  fastForward() {
+    var L = this._live, m = L.m;
+    m.upcoming = false; m.steps[2].s = 'w';
+    m.steps[2].warn = { kind: 'notes', title: 'Add meeting notes', detail: 'Record a voice note, type, or paste your AI notetaker’s notes. FinProIQ turns them into a personal follow-up for you to approve.' };
+    this.say(m, 2, 'Meeting ended — waiting for your notes');
+    L.phase = 'notes'; this.forceUpdate();
+  }
+  liveNotes(m) {
+    var self = this, L = this.liveOf(m), c = this.data().byKey[m.ck];
+    m.steps[2].s = 'r'; m.steps[2].warn = null;
+    L.phase = 'run'; L.runTitle = 'Step 3 · Notes'; L.runText = 'Reading your notes and pulling out action items…';
+    var words = m.notes.trim().split(/\s+/).length;
+    this.say(m, 2, (m.dictated ? 'Voice note transcribed' : 'Notes received') + ' · ' + words + ' words');
+    this.forceUpdate();
+    this.seq([
+      [1100, function () { m.draft = self.genDraft(m); self.say(m, 2, 'Found ' + m.draft.nRecap + ' key points and ' + m.draft.nActs + ' action item' + (m.draft.nActs === 1 ? '' : 's')); m.steps[2].s = 'd'; m.steps[3].s = 'r'; L.runTitle = 'Step 4 · Email / SMS'; L.runText = 'Writing a personal email and text for ' + c.first + '…'; self.say(m, 3, 'Drafting email + SMS from your notes and ' + c.first + '’s history'); }],
+      [2300, function () { m.steps[3].s = 'w'; m.steps[3].warn = { kind: 'compose', title: 'Awaiting your approval' }; self.say(m, 3, 'Drafts ready — nothing is sent until you approve'); L.phase = 'compose'; }]
+    ]);
+  }
+  liveSend(m, via) {
+    var self = this, L = this.liveOf(m), d = this.data(), c = d.byKey[m.ck];
+    m.steps[3].s = 'r'; m.steps[3].warn = null;
+    L.phase = 'run'; L.runTitle = 'Step 4 · Sending'; L.runText = via.replace(' sent to ', ' going to ') + '…';
+    this.say(m, 3, 'Approved by you');
+    this.forceUpdate();
+    this.seq([
+      [1000, function () { self.say(m, 3, via + ' · delivered'); m.steps[3].s = 'd'; m.steps[4].s = 'r'; L.runTitle = 'Step 5 · CRM update'; L.runText = 'Saving notes, action items and the follow-up to ' + c.first + '’s CRM record…'; self.say(m, 4, 'Writing meeting notes to ' + c.name + '’s CRM record'); }],
+      [1800, function () { var n = m.draft.nActs; self.say(m, 4, n ? n + ' action item' + (n === 1 ? '' : 's') + ' created as CRM tasks' : 'No action items found — no tasks added'); }],
+      [2600, function () { self.say(m, 4, 'Follow-up logged · next touchpoint set for 90 days'); m.steps[4].s = 'd'; L.phase = 'done'; L.end = Date.now(); L.via = via;
+        d.acts.unshift({ id: 'lf' + m.id, mid: m.id, step: 4, kind: 'followup', time: self.nowStr(), title: 'Follow-up sent & CRM updated', detail: via + '. Notes and action items were saved to ' + c.first + '’s CRM record.', flag: false });
+        self.toast('All 5 steps complete for ' + c.name); }]
+    ]);
+  }
+
+  renderVals() {
+    var self = this; var d = this.data(); var s = this.state || {};
+    var view = s.view || 'dash';
+    var hr = new Date().getHours();
+    var greet = hr < 12 ? 'Good morning' : (hr < 17 ? 'Good afternoon' : 'Good evening');
+    var todayStr = ''; try { todayStr = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }); } catch (e) {}
+    var warnOf = function (m) { return m.steps.find(function (x) { return x.s === 'w'; }); };
+    var openClient = function (ck, mid) { return function () { self.setState({ view: 'client', client: ck, open: mid || null, meetFilter: 'all' }); }; };
+
+    var warnMs = d.meetings.filter(function (m) { return !!warnOf(m); });
+    var approvals = warnMs.filter(function (m) { return warnOf(m).warn.kind === 'compose'; }).length;
+    var fixes = warnMs.length - approvals;
+    var held = d.meetings.filter(function (m) { return m.iso >= '2026-10-12' && m.iso <= '2026-10-18'; }).length;
+    var upMs = d.meetings.filter(function (m) { return m.upcoming; }).sort(function (a, b) { return a.iso < b.iso ? -1 : 1; });
+    var kpis = [
+      { label: 'Follow-ups awaiting approval', value: String(approvals), sub: 'Drafted from your notes', valCls: approvals ? 'kv kv-amber' : 'kv' },
+      { label: 'Steps that need a fix', value: String(fixes), sub: 'Failed or incomplete', valCls: fixes ? 'kv kv-amber' : 'kv' },
+      { label: 'Meetings this week', value: String(held), sub: upMs.length + ' more coming up', valCls: 'kv' },
+      { label: 'Admin time saved', value: '9.5 hrs', sub: 'This month · estimate', valCls: 'kv kv-blue' }
+    ];
+    var greetSub = warnMs.length
+      ? (approvals + ' follow-up' + (approvals === 1 ? ' is' : 's are') + ' ready for your approval and ' + fixes + ' step' + (fixes === 1 ? ' needs' : 's need') + ' a quick fix. Everything else ran on its own.')
+      : 'You’re all caught up. Every client conversation has been booked, logged and followed up.';
+
+    var af = s.actFilter || 'all'; var ac = s.actClient || null;
+    var all = d.acts.map(function (a) { var m = d.byId[a.mid]; return { a: a, m: m, c: d.byKey[m.ck], attn: m.steps[a.step].s === 'w' }; });
+    var attnActs = all.filter(function (x) { return x.attn; }).length;
+    var chipDefs = [['all', 'All'], ['attn', 'Needs attention (' + attnActs + ')'], ['booking', 'Bookings'], ['notes', 'Notes'], ['followup', 'Follow-ups'], ['crm', 'CRM']];
+    var actChips = chipDefs.map(function (cd) { return { label: cd[1], cls: 'chip' + (af === cd[0] ? ' chip-on' : ''), pressed: String(af === cd[0]), pick: function () { self.setState({ actFilter: cd[0] }); } }; });
+    var acts = all.filter(function (x) { return (af === 'all' || (af === 'attn' ? x.attn : x.a.kind === af)) && (!ac || x.c.key === ac); }).map(function (x) {
+      var a = x.a; var open = s.actOpen === a.id;
+      return { title: a.title, who: x.c.name, mtype: x.m.type, time: a.time, detail: a.detail, open: open, openStr: String(open),
+        toggle: function () { self.setState({ actOpen: open ? null : a.id }); },
+        isAttn: x.attn, isResolved: a.flag && !x.attn, icoCls: 'aico' + (x.attn ? ' aico-warn' : ''),
+        kBooking: a.kind === 'booking', kNotes: a.kind === 'notes', kFollow: a.kind === 'followup', kCrm: a.kind === 'crm',
+        pipe: self.pipe(x.m), openTimeline: openClient(x.c.key, x.m.id),
+        filterClient: function () { self.setState({ actClient: x.c.key, actFilter: 'all' }); },
+        first: x.c.first, chevCls: 'chev' + (open ? ' chev-open' : '') };
+    });
+    var attn = warnMs.slice().sort(function (a, b) { return a.iso < b.iso ? 1 : -1; }).map(function (m) { var c = d.byKey[m.ck]; return { who: c.name, title: warnOf(m).warn.title, when: m.dShort + ' · ' + m.type, open: openClient(c.key, m.id) }; });
+    var upcoming = upMs.map(function (m) { var c = d.byKey[m.ck]; return { who: c.name, type: m.type, when: self.wk(m.iso) + ', ' + m.dShort + ' · ' + m.time, open: openClient(c.key, m.id), hasWarn: !!warnOf(m) }; });
+
+    var ck = s.client || 'jane'; var q = (s.search || '').toLowerCase();
+    var clientList = d.clients.filter(function (c) { return c.name.toLowerCase().indexOf(q) >= 0; }).map(function (c) {
+      var ms = d.meetings.filter(function (m) { return m.ck === c.key; });
+      var n = ms.filter(function (m) { return !!warnOf(m); }).length;
+      return { name: c.name, initials: c.initials, sub: ms.length + ' meeting' + (ms.length === 1 ? '' : 's'), attn: String(n), hasAttn: n > 0, cls: 'cli' + (c.key === ck ? ' cli-on' : ''), current: c.key === ck ? 'true' : 'false', pick: function () { self.setState({ client: c.key, open: null, meetFilter: 'all' }); } };
+    });
+    var cl = d.byKey[ck];
+    var cms = d.meetings.filter(function (m) { return m.ck === ck; }).sort(function (a, b) { return a.iso < b.iso ? 1 : -1; });
+    var past = cms.filter(function (m) { return !m.upcoming; }); var fut = cms.filter(function (m) { return m.upcoming; });
+    var isDoneM = function (m) { return m.steps.every(function (x) { return x.s === 'd'; }); };
+    var mf = s.meetFilter || 'all';
+    var mDefs = [['all', 'All', cms.length], ['attn', 'Needs attention', cms.filter(function (m) { return !!warnOf(m); }).length], ['done', 'Complete', cms.filter(isDoneM).length], ['up', 'Upcoming', fut.length]];
+    var meetChips = mDefs.map(function (md) { return { label: md[1] + ' (' + md[2] + ')', cls: 'chip' + (mf === md[0] ? ' chip-on' : ''), pressed: String(mf === md[0]), pick: function () { self.setState({ meetFilter: md[0] }); } }; });
+    var meetings = cms.filter(function (m) { return mf === 'all' || (mf === 'attn' && !!warnOf(m)) || (mf === 'done' && isDoneM(m)) || (mf === 'up' && m.upcoming); }).map(function (m) { return self.meetVM(m, s, cl); });
+    var client = { name: cl.name, first: cl.first, initials: cl.initials, stage: cl.stage, email: cl.email, phoneText: cl.phone || 'No phone on file', count: String(cms.length), last: past.length ? past[0].dLong : '—', next: fut.length ? fut[fut.length - 1].dLong : '—' };
+
+    var L = this._live || { phase: 'book', log: [] }; var f = this.form(); var lm = L.m || null; var ph = L.phase;
+    var lc = lm ? d.byKey[lm.ck] : (f.mode === 'new' ? null : d.byKey[f.ck]);
+    var blank = { steps: [0, 1, 2, 3, 4].map(function () { return { s: 'p' }; }) };
+    var w2 = lm ? warnOf(lm) : null;
+    var up = function () { self.forceUpdate(); };
+    var chipsOf = function (arr, key) { return arr.map(function (v) { return { label: v, cls: 'chip' + (f[key] === v ? ' chip-on' : ''), pressed: String(f[key] === v), pick: function () { f[key] = v; up(); } }; }); };
+    var dayChips = [0, 1, 2].map(function (n) { var iso = self.shift(self.todayIso(), n); return { label: n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : self.wk(iso) + ', ' + self.fmt(iso), cls: 'chip' + (f.day === n ? ' chip-on' : ''), pressed: String(f.day === n), pick: function () { f.day = n; up(); } }; });
+    var clientChips = d.clients.map(function (c) { var on = f.mode === 'existing' && f.ck === c.key; return { label: c.name, cls: 'chip' + (on ? ' chip-on' : ''), pressed: String(on), pick: function () { f.mode = 'existing'; f.ck = c.key; f.err = ''; up(); } }; })
+      .concat([{ label: '+ New client', cls: 'chip' + (f.mode === 'new' ? ' chip-on' : ''), pressed: String(f.mode === 'new'), pick: function () { f.mode = 'new'; f.err = ''; up(); } }]);
+    var secs = L.end ? Math.max(1, Math.round((L.end - L.start) / 1000)) : 0;
+    var HEAD = { book: 'Run a meeting end to end', run: L.runTitle || '', wait: 'Steps 1 & 2 ran on their own', notes: 'Step 3 · Capture your notes', compose: 'Step 4 · Approve the follow-up', done: 'All 5 steps complete' };
+    var SUB = { book: 'Play the client and book through the advisor’s scheduling link, then take over as the advisor. Every step runs live and lands in the client’s timeline.', run: 'FinProIQ is working. Watch the system log.', wait: 'Booking confirmed and the CRM is up to date — no clicks needed from you.', notes: 'Record a voice note, type, or paste your AI notetaker’s notes.', compose: 'Edit anything, choose email or SMS, then approve and send.', done: 'Booked, logged, followed up and recorded. You only stepped in where it mattered.' };
+    var lv = {
+      heading: HEAD[ph], sub: SUB[ph], pipe: this.pipe(lm || blank),
+      isBook: ph === 'book', isRunning: ph === 'run', isWaiting: ph === 'wait', hasNotes: ph === 'notes' && !!w2, hasCompose: ph === 'compose' && !!w2, isDone: ph === 'done',
+      runTitle: L.runTitle || '', runText: L.runText || '',
+      clientChips: clientChips, isNewClient: f.mode === 'new', isExisting: f.mode !== 'new',
+      bookerName: lc ? lc.name : (f.name || 'New client'), bookerEmail: lc ? lc.email : '', bookerFirst: lc ? lc.first : '',
+      name: f.name, email: f.email, phone: f.phone,
+      onName: function (e) { f.name = e.target.value; f.err = ''; up(); }, onEmail: function (e) { f.email = e.target.value; f.err = ''; up(); }, onPhone: function (e) { f.phone = e.target.value; up(); },
+      typeChips: chipsOf(['Discovery call', 'Portfolio check-in', 'Annual review', 'Tax planning'], 'type'), dayChips: dayChips, timeChips: chipsOf(['9:00 AM', '11:30 AM', '2:00 PM', '4:00 PM'], 'time'),
+      err: f.err, hasErr: !!f.err, book: function () { self.book(); },
+      when: lm ? self.wk(lm.iso) + ', ' + lm.dShort + ' at ' + lm.time : '',
+      fastForward: function () { self.fastForward(); },
+      np: (ph === 'notes' && w2) ? this.npVM(lm, w2) : {}, cp: (ph === 'compose' && w2 && lm.draft) ? this.composeVM(lm) : {},
+      doneText: ph === 'done' ? (L.via + '. Notes and action items were saved to the CRM. Start to finish: ' + Math.floor(secs / 60) + 'm ' + (secs % 60) + 's.') : '',
+      viewTimeline: lm ? openClient(lm.ck, lm.id) : function () {}, again: function () { self.startLive(); },
+      log: L.log.map(function (l) { return { step: 'Step ' + (l.step + 1), t: l.t, x: l.x }; }), noLog: L.log.length === 0
+    };
+
+    return {
+      isLive: view === 'live', lv: lv,
+      startLive: function () { self.startLive(); }, startLiveFor: function () { self.startLive(ck); },
+      isDash: view === 'dash', isClients: view === 'client',
+      navDashCls: 'nav' + (view === 'dash' ? ' nav-on' : ''), navCliCls: 'nav' + (view === 'client' ? ' nav-on' : ''),
+      goDash: function () { self.setState({ view: 'dash' }); }, goClients: function () { self.setState({ view: 'client' }); },
+      greet: greet, todayStr: todayStr, greetSub: greetSub, kpis: kpis,
+      actChips: actChips, acts: acts, noActs: acts.length === 0,
+      hasActClient: !!ac, actClientName: ac ? d.byKey[ac].name : '', clearActClient: function () { self.setState({ actClient: null }); },
+      attn: attn, attnCount: String(attn.length), hasAttn: attn.length > 0, noAttn: attn.length === 0, upcoming: upcoming,
+      search: s.search || '', onSearch: function (e) { self.setState({ search: e.target.value }); },
+      clientList: clientList, noClients: clientList.length === 0, client: client,
+      meetChips: meetChips, meetings: meetings, noMeetings: meetings.length === 0,
+      toast: s.toast || '', hasToast: !!s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>
