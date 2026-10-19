@@ -62,6 +62,12 @@ const Hero = () => {
           >
             Built for financial advisors who want to move faster, stay compliant, and close more - without adding headcount.
           </motion.p>
+          <a
+            href="/demo/"
+            className="inline-flex items-center justify-center mt-6 px-8 py-4 rounded-xl bg-accent hover:bg-accent-hover text-accent-foreground font-semibold shadow-lg hover:shadow-xl transition-all"
+          >
+            Try the Interactive Demo
+          </a>
         </div>
       </div>
     </section>
