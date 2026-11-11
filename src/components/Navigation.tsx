@@ -86,6 +86,12 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
             >
               Limited Early Access
             </button>
+            <a
+              href="/tools"
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              Free Tools
+            </a>
             <Button
               variant="default" 
               size="sm" 
@@ -132,6 +138,12 @@ const Navigation = ({ onOpenCalendly }: NavigationProps) => {
             >
               Limited Early Access
             </button>
+            <a
+              href="/tools"
+              className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
+            >
+              Free Tools
+            </a>
             <Button
               variant="default" 
               size="sm" 
