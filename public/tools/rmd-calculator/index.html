@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RMD Calculator for Financial Advisors (2026 IRS Table) | FinProIQ</title>
+<meta name="description" content="Free RMD calculator for advisors. Uses the IRS Uniform Lifetime Table and SECURE 2.0 start ages (73 or 75) to show this year's required minimum distribution, the deadline and a 10-year projection.">
+<link rel="canonical" href="https://finproiq.com/tools/rmd-calculator">
+<meta property="og:title" content="Free RMD Calculator for Financial Advisors | FinProIQ">
+<meta property="og:description" content="This year's RMD, the deadline and a 10-year projection, using the IRS Uniform Lifetime Table and SECURE 2.0 start ages.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://finproiq.com/tools/rmd-calculator">
+<meta property="og:image" content="https://finproiq.com/og-image.png">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"RMD Calculator for Financial Advisors","url":"https://finproiq.com/tools/rmd-calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"FinProIQ","url":"https://finproiq.com"}}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a href="/" class="logo" aria-label="FinProIQ home"><img src="/finproiq-lockup.svg" alt="FinProIQ" height="32"></a>
+    <nav class="top-nav">
+      <a href="/tools" class="nav-on">Free tools</a>
+      <a href="/demo" class="btn btn-pri">See the demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="padding-bottom:24px">
+    <p class="crumb"><a href="/tools">Free tools</a> &rsaquo; RMD calculator</p>
+    <h1>RMD calculator</h1>
+    <p class="lead">This year's required minimum distribution, the deadline and a 10-year projection. Uses the IRS Uniform Lifetime Table and SECURE 2.0 start ages.</p>
+  </section>
+
+  <section class="wrap calc">
+    <form class="card panel" id="f" onsubmit="return false">
+      <h2>Client details</h2>
+      <div class="row">
+        <label class="lbl" for="by">Birth year</label>
+        <input class="fld" id="by" type="number" inputmode="numeric" min="1900" max="2010" value="1952">
+      </div>
+      <div class="row">
+        <label class="lbl" for="yr">Distribution year</label>
+        <input class="fld" id="yr" type="number" inputmode="numeric" min="2023" max="2060">
+      </div>
+      <div class="row">
+        <label class="lbl" for="bal">Balance on Dec 31 of the prior year</label>
+        <div class="money"><span>$</span><input class="fld" id="bal" type="text" inputmode="decimal" value="500,000"></div>
+        <p class="hint">Traditional IRA, SEP or SIMPLE IRA. Add up all traditional IRAs; the total can come from any of them.</p>
+      </div>
+      <div class="row">
+        <label class="lbl" for="gr">Assumed annual growth (for the projection)</label>
+        <div class="money"><input class="fld" id="gr" type="number" inputmode="decimal" step="0.5" value="5" style="padding-left:12px"></div>
+        <p class="hint">Percent per year. Only affects the 10-year table.</p>
+      </div>
+    </form>
+
+    <div class="card panel" id="out" aria-live="polite"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Discussed this with a client?</h2>
+        <p>FinProIQ drafts the follow-up and updates your CRM the moment the meeting ends. You review and hit send.</p>
+      </div>
+      <a href="/demo" class="btn btn-light">See the demo &rarr;</a>
+    </div>
+  </section>
+
+  <section class="wrap prose">
+    <h2>How the RMD is calculated</h2>
+    <p>Divide the account balance on December 31 of the prior year by the distribution period for the age the client reaches this year. The distribution period comes from the IRS Uniform Lifetime Table (Publication 590-B, Appendix B, Table III), in effect since 2022. At 73 it is 26.5, so a $500,000 balance requires $18,868.</p>
+    <h2>When RMDs start</h2>
+    <table>
+      <tr><th>Born</th><th>RMD age</th></tr>
+      <tr><td>1950 or earlier</td><td>Already taking RMDs (started at 70&frac12; or 72)</td></tr>
+      <tr><td>1951 to 1959</td><td>73</td></tr>
+      <tr><td>1960 or later</td><td>75</td></tr>
+    </table>
+    <p>The first RMD can wait until April 1 of the following year. Every later RMD is due by December 31. Delaying the first one means two RMDs in the same tax year. Final IRS regulations reserve the 1959 birth year; this calculator uses 73, as proposed regulations do.</p>
+    <h2>What this calculator does not cover</h2>
+    <ul>
+      <li>A spouse more than 10 years younger who is the sole beneficiary (uses the Joint Life Table, which gives a smaller RMD).</li>
+      <li>Inherited IRAs and the 10-year rule.</li>
+      <li>401(k) and 403(b) plans, where the still-working exception may delay RMDs. Each plan's RMD must come from that plan.</li>
+      <li>Roth IRAs, which have no RMDs for the original owner.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="disc">These tools are for education only and are not tax, legal or investment advice. Results are estimates based on the inputs you provide and current rules; verify before making client recommendations.</p>
+  <p class="links">&copy; FinProIQ &middot; <a href="/faq">FAQ</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+
+<script>
+// IRS Pub 590-B Appendix B, Table III (Uniform Lifetime), effective 2022+
+var T={72:27.4,73:26.5,74:25.5,75:24.6,76:23.7,77:22.9,78:22.0,79:21.1,80:20.2,81:19.4,82:18.5,83:17.7,84:16.8,85:16.0,86:15.2,87:14.4,88:13.7,89:12.9,90:12.2,91:11.5,92:10.8,93:10.1,94:9.5,95:8.9,96:8.4,97:7.8,98:7.3,99:6.8,100:6.4,101:6.0,102:5.6,103:5.2,104:4.9,105:4.6,106:4.3,107:4.1,108:3.9,109:3.7,110:3.5,111:3.4,112:3.3,113:3.1,114:3.0,115:2.9,116:2.8,117:2.7,118:2.5,119:2.3};
+function dp(age){return age>=120?2.0:T[age];}
+function startAge(by){return by<=1950?null:(by<=1959?73:75);}
+var $=function(id){return document.getElementById(id)};
+var usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+var usd2=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2});
+function num(v){v=String(v).replace(/[^0-9.]/g,'');return v===''?NaN:parseFloat(v);}
+$('yr').value=new Date().getFullYear();
+function calc(){
+  var by=parseInt($('by').value,10),yr=parseInt($('yr').value,10),bal=num($('bal').value),g=num($('gr').value);
+  var o=$('out');
+  if(!(by>1900&&by<2011)||!(yr>2022&&yr<2061)||!(bal>=0)){o.innerHTML='<h2>Result</h2><p class="sub">Enter a birth year, a distribution year and a balance.</p>';return;}
+  if(isNaN(g))g=0;
+  var age=yr-by,sa=startAge(by),first=sa?by+sa:null,h='';
+  if(sa&&yr<first){
+    h+='<p class="eyebrow">'+yr+' RMD</p><p class="big">$0</p><p class="sub">No RMD is required in '+yr+'. The client turns '+age+' this year.</p>';
+    h+='<div class="facts"><div class="fact"><small>RMD age</small><b>'+sa+'</b></div><div class="fact"><small>First RMD year</small><b>'+first+'</b></div><div class="fact"><small>First deadline</small><b>Apr 1, '+(first+1)+'</b></div></div>';
+    h+='<p class="note note-blue">The years before RMDs start are often a window for Roth conversions or planned withdrawals at lower tax rates.</p>';
+    o.innerHTML=h;return;
+  }
+  if(age<72){o.innerHTML='<h2>Result</h2><p class="sub">Check the birth year and distribution year.</p>';return;}
+  var d=dp(age),r=bal/d,isFirst=(first===yr);
+  var deadline=isFirst?'Apr 1, '+(yr+1):'Dec 31, '+yr;
+  h+='<p class="eyebrow">'+yr+' RMD</p><p class="big">'+usd2.format(r)+'</p>';
+  h+='<p class="sub">'+usd.format(bal)+' &divide; '+d.toFixed(1)+' = '+(100/d).toFixed(2)+'% of the balance</p>';
+  h+='<div class="facts"><div class="fact"><small>Age in '+yr+'</small><b>'+age+'</b></div><div class="fact"><small>Distribution period</small><b>'+d.toFixed(1)+'</b></div><div class="fact"><small>Deadline</small><b>'+deadline+'</b></div></div>';
+  if(isFirst)h+='<p class="note">First RMD year. Waiting until April 1, '+(yr+1)+' means two RMDs are taxed in '+(yr+1)+'.</p>';
+  if(by===1959)h+='<p class="note note-blue">Born in 1959: final IRS rules leave the start age (73 or 75) reserved. This uses 73.</p>';
+  h+='<h2 style="margin-top:6px">10-year projection</h2><div class="scroll"><table class="proj"><tr><th>Year</th><th>Age</th><th>Start balance</th><th>RMD</th></tr>';
+  var b=bal;
+  for(var i=0;i<10;i++){var a=age+i,dd=dp(a),rr=b/dd;h+='<tr><td>'+(yr+i)+'</td><td>'+a+'</td><td>'+usd.format(b)+'</td><td>'+usd.format(rr)+'</td></tr>';b=(b-rr)*(1+g/100);}
+  h+='</table></div><p class="hint">Assumes '+g+'% growth after each year\'s RMD is taken and no other withdrawals or contributions.</p>';
+  o.innerHTML=h;
+}
+['by','yr','bal','gr'].forEach(function(id){$(id).addEventListener('input',calc)});
+$('bal').addEventListener('blur',function(){var v=num(this.value);if(!isNaN(v))this.value=v.toLocaleString('en-US');});
+calc();
+</script>
+</body>
+</html>

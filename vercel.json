@@ -8,6 +8,8 @@
     { "source": "/discovery", "destination": "/discovery/index.html" },
     { "source": "/privacy", "destination": "/privacy/index.html" },
     { "source": "/terms", "destination": "/terms/index.html" },
+    { "source": "/tools", "destination": "/tools/index.html" },
+    { "source": "/tools/rmd-calculator", "destination": "/tools/rmd-calculator/index.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
