@@ -20,6 +20,7 @@ const entries: SitemapEntry[] = [
   { path: "/discovery", changefreq: "monthly", priority: "0.7" },
   { path: "/tools", changefreq: "weekly", priority: "0.8" },
   { path: "/tools/rmd-calculator", changefreq: "monthly", priority: "0.8" },
+  { path: "/tools/roth-conversion-breakeven", changefreq: "monthly", priority: "0.8" },
 ];
 
 function generateSitemap(entries: SitemapEntry[]) {

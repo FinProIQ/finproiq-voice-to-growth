@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roth Conversion Breakeven Calculator for Advisors | FinProIQ</title>
+<meta name="description" content="Free Roth conversion breakeven calculator for advisors. Compare tax paid now against the expected future rate and see how many years until a conversion pays off.">
+<link rel="canonical" href="https://finproiq.com/tools/roth-conversion-breakeven">
+<meta property="og:title" content="Free Roth Conversion Breakeven Calculator | FinProIQ">
+<meta property="og:description" content="See how many years until a Roth conversion pays off, given today's and future tax rates.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://finproiq.com/tools/roth-conversion-breakeven">
+<meta property="og:image" content="https://finproiq.com/og-image.png">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Roth Conversion Breakeven Calculator","url":"https://finproiq.com/tools/roth-conversion-breakeven","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"FinProIQ","url":"https://finproiq.com"}}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a href="/" class="logo" aria-label="FinProIQ home"><img src="/finproiq-lockup.svg" alt="FinProIQ" height="32"></a>
+    <nav class="top-nav">
+      <a href="/tools" class="nav-on">Free tools</a>
+      <a href="/demo" class="btn btn-pri">See the demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="padding-bottom:24px">
+    <p class="crumb"><a href="/tools">Free tools</a> &rsaquo; Roth conversion breakeven</p>
+    <h1>Roth conversion breakeven calculator</h1>
+    <p class="lead">How many years until converting pays off? Compare the tax paid today with the rate the money would face later.</p>
+  </section>
+
+  <section class="wrap calc">
+    <form class="card panel" id="f" onsubmit="return false">
+      <h2>Conversion details</h2>
+      <div class="row">
+        <label class="lbl" for="amt">Amount to convert</label>
+        <div class="money"><span>$</span><input class="fld" id="amt" type="text" inputmode="decimal" value="100,000"></div>
+      </div>
+      <div class="row">
+        <label class="lbl" for="tc">Tax rate on the conversion today (%)</label>
+        <input class="fld" id="tc" type="number" inputmode="decimal" step="1" value="24">
+        <p class="hint">Marginal federal plus state rate on the converted amount.</p>
+      </div>
+      <div class="row">
+        <label class="lbl" for="tf">Expected tax rate on future withdrawals (%)</label>
+        <input class="fld" id="tf" type="number" inputmode="decimal" step="1" value="22">
+        <p class="hint">The rate the money would face if left in the traditional IRA. For heirs, use their expected rate.</p>
+      </div>
+      <div class="row">
+        <label class="lbl" for="src">Tax paid from</label>
+        <select class="fld" id="src"><option value="out">Outside savings (taxable account)</option><option value="ira">The IRA itself</option></select>
+      </div>
+      <div class="row">
+        <label class="lbl" for="g">Annual growth (%)</label>
+        <input class="fld" id="g" type="number" inputmode="decimal" step="0.5" value="6">
+      </div>
+      <div class="row" id="dragRow">
+        <label class="lbl" for="dr">Tax on taxable-account growth (%)</label>
+        <input class="fld" id="dr" type="number" inputmode="decimal" step="1" value="15">
+        <p class="hint">Yearly tax drag on the outside money that would otherwise pay the conversion tax. 15% is a common blend of qualified dividends and gains.</p>
+      </div>
+    </form>
+
+    <div class="card panel" id="out" aria-live="polite"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Discussed this with a client?</h2>
+        <p>FinProIQ drafts the follow-up and updates your CRM the moment the meeting ends. You review and hit send.</p>
+      </div>
+      <a href="/demo" class="btn btn-light">See the demo &rarr;</a>
+    </div>
+  </section>
+
+  <section class="wrap prose">
+    <h2>How the breakeven is calculated</h2>
+    <p>The calculator compares two paths for the same dollars. Without a conversion, the money grows in the traditional IRA and is taxed at the future rate when withdrawn, while the cash that would have paid the conversion tax stays invested in a taxable account. With a conversion, that cash pays the tax today and the full amount grows tax-free in the Roth. The breakeven is the first year the Roth path is worth more after tax.</p>
+    <h2>What drives the answer</h2>
+    <ul>
+      <li><b>Today's rate versus the future rate.</b> This matters most. If the future rate is equal or higher, converting comes out ahead almost immediately.</li>
+      <li><b>Where the tax comes from.</b> Paying from outside savings moves more money into the Roth. Paying from the IRA shrinks the conversion, and before age 59&frac12; the withheld portion can face a 10% penalty.</li>
+      <li><b>Time and growth.</b> When today's rate is higher, a long horizon and tax drag on outside savings can still make a conversion pay off.</li>
+    </ul>
+    <h2>What this calculator does not cover</h2>
+    <ul>
+      <li>Medicare IRMAA surcharges, which a conversion can trigger two years later.</li>
+      <li>The Roth five-year rules and early-withdrawal penalties.</li>
+      <li>Lower future RMDs, Social Security taxation and state residency changes.</li>
+      <li>Converting across several years to fill a tax bracket. Run each year's amount separately.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="disc">These tools are for education only and are not tax, legal or investment advice. Results are estimates based on the inputs you provide and current rules; verify before making client recommendations.</p>
+  <p class="links">&copy; FinProIQ &middot; <a href="/faq">FAQ</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+
+<script>
+var $=function(id){return document.getElementById(id)};
+var usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+function num(v){v=String(v).replace(/[^0-9.]/g,'');return v===''?NaN:parseFloat(v);}
+function vals(A,tc,tf,g,gt,src,n){
+  var grow=Math.pow(1+g,n);
+  if(src==='ira')return{roth:A*(1-tc)*grow,trad:A*grow*(1-tf)};
+  return{roth:A*grow,trad:A*grow*(1-tf)+A*tc*Math.pow(1+gt,n)};
+}
+function calc(){
+  var A=num($('amt').value),tc=num($('tc').value)/100,tf=num($('tf').value)/100,g=num($('g').value)/100,dr=num($('dr').value)/100,src=$('src').value;
+  $('dragRow').style.display=src==='out'?'':'none';
+  var o=$('out');
+  if(!(A>0)||isNaN(tc)||isNaN(tf)||isNaN(g)||tc<0||tc>=1||tf<0||tf>=1){o.innerHTML='<h2>Result</h2><p class="sub">Enter an amount and tax rates between 0 and 99%.</p>';return;}
+  if(isNaN(dr))dr=0;
+  var gt=g*(1-dr),be=null;
+  for(var n=1;n<=60;n++){var v=vals(A,tc,tf,g,gt,src,n);if(v.roth>=v.trad-0.005){be=n;break;}}
+  var h='<p class="eyebrow">Breakeven</p>';
+  if(be===1&&tf>=tc){h+='<p class="big">Right away</p><p class="sub">The future rate ('+(tf*100).toFixed(0)+'%) is at or above today\'s rate ('+(tc*100).toFixed(0)+'%), so the conversion comes out even or ahead from the first year.</p>';}
+  else if(be){h+='<p class="big">'+be+' year'+(be===1?'':'s')+'</p><p class="sub">After '+be+' year'+(be===1?'':'s')+' of growth, the Roth is worth more after tax than leaving the money in the traditional IRA.</p>';}
+  else{h+='<p class="big">Not within 60 years</p><p class="sub">With today\'s rate above the future rate'+(src==='ira'?' and the tax paid from the IRA':'')+', converting does not catch up on these assumptions.</p>';}
+  var tax=A*tc;
+  h+='<div class="facts"><div class="fact"><small>Tax due now</small><b>'+usd.format(tax)+'</b></div><div class="fact"><small>Into the Roth</small><b>'+usd.format(src==='ira'?A-tax:A)+'</b></div><div class="fact"><small>Rates now / later</small><b>'+(tc*100).toFixed(0)+'% / '+(tf*100).toFixed(0)+'%</b></div></div>';
+  if(src==='ira')h+='<p class="note">Paying the tax from the IRA means only '+usd.format(A-tax)+' reaches the Roth. Under age 59&frac12;, the withheld amount may also face a 10% penalty.</p>';
+  h+='<h2 style="margin-top:6px">After-tax value over time</h2><div class="scroll"><table class="proj"><tr><th>Year</th><th>Convert</th><th>Don\'t convert</th><th>Difference</th></tr>';
+  [5,10,15,20,25,30].forEach(function(n){var v=vals(A,tc,tf,g,gt,src,n),d=v.roth-v.trad;h+='<tr><td>'+n+'</td><td>'+usd.format(v.roth)+'</td><td>'+usd.format(v.trad)+'</td><td style="color:'+(d>=0?'#0F7B4A':'#B42318')+'">'+(d>=0?'+':'&minus;')+usd.format(Math.abs(d))+'</td></tr>';});
+  h+='</table></div><p class="hint">Don\'t convert = traditional IRA after tax at the future rate'+(src==='out'?', plus the outside cash that would have paid the tax, invested at '+(gt*100).toFixed(2)+'% after tax drag':'')+'.</p>';
+  o.innerHTML=h;
+}
+['amt','tc','tf','src','g','dr'].forEach(function(id){$(id).addEventListener('input',calc)});
+$('amt').addEventListener('blur',function(){var v=num(this.value);if(!isNaN(v))this.value=v.toLocaleString('en-US');});
+calc();
+</script>
+</body>
+</html>
