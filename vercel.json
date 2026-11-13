@@ -11,6 +11,7 @@
     { "source": "/tools", "destination": "/tools/index.html" },
     { "source": "/tools/rmd-calculator", "destination": "/tools/rmd-calculator/index.html" },
     { "source": "/tools/roth-conversion-breakeven", "destination": "/tools/roth-conversion-breakeven/index.html" },
+    { "source": "/tools/social-security-claiming-age", "destination": "/tools/social-security-claiming-age/index.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

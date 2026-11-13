@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Security Claiming Age Calculator for Advisors | FinProIQ</title>
+<meta name="description" content="Free Social Security claiming calculator for advisors. Compare claiming at 62, full retirement age or 70: monthly benefit, lifetime total and breakeven ages.">
+<link rel="canonical" href="https://finproiq.com/tools/social-security-claiming-age">
+<meta property="og:title" content="Free Social Security Claiming Age Calculator | FinProIQ">
+<meta property="og:description" content="Claim at 62, full retirement age or 70? Monthly benefit, lifetime total and breakeven ages.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://finproiq.com/tools/social-security-claiming-age">
+<meta property="og:image" content="https://finproiq.com/og-image.png">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Social Security Claiming Age Calculator","url":"https://finproiq.com/tools/social-security-claiming-age","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"FinProIQ","url":"https://finproiq.com"}}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a href="/" class="logo" aria-label="FinProIQ home"><img src="/finproiq-lockup.svg" alt="FinProIQ" height="32"></a>
+    <nav class="top-nav">
+      <a href="/tools" class="nav-on">Free tools</a>
+      <a href="/demo" class="btn btn-pri">See the demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="padding-bottom:24px">
+    <p class="crumb"><a href="/tools">Free tools</a> &rsaquo; Social Security claiming age</p>
+    <h1>Social Security claiming age calculator</h1>
+    <p class="lead">Claim at 62, full retirement age or 70? See the monthly benefit at each age, the lifetime total and where the breakeven ages land.</p>
+  </section>
+
+  <section class="wrap calc">
+    <form class="card panel" id="f" onsubmit="return false">
+      <h2>Client details</h2>
+      <div class="row">
+        <label class="lbl" for="by">Birth year</label>
+        <input class="fld" id="by" type="number" inputmode="numeric" min="1943" max="2000" value="1960">
+        <p class="hint">Born on January 1? Use the year before.</p>
+      </div>
+      <div class="row">
+        <label class="lbl" for="pia">Monthly benefit at full retirement age</label>
+        <div class="money"><span>$</span><input class="fld" id="pia" type="text" inputmode="decimal" value="2,000"></div>
+        <p class="hint">The primary insurance amount from the client's Social Security statement.</p>
+      </div>
+      <div class="row">
+        <label class="lbl" for="ca">Planned claiming age</label>
+        <select class="fld" id="ca"><option>62</option><option>63</option><option>64</option><option>65</option><option>66</option><option selected>67</option><option>68</option><option>69</option><option>70</option></select>
+      </div>
+      <div class="row">
+        <label class="lbl" for="le">Plan to age (life expectancy)</label>
+        <input class="fld" id="le" type="number" inputmode="numeric" min="63" max="110" value="90">
+        <p class="hint">Used for the lifetime totals.</p>
+      </div>
+    </form>
+
+    <div class="card panel" id="out" aria-live="polite"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Discussed this with a client?</h2>
+        <p>FinProIQ drafts the follow-up and updates your CRM the moment the meeting ends. You review and hit send.</p>
+      </div>
+      <a href="/demo" class="btn btn-light">See the demo &rarr;</a>
+    </div>
+  </section>
+
+  <section class="wrap prose">
+    <h2>How the benefit changes with claiming age</h2>
+    <p>Claiming before full retirement age reduces the benefit by 5/9 of 1% for each of the first 36 months early and 5/12 of 1% for each month beyond that. Waiting past full retirement age adds delayed retirement credits of 2/3 of 1% a month (8% a year) up to age 70, for anyone born in 1943 or later.</p>
+    <h2>Full retirement age by birth year</h2>
+    <table>
+      <tr><th>Born</th><th>Full retirement age</th><th>At 62</th><th>At 70</th></tr>
+      <tr><td>1943 to 1954</td><td>66</td><td>75%</td><td>132%</td></tr>
+      <tr><td>1955</td><td>66 and 2 months</td><td>74.2%</td><td>130.7%</td></tr>
+      <tr><td>1956</td><td>66 and 4 months</td><td>73.3%</td><td>129.3%</td></tr>
+      <tr><td>1957</td><td>66 and 6 months</td><td>72.5%</td><td>128%</td></tr>
+      <tr><td>1958</td><td>66 and 8 months</td><td>71.7%</td><td>126.7%</td></tr>
+      <tr><td>1959</td><td>66 and 10 months</td><td>70.8%</td><td>125.3%</td></tr>
+      <tr><td>1960 or later</td><td>67</td><td>70%</td><td>124%</td></tr>
+    </table>
+    <h2>Reading the breakeven age</h2>
+    <p>The breakeven age is when the larger, later benefit has paid out as much in total as the smaller, earlier one. A client expected to live past it collects more by waiting. Cost-of-living adjustments raise every option by the same percentage, so they do not move the breakeven.</p>
+    <h2>What this calculator does not cover</h2>
+    <ul>
+      <li>Spousal and survivor benefits. For married clients, the higher earner's claiming age also sets the survivor benefit.</li>
+      <li>The earnings test, which withholds benefits for clients who claim before full retirement age and keep working.</li>
+      <li>Taxation of benefits, investment returns on early benefits, and claiming in months between birthdays.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="disc">These tools are for education only and are not tax, legal or investment advice. Results are estimates based on the inputs you provide and current rules; verify before making client recommendations.</p>
+  <p class="links">&copy; FinProIQ &middot; <a href="/faq">FAQ</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+
+<script>
+var $=function(id){return document.getElementById(id)};
+var usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+function num(v){v=String(v).replace(/[^0-9.]/g,'');return v===''?NaN:parseFloat(v);}
+function fraMonths(by){if(by<=1954)return 792;if(by>=1960)return 804;return 792+2*(by-1954);}
+function pct(by,ageMonths){var d=ageMonths-fraMonths(by);if(d<0){var m=-d;return 100-(Math.min(m,36)*5/9+Math.max(m-36,0)*5/12);}return 100+Math.min(d,840-fraMonths(by))*2/3;}
+function ym(months){var y=Math.floor(months/12),m=Math.round(months-12*y);if(m===12){y++;m=0;}return y+(m?' and '+m+' month'+(m>1?'s':''):'');}
+function be(pia,by,a,b){var Ba=pia*pct(by,a)/100,Bb=pia*pct(by,b)/100;return (Bb*b-Ba*a)/(Bb-Ba);}
+function calc(){
+  var by=parseInt($('by').value,10),pia=num($('pia').value),ca=parseInt($('ca').value,10),le=parseInt($('le').value,10),o=$('out');
+  if(!(by>=1943&&by<=2000)||!(pia>0)||!(le>62&&le<=110)){o.innerHTML='<h2>Result</h2><p class="sub">Enter a birth year from 1943 on, a monthly benefit and a plan-to age above 62.</p>';return;}
+  var f=fraMonths(by),p=pct(by,ca*12),mo=pia*p/100,best=null,rows='';
+  for(var a=62;a<=70;a++){var b=pia*pct(by,a*12)/100,tot=b*Math.max(0,12*(le-a));if(!best||tot>best.tot)best={a:a,tot:tot};}
+  for(a=62;a<=70;a++){var pp=pct(by,a*12),b2=pia*pp/100,t2=b2*Math.max(0,12*(le-a));rows+='<tr'+(a===ca?' style="background:#EEF3FF;font-weight:700"':'')+'><td>'+a+(a===best.a?' &#9733;':'')+'</td><td>'+usd.format(b2)+'</td><td>'+pp.toFixed(1)+'%</td><td>'+usd.format(t2)+'</td></tr>';}
+  var h='<p class="eyebrow">Claiming at '+ca+'</p><p class="big">'+usd.format(mo)+'<span style="font-size:18px;font-weight:600;color:#4A5675"> /month</span></p>';
+  h+='<p class="sub">'+p.toFixed(1)+'% of the full benefit. Lifetime total to age '+le+': '+usd.format(mo*Math.max(0,12*(le-ca)))+'.</p>';
+  h+='<div class="facts"><div class="fact"><small>Full retirement age</small><b>'+ym(f)+'</b></div><div class="fact"><small>Breakeven 62 vs FRA</small><b>'+ym(be(pia,by,744,f)*12/12)+'</b></div><div class="fact"><small>Breakeven FRA vs 70</small><b>'+ym(be(pia,by,f,840))+'</b></div></div>';
+  h+='<p class="note note-blue">Breakeven 62 vs 70: age '+ym(be(pia,by,744,840))+'. To age '+le+', claiming at '+best.a+' pays the most in total (&#9733;).</p>';
+  h+='<h2 style="margin-top:6px">Every claiming age</h2><div class="scroll"><table class="proj"><tr><th>Age</th><th>Monthly</th><th>% of full</th><th>Total to '+le+'</th></tr>'+rows+'</table></div>';
+  h+='<p class="hint">Claiming on the birthday shown. Today\'s dollars; no cost-of-living adjustments.</p>';
+  o.innerHTML=h;
+}
+['by','pia','ca','le'].forEach(function(id){$(id).addEventListener('input',calc)});
+$('pia').addEventListener('blur',function(){var v=num(this.value);if(!isNaN(v))this.value=v.toLocaleString('en-US');});
+calc();
+</script>
+</body>
+</html>
