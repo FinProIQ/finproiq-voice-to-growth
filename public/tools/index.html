@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Calculators for Financial Advisors | FinProIQ</title>
-<meta name="description" content="Free, no-signup calculators for financial advisors: RMDs, Roth conversion breakeven and Social Security claiming age. Fast answers for client conversations.">
+<meta name="description" content="Free, no-signup calculators for financial advisors: RMDs, Roth conversions, Social Security, inherited IRAs, fee drag and retirement savings gaps. Fast answers for client conversations.">
 <link rel="canonical" href="https://finproiq.com/tools">
 <meta property="og:title" content="Free Calculators for Financial Advisors | FinProIQ">
-<meta property="og:description" content="RMD, Roth conversion breakeven and Social Security claiming calculators. Free, no signup.">
+<meta property="og:description" content="RMD, Roth conversion, Social Security, inherited IRA, fee drag and savings gap calculators. Free, no signup.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://finproiq.com/tools">
 <meta property="og:image" content="https://finproiq.com/og-image.png">
@@ -53,6 +53,24 @@
       <p>Claim at 62, full retirement age or 70? See the monthly benefit and the breakeven age.</p>
       <span class="go">Open calculator &rarr;</span>
     </a>
+    <a class="card tool" href="/tools/fee-drag-calculator">
+      <span class="tag tag-pale">Fees</span>
+      <h2>Advisory fee drag</h2>
+      <p>What does 1% cost versus 0.5% over 20 years? Ending balances, fees paid and lost growth.</p>
+      <span class="go">Open calculator &rarr;</span>
+    </a>
+    <a class="card tool" href="/tools/inherited-ira-10-year-rule">
+      <span class="tag tag-pale">Inherited IRAs</span>
+      <h2>Inherited IRA 10-year rule</h2>
+      <p>The emptying deadline, whether annual RMDs apply, and a year-by-year schedule.</p>
+      <span class="go">Open calculator &rarr;</span>
+    </a>
+    <a class="card tool" href="/tools/retirement-savings-gap">
+      <span class="tag tag-pale">Retirement planning</span>
+      <h2>Retirement savings gap</h2>
+      <p>Is the client on track? Nest egg needed, projected savings and the extra savings to close the gap.</p>
+      <span class="go">Open calculator &rarr;</span>
+    </a>
   </section>
 
   <section class="wrap">
@@ -64,11 +82,19 @@
       <a href="/demo" class="btn btn-light">See the demo &rarr;</a>
     </div>
   </section>
+  <section class="wrap">
+    <div class="card signup">
+      <div><h2>Get a new free advisor tool every week</h2><p>One short email when a new calculator goes live. No spam.</p></div>
+      <form id="signup" novalidate><input class="fld" name="email" type="email" placeholder="you@yourfirm.com" aria-label="Email address" autocomplete="email" required><button class="btn btn-pri" type="submit">Subscribe</button></form>
+      <p id="signupMsg" aria-live="polite"></p>
+    </div>
+  </section>
 </main>
 
 <footer class="wrap foot">
   <p class="disc">These tools are for education only and are not tax, legal or investment advice. Results are estimates based on the inputs you provide and current rules; verify before making client recommendations.</p>
   <p class="links">&copy; FinProIQ &middot; <a href="/faq">FAQ</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
 </footer>
+<script src="/tools/signup.js" defer></script>
 </body>
 </html>

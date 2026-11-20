@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inherited IRA 10-Year Rule Calculator | FinProIQ</title>
+<meta name="description" content="Free inherited IRA calculator for advisors. See the 10-year deadline, whether annual RMDs apply under the final IRS regulations, and a year-by-year withdrawal schedule.">
+<link rel="canonical" href="https://finproiq.com/tools/inherited-ira-10-year-rule">
+<meta property="og:title" content="Free Inherited IRA 10-Year Rule Calculator | FinProIQ">
+<meta property="og:description" content="The 10-year deadline, annual RMDs under the final IRS rules, and a year-by-year schedule.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://finproiq.com/tools/inherited-ira-10-year-rule">
+<meta property="og:image" content="https://finproiq.com/og-image.png">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Inherited IRA 10-Year Rule Calculator","url":"https://finproiq.com/tools/inherited-ira-10-year-rule","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"FinProIQ","url":"https://finproiq.com"}}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a href="/" class="logo" aria-label="FinProIQ home"><img src="/finproiq-lockup.svg" alt="FinProIQ" height="32"></a>
+    <nav class="top-nav">
+      <a href="/tools" class="nav-on">Free tools</a>
+      <a href="/demo" class="btn btn-pri">See the demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="padding-bottom:24px">
+    <p class="crumb"><a href="/tools">Free tools</a> &rsaquo; Inherited IRA 10-year rule</p>
+    <h1>Inherited IRA 10-year rule calculator</h1>
+    <p class="lead">When must an inherited IRA be emptied, and are annual RMDs required along the way? See the deadline, this year's minimum and a year-by-year schedule.</p>
+  </section>
+
+  <section class="wrap calc">
+    <form class="card panel" id="f" onsubmit="return false">
+      <h2>Inheritance details</h2>
+      <div class="row">
+        <label class="lbl" for="bt">Beneficiary type</label>
+        <select class="fld" id="bt">
+          <option value="nedb">Non-spouse adult (most children, grandchildren, others)</option>
+          <option value="edb">Eligible designated beneficiary (spouse, minor child of the owner, disabled, chronically ill, or not more than 10 years younger)</option>
+        </select>
+      </div>
+      <div class="row">
+        <label class="lbl" for="dy">Year the owner died</label>
+        <input class="fld" id="dy" type="number" inputmode="numeric" min="2020" max="2060" value="2022">
+        <p class="hint">The 10-year rule applies to deaths in 2020 or later.</p>
+      </div>
+      <div class="row">
+        <label class="lbl" for="ob">Owner's birth year</label>
+        <input class="fld" id="ob" type="number" inputmode="numeric" min="1900" max="2010" value="1945">
+      </div>
+      <div class="row">
+        <label class="lbl" for="rbd">Had the owner reached their required beginning date?</label>
+        <select class="fld" id="rbd"><option value="auto">Work it out from the years</option><option value="yes">Yes, RMDs had started</option><option value="no">No, died before RMDs started</option></select>
+        <p class="hint" id="rbdHint"></p>
+      </div>
+      <div class="row">
+        <label class="lbl" for="bb">Beneficiary's birth year</label>
+        <input class="fld" id="bb" type="number" inputmode="numeric" min="1900" max="2025" value="1975">
+      </div>
+      <div class="row">
+        <label class="lbl" for="yr">Distribution year</label>
+        <input class="fld" id="yr" type="number" inputmode="numeric" min="2021" max="2070">
+      </div>
+      <div class="row">
+        <label class="lbl" for="bal">Inherited IRA balance on Dec 31 of the prior year</label>
+        <div class="money"><span>$</span><input class="fld" id="bal" type="text" inputmode="decimal" value="500,000"></div>
+      </div>
+      <div class="row">
+        <label class="lbl" for="g">Assumed annual growth (%)</label>
+        <input class="fld" id="g" type="number" inputmode="decimal" step="0.5" value="5">
+      </div>
+    </form>
+    <div class="card panel" id="out" aria-live="polite"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Discussed this with a client?</h2>
+        <p>FinProIQ drafts the follow-up and updates your CRM the moment the meeting ends. You review and hit send.</p>
+      </div>
+      <a href="/demo" class="btn btn-light">See the demo &rarr;</a>
+    </div>
+  </section>
+
+  <section class="wrap prose">
+    <h2>How the 10-year rule works</h2>
+    <p>For most non-spouse beneficiaries of an owner who died in 2020 or later, the inherited IRA must be emptied by December 31 of the tenth year after the year of death. Whether annual RMDs are also required in years 1 to 9 depends on when the owner died.</p>
+    <table>
+      <tr><th>Owner died</th><th>Years 1 to 9</th><th>Year 10</th></tr>
+      <tr><td>Before their required beginning date</td><td>No annual RMDs required</td><td>Empty the account</td></tr>
+      <tr><td>On or after their required beginning date</td><td>Annual RMDs required (from 2025 on)</td><td>Empty the account</td></tr>
+    </table>
+    <p>Final IRS regulations require the annual RMDs starting in 2025, and the IRS waived penalties for missed annual RMDs from 2021 through 2024. The 10-year clock still started in the year after death, so those waived years do not extend the deadline.</p>
+    <h2>How the annual RMD is figured</h2>
+    <p>Divide the prior year-end balance by a life expectancy from the IRS Single Life Table (Publication 590-B, Table I). Look up the beneficiary's age in the year after death, then subtract one for each later year. When the owner died after their required beginning date, the beneficiary can use the owner's remaining life expectancy instead if it is longer; the calculator uses whichever is longer.</p>
+    <h2>What this calculator does not cover</h2>
+    <ul>
+      <li>Eligible designated beneficiaries who stretch over their life expectancy, and spouses who treat the IRA as their own.</li>
+      <li>Trusts, estates and charities as beneficiaries, and multiple beneficiaries sharing one account.</li>
+      <li>Inherited Roth IRAs (no annual RMDs, but still the 10-year deadline) and any RMD the owner had not yet taken in the year of death.</li>
+    </ul>
+  </section>
+  <section class="wrap">
+    <div class="card signup">
+      <div><h2>Get a new free advisor tool every week</h2><p>One short email when a new calculator goes live. No spam.</p></div>
+      <form id="signup" novalidate><input class="fld" name="email" type="email" placeholder="you@yourfirm.com" aria-label="Email address" autocomplete="email" required><button class="btn btn-pri" type="submit">Subscribe</button></form>
+      <p id="signupMsg" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="disc">These tools are for education only and are not tax, legal or investment advice. Results are estimates based on the inputs you provide and current rules; verify before making client recommendations.</p>
+  <p class="links">&copy; FinProIQ &middot; <a href="/faq">FAQ</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+
+<script>
+var SL={0:84.6,1:83.7,2:82.8,3:81.8,4:80.8,5:79.8,6:78.8,7:77.9,8:76.9,9:75.9,10:74.9,11:73.9,12:72.9,13:71.9,14:70.9,15:69.9,16:69.0,17:68.0,18:67.0,19:66.0,20:65.0,21:64.1,22:63.1,23:62.1,24:61.1,25:60.2,26:59.2,27:58.2,28:57.3,29:56.3,30:55.3,31:54.4,32:53.4,33:52.5,34:51.5,35:50.5,36:49.6,37:48.6,38:47.7,39:46.7,40:45.7,41:44.8,42:43.8,43:42.9,44:41.9,45:41.0,46:40.0,47:39.0,48:38.1,49:37.1,50:36.2,51:35.3,52:34.3,53:33.4,54:32.5,55:31.6,56:30.6,57:29.8,58:28.9,59:28.0,60:27.1,61:26.2,62:25.4,63:24.5,64:23.7,65:22.9,66:22.0,67:21.2,68:20.4,69:19.6,70:18.8,71:18.0,72:17.2,73:16.4,74:15.6,75:14.8,76:14.1,77:13.3,78:12.6,79:11.9,80:11.2,81:10.5,82:9.9,83:9.3,84:8.7,85:8.1,86:7.6,87:7.1,88:6.6,89:6.1,90:5.7,91:5.3,92:4.9,93:4.6,94:4.3,95:4.0,96:3.7,97:3.4,98:3.2,99:3.0,100:2.8,101:2.6,102:2.5,103:2.3,104:2.2,105:2.1,106:2.1,107:2.1,108:2.0,109:2.0,110:2.0,111:2.0,112:2.0,113:1.9,114:1.9,115:1.8,116:1.8,117:1.6,118:1.4,119:1.1,120:1.0};
+function sl(a){return a>=120?1.0:(a<0?84.6:SL[a]);}
+var $=function(id){return document.getElementById(id)};
+var usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+var usd2=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2});
+function num(v){v=String(v).replace(/[^0-9.]/g,'');return v===''?NaN:parseFloat(v);}
+$('yr').value=new Date().getFullYear();
+// Year of the owner's required beginning date (April 1 of that year).
+function rbdYear(ob){if(ob<=1948)return ob+71;if(ob<=1950)return ob+73;if(ob<=1959)return ob+74;return ob+76;}
+function calc(){
+  var bt=$('bt').value,dy=parseInt($('dy').value,10),ob=parseInt($('ob').value,10),bb=parseInt($('bb').value,10),yr=parseInt($('yr').value,10),bal=num($('bal').value),g=num($('g').value)/100,o=$('out');
+  if(isNaN(g))g=0;
+  if(bt==='edb'){o.innerHTML='<h2>Result</h2><p class="note note-blue">Eligible designated beneficiaries can usually stretch withdrawals over their own life expectancy instead of following the 10-year rule. A surviving spouse can also treat the IRA as their own. This calculator covers the 10-year rule only.</p>';return;}
+  if(!(dy>=2020&&dy<=2060)||!(ob>1900&&ob<=dy)||!(bb>1900&&bb<=2025)||!(yr>dy)||!(bal>=0)){o.innerHTML='<h2>Result</h2><p class="sub">Enter a death year from 2020, birth years, a distribution year after the year of death, and a balance.</p>';return;}
+  var R=rbdYear(ob),mode=$('rbd').value,after;
+  if(mode==='yes')after=true;else if(mode==='no')after=false;else after=dy>=R;
+  $('rbdHint').textContent='Required beginning date: April 1, '+R+'.'+(mode==='auto'&&dy===R?' The owner died in that year, so pick Yes or No based on the exact date.':'');
+  var last=dy+10,h='';
+  if(yr>last){o.innerHTML='<p class="eyebrow">Deadline passed</p><p class="big">Dec 31, '+last+'</p><p class="sub">The account should have been emptied by the end of '+last+'.</p>';return;}
+  function req(y,b){if(!after)return y===last?b:0;if(y===last)return b;if(y<2025)return 0;var n=y-(dy+1);var d=Math.max(sl((dy+1)-bb)-n,sl(dy-ob)-1-n);return d<=1?b:b/d;}
+  var r=req(yr,bal),yrsLeft=last-yr+1;
+  h+='<p class="eyebrow">'+yr+' required minimum</p><p class="big">'+usd2.format(r)+'</p>';
+  h+='<p class="sub">'+(yr===last?'Final year: the whole balance must come out by December 31.':(after?'Annual RMD in year '+(yr-dy)+' of 10.':'No annual RMD is required. Only the year-10 deadline applies.'))+'</p>';
+  h+='<div class="facts"><div class="fact"><small>Empty by</small><b>Dec 31, '+last+'</b></div><div class="fact"><small>Owner died</small><b>'+(after?'After RBD':'Before RBD')+'</b></div><div class="fact"><small>Even spread / year</small><b>'+usd.format(bal/yrsLeft)+'</b></div></div>';
+  if(after&&dy+1<2025)h+='<p class="note note-blue">Annual RMDs for '+(dy+1)+' to 2024 were waived by the IRS. They are required from 2025 on, and the deadline stays '+last+'.</p>';
+  if(!after)h+='<p class="note">Waiting until year 10 to withdraw everything can push the beneficiary into a much higher bracket. The even-spread column shows a smoother path.</p>';
+  h+='<h2 style="margin-top:6px">Year-by-year schedule</h2><div class="scroll"><table class="proj"><tr><th>Year</th><th>Year #</th><th>Start balance</th><th>Required</th><th>Even spread</th></tr>';
+  var b=bal;for(var y=yr;y<=last;y++){var q=req(y,b),ev=b/(last-y+1);h+='<tr'+(y===last?' style="font-weight:700"':'')+'><td>'+y+'</td><td>'+(y-dy)+'</td><td>'+usd.format(b)+'</td><td>'+usd.format(q)+'</td><td>'+usd.format(ev)+'</td></tr>';b=Math.max(0,(b-q)*(1+g));}
+  h+='</table></div><p class="hint">Start balances follow the required-minimum path with '+(g*100)+'% growth. Even spread divides each year\'s balance by the years left.</p>';
+  o.innerHTML=h;
+}
+['bt','dy','ob','rbd','bb','yr','bal','g'].forEach(function(id){$(id).addEventListener('input',calc)});
+$('bal').addEventListener('blur',function(){var v=num(this.value);if(!isNaN(v))this.value=v.toLocaleString('en-US');});
+calc();
+</script>
+<script src="/tools/signup.js" defer></script>
+</body>
+</html>

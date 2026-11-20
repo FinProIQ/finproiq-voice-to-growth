@@ -12,6 +12,9 @@
     { "source": "/tools/rmd-calculator", "destination": "/tools/rmd-calculator/index.html" },
     { "source": "/tools/roth-conversion-breakeven", "destination": "/tools/roth-conversion-breakeven/index.html" },
     { "source": "/tools/social-security-claiming-age", "destination": "/tools/social-security-claiming-age/index.html" },
+    { "source": "/tools/fee-drag-calculator", "destination": "/tools/fee-drag-calculator/index.html" },
+    { "source": "/tools/inherited-ira-10-year-rule", "destination": "/tools/inherited-ira-10-year-rule/index.html" },
+    { "source": "/tools/retirement-savings-gap", "destination": "/tools/retirement-savings-gap/index.html" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

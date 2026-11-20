@@ -99,6 +99,13 @@
       <li>Converting across several years to fill a tax bracket. Run each year's amount separately.</li>
     </ul>
   </section>
+  <section class="wrap">
+    <div class="card signup">
+      <div><h2>Get a new free advisor tool every week</h2><p>One short email when a new calculator goes live. No spam.</p></div>
+      <form id="signup" novalidate><input class="fld" name="email" type="email" placeholder="you@yourfirm.com" aria-label="Email address" autocomplete="email" required><button class="btn btn-pri" type="submit">Subscribe</button></form>
+      <p id="signupMsg" aria-live="polite"></p>
+    </div>
+  </section>
 </main>
 
 <footer class="wrap foot">
@@ -139,5 +146,6 @@ function calc(){
 $('amt').addEventListener('blur',function(){var v=num(this.value);if(!isNaN(v))this.value=v.toLocaleString('en-US');});
 calc();
 </script>
+<script src="/tools/signup.js" defer></script>
 </body>
 </html>

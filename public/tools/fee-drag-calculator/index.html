@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advisory Fee Drag Calculator: 1% vs 0.5% | FinProIQ</title>
+<meta name="description" content="Free fee drag calculator for advisors. Compare two advisory fees over time: ending balances, total fees paid and the lost growth, in dollars.">
+<link rel="canonical" href="https://finproiq.com/tools/fee-drag-calculator">
+<meta property="og:title" content="Free Advisory Fee Drag Calculator | FinProIQ">
+<meta property="og:description" content="Compare a 1% and 0.5% fee over 20 years: ending balances, fees paid and lost growth.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://finproiq.com/tools/fee-drag-calculator">
+<meta property="og:image" content="https://finproiq.com/og-image.png">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Advisory Fee Drag Calculator","url":"https://finproiq.com/tools/fee-drag-calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"FinProIQ","url":"https://finproiq.com"}}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a href="/" class="logo" aria-label="FinProIQ home"><img src="/finproiq-lockup.svg" alt="FinProIQ" height="32"></a>
+    <nav class="top-nav">
+      <a href="/tools" class="nav-on">Free tools</a>
+      <a href="/demo" class="btn btn-pri">See the demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="padding-bottom:24px">
+    <p class="crumb"><a href="/tools">Free tools</a> &rsaquo; Fee drag</p>
+    <h1>Advisory fee drag calculator</h1>
+    <p class="lead">What does a 1% fee cost compared with 0.5% over 20 years? See the ending balance, total fees paid and the growth those fees would have earned.</p>
+  </section>
+
+  <section class="wrap calc">
+    <form class="card panel" id="f" onsubmit="return false">
+      <h2>Portfolio details</h2>
+      <div class="row">
+        <label class="lbl" for="bal">Starting balance</label>
+        <div class="money"><span>$</span><input class="fld" id="bal" type="text" inputmode="decimal" value="1,000,000"></div>
+      </div>
+      <div class="row">
+        <label class="lbl" for="con">Annual contribution (or withdrawal as a negative)</label>
+        <div class="money"><span>$</span><input class="fld" id="con" type="text" inputmode="decimal" value="0"></div>
+      </div>
+      <div class="row">
+        <label class="lbl" for="yrs">Years</label>
+        <input class="fld" id="yrs" type="number" inputmode="numeric" min="1" max="50" value="20">
+      </div>
+      <div class="row">
+        <label class="lbl" for="r">Annual return before fees (%)</label>
+        <input class="fld" id="r" type="number" inputmode="decimal" step="0.5" value="7">
+      </div>
+      <div class="row">
+        <label class="lbl" for="fa">Fee A (% per year)</label>
+        <input class="fld" id="fa" type="number" inputmode="decimal" step="0.05" value="1">
+      </div>
+      <div class="row">
+        <label class="lbl" for="fb">Fee B (% per year)</label>
+        <input class="fld" id="fb" type="number" inputmode="decimal" step="0.05" value="0.5">
+        <p class="hint">Include fund expense ratios for an all-in comparison.</p>
+      </div>
+    </form>
+    <div class="card panel" id="out" aria-live="polite"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Discussed this with a client?</h2>
+        <p>FinProIQ drafts the follow-up and updates your CRM the moment the meeting ends. You review and hit send.</p>
+      </div>
+      <a href="/demo" class="btn btn-light">See the demo &rarr;</a>
+    </div>
+  </section>
+
+  <section class="wrap prose">
+    <h2>How fee drag is calculated</h2>
+    <p>Each year the portfolio earns the return before fees, then the fee is charged on the grown balance, then the contribution is added. Fees paid are summed year by year. The cost of the higher fee is the gap between the two ending balances: the extra fees themselves plus the growth those dollars would have earned.</p>
+    <h2>Using this with clients</h2>
+    <ul>
+      <li>Show the dollar cost of a fee difference, not just the percentage.</li>
+      <li>Compare an advisory fee against the value of planning, tax work and behavioral coaching, which this calculator does not measure.</li>
+      <li>Run a withdrawal scenario (a negative contribution) for clients already in retirement.</li>
+    </ul>
+    <h2>What this calculator does not cover</h2>
+    <ul>
+      <li>Tiered or breakpoint fee schedules, taxes, and returns that vary year to year.</li>
+    </ul>
+  </section>
+  <section class="wrap">
+    <div class="card signup">
+      <div><h2>Get a new free advisor tool every week</h2><p>One short email when a new calculator goes live. No spam.</p></div>
+      <form id="signup" novalidate><input class="fld" name="email" type="email" placeholder="you@yourfirm.com" aria-label="Email address" autocomplete="email" required><button class="btn btn-pri" type="submit">Subscribe</button></form>
+      <p id="signupMsg" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="disc">These tools are for education only and are not tax, legal or investment advice. Results are estimates based on the inputs you provide and current rules; verify before making client recommendations.</p>
+  <p class="links">&copy; FinProIQ &middot; <a href="/faq">FAQ</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+
+<script>
+var $=function(id){return document.getElementById(id)};
+var usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+function num(v){var s=String(v).trim(),neg=/^-/.test(s);s=s.replace(/[^0-9.]/g,'');return s===''?NaN:(neg?-1:1)*parseFloat(s);}
+function run(B,c,n,r,f){var paid=0,rows=[];for(var y=1;y<=n;y++){var g=B*(1+r),fee=g*f;paid+=fee;B=Math.max(0,g-fee+c);rows.push(B);}return{end:B,paid:paid,rows:rows};}
+function calc(){
+  var B=num($('bal').value),c=num($('con').value)||0,n=parseInt($('yrs').value,10),r=num($('r').value)/100,fa=num($('fa').value)/100,fb=num($('fb').value)/100,o=$('out');
+  if(!(B>0)||!(n>0&&n<=50)||isNaN(r)||isNaN(fa)||isNaN(fb)){o.innerHTML='<h2>Result</h2><p class="sub">Enter a balance, years, a return and two fees.</p>';return;}
+  var A=run(B,c,n,r,fa),Bb=run(B,c,n,r,fb),hi=fa>=fb?A:Bb,lo=fa>=fb?Bb:A,hiF=Math.max(fa,fb),loF=Math.min(fa,fb),gap=lo.end-hi.end;
+  var h='<p class="eyebrow">Cost of the higher fee over '+n+' years</p><p class="big">'+usd.format(gap)+'</p>';
+  h+='<p class="sub">'+(hiF*100).toFixed(2)+'% vs '+(loF*100).toFixed(2)+'%: '+(lo.end>0?(gap/lo.end*100).toFixed(1):'0')+'% less money at the end.</p>';
+  h+='<div class="facts"><div class="fact"><small>Ending at '+(fa*100).toFixed(2)+'%</small><b>'+usd.format(A.end)+'</b></div><div class="fact"><small>Ending at '+(fb*100).toFixed(2)+'%</small><b>'+usd.format(Bb.end)+'</b></div><div class="fact"><small>Fees paid (A / B)</small><b>'+usd.format(A.paid)+' / '+usd.format(Bb.paid)+'</b></div></div>';
+  h+='<p class="note note-blue">Of the '+usd.format(gap)+' gap, '+usd.format(hi.paid-lo.paid)+' is extra fees paid and '+usd.format(gap-(hi.paid-lo.paid))+' is growth those fees would have earned.</p>';
+  h+='<h2 style="margin-top:6px">Balance over time</h2><div class="scroll"><table class="proj"><tr><th>Year</th><th>Fee A</th><th>Fee B</th><th>Gap</th></tr>';
+  for(var y=1;y<=n;y++){if(y%5===0||y===n||n<=10){h+='<tr><td>'+y+'</td><td>'+usd.format(A.rows[y-1])+'</td><td>'+usd.format(Bb.rows[y-1])+'</td><td>'+usd.format(Math.abs(Bb.rows[y-1]-A.rows[y-1]))+'</td></tr>';}}
+  h+='</table></div><p class="hint">Return applied first, then the fee on the grown balance, then the contribution, once a year.</p>';
+  o.innerHTML=h;
+}
+['bal','con','yrs','r','fa','fb'].forEach(function(id){$(id).addEventListener('input',calc)});
+['bal','con'].forEach(function(id){$(id).addEventListener('blur',function(){var v=num(this.value);if(!isNaN(v))this.value=v.toLocaleString('en-US');})});
+calc();
+</script>
+<script src="/tools/signup.js" defer></script>
+</body>
+</html>

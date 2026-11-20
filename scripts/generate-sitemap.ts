@@ -22,6 +22,9 @@ const entries: SitemapEntry[] = [
   { path: "/tools/rmd-calculator", changefreq: "monthly", priority: "0.8" },
   { path: "/tools/roth-conversion-breakeven", changefreq: "monthly", priority: "0.8" },
   { path: "/tools/social-security-claiming-age", changefreq: "monthly", priority: "0.8" },
+  { path: "/tools/fee-drag-calculator", changefreq: "monthly", priority: "0.8" },
+  { path: "/tools/inherited-ira-10-year-rule", changefreq: "monthly", priority: "0.8" },
+  { path: "/tools/retirement-savings-gap", changefreq: "monthly", priority: "0.8" },
 ];
 
 function generateSitemap(entries: SitemapEntry[]) {

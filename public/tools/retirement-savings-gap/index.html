@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retirement Savings Gap Calculator for Advisors | FinProIQ</title>
+<meta name="description" content="Free retirement savings gap calculator for advisors. Compare the nest egg a client needs with projected savings and see the extra yearly savings that closes the gap.">
+<link rel="canonical" href="https://finproiq.com/tools/retirement-savings-gap">
+<meta property="og:title" content="Free Retirement Savings Gap Calculator | FinProIQ">
+<meta property="og:description" content="Nest egg needed vs projected savings, and the extra yearly savings that closes the gap.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://finproiq.com/tools/retirement-savings-gap">
+<meta property="og:image" content="https://finproiq.com/og-image.png">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/tools.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Retirement Savings Gap Calculator","url":"https://finproiq.com/tools/retirement-savings-gap","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"FinProIQ","url":"https://finproiq.com"}}
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a href="/" class="logo" aria-label="FinProIQ home"><img src="/finproiq-lockup.svg" alt="FinProIQ" height="32"></a>
+    <nav class="top-nav">
+      <a href="/tools" class="nav-on">Free tools</a>
+      <a href="/demo" class="btn btn-pri">See the demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="padding-bottom:24px">
+    <p class="crumb"><a href="/tools">Free tools</a> &rsaquo; Retirement savings gap</p>
+    <h1>Retirement savings gap calculator</h1>
+    <p class="lead">Is the client on track? Compare the nest egg their income goal needs with where current savings are heading, and see the extra yearly savings that closes the gap.</p>
+  </section>
+
+  <section class="wrap calc">
+    <form class="card panel" id="f" onsubmit="return false">
+      <h2>Client details</h2>
+      <div class="row"><label class="lbl" for="age">Current age</label><input class="fld" id="age" type="number" inputmode="numeric" value="50"></div>
+      <div class="row"><label class="lbl" for="ra">Retirement age</label><input class="fld" id="ra" type="number" inputmode="numeric" value="65"></div>
+      <div class="row"><label class="lbl" for="pa">Plan to age</label><input class="fld" id="pa" type="number" inputmode="numeric" value="92"></div>
+      <div class="row"><label class="lbl" for="sv">Current retirement savings</label><div class="money"><span>$</span><input class="fld" id="sv" type="text" inputmode="decimal" value="600,000"></div></div>
+      <div class="row"><label class="lbl" for="as">Annual savings until retirement</label><div class="money"><span>$</span><input class="fld" id="as" type="text" inputmode="decimal" value="25,000"></div></div>
+      <div class="row"><label class="lbl" for="inc">Income goal in retirement (per year, today's dollars)</label><div class="money"><span>$</span><input class="fld" id="inc" type="text" inputmode="decimal" value="140,000"></div></div>
+      <div class="row"><label class="lbl" for="oth">Social Security and pensions (per year, today's dollars)</label><div class="money"><span>$</span><input class="fld" id="oth" type="text" inputmode="decimal" value="45,000"></div></div>
+      <div class="row"><label class="lbl" for="r">Annual return (%)</label><input class="fld" id="r" type="number" inputmode="decimal" step="0.5" value="6"></div>
+      <div class="row"><label class="lbl" for="inf">Inflation (%)</label><input class="fld" id="inf" type="number" inputmode="decimal" step="0.25" value="2.5"></div>
+    </form>
+    <div class="card panel" id="out" aria-live="polite"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Discussed this with a client?</h2>
+        <p>FinProIQ drafts the follow-up and updates your CRM the moment the meeting ends. You review and hit send.</p>
+      </div>
+      <a href="/demo" class="btn btn-light">See the demo &rarr;</a>
+    </div>
+  </section>
+
+  <section class="wrap prose">
+    <h2>How the gap is calculated</h2>
+    <p>Everything is in today's dollars, using the real return (the return after inflation). The nest egg needed is what it takes, at retirement, to pay the income goal minus Social Security and pensions every year until the plan-to age, rising with inflation. Projected savings grow the current balance and yearly savings to retirement. The gap is the difference, and the extra savings figure is the yearly amount that closes it by retirement.</p>
+    <h2>What this calculator does not cover</h2>
+    <ul>
+      <li>Taxes on withdrawals, which raise the gross amount the nest egg must provide.</li>
+      <li>Return sequence risk, one-off expenses, and savings that grow with salary.</li>
+      <li>Social Security that starts at a different age from retirement.</li>
+    </ul>
+  </section>
+  <section class="wrap">
+    <div class="card signup">
+      <div><h2>Get a new free advisor tool every week</h2><p>One short email when a new calculator goes live. No spam.</p></div>
+      <form id="signup" novalidate><input class="fld" name="email" type="email" placeholder="you@yourfirm.com" aria-label="Email address" autocomplete="email" required><button class="btn btn-pri" type="submit">Subscribe</button></form>
+      <p id="signupMsg" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="disc">These tools are for education only and are not tax, legal or investment advice. Results are estimates based on the inputs you provide and current rules; verify before making client recommendations.</p>
+  <p class="links">&copy; FinProIQ &middot; <a href="/faq">FAQ</a> &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+</footer>
+
+<script>
+var $=function(id){return document.getElementById(id)};
+var usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+function num(v){v=String(v).replace(/[^0-9.]/g,'');return v===''?NaN:parseFloat(v);}
+function calc(){
+  var age=num($('age').value),ra=num($('ra').value),pa=num($('pa').value),sv=num($('sv').value)||0,as=num($('as').value)||0,inc=num($('inc').value)||0,oth=num($('oth').value)||0,r=num($('r').value)/100,inf=num($('inf').value)/100,o=$('out');
+  if(!(age>=18)||!(ra>=age)||!(pa>ra)||isNaN(r)||isNaN(inf)){o.innerHTML='<h2>Result</h2><p class="sub">Enter ages (current &le; retirement &lt; plan-to), a return and inflation.</p>';return;}
+  var rr=(1+r)/(1+inf)-1,n=ra-age,N=pa-ra,need=Math.max(0,inc-oth);
+  var af=Math.abs(rr)<1e-9?N:(1-Math.pow(1+rr,-N))/rr*(1+rr);
+  var target=need*af;
+  var grow=Math.pow(1+rr,n),fv=Math.abs(rr)<1e-9?n:(grow-1)/rr;
+  var proj=sv*grow+as*fv,gap=target-proj;
+  var h='';
+  if(gap<=0){h+='<p class="eyebrow">On track</p><p class="big">'+usd.format(-gap)+' ahead</p><p class="sub">Projected savings cover the income goal to age '+pa+' with room to spare (today\'s dollars).</p>';}
+  else{var extra=n>0?gap/fv:null;h+='<p class="eyebrow">Savings gap</p><p class="big">'+usd.format(gap)+'</p><p class="sub">'+(n>0?'Closing it takes about <b>'+usd.format(extra)+' more per year</b> until age '+ra+' (today\'s dollars).':'Retirement is now, so the gap would need to come from spending less or other income.')+'</p>';}
+  h+='<div class="facts"><div class="fact"><small>Nest egg needed at '+ra+'</small><b>'+usd.format(target)+'</b></div><div class="fact"><small>Projected at '+ra+'</small><b>'+usd.format(proj)+'</b></div><div class="fact"><small>Yearly income to fund</small><b>'+usd.format(need)+'</b></div></div>';
+  h+='<p class="note note-blue">In future dollars at age '+ra+': needed '+usd.format(target*Math.pow(1+inf,n))+', projected '+usd.format(proj*Math.pow(1+inf,n))+'. Real return used: '+(rr*100).toFixed(2)+'%.</p>';
+  h+='<h2 style="margin-top:6px">What changes the answer</h2><div class="scroll"><table class="proj"><tr><th>Change</th><th>Gap (today\'s $)</th></tr>';
+  function g2(a,b,c,d){var nn=b-a,gr=Math.pow(1+rr,nn),f=Math.abs(rr)<1e-9?nn:(gr-1)/rr,NN=pa-b,aff=Math.abs(rr)<1e-9?NN:(1-Math.pow(1+rr,-NN))/rr*(1+rr);return Math.max(0,c-oth)*aff-(sv*gr+d*f);}
+  [['As entered',g2(age,ra,inc,as)],['Retire 2 years later',g2(age,ra+2,inc,as)],['Income goal 10% lower',g2(age,ra,inc*0.9,as)],['Save $10,000 more a year',g2(age,ra,inc,as+10000)]].forEach(function(x){h+='<tr><td>'+x[0]+'</td><td style="color:'+(x[1]>0?'#B42318':'#0F7B4A')+'">'+(x[1]>0?usd.format(x[1]):usd.format(-x[1])+' ahead')+'</td></tr>';});
+  h+='</table></div><p class="hint">Savings added at the end of each year; retirement income paid at the start of each year.</p>';
+  o.innerHTML=h;
+}
+['age','ra','pa','sv','as','inc','oth','r','inf'].forEach(function(id){$(id).addEventListener('input',calc)});
+['sv','as','inc','oth'].forEach(function(id){$(id).addEventListener('blur',function(){var v=num(this.value);if(!isNaN(v))this.value=v.toLocaleString('en-US');})});
+calc();
+</script>
+<script src="/tools/signup.js" defer></script>
+</body>
+</html>
